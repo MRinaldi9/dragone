@@ -22,19 +22,18 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'lib',
-          style: 'camelCase',
-        },
-      ],
+      '@angular-eslint/no-uncalled-signals': 'error',
+      '@angular-eslint/component-max-inline-declarations': 'error',
+      '@angular-eslint/prefer-on-push-component-change-detection': 'error',
+      '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/prefer-signals': 'error',
+      '@angular-eslint/sort-keys-in-type-decorator': 'error',
+      '@angular-eslint/prefer-output-readonly': 'error',
       '@angular-eslint/component-selector': [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'drgn',
           style: 'kebab-case',
         },
       ],
@@ -43,6 +42,16 @@ export default [
   {
     files: ['**/*.html'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@angular-eslint/template/conditional-complexity': 'error',
+      '@angular-eslint/template/cyclomatic-complexity': 'error',
+      '@angular-eslint/template/no-interpolation-in-attributes': 'error',
+      '@angular-eslint/template/prefer-at-empty': 'error',
+      '@angular-eslint/template/prefer-contextual-for-variables': 'error',
+      '@angular-eslint/template/prefer-control-flow': 'error',
+      '@angular-eslint/template/prefer-self-closing-tags': 'error',
+      '@angular-eslint/template/prefer-static-string-properties': 'error',
+      '@angular-eslint/template/attributes-order': 'error',
+    },
   },
 ];

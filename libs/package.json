@@ -3,7 +3,17 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^20.0.0",
-    "@angular/core": "^20.0.0"
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
+    "ng-primitives": "^0.65.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/cdk": {
+      "optional": true
+    },
+    "@floating-ui/dom": {
+      "optional": true
+    }
   },
   "sideEffects": false
 }
