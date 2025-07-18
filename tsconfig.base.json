@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dragone/ui": ["libs/src/index.ts"]
+      "@dragone/ui": ["libs/dragone/ui/src/index.ts"],
+      "@dragone/ui/input-text": ["libs/dragone/ui/input-text/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

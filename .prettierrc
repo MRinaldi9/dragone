@@ -3,6 +3,7 @@
   "arrowParens": "avoid",
   "experimentalTernaries": true,
   "plugins": [
-    "prettier-plugin-organize-imports"
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
   ]
 }

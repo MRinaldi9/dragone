@@ -1,5 +1,6 @@
 onlyBuiltDependencies:
   - '@swc/core'
+  - '@tailwindcss/oxide'
   - lmdb
   - msgpackr-extract
   - nx

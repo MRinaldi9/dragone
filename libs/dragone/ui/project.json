@@ -1,0 +1,98 @@
+{
+  "name": "@dragone/ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dragone/ui/src",
+  "prefix": "drgn",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "manifestRootsToUpdate": [
+        "dist/{projectRoot}"
+      ],
+      "currentVersionResolver": "git-tag",
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build-library": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "project": "libs/dragone/ui/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/dragone/ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/dragone/ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "build-with-tailwind": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "configurations": {
+        "production": {
+          "commands": [
+            "nx run @dragone/ui:build-library:production",
+            "tailwindcss -i ./libs/dragone/ui/main.css -o ./dist/dragone/ui/main.css"
+          ]
+        },
+        "development": {
+          "commands": [
+            "nx run @dragone/ui:build-library:development",
+            "tailwindcss -i ./libs/dragone/ui/main.css -o ./dist/dragone/ui/main.css"
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "configurations": {
+        "production": {
+          "commands": [
+            "rimraf dist/dragone/ui",
+            "nx run @dragone/ui:build-with-tailwind:production"
+          ],
+          "parallel": false
+        },
+        "development": {
+          "commands": [
+            "rimraf dist/dragone/ui",
+            "nx run @dragone/ui:build-with-tailwind:development"
+          ],
+          "parallel": false
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/dragone/ui"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

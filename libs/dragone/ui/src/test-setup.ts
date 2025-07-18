@@ -9,5 +9,5 @@ import {
 
 getTestBed().initTestEnvironment(
   BrowserTestingModule,
-  platformBrowserTesting()
+  platformBrowserTesting(),
 );
