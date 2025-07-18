@@ -10,6 +10,13 @@ export default [
         'error',
         {
           ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs,ts,cts,mts}'],
+          ignoredDependencies: [
+            'tailwindcss',
+            'vite',
+            '@analogjs/vitest-angular',
+            '@analogjs/vite-plugin-angular',
+            '@nx/vite',
+          ],
         },
       ],
     },
@@ -22,6 +29,14 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
+      '@angular-eslint/component-max-inline-declarations': [
+        'error',
+        { template: 10, styles: 10 },
+      ],
+      '@angular-eslint/prefer-on-push-component-change-detection': 'error',
+      '@angular-eslint/prefer-output-readonly': 'error',
+      '@angular-eslint/prefer-signals': 'error',
+      '@angular-eslint/sort-keys-in-type-decorator': 'error',
       '@angular-eslint/component-selector': [
         'error',
         {
@@ -35,6 +50,16 @@ export default [
   {
     files: ['**/*.html'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@angular-eslint/template/conditional-complexity': 'error',
+      '@angular-eslint/template/cyclomatic-complexity': 'error',
+      '@angular-eslint/template/no-interpolation-in-attributes': 'error',
+      '@angular-eslint/template/prefer-at-empty': 'error',
+      '@angular-eslint/template/prefer-contextual-for-variables': 'error',
+      '@angular-eslint/template/prefer-control-flow': 'error',
+      '@angular-eslint/template/attributes-order': 'error',
+      '@angular-eslint/template/prefer-self-closing-tags': 'error',
+      '@angular-eslint/template/prefer-static-string-properties': 'error',
+    },
   },
 ];

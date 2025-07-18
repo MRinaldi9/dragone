@@ -42,7 +42,7 @@
         "production": {
           "commands": [
             "nx run @dragone/ui:build-library:production",
-            "tailwindcss -i ./libs/dragone/ui/main.css -o ./dist/dragone/ui/main.css"
+            "tailwindcss -i ./libs/dragone/ui/main.css -o ./dist/libs/dragone/ui/main.css -m"
           ]
         },
         "development": {
