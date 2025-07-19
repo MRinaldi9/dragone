@@ -1,1 +1,0 @@
-exec < /dev/tty && pnpx git-cz --hook || true

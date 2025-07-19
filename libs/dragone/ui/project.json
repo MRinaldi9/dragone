@@ -28,7 +28,8 @@
           "tsConfig": "libs/dragone/ui/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "libs/dragone/ui/tsconfig.lib.json"
+          "tsConfig": "libs/dragone/ui/tsconfig.lib.json",
+          "watch": true
         }
       },
       "defaultConfiguration": "production"
