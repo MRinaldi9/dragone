@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
+import { NgpInput } from 'ng-primitives/input';
 @Component({
-  selector: 'drgn-input-text',
-  imports: [],
-  template: `<p class="text-red-600">input-text works!</p>`,
+  selector: 'input[drgn-input-text]',
+  template: ``,
   styles: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    type: 'text',
+  },
+  hostDirectives: [{ directive: NgpInput, inputs: ['disabled'] }],
 })
 export class InputText {}
