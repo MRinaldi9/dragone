@@ -15,7 +15,7 @@
   },
   "tags": [],
   "targets": {
-    "build-library": {
+    "internal:build-library": {
       "executor": "@nx/angular:package",
       "outputs": [
         "{workspaceRoot}/dist/{projectRoot}"
@@ -33,7 +33,7 @@
       },
       "defaultConfiguration": "production"
     },
-    "build-with-tailwind": {
+    "internal:build-with-tailwind": {
       "executor": "nx:run-commands",
       "outputs": [
         "{workspaceRoot}/dist/{projectRoot}"
@@ -48,7 +48,7 @@
         "development": {
           "commands": [
             "nx run @dragone/ui:build-library:development",
-            "tailwindcss -i ./libs/dragone/ui/main.css -o ./dist/dragone/ui/main.css"
+            "tailwindcss -i ./libs/dragone/ui/main.css -o ./dist/libs/dragone/ui/main.css"
           ]
         }
       },
@@ -62,14 +62,14 @@
       "configurations": {
         "production": {
           "commands": [
-            "rimraf dist/dragone/ui",
+            "rimraf dist/libs/dragone",
             "nx run @dragone/ui:build-with-tailwind:production"
           ],
           "parallel": false
         },
         "development": {
           "commands": [
-            "rimraf dist/dragone/ui",
+            "rimraf dist/libs/dragone",
             "nx run @dragone/ui:build-with-tailwind:development"
           ],
           "parallel": false

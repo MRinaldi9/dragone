@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
-
+import { InputText } from '@dragone/ui/input-text';
 @Component({
-  imports: [NxWelcome, RouterModule],
+  imports: [InputText],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
