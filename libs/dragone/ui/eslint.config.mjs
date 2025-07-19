@@ -16,6 +16,8 @@ export default [
             '@analogjs/vitest-angular',
             '@analogjs/vite-plugin-angular',
             '@nx/vite',
+            '@angular/compiler',
+            '@angular/platform-browser',
           ],
         },
       ],
@@ -37,14 +39,6 @@ export default [
       '@angular-eslint/prefer-output-readonly': 'error',
       '@angular-eslint/prefer-signals': 'error',
       '@angular-eslint/sort-keys-in-type-decorator': 'error',
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'drgn',
-          style: 'kebab-case',
-        },
-      ],
     },
   },
   {

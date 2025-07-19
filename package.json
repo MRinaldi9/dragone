@@ -2,7 +2,10 @@
   "name": "@dragone/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "commit": "git-cz",
+    "prepare": "husky"
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "^20.1.2",
@@ -25,6 +28,9 @@
     "@angular/cli": "~20.0.0",
     "@angular/compiler-cli": "~20.0.0",
     "@angular/language-service": "~20.0.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cz-commitlint": "^19.8.1",
     "@eslint/js": "^9.8.0",
     "@nx/angular": "21.2.4",
     "@nx/devkit": "21.2.4",
@@ -48,12 +54,16 @@
     "@vitest/ui": "^3.0.0",
     "angular-eslint": "^20.0.0",
     "autoprefixer": "^10.4.0",
+    "commitizen": "^4.3.1",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^1.6.2",
+    "husky": "^9.1.7",
+    "inquirer": "9",
     "jiti": "2.4.2",
     "jsdom": "~22.1.0",
     "jsonc-eslint-parser": "^2.1.0",
+    "lint-staged": "^16.1.2",
     "ng-packagr": "~20.0.0",
     "ng-primitives": "^0.65.0",
     "nx": "21.2.4",
@@ -73,5 +83,10 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
