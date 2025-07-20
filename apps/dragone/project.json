@@ -53,7 +53,7 @@
       },
       "defaultConfiguration": "production"
     },
-    "internal:serve-app": {
+    "serve": {
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "configurations": {
@@ -62,27 +62,6 @@
         },
         "development": {
           "buildTarget": "dragone:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "serve": {
-      "executor": "nx:run-commands",
-      "options": {
-        "parallel": false
-      },
-      "configurations": {
-        "production": {
-          "commands": [
-            "nx run @dragone/ui:build:production",
-            "nx run dragone:serve"
-          ]
-        },
-        "development": {
-          "commands": [
-            "nx run @dragone/ui:build:development",
-            "nx run dragone:serve"
-          ]
         }
       },
       "defaultConfiguration": "development"
