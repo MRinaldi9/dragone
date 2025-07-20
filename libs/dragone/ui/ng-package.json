@@ -1,6 +1,9 @@
 {
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/libs/dragone/ui",
+  "assets": [
+    "./styles/*.css"
+  ],
   "lib": {
     "entryFile": "src/index.ts"
   },
