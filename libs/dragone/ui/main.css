@@ -1,13 +1,143 @@
 @import './styles/typography.css';
-@import './styles/tokens.css';
 @import 'tailwindcss';
+@import './styles/theme.css';
 @config './tailwind.config.ts';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  html {
+    font-family: var(--typography-global-font-family-01), sans-serif;
+  }
+
+  h1 {
+    &,
+    &.md {
+      font-size: var(--typography-alias-h1-md-size-13);
+      font-weight: var(--typography-alias-h1-font-weight-700);
+      line-height: var(--typography-alias-h1-md-line-height-13);
+    }
+    &.lg {
+      font-size: var(--typography-alias-h1-lg-size-14);
+      line-height: var(--typography-alias-h1-lg-line-height-14);
+      font-weight: var(--typography-alias-h1-font-weight-700);
+    }
+    &.xl {
+      font-size: var(--typography-alias-h1-xl-size-15);
+      line-height: var(--typography-alias-h1-xl-line-height-15);
+      font-weight: var(--typography-alias-h1-font-weight-700);
+    }
+  }
+
+  h2 {
+    &,
+    &.md {
+      font-size: var(--typography-alias-h2-md-size-11);
+      line-height: var(--typography-alias-h2-md-line-height-11);
+      font-weight: var(--typography-alias-h2-font-weight-700);
+    }
+    &.lg {
+      font-size: var(--typography-alias-h2-lg-size-12);
+      line-height: var(--typography-alias-h2-lg-line-height-12);
+      font-weight: var(--typography-alias-h2-font-weight-700);
+    }
+  }
+
+  h3 {
+    &,
+    &.md {
+      font-size: var(--typography-alias-h3-md-size-09);
+      line-height: var(--typography-alias-h3-md-line-height-09);
+      font-weight: var(--typography-alias-h3-font-weight-700);
+    }
+    &.lg {
+      font-size: var(--typography-alias-h3-lg-size-10);
+      line-height: var(--typography-alias-h3-lg-line-height-10);
+      font-weight: var(--typography-alias-h3-font-weight-700);
+    }
+  }
+
+  h4 {
+    &,
+    &.md {
+      font-size: var(--typography-alias-h4-md-size-07);
+      line-height: var(--typography-alias-h4-md-line-height-07);
+      font-weight: var(--typography-alias-h4-font-weight-700);
+    }
+    &.lg {
+      font-size: var(--typography-alias-h4-lg-size-08);
+      line-height: var(--typography-alias-h4-lg-line-height-08);
+      font-weight: var(--typography-alias-h4-font-weight-700);
+    }
+  }
+
+  h5 {
+    &,
+    &.md {
+      font-size: var(--typography-alias-h5-md-size-06);
+      line-height: var(--typography-alias-h5-md-line-height-06);
+      font-weight: var(--typography-alias-h5-font-weight-600);
+    }
+  }
+
+  h6 {
+    &,
+    &.md {
+      font-size: var(--typography-alias-h6-md-size-05);
+      line-height: var(--typography-alias-h6-md-line-height-05);
+      font-weight: var(--typography-alias-h6-font-weight-600);
+    }
+  }
+
+  p {
+    &.lg-01 {
+      font-size: var(--typography-alias-p-lg-size-05);
+      line-height: var(--typography-alias-p-lg-line-height-05);
+      font-size: var(--typography-alias-p-font-weight-400);
+    }
+    &.lg-02 {
+      font-size: var(--typography-alias-p-lg-size-05);
+      line-height: var(--typography-alias-p-lg-line-height-05);
+      font-size: var(--typography-alias-p-font-weight-400);
+      font-family: var(--font-serif);
+    }
+    &.md-01 {
+      font-size: var(--typography-alias-p-md-size-04);
+      line-height: var(--typography-alias-p-md-line-height-04);
+      font-size: var(--typography-alias-p-font-weight-400);
+    }
+    &.md-02 {
+      font-size: var(--typography-alias-p-md-size-04);
+      line-height: var(--typography-alias-p-md-line-height-04);
+      font-size: var(--typography-alias-p-font-weight-400);
+      font-family: var(--font-serif);
+    }
+    &.signature-lg-02 {
+      font-size: var(--typography-alias-p-lg-size-05);
+      line-height: var(--typography-alias-p-lg-line-height-05);
+      font-size: var(--typography-global-font-weights-700);
+      font-family: var(--font-serif);
+      font-style: italic;
+    }
+    &.signature-md-02 {
+      font-size: var(--typography-alias-p-md-size-04);
+      line-height: var(--typography-alias-p-md-line-height-04);
+      font-size: var(--typography-global-font-weights-700);
+      font-family: var(--font-serif);
+      font-style: italic;
+    }
+  }
+
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+@layer components {
+  .disclaimer-md-400 {
+    font-size: var(--typography-alias-disclaimer-md-size-03);
+    line-height: var(--typography-alias-disclaimer-md-line-height-03);
+    font-weight: var(--typography-alias-disclaimer-font-weight-400);
   }
 }
