@@ -1,0 +1,7 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    "class:\\s*'([^']*)",
+    "'\\[class\\.([^\\]\\s']*)"
+  ],
+  "nxConsole.generateAiAgentRules": true,
+}
