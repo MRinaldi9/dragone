@@ -1,4 +1,4 @@
-:root {
+@theme {
   --color-global-primary-100: #2f6dd5;
   --color-global-primary-000: #ffffff;
   --color-global-secondary-100: #454d56;
@@ -271,4 +271,13 @@
   --elevation-elevation-02: 0px 0px 24px 0px rgba(227, 229, 232, 1);
   --elevation-elevation-03: 0px 0px 32px 0px rgba(227, 229, 232, 1);
   --elevation-elevation-04: 0px 0px 40px 0px rgba(227, 229, 232, 1);
+  --font-sans:
+    var(--typography-global-font-family-01), 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+  --font-serif:
+    var(--typography-global-font-family-02), 'Georgia', 'Cambria',
+    'Times New Roman', serif;
+  --font-mono:
+    var(--typography-global-font-family-03), 'Courier New', 'Consolas',
+    monospace;
 }
