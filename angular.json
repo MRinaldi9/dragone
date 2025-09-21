@@ -2,9 +2,49 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "pnpm"
+    "packageManager": "pnpm",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   },
   "newProjectRoot": "projects",
   "projects": {
+    "@dragone/ui": {
+      "projectType": "library",
+      "root": "projects/dragone/ui",
+      "sourceRoot": "projects/dragone/ui/src",
+      "prefix": "drgn",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dragone/ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dragone/ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/dragone/ui/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dragone/ui/**/*.ts",
+              "projects/dragone/ui/**/*.html"
+            ],
+            "eslintConfig": "projects/dragone/ui/eslint.config.js",
+            "concurrency": "auto"
+          }
+        }
+      }
+    }
   }
 }

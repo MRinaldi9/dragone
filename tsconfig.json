@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@dragone/ui": [
+        "./dist/dragone/ui"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -22,5 +27,13 @@
     "typeCheckHostBindings": true,
     "strictTemplates": true
   },
-  "files": []
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/dragone/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/dragone/ui/tsconfig.spec.json"
+    }
+  ]
 }
