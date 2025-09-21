@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky"
+    "format": "prettier -w \"**/*.{ts,js,css,scss,html}\""
   },
   "prettier": {
     "printWidth": 100,
@@ -48,7 +48,6 @@
     "angular-eslint": "20.3.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
-    "husky": "^9.1.7",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

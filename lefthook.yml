@@ -17,7 +17,8 @@
 #         - security
 #       run: bundle audit
 #
-lint:
+pre-commit:
+  parallel: true
   jobs:
-    - name: angular lint
-      run: pnpm lint
+    - run: pnpm lint
+    - run: pnpm format

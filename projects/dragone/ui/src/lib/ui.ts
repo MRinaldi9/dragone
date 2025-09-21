@@ -3,14 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'drgn-ui',
   imports: [],
-  template: `
-    <p>
-      ui works!
-    </p>
-  `,
+  template: ` <p>ui works!</p> `,
   styles: ``,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Ui {
-
-}
+export class Ui {}
