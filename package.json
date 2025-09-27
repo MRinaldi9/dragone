@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "format": "prettier -w \"**/*.{ts,js,css,scss,html}\""
+    "format": "prettier -w \"**/*.{ts,js,css,scss,html}\"",
+    "storybook": "ng run @dragone/ui:storybook",
+    "build-storybook": "ng run @dragone/ui:build-storybook"
   },
   "prettier": {
     "printWidth": 100,
@@ -29,29 +31,41 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^19.0.0",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@floating-ui/dom": "^1.6.0",
+    "ng-primitives": "0.80.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@analogjs/storybook-angular": "^1.21.1",
+    "@analogjs/vite-plugin-angular": "^1.21.1",
+    "@angular-devkit/build-angular": "20.3.0",
     "@angular-eslint/builder": "20.3.0",
     "@angular/build": "^20.3.2",
     "@angular/cli": "^20.3.2",
     "@angular/compiler-cli": "^20.3.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@compodoc/compodoc": "1.1.30",
     "@eslint/js": "^9.35.0",
+    "@storybook/addon-a11y": "9.1.8",
+    "@storybook/addon-docs": "9.1.8",
+    "@storybook/addon-onboarding": "9.1.8",
+    "@storybook/angular": "9.1.8",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "20.3.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-storybook": "9.1.8",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -62,8 +76,10 @@
     "ng-packagr": "^20.3.0",
     "prettier": "^3.6.2",
     "prettier-plugin-organize-imports": "^4.3.0",
+    "storybook": "9.1.8",
     "typescript": "~5.9.2",
-    "typescript-eslint": "8.40.0"
+    "typescript-eslint": "8.40.0",
+    "zone.js": "^0.15.1"
   },
   "config": {
     "commitizen": {

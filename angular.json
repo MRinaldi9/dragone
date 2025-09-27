@@ -7,6 +7,11 @@
       "angular-eslint"
     ]
   },
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush"
+    }
+  },
   "newProjectRoot": "projects",
   "projects": {
     "@dragone/ui": {
@@ -42,6 +47,40 @@
             ],
             "eslintConfig": "projects/dragone/ui/eslint.config.js",
             "concurrency": "auto"
+          }
+        },
+        "storybook": {
+          "builder": "@analogjs/storybook-angular:start-storybook",
+          "options": {
+            "configDir": "projects/dragone/ui/.storybook",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/dragone/ui"
+            ],
+            "port": 6006,
+            "styles": [
+              "../src/tokens.css"
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@analogjs/storybook-angular:build-storybook",
+          "options": {
+            "configDir": "projects/dragone/ui/.storybook",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/dragone/ui"
+            ],
+            "outputDir": "storybook-static",
+            "styles": [
+              "src/tokens.css"
+            ]
           }
         }
       }
