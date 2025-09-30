@@ -62,7 +62,7 @@
             ],
             "port": 6006,
             "styles": [
-              "../src/tokens.css"
+              "../src/main.css"
             ]
           }
         },
@@ -79,7 +79,7 @@
             ],
             "outputDir": "storybook-static",
             "styles": [
-              "src/tokens.css"
+              "../src/main.css"
             ]
           }
         }
