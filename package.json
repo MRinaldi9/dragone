@@ -1,6 +1,7 @@
 {
   "name": "dragone",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,24 +13,6 @@
     "storybook": "ng run @dragone/ui:storybook",
     "build-storybook": "ng run @dragone/ui:build-storybook"
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "arrowParens": "avoid",
-    "experimentalTernaries": true,
-    "plugins": [
-      "prettier-plugin-organize-imports"
-    ],
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
-  "private": true,
   "dependencies": {
     "@angular/cdk": "^19.0.0",
     "@angular/common": "^20.3.0",
@@ -39,6 +22,8 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@floating-ui/dom": "^1.6.0",
+    "@ng-icons/core": "^32.1.0",
+    "@ng-icons/font-awesome": "^32.1.0",
     "ng-primitives": "0.80.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -85,5 +70,22 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "experimentalTernaries": true,
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ],
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
   }
 }
