@@ -1,0 +1,19 @@
+.drgn-h1-xl {
+  font-family: var(--typography-global-font-family-01);
+  font-size: var(--typography-h1-size-xl);
+  line-height: var(--typography-h1-line-height-xl);
+  font-weight: var(--typography-global-font-weight-600);
+  font-style: var(--typography-style-normal);
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.drgn-label-md-700 {
+  font-family: var(--typography-global-font-family-01);
+  font-size: var(--typography-global-font-size-04);
+  line-height: var(--typography-global-line-height-md);
+  font-weight: var(--typography-global-font-weight-700);
+  font-style: var(--typography-style-normal);
+  letter-spacing: 0;
+  margin: 0;
+}

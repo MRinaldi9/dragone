@@ -11,84 +11,54 @@
     "miscellaneous": {
         "variables": [
             {
-                "name": "Large",
+                "name": "ButtonPrimary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/button.stories.ts",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'large',\n  },\n  play: async ({ canvas, userEvent }) => {\n    const button = canvas.getByText<HTMLButtonElement>('Dragone');\n\n    await userEvent.click(button);\n    button.onclick = async (e) => {\n      await expect(e).toBeInstanceOf(MouseEvent);\n    };\n  },\n}"
             },
             {
-                "name": "LoggedIn",
+                "name": "ButtonPrimaryOnlyIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/header.stories.ts",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+                "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n    icon: true,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
             },
             {
-                "name": "LoggedIn",
+                "name": "ButtonPrimaryWithIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/page.stories.ts",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
+                "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
             },
             {
-                "name": "LoggedOut",
+                "name": "ButtonSecondary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/header.stories.ts",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
+                "defaultValue": "{\n  args: {\n    variant: 'secondary',\n    size: 'large',\n  },\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/button.stories.ts",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<HeaderComponent>",
-                "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<PageComponent>",
-                "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                "type": "Meta<>",
+                "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  argTypes: {\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  render: args => {\n    return {\n      props: args,\n      template: `<button drgn-button ${argsToTemplate(args)}>Dragone</button>`,\n    };\n  },\n}"
             },
             {
                 "name": "preview",
@@ -98,37 +68,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\r\n  parameters: {\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n  },\r\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [componentWrapperDecorator(story => `<div style=\"display: flex; justify-content: center;\">${story}</div>`)],\n}"
             }
         ],
         "functions": [],
@@ -137,30 +77,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
-                "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<HeaderComponent>",
-                "file": "projects/dragone/ui/src/stories/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<PageComponent>",
-                "file": "projects/dragone/ui/src/stories/page.stories.ts",
+                "rawtype": "StoryObj<>",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -169,120 +87,56 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/dragone/ui/src/stories/button.stories.ts": [
+            "projects/dragone/ui/button/src/button.stories.ts": [
                 {
-                    "name": "Large",
+                    "name": "ButtonPrimary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/button.stories.ts",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'large',\n  },\n  play: async ({ canvas, userEvent }) => {\n    const button = canvas.getByText<HTMLButtonElement>('Dragone');\n\n    await userEvent.click(button);\n    button.onclick = async (e) => {\n      await expect(e).toBeInstanceOf(MouseEvent);\n    };\n  },\n}"
+                },
+                {
+                    "name": "ButtonPrimaryOnlyIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n    icon: true,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
+                },
+                {
+                    "name": "ButtonPrimaryWithIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
+                },
+                {
+                    "name": "ButtonSecondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'secondary',\n    size: 'large',\n  },\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/button.stories.ts",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
-                }
-            ],
-            "projects/dragone/ui/src/stories/header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<HeaderComponent>",
-                    "defaultValue": "{\n  title: 'Example/Header',\n  component: HeaderComponent,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs\n  tags: ['autodocs'],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n  args: {\n    onLogin: fn(),\n    onLogout: fn(),\n    onCreateAccount: fn(),\n  },\n}"
-                }
-            ],
-            "projects/dragone/ui/src/stories/page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = canvas.getByRole('button', { name: /Log in/i });\n    await expect(loginButton).toBeInTheDocument();\n    await userEvent.click(loginButton);\n    await expect(loginButton).not.toBeInTheDocument();\n\n    const logoutButton = canvas.getByRole('button', { name: /Log out/i });\n    await expect(logoutButton).toBeInTheDocument();\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/src/stories/page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<PageComponent>",
-                    "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                    "type": "Meta<>",
+                    "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  argTypes: {\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  render: args => {\n    return {\n      props: args,\n      template: `<button drgn-button ${argsToTemplate(args)}>Dragone</button>`,\n    };\n  },\n}"
                 }
             ],
             "projects/dragone/ui/.storybook/preview.ts": [
@@ -294,46 +148,20 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\r\n  parameters: {\r\n    controls: {\r\n      matchers: {\r\n        color: /(background|color)$/i,\r\n        date: /Date$/i,\r\n      },\r\n    },\r\n  },\r\n}"
+                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [componentWrapperDecorator(story => `<div style=\"display: flex; justify-content: center;\">${story}</div>`)],\n}"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/dragone/ui/src/stories/button.stories.ts": [
+            "projects/dragone/ui/button/src/button.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
-                    "file": "projects/dragone/ui/src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/dragone/ui/src/stories/header.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<HeaderComponent>",
-                    "file": "projects/dragone/ui/src/stories/header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "projects/dragone/ui/src/stories/page.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<PageComponent>",
-                    "file": "projects/dragone/ui/src/stories/page.stories.ts",
+                    "rawtype": "StoryObj<>",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -362,87 +190,47 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/dragone/ui/src/stories/button.stories.ts",
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Large",
+                "name": "ButtonPrimary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/dragone/ui/src/stories/button.stories.ts",
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "meta",
+                "name": "ButtonPrimaryOnlyIcon",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/dragone/ui/src/stories/button.stories.ts",
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Primary",
+                "name": "ButtonPrimaryWithIcon",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/dragone/ui/src/stories/button.stories.ts",
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Secondary",
+                "name": "ButtonSecondary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "projects/dragone/ui/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/button.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/header.stories.ts",
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -452,47 +240,7 @@
                 "status": "low"
             },
             {
-                "filePath": "projects/dragone/ui/src/stories/header.stories.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "Story",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/src/stories/page.stories.ts",
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
