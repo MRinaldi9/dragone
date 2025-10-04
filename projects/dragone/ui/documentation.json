@@ -11,44 +11,24 @@
     "miscellaneous": {
         "variables": [
             {
-                "name": "ButtonPrimary",
+                "name": "Danger",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'large',\n  },\n  play: async ({ canvas, userEvent }) => {\n    const button = canvas.getByText<HTMLButtonElement>('Dragone');\n\n    await userEvent.click(button);\n    button.onclick = async (e) => {\n      await expect(e).toBeInstanceOf(MouseEvent);\n    };\n  },\n}"
+                "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'danger',\n  },\n}"
             },
             {
-                "name": "ButtonPrimaryOnlyIcon",
+                "name": "IconOnly",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n    icon: true,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
-            },
-            {
-                "name": "ButtonPrimaryWithIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/button/src/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
-            },
-            {
-                "name": "ButtonSecondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/dragone/ui/button/src/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'secondary',\n    size: 'large',\n  },\n}"
+                "defaultValue": "{\n  ...Template,\n  args: {\n    label: '',\n    showLeadingIcon: true,\n    icon: true,\n  },\n}"
             },
             {
                 "name": "meta",
@@ -57,8 +37,8 @@
                 "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<>",
-                "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  argTypes: {\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  render: args => {\n    return {\n      props: args,\n      template: `<button drgn-button ${argsToTemplate(args)}>Dragone</button>`,\n    };\n  },\n}"
+                "type": "Meta<ButtonStory>",
+                "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  args: {\n    focusVisible: fn(),\n    label: 'Dragone',\n    disabled: false,\n    icon: false,\n    showLeadingIcon: false,\n    showTrailingIcon: false,\n    size: 'large',\n    variant: 'primary',\n  },\n  argTypes: {\n    focusVisible: { type: 'function', control: false },\n    label: { control: 'text' },\n    showLeadingIcon: { control: 'boolean' },\n    showTrailingIcon: { control: 'boolean' },\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <button drgn-button ${argsToTemplate(args)}>\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        ${args.label}\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n      </button>\n      `,\n    };\n  },\n}"
             },
             {
                 "name": "preview",
@@ -68,16 +48,77 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [componentWrapperDecorator(story => `<div style=\"display: flex; justify-content: center;\">${story}</div>`)],\n}"
+                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [\n    componentWrapperDecorator(\n      story =>\n        `<div style=\"display: flex; justify-content: center; align-items: center;\">${story}</div>`,\n    ),\n  ],\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'primary',\n  },\n}"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'secondary',\n  },\n}"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  play: async ({ canvas, userEvent, canvasElement, args, step }) => {\n    const button = canvas.getByRole<HTMLButtonElement>('button');\n    await step('Click on button', async () => {\n      await userEvent.click(button);\n      await expect(args.focusVisible).not.toHaveBeenCalled();\n    });\n\n    await userEvent.click(canvasElement);\n\n    await step('Focus visible on button', async () => {\n      await userEvent.tab();\n      await expect(button).toHaveFocus();\n      await expect(args.focusVisible).toHaveBeenCalled();\n    });\n  },\n}"
+            },
+            {
+                "name": "Tertiary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'tertiary',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <div class=\"drgn-dark\" style=\"background-color: #002460\">\n        <button drgn-button ${argsToTemplate(args)}>\n          ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n          ${args.label}\n          ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        </button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithTrailingIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  ...Template,\n  args: {\n    showTrailingIcon: true,\n  },\n}"
             }
         ],
         "functions": [],
         "typealiases": [
             {
+                "name": "ButtonStory",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "",
+                "file": "projects/dragone/ui/button/src/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<>",
+                "rawtype": "StoryObj<ButtonStory>",
                 "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -89,44 +130,24 @@
         "groupedVariables": {
             "projects/dragone/ui/button/src/button.stories.ts": [
                 {
-                    "name": "ButtonPrimary",
+                    "name": "Danger",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    size: 'large',\n  },\n  play: async ({ canvas, userEvent }) => {\n    const button = canvas.getByText<HTMLButtonElement>('Dragone');\n\n    await userEvent.click(button);\n    button.onclick = async (e) => {\n      await expect(e).toBeInstanceOf(MouseEvent);\n    };\n  },\n}"
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'danger',\n  },\n}"
                 },
                 {
-                    "name": "ButtonPrimaryOnlyIcon",
+                    "name": "IconOnly",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n    icon: true,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
-                },
-                {
-                    "name": "ButtonPrimaryWithIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/button/src/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    ...ButtonPrimary.args,\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => ({\n    props: args,\n    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon></button>`,\n  }),\n}"
-                },
-                {
-                    "name": "ButtonSecondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/dragone/ui/button/src/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'secondary',\n    size: 'large',\n  },\n}"
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    label: '',\n    showLeadingIcon: true,\n    icon: true,\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -135,8 +156,58 @@
                     "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<>",
-                    "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  argTypes: {\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  render: args => {\n    return {\n      props: args,\n      template: `<button drgn-button ${argsToTemplate(args)}>Dragone</button>`,\n    };\n  },\n}"
+                    "type": "Meta<ButtonStory>",
+                    "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  args: {\n    focusVisible: fn(),\n    label: 'Dragone',\n    disabled: false,\n    icon: false,\n    showLeadingIcon: false,\n    showTrailingIcon: false,\n    size: 'large',\n    variant: 'primary',\n  },\n  argTypes: {\n    focusVisible: { type: 'function', control: false },\n    label: { control: 'text' },\n    showLeadingIcon: { control: 'boolean' },\n    showTrailingIcon: { control: 'boolean' },\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <button drgn-button ${argsToTemplate(args)}>\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        ${args.label}\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n      </button>\n      `,\n    };\n  },\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'primary',\n  },\n}"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'secondary',\n  },\n}"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  play: async ({ canvas, userEvent, canvasElement, args, step }) => {\n    const button = canvas.getByRole<HTMLButtonElement>('button');\n    await step('Click on button', async () => {\n      await userEvent.click(button);\n      await expect(args.focusVisible).not.toHaveBeenCalled();\n    });\n\n    await userEvent.click(canvasElement);\n\n    await step('Focus visible on button', async () => {\n      await userEvent.tab();\n      await expect(button).toHaveFocus();\n      await expect(args.focusVisible).toHaveBeenCalled();\n    });\n  },\n}"
+                },
+                {
+                    "name": "Tertiary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'tertiary',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <div class=\"drgn-dark\" style=\"background-color: #002460\">\n        <button drgn-button ${argsToTemplate(args)}>\n          ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n          ${args.label}\n          ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        </button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithTrailingIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    showTrailingIcon: true,\n  },\n}"
                 }
             ],
             "projects/dragone/ui/.storybook/preview.ts": [
@@ -148,7 +219,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [componentWrapperDecorator(story => `<div style=\"display: flex; justify-content: center;\">${story}</div>`)],\n}"
+                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [\n    componentWrapperDecorator(\n      story =>\n        `<div style=\"display: flex; justify-content: center; align-items: center;\">${story}</div>`,\n    ),\n  ],\n}"
                 }
             ]
         },
@@ -157,10 +228,21 @@
         "groupedTypeAliases": {
             "projects/dragone/ui/button/src/button.stories.ts": [
                 {
+                    "name": "ButtonStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "",
+                    "file": "projects/dragone/ui/button/src/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<>",
+                    "rawtype": "StoryObj<ButtonStory>",
                     "file": "projects/dragone/ui/button/src/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -194,7 +276,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "ButtonPrimary",
+                "name": "Danger",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -204,27 +286,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "ButtonPrimaryOnlyIcon",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ButtonPrimaryWithIcon",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ButtonSecondary",
+                "name": "IconOnly",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -235,6 +297,66 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Tertiary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithTrailingIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "ButtonStory",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

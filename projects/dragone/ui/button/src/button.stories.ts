@@ -9,7 +9,14 @@ import { faSolidArrowRight } from '@ng-icons/font-awesome/solid';
 import { expect, fn } from 'storybook/test';
 import { Button } from './button';
 
-type ButtonStory = Button & { disabled: boolean; icon: boolean; focusVisible: () => boolean };
+type ButtonStory = Button & {
+  disabled: boolean;
+  icon: boolean;
+  focusVisible: () => boolean;
+  label: string;
+  showLeadingIcon: boolean;
+  showTrailingIcon: boolean;
+};
 
 const meta: Meta<ButtonStory> = {
   title: 'Dragone/UI/Button',
@@ -17,9 +24,19 @@ const meta: Meta<ButtonStory> = {
   tags: ['autodocs'],
   args: {
     focusVisible: fn(),
+    label: 'Dragone',
+    disabled: false,
+    icon: false,
+    showLeadingIcon: false,
+    showTrailingIcon: false,
+    size: 'large',
+    variant: 'primary',
   },
   argTypes: {
     focusVisible: { type: 'function', control: false },
+    label: { control: 'text' },
+    showLeadingIcon: { control: 'boolean' },
+    showTrailingIcon: { control: 'boolean' },
     size: {
       description: 'The size of the button',
       type: 'string',
@@ -47,10 +64,19 @@ const meta: Meta<ButtonStory> = {
       },
     },
   },
+  decorators: [
+    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
+  ],
   render: args => {
     return {
       props: args,
-      template: `<button drgn-button ${argsToTemplate(args)}>Dragone</button>`,
+      template: `
+      <button drgn-button ${argsToTemplate(args)}>
+        ${args.showLeadingIcon ? '<ng-icon slot="leading" name="fa-solid-arrow-right"></ng-icon>' : ''}
+        ${args.label}
+        ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon>' : ''}
+      </button>
+      `,
     };
   },
 };
@@ -58,11 +84,7 @@ const meta: Meta<ButtonStory> = {
 export default meta;
 type Story = StoryObj<ButtonStory>;
 
-export const ButtonPrimary: Story = {
-  args: {
-    variant: 'primary',
-    size: 'large',
-  },
+const Template: Story = {
   play: async ({ canvas, userEvent, canvasElement, args, step }) => {
     const button = canvas.getByRole<HTMLButtonElement>('button');
     await step('Click on button', async () => {
@@ -80,103 +102,46 @@ export const ButtonPrimary: Story = {
   },
 };
 
-export const ButtonPrimaryWithIcon: Story = {
+export const Primary: Story = {
+  ...Template,
   args: {
-    ...ButtonPrimary.args,
-  },
-  decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
-  ],
-  render: args => ({
-    props: args,
-    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon></button>`,
-  }),
-  play: async ({ context }) => {
-    await ButtonPrimary.play?.(context);
+    variant: 'primary',
   },
 };
 
-export const ButtonPrimaryOnlyIcon: Story = {
-  args: {
-    ...ButtonPrimary.args,
-    icon: true,
-  },
-  decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
-  ],
-  render: args => ({
-    props: args,
-    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name="fa-solid-arrow-right"></ng-icon></button>`,
-  }),
-  play: async ({ context }) => {
-    await ButtonPrimary.play?.(context);
-  },
-};
-
-export const ButtonSecondary: Story = {
+export const Secondary: Story = {
+  ...Template,
   args: {
     variant: 'secondary',
-    size: 'large',
   },
 };
 
-export const ButtonSecondaryWithIcon: Story = {
+export const Tertiary: Story = {
+  ...Template,
   args: {
-    ...ButtonSecondary.args,
+    variant: 'tertiary',
   },
-  decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
-  ],
-  render: args => ({
-    props: args,
-    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon></button>`,
-  }),
 };
 
-export const ButtonSecondaryOnlyIcon: Story = {
-  args: {
-    ...ButtonSecondary.args,
-    icon: true,
-  },
-  decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
-  ],
-  render: args => ({
-    props: args,
-    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name="fa-solid-arrow-right"></ng-icon></button>`,
-  }),
-};
-
-export const ButtonDanger: Story = {
+export const Danger: Story = {
+  ...Template,
   args: {
     variant: 'danger',
-    size: 'large',
   },
 };
 
-export const ButtonDangerWithIcon: Story = {
+export const WithTrailingIcon: Story = {
+  ...Template,
   args: {
-    ...ButtonDanger.args,
+    showTrailingIcon: true,
   },
-  decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
-  ],
-  render: args => ({
-    props: args,
-    template: `<button drgn-button ${argsToTemplate(args)}>Dragone <ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon></button>`,
-  }),
 };
 
-export const ButtonDangerOnlyIcon: Story = {
+export const IconOnly: Story = {
+  ...Template,
   args: {
-    ...ButtonDanger.args,
+    label: '',
+    showLeadingIcon: true,
     icon: true,
   },
-  decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
-  ],
-  render: args => ({
-    props: args,
-    template: `<button drgn-button ${argsToTemplate(args)}><ng-icon name="fa-solid-arrow-right"></ng-icon></button>`,
-  }),
 };
