@@ -49,7 +49,7 @@
       background-color: var(--interactive-alert-pressed);
     }
   }
-  &[data-variant='tertiary'] {
+  &[data-variant='tertiary']:not([ngpAccordionTrigger]) {
     background-color: transparent;
     &:not(:disabled) {
       color: var(--interactive-primary-default);
@@ -82,6 +82,21 @@
     }
     &:disabled {
       color: var(--text-disabled);
+    }
+  }
+  &[data-variant='tertiary'][ngpAccordionTrigger] {
+    background-color: var(--color-global-primary-000);
+    &:not(:disabled) {
+      color: var(--bg-primary-dark-110);
+      border: 1px solid var(--bg-primary-light-50);
+      &:hover,
+      &[data-open] {
+        background-color: var(--bg-primary-light-40);
+      }
+    }
+    &:disabled {
+      color: var(--text-disabled);
+      border: 1px solid var(--bg-disabled);
     }
   }
 }

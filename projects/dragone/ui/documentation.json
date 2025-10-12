@@ -18,7 +18,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    type: 'multiple',\r\n  },\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading + '#2' })}>\r\n          <p>Sed et laborum.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    type: 'multiple',\n  },\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n        </drgn-accordion-item>\n        <drgn-accordion-item heading=\"Dragone#2\">\n          <p>Sed et laborum.</p>\n        </drgn-accordion-item>\n      </drgn-accordion>\n      `,\n    };\n  },\n}"
             },
             {
                 "name": "AccordionSingle",
@@ -28,7 +28,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{}"
+                "defaultValue": "{\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n        </drgn-accordion-item>\n      </drgn-accordion>\n      `,\n    };\n  },\n}"
             },
             {
                 "name": "Danger",
@@ -58,7 +58,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<Accordion>",
-                "defaultValue": "{\r\n  title: 'Dragone/UI/Accordion',\r\n  component: Accordion,\r\n  tags: ['autodocs'],\r\n  args: {\r\n    collapse: true,\r\n    type: 'single',\r\n    disabled: false,\r\n    orientation: 'vertical',\r\n    heading: 'Dragone',\r\n    accordionChange: fn(),\r\n  },\r\n  argTypes: {\r\n    collapse: {\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      description: 'Allows all accordion items to be collapsed',\r\n    },\r\n    heading: { control: 'text' },\r\n    type: { type: 'string', control: 'select', options: ['single', 'multiple'] },\r\n    showTrailingIcon: { control: 'boolean' },\r\n    disabled: {\r\n      description: 'Disables the accordion if set to true',\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      table: {\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    accordionChange: { type: 'function', control: false },\r\n  },\r\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+                "defaultValue": "{\n  title: 'Dragone/UI/Accordion',\n  component: Accordion,\n  tags: ['autodocs'],\n  args: {\n    collapse: true,\n    type: 'single',\n    disabled: false,\n    orientation: 'vertical',\n    heading: 'Dragone',\n    accordionChange: fn(),\n  },\n  argTypes: {\n    collapse: {\n      type: 'boolean',\n      control: { type: 'boolean' },\n      description: 'Allows all accordion items to be collapsed',\n    },\n    heading: { control: 'text' },\n    type: {\n      type: 'string',\n      control: 'select',\n      options: ['single', 'multiple'],\n      table: { defaultValue: { summary: 'single' } },\n    },\n    disabled: {\n      description: 'Disables the accordion if set to true',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n    accordionChange: { type: 'function', control: false },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\n}"
             },
             {
                 "name": "meta",
@@ -178,7 +178,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    type: 'multiple',\r\n  },\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading + '#2' })}>\r\n          <p>Sed et laborum.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    type: 'multiple',\n  },\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n        </drgn-accordion-item>\n        <drgn-accordion-item heading=\"Dragone#2\">\n          <p>Sed et laborum.</p>\n        </drgn-accordion-item>\n      </drgn-accordion>\n      `,\n    };\n  },\n}"
                 },
                 {
                     "name": "AccordionSingle",
@@ -188,7 +188,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{}"
+                    "defaultValue": "{\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n        </drgn-accordion-item>\n      </drgn-accordion>\n      `,\n    };\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -198,7 +198,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<Accordion>",
-                    "defaultValue": "{\r\n  title: 'Dragone/UI/Accordion',\r\n  component: Accordion,\r\n  tags: ['autodocs'],\r\n  args: {\r\n    collapse: true,\r\n    type: 'single',\r\n    disabled: false,\r\n    orientation: 'vertical',\r\n    heading: 'Dragone',\r\n    accordionChange: fn(),\r\n  },\r\n  argTypes: {\r\n    collapse: {\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      description: 'Allows all accordion items to be collapsed',\r\n    },\r\n    heading: { control: 'text' },\r\n    type: { type: 'string', control: 'select', options: ['single', 'multiple'] },\r\n    showTrailingIcon: { control: 'boolean' },\r\n    disabled: {\r\n      description: 'Disables the accordion if set to true',\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      table: {\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    accordionChange: { type: 'function', control: false },\r\n  },\r\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+                    "defaultValue": "{\n  title: 'Dragone/UI/Accordion',\n  component: Accordion,\n  tags: ['autodocs'],\n  args: {\n    collapse: true,\n    type: 'single',\n    disabled: false,\n    orientation: 'vertical',\n    heading: 'Dragone',\n    accordionChange: fn(),\n  },\n  argTypes: {\n    collapse: {\n      type: 'boolean',\n      control: { type: 'boolean' },\n      description: 'Allows all accordion items to be collapsed',\n    },\n    heading: { control: 'text' },\n    type: {\n      type: 'string',\n      control: 'select',\n      options: ['single', 'multiple'],\n      table: { defaultValue: { summary: 'single' } },\n    },\n    disabled: {\n      description: 'Disables the accordion if set to true',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n    accordionChange: { type: 'function', control: false },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\n}"
                 }
             ],
             "projects/dragone/ui/button/src/button.stories.ts": [

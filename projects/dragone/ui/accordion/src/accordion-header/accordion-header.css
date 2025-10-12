@@ -1,0 +1,17 @@
+[ngpAccordionTrigger] {
+  display: flex;
+  padding: 20px 16px;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 0;
+}
+
+ng-icon {
+  font-size: 1.25rem;
+  color: var(--ngp-text-secondary);
+  transition: transform 0.2s ease-in-out;
+}
+
+[ngpAccordionTrigger][data-open] ng-icon {
+  transform: rotateX(180deg);
+}

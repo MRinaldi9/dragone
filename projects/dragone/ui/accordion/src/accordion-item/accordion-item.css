@@ -5,14 +5,6 @@
   }
 }
 
-[ngpAccordionTrigger] {
-  display: flex;
-  padding: 20px 16px;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 0;
-}
-
 .accordion-container {
   padding: 0 4rem;
 }
@@ -32,16 +24,6 @@
 
 [ngpAccordionContent][data-closed] .accordion-container {
   animation: slideUp 0.2s ease-in-out forwards;
-}
-
-ng-icon {
-  font-size: 1.25rem;
-  color: var(--ngp-text-secondary);
-  transition: transform 0.2s ease-in-out;
-}
-
-[ngpAccordionTrigger][data-open] ng-icon {
-  transform: rotateX(180deg);
 }
 
 @keyframes slideDown {

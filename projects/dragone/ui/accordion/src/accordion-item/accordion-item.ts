@@ -1,29 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { Button } from '@dragone/ui/button';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidChevronDown, faSolidChevronUp } from '@ng-icons/font-awesome/solid';
-import {
-  injectAccordionItemState,
-  injectAccordionState,
-  NgpAccordionContent,
-  NgpAccordionItem,
-  NgpAccordionTrigger,
-} from 'ng-primitives/accordion';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ButtonVariant } from '@dragone/ui/button';
+import { NgpAccordionContent, NgpAccordionItem } from 'ng-primitives/accordion';
+import { AccordionHeader, AriaLevel } from '../accordion-header/accordion-header';
 
 @Component({
   selector: 'drgn-accordion-item',
-  imports: [NgpAccordionContent, NgpAccordionTrigger, NgIcon, Button],
+  imports: [NgpAccordionContent, AccordionHeader],
   template: `
-    <button
-      ngpAccordionTrigger
-      drgn-button
-      variant="tertiary"
-      class="drgn-label-md-600"
-      [disabled]="isDisabled()"
-    >
+    <drgn-accordion-header [ariaLevel]="headingAriaLevel()" [variant]="accordionVariant()">
       {{ heading() }}
-      <ng-icon slot="trailing" class="chevron-icon" name="faSolidChevronDown" />
-    </button>
+    </drgn-accordion-header>
     <div class="drgn-p-md-01" ngpAccordionContent>
       <div class="accordion-container">
         <ng-content />
@@ -31,7 +17,7 @@ import {
     </div>
   `,
   styleUrl: './accordion-item.css',
-  providers: [provideIcons({ faSolidChevronDown, faSolidChevronUp })],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
@@ -42,10 +28,11 @@ import {
 })
 export class AccordionItem {
   readonly heading = input.required<string>();
-  private readonly internalState = injectAccordionItemState();
-  private readonly accordionState = injectAccordionState();
-
-  protected readonly isDisabled = computed(
-    () => this.internalState().disabled() || this.accordionState().disabled(),
-  );
+  readonly headingAriaLevel = input<AriaLevel>(3);
+  readonly accordionVariant = input<
+    Extract<ButtonVariant, 'primary' | 'tertiary'>,
+    'dark' | 'light'
+  >('primary', {
+    transform: v => (v === 'dark' ? 'primary' : 'tertiary'),
+  });
 }

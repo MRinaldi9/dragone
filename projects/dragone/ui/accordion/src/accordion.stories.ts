@@ -19,6 +19,7 @@ const meta: Meta<Accordion> = {
     orientation: 'vertical',
     heading: 'Dragone',
     accordionChange: fn(),
+    accordionVariant: 'dark',
   },
   argTypes: {
     collapse: {
@@ -32,6 +33,12 @@ const meta: Meta<Accordion> = {
       control: 'select',
       options: ['single', 'multiple'],
       table: { defaultValue: { summary: 'single' } },
+    },
+    accordionVariant: {
+      type: 'string',
+      control: 'select',
+      options: ['dark', 'light'],
+      table: { defaultValue: { summary: 'dark' } },
     },
     disabled: {
       description: 'Disables the accordion if set to true',
@@ -54,8 +61,8 @@ export const AccordionSingle: Story = {
     return {
       props: args,
       template: `
-      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>
-        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>
+      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
+        <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
       </drgn-accordion>
@@ -71,11 +78,11 @@ export const AccordionMultiple: Story = {
     return {
       props: args,
       template: `
-      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>
-        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>
+      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
+        <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
-        <drgn-accordion-item heading="Dragone#2">
+        <drgn-accordion-item heading="Dragone#2" ${argsToTemplate({ ...args }, { exclude: ['darkMode', 'collapse', 'type', 'orientation', 'heading'] })}>
           <p>Sed et laborum.</p>
         </drgn-accordion-item>
       </drgn-accordion>
