@@ -11,6 +11,26 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "AccordionMultiple",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    type: 'multiple',\r\n  },\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading + '#2' })}>\r\n          <p>Sed et laborum.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+            },
+            {
+                "name": "AccordionSingle",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
                 "name": "Danger",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -34,11 +54,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Accordion>",
+                "defaultValue": "{\r\n  title: 'Dragone/UI/Accordion',\r\n  component: Accordion,\r\n  tags: ['autodocs'],\r\n  args: {\r\n    collapse: true,\r\n    type: 'single',\r\n    disabled: false,\r\n    orientation: 'vertical',\r\n    heading: 'Dragone',\r\n    accordionChange: fn(),\r\n  },\r\n  argTypes: {\r\n    collapse: {\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      description: 'Allows all accordion items to be collapsed',\r\n    },\r\n    heading: { control: 'text' },\r\n    type: { type: 'string', control: 'select', options: ['single', 'multiple'] },\r\n    showTrailingIcon: { control: 'boolean' },\r\n    disabled: {\r\n      description: 'Disables the accordion if set to true',\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      table: {\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    accordionChange: { type: 'function', control: false },\r\n  },\r\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonStory>",
-                "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  args: {\n    focusVisible: fn(),\n    label: 'Dragone',\n    disabled: false,\n    icon: false,\n    showLeadingIcon: false,\n    showTrailingIcon: false,\n    size: 'large',\n    variant: 'primary',\n  },\n  argTypes: {\n    focusVisible: { type: 'function', control: false },\n    label: { control: 'text' },\n    showLeadingIcon: { control: 'boolean' },\n    showTrailingIcon: { control: 'boolean' },\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <button drgn-button ${argsToTemplate(args)}>\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        ${args.label}\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n      </button>\n      `,\n    };\n  },\n}"
+                "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  args: {\n    focusVisible: fn(),\n    label: 'Dragone',\n    disabled: false,\n    icon: false,\n    showLeadingIcon: false,\n    showTrailingIcon: false,\n    size: 'large',\n    variant: 'primary',\n  },\n  argTypes: {\n    focusVisible: { type: 'function', control: false },\n    label: { control: 'text' },\n    showLeadingIcon: { control: 'boolean' },\n    showTrailingIcon: { control: 'boolean' },\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <button drgn-button ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        ${args.label}\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n      </button>\n      `,\n    };\n  },\n}"
             },
             {
                 "name": "preview",
@@ -48,7 +78,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [\n    componentWrapperDecorator(\n      story =>\n        `<div style=\"display: flex; justify-content: center; align-items: center;\">${story}</div>`,\n    ),\n  ],\n}"
+                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  args: {\n    darkMode: false,\n  },\n  argTypes: {\n    darkMode: {\n      description: 'Global control for enabling dark mode',\n      control: 'boolean',\n      table: { defaultValue: { summary: 'false' } },\n    },\n  },\n  decorators: [\n    (storyFn, { args }) => {\n      const story = storyFn();\n\n      // 2. Estraiamo il valore di 'darkMode' dal contesto\n      const darkMode = args['darkMode'] as boolean;\n\n      // 3. Determiniamo i colori e la classe del tema\n      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';\n      const themeClass = darkMode ? 'drgn-dark' : '';\n\n      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico\n      story.template = `\n        <div\n          class=\"${themeClass}\"\n          style=\"\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: ${backgroundColor};\n            padding: 2rem;\n            transition: background-color 0.3s;\n          \"\n        >\n          ${story.template}\n        </div>\n      `;\n\n      // 5. Restituiamo l'oggetto storia modificato\n      return story;\n    },\n  ],\n}"
             },
             {
                 "name": "Primary",
@@ -88,7 +118,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'tertiary',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <div class=\"drgn-dark\" style=\"background-color: #002460\">\n        <button drgn-button ${argsToTemplate(args)}>\n          ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n          ${args.label}\n          ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        </button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'tertiary',\n  },\n}"
             },
             {
                 "name": "WithTrailingIcon",
@@ -118,6 +148,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<Accordion>",
+                "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<ButtonStory>",
                 "file": "projects/dragone/ui/button/src/button.stories.ts",
                 "deprecated": false,
@@ -128,6 +169,38 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "projects/dragone/ui/accordion/src/accordion.stories.ts": [
+                {
+                    "name": "AccordionMultiple",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    type: 'multiple',\r\n  },\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading + '#2' })}>\r\n          <p>Sed et laborum.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+                },
+                {
+                    "name": "AccordionSingle",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<Accordion>",
+                    "defaultValue": "{\r\n  title: 'Dragone/UI/Accordion',\r\n  component: Accordion,\r\n  tags: ['autodocs'],\r\n  args: {\r\n    collapse: true,\r\n    type: 'single',\r\n    disabled: false,\r\n    orientation: 'vertical',\r\n    heading: 'Dragone',\r\n    accordionChange: fn(),\r\n  },\r\n  argTypes: {\r\n    collapse: {\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      description: 'Allows all accordion items to be collapsed',\r\n    },\r\n    heading: { control: 'text' },\r\n    type: { type: 'string', control: 'select', options: ['single', 'multiple'] },\r\n    showTrailingIcon: { control: 'boolean' },\r\n    disabled: {\r\n      description: 'Disables the accordion if set to true',\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      table: {\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    accordionChange: { type: 'function', control: false },\r\n  },\r\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <drgn-accordion style=\"max-width: 24rem;\" ${argsToTemplate(args, { exclude: ['heading', 'darkMode'] })}>\r\n        <drgn-accordion-item ${argsToTemplate({ heading: args.heading })}>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\r\n        </drgn-accordion-item>\r\n      </drgn-accordion>\r\n      `,\r\n    };\r\n  },\r\n}"
+                }
+            ],
             "projects/dragone/ui/button/src/button.stories.ts": [
                 {
                     "name": "Danger",
@@ -157,7 +230,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonStory>",
-                    "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  args: {\n    focusVisible: fn(),\n    label: 'Dragone',\n    disabled: false,\n    icon: false,\n    showLeadingIcon: false,\n    showTrailingIcon: false,\n    size: 'large',\n    variant: 'primary',\n  },\n  argTypes: {\n    focusVisible: { type: 'function', control: false },\n    label: { control: 'text' },\n    showLeadingIcon: { control: 'boolean' },\n    showTrailingIcon: { control: 'boolean' },\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <button drgn-button ${argsToTemplate(args)}>\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        ${args.label}\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n      </button>\n      `,\n    };\n  },\n}"
+                    "defaultValue": "{\n  title: 'Dragone/UI/Button',\n  component: Button,\n  tags: ['autodocs'],\n  args: {\n    focusVisible: fn(),\n    label: 'Dragone',\n    disabled: false,\n    icon: false,\n    showLeadingIcon: false,\n    showTrailingIcon: false,\n    size: 'large',\n    variant: 'primary',\n  },\n  argTypes: {\n    focusVisible: { type: 'function', control: false },\n    label: { control: 'text' },\n    showLeadingIcon: { control: 'boolean' },\n    showTrailingIcon: { control: 'boolean' },\n    size: {\n      description: 'The size of the button',\n      type: 'string',\n      options: ['small', 'medium', 'large'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'large' },\n      },\n    },\n    variant: {\n      description: 'The variant of the button',\n      type: 'string',\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    disabled: {\n      description: 'Whether the button is disabled',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n  },\n  decorators: [\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\n  ],\n  render: args => {\n    return {\n      props: args,\n      template: `\n      <button drgn-button ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        ${args.label}\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n      </button>\n      `,\n    };\n  },\n}"
                 },
                 {
                     "name": "Primary",
@@ -197,7 +270,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'tertiary',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <div class=\"drgn-dark\" style=\"background-color: #002460\">\n        <button drgn-button ${argsToTemplate(args)}>\n          ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n          ${args.label}\n          ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\n        </button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  ...Template,\n  args: {\n    variant: 'tertiary',\n  },\n}"
                 },
                 {
                     "name": "WithTrailingIcon",
@@ -219,7 +292,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  decorators: [\n    componentWrapperDecorator(\n      story =>\n        `<div style=\"display: flex; justify-content: center; align-items: center;\">${story}</div>`,\n    ),\n  ],\n}"
+                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  args: {\n    darkMode: false,\n  },\n  argTypes: {\n    darkMode: {\n      description: 'Global control for enabling dark mode',\n      control: 'boolean',\n      table: { defaultValue: { summary: 'false' } },\n    },\n  },\n  decorators: [\n    (storyFn, { args }) => {\n      const story = storyFn();\n\n      // 2. Estraiamo il valore di 'darkMode' dal contesto\n      const darkMode = args['darkMode'] as boolean;\n\n      // 3. Determiniamo i colori e la classe del tema\n      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';\n      const themeClass = darkMode ? 'drgn-dark' : '';\n\n      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico\n      story.template = `\n        <div\n          class=\"${themeClass}\"\n          style=\"\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: ${backgroundColor};\n            padding: 2rem;\n            transition: background-color 0.3s;\n          \"\n        >\n          ${story.template}\n        </div>\n      `;\n\n      // 5. Restituiamo l'oggetto storia modificato\n      return story;\n    },\n  ],\n}"
                 }
             ]
         },
@@ -249,6 +322,19 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "projects/dragone/ui/accordion/src/accordion.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<Accordion>",
+                    "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
@@ -267,6 +353,46 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AccordionMultiple",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AccordionSingle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

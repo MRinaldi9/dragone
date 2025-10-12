@@ -17,3 +17,23 @@
   letter-spacing: 0;
   margin: 0;
 }
+
+.drgn-label-md-600 {
+  font-family: var(--typography-global-font-family-01);
+  font-size: var(--typography-global-font-size-04);
+  line-height: var(--typography-global-line-height-md);
+  font-weight: var(--typography-global-font-weight-600);
+  font-style: var(--typography-style-normal);
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.drgn-p-md-01 {
+  font-family: var(--typography-global-font-family-01);
+  font-size: var(--typography-global-font-size-04);
+  line-height: var(--typography-global-line-height-md);
+  font-weight: var(--typography-global-font-weight-400);
+  font-style: var(--typography-style-normal);
+  letter-spacing: 0;
+  margin: 0;
+}

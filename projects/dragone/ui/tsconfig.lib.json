@@ -10,9 +10,11 @@
     "types": []
   },
   "include": [
-    "src/**/*.ts"
-, "public-api.ts"  ],
+    "./**/*.ts",
+    "public-api.ts"
+  ],
   "exclude": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.stories.ts"
   ]
 }

@@ -4,8 +4,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
+      "@dragone/ui/*": [
+        "./projects/dragone/ui/*"
+      ],
       "@dragone/ui": [
-        "./dist/dragone/ui"
+        "./projects/dragone/ui"
       ]
     },
     "strict": true,

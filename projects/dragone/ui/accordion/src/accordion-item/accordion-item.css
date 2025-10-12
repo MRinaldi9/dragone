@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  &:not(:last-child) {
+    margin-bottom: 2px;
+  }
+}
+
+[ngpAccordionTrigger] {
+  display: flex;
+  padding: 20px 16px;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 0;
+}
+
+.accordion-container {
+  padding: 0 4rem;
+}
+
+[ngpAccordionContent] {
+  color: var(--color-global-dark-secondary-130);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+[ngpAccordionContent][data-open] {
+  border: 1px solid var(--bg-primary-light-40);
+  & .accordion-container {
+    animation: slideDown 0.2s ease-in-out forwards;
+  }
+}
+
+[ngpAccordionContent][data-closed] .accordion-container {
+  animation: slideUp 0.2s ease-in-out forwards;
+}
+
+ng-icon {
+  font-size: 1.25rem;
+  color: var(--ngp-text-secondary);
+  transition: transform 0.2s ease-in-out;
+}
+
+[ngpAccordionTrigger][data-open] ng-icon {
+  transform: rotateX(180deg);
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+    border: 0;
+  }
+  to {
+    height: calc(var(--ngp-accordion-content-height) + 2rem);
+    padding: 2rem 4rem;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    height: calc(var(--ngp-accordion-content-height) + 2rem);
+    padding: 2rem 4rem;
+  }
+  50% {
+    padding: 1rem 4rem;
+  }
+  100% {
+    height: 0;
+    padding: 0 4rem;
+  }
+}
