@@ -1,59 +1,77 @@
 # Dragone
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+La libreria Dragone nasce dal design system [Sirio](https://www.inps.design/3e7e2b0f5/p/37c451-ciao-italia) e nasce per la creazione di un set robusto e coerente di componenti UI riutilizzabili per Angular.
 
-## Development server
+## 🚀 Getting Started
 
-To start a local development server, run:
+Per avviare il progetto sulla tua macchina locale, segui questi passaggi.
 
-```bash
-ng serve
-```
+### Prerequisiti
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Assicurati di avere `pnpm` installato globalmente. Se non ce l'hai, puoi installarlo con npm:
 
 ```bash
-ng generate component component-name
+npm install -g pnpm
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Installazione
+
+1.  Clona il repository:
+    ```bash
+    git clone <url-del-tuo-repository>
+    ```
+2.  Naviga nella directory del progetto:
+    ```bash
+    cd dragone
+    ```
+3.  Installa le dipendenze usando `pnpm`:
+    ```bash
+    pnpm install
+    ```
+
+## 💻 Workflow di Sviluppo
+
+Questo progetto usa **Storybook** come ambiente primario per sviluppare, visualizzare e testare i componenti in isolamento.
+
+### Avviare Storybook
+
+Per avviare il server di sviluppo di Storybook, esegui:
 
 ```bash
-ng generate --help
+pnpm storybook
 ```
 
-## Building
+Questo aprirà Storybook nel tuo browser, dove potrai vedere tutti i componenti della libreria `@dragone/ui`.
 
-To build the project run:
+### Costruire la Libreria
+
+Per creare una build di produzione della libreria `@dragone/ui`, esegui:
 
 ```bash
-ng build
+pnpm build @dragone/ui
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Gli artefatti della build verranno salvati nella directory `dist/projects/dragone/ui`.
 
-## Running unit tests
+### Eseguire i Test
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Per eseguire i test unitari per la libreria, esegui:
 
 ```bash
-ng test
+pnpm test
 ```
 
-## Running end-to-end tests
+## ✨ Qualità del Codice e Convenzioni
 
-For end-to-end (e2e) testing, run:
+Questo progetto applica rigide convenzioni sulla qualità del codice e sui commit per mantenere uno standard elevato.
 
-```bash
-ng e2e
-```
+### Linting e Formattazione
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Per eseguire il linter: `pnpm lint`
+- Per formattare il codice con Prettier: `pnpm format`
 
-## Additional Resources
+Questi controlli vengono eseguiti automaticamente prima di ogni commit, grazie a `lefthook`.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Messaggi di Commit
+
+Tutti i messaggi di commit devono seguire lo standard [Conventional Commits](https://www.conventionalcommits.org/). Per aiutarti, un hook pre-commit avvierà automaticamente un prompt interattivo (`pnpm cz`) per guidarti nella creazione del messaggio.
