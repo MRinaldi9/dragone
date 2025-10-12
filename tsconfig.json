@@ -37,6 +37,9 @@
     },
     {
       "path": "./projects/dragone/ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
     }
   ]
 }

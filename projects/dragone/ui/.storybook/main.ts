@@ -9,10 +9,8 @@ const config: StorybookConfig = {
     options: {},
   },
   async viteFinal(config) {
-    console.log(config);
-
     return mergeConfig(config, {
-      plugins: [viteTsconfigPaths({})],
+      plugins: [viteTsconfigPaths()],
     });
   },
 };

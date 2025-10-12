@@ -34,9 +34,10 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@analogjs/vitest-angular:test",
           "options": {
-            "tsConfig": "projects/dragone/ui/tsconfig.spec.json"
+            "watch": true,
+            "coverage": true
           }
         },
         "lint": {
