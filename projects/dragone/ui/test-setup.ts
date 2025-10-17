@@ -1,3 +1,4 @@
+/// <reference types="@vitest/browser/providers/playwright" />
 import '@analogjs/vitest-angular/setup-snapshots';
 import '@angular/compiler';
 

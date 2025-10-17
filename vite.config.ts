@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => ({
         '**/*.stories.ts',
         '**/index.ts',
         '**/public-api.ts',
+        '**/*.js',
       ],
     },
     browser: {
