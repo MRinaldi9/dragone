@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  align-items: baseline;
+  color: var(--interactive-primary-default);
+  font-family: var(--typography-global-font-family-01);
+  font-style: var(--typography-style-normal);
+  font-weight: var(--typography-global-font-weight-600);
+  font-size: var(--typography-global-font-size-04);
+  flex: none;
+  &:not(:has(.active-route)):hover {
+    color: var(--interactive-primary-hover);
+  }
+  & a {
+    padding: 3px;
+    color: inherit;
+    text-decoration: none;
+    &[data-focus-visible],
+    &:focus-visible {
+      outline: 1px solid var(--interactive-primary-focus);
+      border-radius: 3px;
+    }
+    &:not([href]):not([routerLink]) {
+      cursor: pointer;
+    }
+  }
+  &:has(.active-route) {
+    ng-icon {
+      color: var(--interactive-secondary-default);
+    }
+  }
+  & ng-icon {
+    margin-right: 3px;
+  }
+  &:not(:last-child)::after {
+    display: inline-block;
+    margin: 0 6px;
+    transform: rotate(20deg);
+    border-right: 2px solid currentcolor;
+    height: 1em;
+    content: '';
+  }
+}
+
+.active-route {
+  color: var(--interactive-secondary-default);
+}

@@ -1,4 +1,5 @@
-import { type Preview } from '@analogjs/storybook-angular';
+import { applicationConfig, type Preview } from '@analogjs/storybook-angular';
+import { provideRouter } from '@angular/router';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
@@ -23,6 +24,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    applicationConfig({ providers: [provideRouter([])] }),
     (storyFn, { args }) => {
       const story = storyFn();
 
