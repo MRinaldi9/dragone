@@ -4,12 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@dragone/ui/*": [
-        "./projects/dragone/ui/*"
-      ],
-      "@dragone/ui": [
-        "./projects/dragone/ui"
-      ]
+      "@dragone/ui/*": ["./projects/dragone/ui/*"],
+      "@dragone/ui": ["./projects/dragone/ui"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -20,7 +16,7 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "es2023",
     "module": "preserve"
   },
   "angularCompilerOptions": {

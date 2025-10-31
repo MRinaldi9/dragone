@@ -19,6 +19,7 @@ module.exports = tseslint.config(
       '@angular-eslint/no-input-rename': 'off',
       '@angular-eslint/prefer-on-push-component-change-detection': 'error',
       '@angular-eslint/sort-keys-in-type-decorator': 'error',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     },
   },
   {

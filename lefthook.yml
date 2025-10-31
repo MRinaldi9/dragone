@@ -12,5 +12,9 @@ commit-msg:
 pre-commit:
   parallel: true
   jobs:
-    - run: pnpm lint
-    - run: pnpm format
+    - name: Lint Dragone UI staged files
+      run: pnpx eslint --fix -c projects/dragone/ui/eslint.config.js {staged_files}
+      stage_fixed: true
+    - name: Format Dragone UI staged files
+      run: pnpx prettier -w {staged_files}
+      stage_fixed: true
