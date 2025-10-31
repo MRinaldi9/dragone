@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { Button, ButtonVariant } from '@dragone/ui/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidChevronDown, faSolidChevronUp } from '@ng-icons/font-awesome/solid';
+import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
   injectAccordionItemState,
   injectAccordionState,
@@ -26,7 +26,7 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
     </button>
   `,
   styleUrl: './accordion-header.css',
-  providers: [provideIcons({ faSolidChevronDown, faSolidChevronUp })],
+  providers: [provideIcons({ faSolidChevronDown })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'heading',
@@ -35,7 +35,7 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
 })
 export class AccordionHeader {
   readonly ariaLevel = input.required<AriaLevel>();
-  readonly variant = input<ButtonVariant>('primary');
+  readonly variant = input<Extract<ButtonVariant, 'primary' | 'tertiary'>>('primary');
   private readonly internalState = injectAccordionItemState();
   private readonly accordionState = injectAccordionState();
 
