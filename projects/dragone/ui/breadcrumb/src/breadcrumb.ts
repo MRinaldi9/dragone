@@ -49,15 +49,17 @@ export class Breadcrumb {
     viewChild<ElementRef<HTMLOListElement>>('breadcrumbList');
 
   constructor() {
-    afterRenderEffect(() => {
-      const list = this.breadcrumbListElement()?.nativeElement;
-      const host = this.breadcrumbDimensions();
+    afterRenderEffect({
+      read: () => {
+        const list = this.breadcrumbListElement()?.nativeElement;
+        const host = this.breadcrumbDimensions();
 
-      if (!list || host.width === 0 || this.breadcrumbs().length === 0) return;
+        if (!list || host.width === 0 || this.breadcrumbs().length === 0) return;
 
-      const isOverflowing = Math.floor(list.scrollWidth) > Math.floor(host.width + 16);
+        const isOverflowing = Math.floor(list.scrollWidth) > Math.floor(host.width + 16);
 
-      this.showEllipsis.set(isOverflowing);
+        this.showEllipsis.set(isOverflowing);
+      },
     });
   }
 }
