@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inputBinding, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { Button, ButtonSize, ButtonVariant } from './button';
 
 @Component({
