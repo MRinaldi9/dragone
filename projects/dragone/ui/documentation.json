@@ -38,7 +38,19 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n    `,\r\n  }),\r\n}"
+        "defaultValue": "{\n  render: args => ({\n    props: args,\n    template: `\n      <div style=\"display:flex; flex-direction: column; gap: 2rem; align-items: center; padding: 2rem;\">\n        <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />\n        <router-outlet/>\n      </div>\n    `,\n  }),\n}"
+      },
+      {
+        "name": "Checked",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n  },\r\n}",
+        "rawdescription": "Switch in stato checked (attivo).",
+        "description": "<p>Switch in stato checked (attivo).</p>\n"
       },
       {
         "name": "Danger",
@@ -51,6 +63,42 @@
         "defaultValue": "{\r\n  ...Template,\r\n  args: {\r\n    variant: 'danger',\r\n  },\r\n}"
       },
       {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    disabled: false,\r\n    checkedChange: fn(),\r\n  },\r\n}",
+        "rawdescription": "Switch di default in stato non selezionato.",
+        "description": "<p>Switch di default in stato non selezionato.</p>\n"
+      },
+      {
+        "name": "Disabled",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    disabled: true,\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Verifica che lo switch sia disabilitato\r\n    await expect(switchElement).toHaveAttribute('aria-disabled', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-disabled');\r\n  },\r\n}",
+        "rawdescription": "Switch in stato disabilitato, non interagibile.",
+        "description": "<p>Switch in stato disabilitato, non interagibile.</p>\n"
+      },
+      {
+        "name": "DisabledChecked",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n    disabled: true,\r\n  },\r\n}",
+        "rawdescription": "Switch disabilitato in stato checked.",
+        "description": "<p>Switch disabilitato in stato checked.</p>\n"
+      },
+      {
         "name": "IconOnly",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -59,6 +107,30 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\r\n  ...Template,\r\n  args: {\r\n    label: '',\r\n    showLeadingIcon: true,\r\n    icon: true,\r\n  },\r\n}"
+      },
+      {
+        "name": "InteractionTest",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Stato iniziale: non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n\r\n    // Click per attivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-checked');\r\n\r\n    // Click per disattivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n  },\r\n}",
+        "rawdescription": "Test di interazione: verifica che lo switch cambi stato al click.",
+        "description": "<p>Test di interazione: verifica che lo switch cambi stato al click.</p>\n"
+      },
+      {
+        "name": "KeyboardNavigation",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent, step }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Focus con Tab\r\n    await userEvent.tab();\r\n    await expect(switchElement).toHaveFocus();\r\n    await expect(switchElement).toHaveAttribute('data-focus-visible');\r\n\r\n    // Stato iniziale\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n\r\n    await step('Uso con Space', async () => {\r\n      // Attiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      // Disattiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n\r\n    await step('Uso con Enter', async () => {\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n  },\r\n}",
+        "rawdescription": "Test di accessibilità: verifica la navigazione da tastiera.",
+        "description": "<p>Test di accessibilità: verifica la navigazione da tastiera.</p>\n"
       },
       {
         "name": "meta",
@@ -78,7 +150,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<Breadcrumb>",
-        "defaultValue": "{\r\n  title: 'Dragone/UI/Breadcrumb',\r\n  component: Breadcrumb,\r\n  tags: ['autodocs'],\r\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem], providers: [] })],\r\n  args: {\r\n    breadcrumbs: [\r\n      // {\r\n      //   label: 'Inventore corporis dolore at illo magnam rerum nesciunt.',\r\n      //   routerLink: '/',\r\n      //   icon: faSolidHouse,\r\n      // },\r\n      // {\r\n      //   label: 'Delectus quis laudantium praesentium veritatis voluptates rerum dicta.',\r\n      //   routerLink: '/category',\r\n      // },\r\n      // {\r\n      //   label: 'Minus nam aut ut autem ducimus velit aliquid.',\r\n      //   routerLink: '/category/subcategory',\r\n      // },\r\n      // {\r\n      //   label: 'Minus nam aut ut autem ducimus velit aliquid.',\r\n      //   routerLink: '/category/subcategory',\r\n      // },\r\n      // {\r\n      //   label: 'Minus nam aut ut autem ducimus velit aliquid.',\r\n      //   routerLink: '/category/subcategory',\r\n      // },\r\n      // {\r\n      //   label: 'Nam velit sunt voluptatem ipsum ea inventore tenetur iusto.',\r\n      //   href: '/category/subcategory/current-page',\r\n      // },\r\n    ],\r\n  },\r\n  argTypes: {\r\n    breadcrumbs: { control: { type: 'object' } },\r\n  },\r\n}"
+        "defaultValue": "{\n  title: 'Dragone/UI/Breadcrumb',\n  component: Breadcrumb,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],\n  args: {\n    breadcrumbs: [\n      {\n        label: 'quis',\n        routerLink: '/',\n        icon: faSolidHouse,\n      },\n      {\n        label: 'ullam',\n        routerLink: '/category',\n      },\n      {\n        label: 'officiis',\n        routerLink: '/category/subcategory',\n      },\n      {\n        label: 'deleniti',\n        routerLink: '/category/subcategory/1',\n      },\n      {\n        label: 'laudantium',\n        routerLink: '/category/subcategory/2',\n      },\n      {\n        label: 'voluptatem ipsum',\n        href: '/category/subcategory/current-page',\n      },\n    ],\n  },\n  argTypes: {\n    breadcrumbs: { control: { type: 'object' } },\n  },\n}"
       },
       {
         "name": "meta",
@@ -91,6 +163,16 @@
         "defaultValue": "{\r\n  title: 'Dragone/UI/Button',\r\n  component: Button,\r\n  tags: ['autodocs'],\r\n  args: {\r\n    focusVisible: fn(),\r\n    label: 'Dragone',\r\n    disabled: false,\r\n    icon: false,\r\n    showLeadingIcon: false,\r\n    showTrailingIcon: false,\r\n    size: 'large',\r\n    variant: 'primary',\r\n  },\r\n  argTypes: {\r\n    focusVisible: { type: 'function', control: false },\r\n    label: { control: 'text' },\r\n    showLeadingIcon: { control: 'boolean' },\r\n    showTrailingIcon: { control: 'boolean' },\r\n    size: {\r\n      description: 'The size of the button',\r\n      type: 'string',\r\n      options: ['small', 'medium', 'large'],\r\n      control: { type: 'select' },\r\n      table: {\r\n        defaultValue: { summary: 'large' },\r\n      },\r\n    },\r\n    variant: {\r\n      description: 'The variant of the button',\r\n      type: 'string',\r\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\r\n      control: { type: 'select' },\r\n      table: {\r\n        defaultValue: { summary: 'primary' },\r\n      },\r\n    },\r\n    disabled: {\r\n      description: 'Whether the button is disabled',\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      table: {\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n  },\r\n  decorators: [\r\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\r\n  ],\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <button drgn-button ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>\r\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\r\n        ${args.label}\r\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\r\n      </button>\r\n      `,\r\n    };\r\n  },\r\n}"
       },
       {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<SwitchArgs>",
+        "defaultValue": "{\r\n  title: 'Dragone/UI/Switch',\r\n  component: Switch,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    checked: {\r\n      control: 'boolean',\r\n      description: 'Controlla se lo switch è attivo o meno',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disabilita lo switch impedendo interazioni',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    checkedChange: {\r\n      action: 'checkedChange',\r\n      description: 'Evento emesso quando lo stato checked cambia',\r\n      table: {\r\n        type: { summary: 'EventEmitter<boolean>' },\r\n      },\r\n    },\r\n  },\r\n  args: {\r\n    ariaLabel: 'switch',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-switch ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\r\n    `,\r\n  }),\r\n}"
+      },
+      {
         "name": "preview",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -98,7 +180,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Preview",
-        "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  args: {\n    darkMode: false,\n  },\n  argTypes: {\n    darkMode: {\n      description: 'Global control for enabling dark mode',\n      control: 'boolean',\n      table: { defaultValue: { summary: 'false' } },\n    },\n  },\n  decorators: [\n    applicationConfig({ providers: [provideRouter([])] }),\n    (storyFn, { args }) => {\n      const story = storyFn();\n\n      // 2. Estraiamo il valore di 'darkMode' dal contesto\n      const darkMode = args['darkMode'] as boolean;\n\n      // 3. Determiniamo i colori e la classe del tema\n      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';\n      const themeClass = darkMode ? 'drgn-dark' : '';\n\n      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico\n      story.template = `\n        <div\n          class=\"${themeClass}\"\n          style=\"\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: ${backgroundColor};\n            padding: 2rem;\n            transition: background-color 0.3s;\n          \"\n        >\n          ${story.template}\n        </div>\n      `;\n\n      // 5. Restituiamo l'oggetto storia modificato\n      return story;\n    },\n  ],\n}"
+        "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  args: {\n    darkMode: false,\n  },\n  argTypes: {\n    darkMode: {\n      description: 'Global control for enabling dark mode',\n      control: 'boolean',\n      table: { defaultValue: { summary: 'false' } },\n    },\n  },\n  decorators: [\n    applicationConfig({ providers: [provideRouter(fakeRoutes)] }),\n    (storyFn, { args }) => {\n      const story = storyFn();\n\n      // 2. Estraiamo il valore di 'darkMode' dal contesto\n      const darkMode = args['darkMode'] as boolean;\n\n      // 3. Determiniamo i colori e la classe del tema\n      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';\n      const themeClass = darkMode ? 'drgn-dark' : '';\n\n      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico\n      story.template = `\n        <div\n          class=\"${themeClass}\"\n          style=\"\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: ${backgroundColor};\n            padding: 2rem;\n            transition: background-color 0.3s;\n          \"\n        >\n          ${story.template}\n        </div>\n      `;\n\n      // 5. Restituiamo l'oggetto storia modificato\n      return story;\n    },\n  ],\n}"
       },
       {
         "name": "Primary",
@@ -141,6 +223,18 @@
         "defaultValue": "{\r\n  ...Template,\r\n  args: {\r\n    variant: 'tertiary',\r\n  },\r\n}"
       },
       {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <div style=\"padding: 2rem;\">\r\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\r\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\r\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\r\n            Abilita notifiche\r\n          </span>\r\n        </label>\r\n      </div>\r\n    `,\r\n  }),\r\n}",
+        "rawdescription": "Variante con label personalizzata.\r\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
+        "description": "<p>Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l&#39;accessibilità.</p>\n"
+      },
+      {
         "name": "WithTrailingIcon",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -157,12 +251,12 @@
         "name": "ButtonStory",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "",
+        "rawtype": "unknown",
         "file": "projects/dragone/ui/button/src/button.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
-        "kind": 193
+        "kind": 194
       },
       {
         "name": "Story",
@@ -173,7 +267,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
-        "kind": 183
+        "kind": 184
       },
       {
         "name": "Story",
@@ -184,7 +278,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
-        "kind": 183
+        "kind": 184
       },
       {
         "name": "Story",
@@ -195,7 +289,29 @@
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
-        "kind": 183
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<SwitchArgs>",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "SwitchArgs",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "literal type",
+        "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 188
       }
     ],
     "enumerations": [],
@@ -241,7 +357,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n    `,\r\n  }),\r\n}"
+          "defaultValue": "{\n  render: args => ({\n    props: args,\n    template: `\n      <div style=\"display:flex; flex-direction: column; gap: 2rem; align-items: center; padding: 2rem;\">\n        <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />\n        <router-outlet/>\n      </div>\n    `,\n  }),\n}"
         },
         {
           "name": "meta",
@@ -251,7 +367,103 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<Breadcrumb>",
-          "defaultValue": "{\r\n  title: 'Dragone/UI/Breadcrumb',\r\n  component: Breadcrumb,\r\n  tags: ['autodocs'],\r\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem], providers: [] })],\r\n  args: {\r\n    breadcrumbs: [\r\n      // {\r\n      //   label: 'Inventore corporis dolore at illo magnam rerum nesciunt.',\r\n      //   routerLink: '/',\r\n      //   icon: faSolidHouse,\r\n      // },\r\n      // {\r\n      //   label: 'Delectus quis laudantium praesentium veritatis voluptates rerum dicta.',\r\n      //   routerLink: '/category',\r\n      // },\r\n      // {\r\n      //   label: 'Minus nam aut ut autem ducimus velit aliquid.',\r\n      //   routerLink: '/category/subcategory',\r\n      // },\r\n      // {\r\n      //   label: 'Minus nam aut ut autem ducimus velit aliquid.',\r\n      //   routerLink: '/category/subcategory',\r\n      // },\r\n      // {\r\n      //   label: 'Minus nam aut ut autem ducimus velit aliquid.',\r\n      //   routerLink: '/category/subcategory',\r\n      // },\r\n      // {\r\n      //   label: 'Nam velit sunt voluptatem ipsum ea inventore tenetur iusto.',\r\n      //   href: '/category/subcategory/current-page',\r\n      // },\r\n    ],\r\n  },\r\n  argTypes: {\r\n    breadcrumbs: { control: { type: 'object' } },\r\n  },\r\n}"
+          "defaultValue": "{\n  title: 'Dragone/UI/Breadcrumb',\n  component: Breadcrumb,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],\n  args: {\n    breadcrumbs: [\n      {\n        label: 'quis',\n        routerLink: '/',\n        icon: faSolidHouse,\n      },\n      {\n        label: 'ullam',\n        routerLink: '/category',\n      },\n      {\n        label: 'officiis',\n        routerLink: '/category/subcategory',\n      },\n      {\n        label: 'deleniti',\n        routerLink: '/category/subcategory/1',\n      },\n      {\n        label: 'laudantium',\n        routerLink: '/category/subcategory/2',\n      },\n      {\n        label: 'voluptatem ipsum',\n        href: '/category/subcategory/current-page',\n      },\n    ],\n  },\n  argTypes: {\n    breadcrumbs: { control: { type: 'object' } },\n  },\n}"
+        }
+      ],
+      "projects/dragone/ui/switch/src/switch.stories.ts": [
+        {
+          "name": "Checked",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n  },\r\n}",
+          "rawdescription": "Switch in stato checked (attivo).",
+          "description": "<p>Switch in stato checked (attivo).</p>\n"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    disabled: false,\r\n    checkedChange: fn(),\r\n  },\r\n}",
+          "rawdescription": "Switch di default in stato non selezionato.",
+          "description": "<p>Switch di default in stato non selezionato.</p>\n"
+        },
+        {
+          "name": "Disabled",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    disabled: true,\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Verifica che lo switch sia disabilitato\r\n    await expect(switchElement).toHaveAttribute('aria-disabled', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-disabled');\r\n  },\r\n}",
+          "rawdescription": "Switch in stato disabilitato, non interagibile.",
+          "description": "<p>Switch in stato disabilitato, non interagibile.</p>\n"
+        },
+        {
+          "name": "DisabledChecked",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n    disabled: true,\r\n  },\r\n}",
+          "rawdescription": "Switch disabilitato in stato checked.",
+          "description": "<p>Switch disabilitato in stato checked.</p>\n"
+        },
+        {
+          "name": "InteractionTest",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Stato iniziale: non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n\r\n    // Click per attivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-checked');\r\n\r\n    // Click per disattivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n  },\r\n}",
+          "rawdescription": "Test di interazione: verifica che lo switch cambi stato al click.",
+          "description": "<p>Test di interazione: verifica che lo switch cambi stato al click.</p>\n"
+        },
+        {
+          "name": "KeyboardNavigation",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent, step }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Focus con Tab\r\n    await userEvent.tab();\r\n    await expect(switchElement).toHaveFocus();\r\n    await expect(switchElement).toHaveAttribute('data-focus-visible');\r\n\r\n    // Stato iniziale\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n\r\n    await step('Uso con Space', async () => {\r\n      // Attiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      // Disattiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n\r\n    await step('Uso con Enter', async () => {\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n  },\r\n}",
+          "rawdescription": "Test di accessibilità: verifica la navigazione da tastiera.",
+          "description": "<p>Test di accessibilità: verifica la navigazione da tastiera.</p>\n"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<SwitchArgs>",
+          "defaultValue": "{\r\n  title: 'Dragone/UI/Switch',\r\n  component: Switch,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    checked: {\r\n      control: 'boolean',\r\n      description: 'Controlla se lo switch è attivo o meno',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disabilita lo switch impedendo interazioni',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    checkedChange: {\r\n      action: 'checkedChange',\r\n      description: 'Evento emesso quando lo stato checked cambia',\r\n      table: {\r\n        type: { summary: 'EventEmitter<boolean>' },\r\n      },\r\n    },\r\n  },\r\n  args: {\r\n    ariaLabel: 'switch',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-switch ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\r\n    `,\r\n  }),\r\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <div style=\"padding: 2rem;\">\r\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\r\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\r\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\r\n            Abilita notifiche\r\n          </span>\r\n        </label>\r\n      </div>\r\n    `,\r\n  }),\r\n}",
+          "rawdescription": "Variante con label personalizzata.\r\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
+          "description": "<p>Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l&#39;accessibilità.</p>\n"
         }
       ],
       "projects/dragone/ui/button/src/button.stories.ts": [
@@ -345,7 +557,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Preview",
-          "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  args: {\n    darkMode: false,\n  },\n  argTypes: {\n    darkMode: {\n      description: 'Global control for enabling dark mode',\n      control: 'boolean',\n      table: { defaultValue: { summary: 'false' } },\n    },\n  },\n  decorators: [\n    applicationConfig({ providers: [provideRouter([])] }),\n    (storyFn, { args }) => {\n      const story = storyFn();\n\n      // 2. Estraiamo il valore di 'darkMode' dal contesto\n      const darkMode = args['darkMode'] as boolean;\n\n      // 3. Determiniamo i colori e la classe del tema\n      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';\n      const themeClass = darkMode ? 'drgn-dark' : '';\n\n      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico\n      story.template = `\n        <div\n          class=\"${themeClass}\"\n          style=\"\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: ${backgroundColor};\n            padding: 2rem;\n            transition: background-color 0.3s;\n          \"\n        >\n          ${story.template}\n        </div>\n      `;\n\n      // 5. Restituiamo l'oggetto storia modificato\n      return story;\n    },\n  ],\n}"
+          "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n  args: {\n    darkMode: false,\n  },\n  argTypes: {\n    darkMode: {\n      description: 'Global control for enabling dark mode',\n      control: 'boolean',\n      table: { defaultValue: { summary: 'false' } },\n    },\n  },\n  decorators: [\n    applicationConfig({ providers: [provideRouter(fakeRoutes)] }),\n    (storyFn, { args }) => {\n      const story = storyFn();\n\n      // 2. Estraiamo il valore di 'darkMode' dal contesto\n      const darkMode = args['darkMode'] as boolean;\n\n      // 3. Determiniamo i colori e la classe del tema\n      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';\n      const themeClass = darkMode ? 'drgn-dark' : '';\n\n      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico\n      story.template = `\n        <div\n          class=\"${themeClass}\"\n          style=\"\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            background-color: ${backgroundColor};\n            padding: 2rem;\n            transition: background-color 0.3s;\n          \"\n        >\n          ${story.template}\n        </div>\n      `;\n\n      // 5. Restituiamo l'oggetto storia modificato\n      return story;\n    },\n  ],\n}"
         }
       ]
     },
@@ -357,12 +569,12 @@
           "name": "ButtonStory",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "",
+          "rawtype": "unknown",
           "file": "projects/dragone/ui/button/src/button.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
-          "kind": 193
+          "kind": 194
         },
         {
           "name": "Story",
@@ -373,7 +585,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
-          "kind": 183
+          "kind": 184
         }
       ],
       "projects/dragone/ui/accordion/src/accordion.stories.ts": [
@@ -386,7 +598,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
-          "kind": 183
+          "kind": 184
         }
       ],
       "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts": [
@@ -399,7 +611,31 @@
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
-          "kind": 183
+          "kind": 184
+        }
+      ],
+      "projects/dragone/ui/switch/src/switch.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<SwitchArgs>",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 184
+        },
+        {
+          "name": "SwitchArgs",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "literal type",
+          "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 188
         }
       ]
     }
@@ -410,7 +646,7 @@
     "children": []
   },
   "coverage": {
-    "count": 0,
+    "count": 25,
     "status": "low",
     "files": [
       {
@@ -589,6 +825,106 @@
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
         "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Checked",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Disabled",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DisabledChecked",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "InteractionTest",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "KeyboardNavigation",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithLabel",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "SwitchArgs",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
