@@ -1,3 +1,4 @@
+import { RouterOutlet } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Breadcrumb } from './breadcrumb';
@@ -7,7 +8,7 @@ const meta: Meta<Breadcrumb> = {
   title: 'Dragone/UI/Breadcrumb',
   component: Breadcrumb,
   tags: ['autodocs'],
-  decorators: [moduleMetadata({ imports: [BreadcrumbItem], providers: [] })],
+  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],
   args: {
     breadcrumbs: [
       {
@@ -25,16 +26,16 @@ const meta: Meta<Breadcrumb> = {
       },
       {
         label: 'deleniti',
-        routerLink: '/category/subcategory',
+        routerLink: '/category/subcategory/1',
       },
       {
         label: 'laudantium',
-        routerLink: '/category/subcategory',
+        routerLink: '/category/subcategory/2',
       },
-      // {
-      //   label: 'Nam velit sunt voluptatem ipsum ea inventore tenetur iusto.',
-      //   href: '/category/subcategory/current-page',
-      // },
+      {
+        label: 'voluptatem ipsum',
+        href: '/category/subcategory/current-page',
+      },
     ],
   },
   argTypes: {
@@ -49,7 +50,10 @@ export const BreadcrumbSingle: Story = {
   render: args => ({
     props: args,
     template: `
-      <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />
+      <div style="display:flex; flex-direction: column; gap: 2rem; align-items: center; padding: 2rem;">
+        <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />
+        <router-outlet/>
+      </div>
     `,
   }),
 };

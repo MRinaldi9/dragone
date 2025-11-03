@@ -46,6 +46,7 @@ type BreadcrumbWithEllipsis = {
         ngpFocusVisible
         routerLinkActive="active-route"
         ariaCurrentWhenActive="page"
+        [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="config.routerLink"
       >
         {{ config.label }}

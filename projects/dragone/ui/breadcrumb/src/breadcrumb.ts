@@ -6,6 +6,7 @@ import {
   ElementRef,
   input,
   linkedSignal,
+  untracked,
   viewChild,
 } from '@angular/core';
 import { injectDimensions } from 'ng-primitives/internal';
@@ -44,22 +45,28 @@ export class Breadcrumb {
   protected readonly showEllipsis = linkedSignal(() => this.breadcrumbs().length >= 6);
   protected readonly firstItem = computed(() => this.breadcrumbs().at(0)!);
   protected readonly lastItem = computed(() => this.breadcrumbs().at(-1)!);
-  private readonly breadcrumbDimensions = injectDimensions();
+  private readonly hostDimensions = injectDimensions();
   private readonly breadcrumbListElement =
     viewChild<ElementRef<HTMLOListElement>>('breadcrumbList');
 
   constructor() {
-    afterRenderEffect({
-      read: () => {
+    afterRenderEffect(() => {
+      const { isCollapsed, list } = untracked(() => {
+        const isCollapsed = this.showEllipsis();
         const list = this.breadcrumbListElement()?.nativeElement;
-        const host = this.breadcrumbDimensions();
+        return { isCollapsed, list };
+      });
+      const { width: hostWidth } = this.hostDimensions();
 
-        if (!list || host.width === 0 || this.breadcrumbs().length === 0) return;
+      if (isCollapsed || !list || !hostWidth) {
+        return;
+      }
+      const listWidth = list.scrollWidth;
 
-        const isOverflowing = Math.floor(list.scrollWidth) > Math.floor(host.width + 16);
+      const OVERFLOW_TOLERANCE_PX = 16;
+      const isOverflowing = Math.floor(listWidth) > Math.floor(hostWidth + OVERFLOW_TOLERANCE_PX);
 
-        this.showEllipsis.set(isOverflowing);
-      },
+      this.showEllipsis.set(isOverflowing);
     });
   }
 }

@@ -1,6 +1,7 @@
 import { applicationConfig, type Preview } from '@analogjs/storybook-angular';
 import { provideRouter } from '@angular/router';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
+import fakeRoutes from '../breadcrumb/src/test.routes';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
 
@@ -24,7 +25,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    applicationConfig({ providers: [provideRouter([])] }),
+    applicationConfig({ providers: [provideRouter(fakeRoutes)] }),
     (storyFn, { args }) => {
       const story = storyFn();
 
