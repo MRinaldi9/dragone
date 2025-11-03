@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: 1px solid var(--data-entry-border-default);
+  background-color: var(--color-global-primary-000);
+  padding: 0;
+  outline: none;
+  flex: none;
+  color: var(--ngp-text-inverse);
+  font-size: 0.75rem;
+
+  &[data-focus-visible],
+  &:focus-visible {
+    outline: 1px solid var(--data-entry-label-focus);
+    outline-offset: 2px;
+    border-color: var(--data-entry-label-focus);
+  }
+  &:not([data-disabled])[data-hover],
+  &:not([data-disabled]):hover {
+    border-color: var(--data-entry-label-hover);
+  }
+  &[data-disabled],
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--bg-disabled);
+    border-color: var(--bg-disabled);
+    color: var(--text-disabled);
+  }
+}
+
+:host(:not([data-disabled]):hover) ng-icon {
+  color: var(--data-entry-label-hover);
+}
+
+ng-icon {
+  color: var(--data-entry-label-default);
+}
