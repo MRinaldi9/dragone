@@ -20,6 +20,18 @@ module.exports = tseslint.config(
       '@angular-eslint/prefer-on-push-component-change-detection': 'error',
       '@angular-eslint/sort-keys-in-type-decorator': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
     },
   },
   {
