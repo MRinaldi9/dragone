@@ -1,6 +1,6 @@
+import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@analogjs/storybook-angular';
 import { RouterOutlet } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Breadcrumb } from './breadcrumb';
 import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';
 

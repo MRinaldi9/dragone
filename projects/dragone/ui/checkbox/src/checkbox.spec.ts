@@ -13,10 +13,32 @@ describe('Checkbox', () => {
 
     fixture = TestBed.createComponent(Checkbox);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should write to internal state through writeValue', () => {
+    component.writeValue(true);
+    expect(component['internalState']().checked()).toBeTruthy();
+  });
+
+  it('should set disabled state through setDisabledState', () => {
+    component.setDisabledState?.(true);
+    expect(component['internalState']().disabled()).toBeTruthy();
+  });
+
+  it('should have changeFn called on checkedChange', () => {
+    const changeFnSpy = vi.fn();
+    component.registerOnChange(changeFnSpy);
+
+    fixture.debugElement.triggerEventHandler('click');
+    expect(changeFnSpy).toHaveBeenCalledWith(true);
+  });
+
+  it('should have touchedFn called on blur', () => {
+    const touchedFnSpy = vi.fn();
+    component.registerOnTouched(touchedFnSpy);
+
+    fixture.debugElement.triggerEventHandler('blur', {});
+    expect(touchedFnSpy).toHaveBeenCalled();
   });
 });

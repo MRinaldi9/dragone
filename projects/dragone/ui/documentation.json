@@ -44,11 +44,23 @@
         "name": "Checked",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n  },\n}",
+        "rawdescription": "Checkbox in stato checked (selezionato).",
+        "description": "<p>Checkbox in stato checked (selezionato).</p>\n"
+      },
+      {
+        "name": "Checked",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/dragone/ui/switch/src/switch.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n  },\r\n}",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n  },\n}",
         "rawdescription": "Switch in stato checked (attivo).",
         "description": "<p>Switch in stato checked (attivo).</p>\n"
       },
@@ -66,13 +78,37 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    checked: false,\n    disabled: false,\n    checkedChange: fn(),\n  },\n}",
+        "rawdescription": "Checkbox di default in stato non selezionato.",
+        "description": "<p>Checkbox di default in stato non selezionato.</p>\n"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/dragone/ui/switch/src/switch.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    disabled: false,\r\n    checkedChange: fn(),\r\n  },\r\n}",
+        "defaultValue": "{\n  args: {\n    checked: false,\n    disabled: false,\n    checkedChange: fn(),\n  },\n}",
         "rawdescription": "Switch di default in stato non selezionato.",
         "description": "<p>Switch di default in stato non selezionato.</p>\n"
+      },
+      {
+        "name": "Disabled",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    disabled: true,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const checkboxElement = canvas.getByRole('checkbox');\n\n    // Verifica che il checkbox sia disabilitato\n    await expect(checkboxElement).toHaveAttribute('aria-disabled', 'true');\n    await expect(checkboxElement).toHaveAttribute('data-disabled');\n  },\n}",
+        "rawdescription": "Checkbox in stato disabilitato, non interagibile.",
+        "description": "<p>Checkbox in stato disabilitato, non interagibile.</p>\n"
       },
       {
         "name": "Disabled",
@@ -82,9 +118,21 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    disabled: true,\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Verifica che lo switch sia disabilitato\r\n    await expect(switchElement).toHaveAttribute('aria-disabled', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-disabled');\r\n  },\r\n}",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    disabled: true,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const switchElement = canvas.getByRole('switch');\n\n    // Verifica che lo switch sia disabilitato\n    await expect(switchElement).toHaveAttribute('aria-disabled', 'true');\n    await expect(switchElement).toHaveAttribute('data-disabled');\n  },\n}",
         "rawdescription": "Switch in stato disabilitato, non interagibile.",
         "description": "<p>Switch in stato disabilitato, non interagibile.</p>\n"
+      },
+      {
+        "name": "DisabledChecked",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n    disabled: true,\n  },\n}",
+        "rawdescription": "Checkbox disabilitato in stato checked.",
+        "description": "<p>Checkbox disabilitato in stato checked.</p>\n"
       },
       {
         "name": "DisabledChecked",
@@ -94,7 +142,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n    disabled: true,\r\n  },\r\n}",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n    disabled: true,\n  },\n}",
         "rawdescription": "Switch disabilitato in stato checked.",
         "description": "<p>Switch disabilitato in stato checked.</p>\n"
       },
@@ -112,13 +160,37 @@
         "name": "InteractionTest",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const checkboxElement = canvas.getByRole('checkbox');\n\n    // Stato iniziale: non checked\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n    await expect(checkboxElement).not.toHaveAttribute('data-checked');\n\n    // Click per selezionare\n    await userEvent.click(checkboxElement);\n\n    // Verifica stato checked\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'true');\n    await expect(checkboxElement).toHaveAttribute('data-checked');\n\n    // Click per deselezionare\n    await userEvent.click(checkboxElement);\n\n    // Verifica stato non checked\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n    await expect(checkboxElement).not.toHaveAttribute('data-checked');\n  },\n}",
+        "rawdescription": "Test di interazione: verifica che il checkbox cambi stato al click.",
+        "description": "<p>Test di interazione: verifica che il checkbox cambi stato al click.</p>\n"
+      },
+      {
+        "name": "InteractionTest",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/dragone/ui/switch/src/switch.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Stato iniziale: non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n\r\n    // Click per attivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-checked');\r\n\r\n    // Click per disattivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n  },\r\n}",
+        "defaultValue": "{\n  play: async ({ canvasElement, userEvent }) => {\n    const canvas = within(canvasElement);\n    const switchElement = canvas.getByRole('switch');\n\n    // Stato iniziale: non checked\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    await expect(switchElement).not.toHaveAttribute('data-checked');\n\n    // Click per attivare\n    await userEvent.click(switchElement);\n\n    // Verifica stato checked\n    await expect(switchElement).toHaveAttribute('aria-checked', 'true');\n    await expect(switchElement).toHaveAttribute('data-checked');\n\n    // Click per disattivare\n    await userEvent.click(switchElement);\n\n    // Verifica stato non checked\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    await expect(switchElement).not.toHaveAttribute('data-checked');\n  },\n}",
         "rawdescription": "Test di interazione: verifica che lo switch cambi stato al click.",
         "description": "<p>Test di interazione: verifica che lo switch cambi stato al click.</p>\n"
+      },
+      {
+        "name": "KeyboardNavigation",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const checkboxElement = canvas.getByRole('checkbox');\n\n    // Focus con Tab\n    await userEvent.tab();\n    await expect(checkboxElement).toHaveFocus();\n    await expect(checkboxElement).toHaveAttribute('data-focus-visible');\n\n    // Stato iniziale\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n\n    // Seleziona con Space\n    await userEvent.keyboard(' ');\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'true');\n\n    // Deseleziona con Space\n    await userEvent.keyboard(' ');\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n  },\n}",
+        "rawdescription": "Test di accessibilità: verifica la navigazione da tastiera.",
+        "description": "<p>Test di accessibilità: verifica la navigazione da tastiera.</p>\n"
       },
       {
         "name": "KeyboardNavigation",
@@ -128,19 +200,9 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent, step }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Focus con Tab\r\n    await userEvent.tab();\r\n    await expect(switchElement).toHaveFocus();\r\n    await expect(switchElement).toHaveAttribute('data-focus-visible');\r\n\r\n    // Stato iniziale\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n\r\n    await step('Uso con Space', async () => {\r\n      // Attiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      // Disattiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n\r\n    await step('Uso con Enter', async () => {\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n  },\r\n}",
+        "defaultValue": "{\n  play: async ({ canvasElement, userEvent, step }) => {\n    const canvas = within(canvasElement);\n    const switchElement = canvas.getByRole('switch');\n\n    // Focus con Tab\n    await userEvent.tab();\n    await expect(switchElement).toHaveFocus();\n    await expect(switchElement).toHaveAttribute('data-focus-visible');\n\n    // Stato iniziale\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n\n    await step('Uso con Space', async () => {\n      // Attiva con Space\n      await userEvent.keyboard(' ');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\n\n      // Disattiva con Space\n      await userEvent.keyboard(' ');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    });\n\n    await step('Uso con Enter', async () => {\n      await userEvent.keyboard('{Enter}');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\n\n      await userEvent.keyboard('{Enter}');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    });\n  },\n}",
         "rawdescription": "Test di accessibilità: verifica la navigazione da tastiera.",
         "description": "<p>Test di accessibilità: verifica la navigazione da tastiera.</p>\n"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<Accordion>",
-        "defaultValue": "{\n  title: 'Dragone/UI/Accordion',\n  component: Accordion,\n  tags: ['autodocs'],\n  args: {\n    collapse: true,\n    type: 'single',\n    disabled: false,\n    orientation: 'vertical',\n    heading: 'Dragone',\n    accordionChange: fn(),\n    accordionVariant: 'dark',\n  },\n  argTypes: {\n    collapse: {\n      type: 'boolean',\n      control: { type: 'boolean' },\n      description: 'Allows all accordion items to be collapsed',\n    },\n    heading: { control: 'text' },\n    type: {\n      type: 'string',\n      control: 'select',\n      options: ['single', 'multiple'],\n      table: { defaultValue: { summary: 'single' } },\n    },\n    accordionVariant: {\n      type: 'string',\n      control: 'select',\n      options: ['dark', 'light'],\n      table: { defaultValue: { summary: 'dark' } },\n    },\n    disabled: {\n      description: 'Disables the accordion if set to true',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n    accordionChange: { type: 'function', control: false },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\n}"
       },
       {
         "name": "meta",
@@ -166,11 +228,31 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<Accordion>",
+        "defaultValue": "{\n  title: 'Dragone/UI/Accordion',\n  component: Accordion,\n  tags: ['autodocs'],\n  args: {\n    collapse: true,\n    type: 'single',\n    disabled: false,\n    orientation: 'vertical',\n    heading: 'Dragone',\n    accordionChange: fn(),\n    accordionVariant: 'dark',\n  },\n  argTypes: {\n    collapse: {\n      type: 'boolean',\n      control: { type: 'boolean' },\n      description: 'Allows all accordion items to be collapsed',\n    },\n    heading: { control: 'text' },\n    type: {\n      type: 'string',\n      control: 'select',\n      options: ['single', 'multiple'],\n      table: { defaultValue: { summary: 'single' } },\n    },\n    accordionVariant: {\n      type: 'string',\n      control: 'select',\n      options: ['dark', 'light'],\n      table: { defaultValue: { summary: 'dark' } },\n    },\n    disabled: {\n      description: 'Disables the accordion if set to true',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n    accordionChange: { type: 'function', control: false },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<CheckboxArgs>",
+        "defaultValue": "{\n  title: 'Dragone/UI/Checkbox',\n  component: Checkbox,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se il checkbox è selezionato',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita il checkbox impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  render: args => ({\n    props: args,\n    template: `<drgn-checkbox aria-label=\"Checkbox\" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`,\n  }),\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/dragone/ui/switch/src/switch.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<SwitchArgs>",
-        "defaultValue": "{\r\n  title: 'Dragone/UI/Switch',\r\n  component: Switch,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    checked: {\r\n      control: 'boolean',\r\n      description: 'Controlla se lo switch è attivo o meno',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disabilita lo switch impedendo interazioni',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    checkedChange: {\r\n      action: 'checkedChange',\r\n      description: 'Evento emesso quando lo stato checked cambia',\r\n      table: {\r\n        type: { summary: 'EventEmitter<boolean>' },\r\n      },\r\n    },\r\n  },\r\n  args: {\r\n    ariaLabel: 'switch',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-switch ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\r\n    `,\r\n  }),\r\n}"
+        "defaultValue": "{\n  title: 'Dragone/UI/Switch',\n  component: Switch,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se lo switch è attivo o meno',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita lo switch impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  args: {\n    ariaLabel: 'switch',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <drgn-switch aria-label=\"Switch\" ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\n    `,\n  }),\n}"
       },
       {
         "name": "preview",
@@ -230,8 +312,8 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <div style=\"padding: 2rem;\">\r\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\r\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\r\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\r\n            Abilita notifiche\r\n          </span>\r\n        </label>\r\n      </div>\r\n    `,\r\n  }),\r\n}",
-        "rawdescription": "Variante con label personalizzata.\r\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
+        "defaultValue": "{\n  render: args => ({\n    props: args,\n    template: `\n      <div style=\"padding: 2rem;\">\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\n            Abilita notifiche\n          </span>\n        </label>\n      </div>\n    `,\n  }),\n}",
+        "rawdescription": "Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
         "description": "<p>Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l&#39;accessibilità.</p>\n"
       },
       {
@@ -259,15 +341,15 @@
         "kind": 194
       },
       {
-        "name": "Story",
+        "name": "CheckboxArgs",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<Accordion>",
-        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+        "rawtype": "literal type",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
-        "kind": 184
+        "kind": 188
       },
       {
         "name": "Story",
@@ -286,6 +368,28 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ButtonStory>",
         "file": "projects/dragone/ui/button/src/button.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<Accordion>",
+        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<CheckboxArgs>",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -370,6 +474,90 @@
           "defaultValue": "{\n  title: 'Dragone/UI/Breadcrumb',\n  component: Breadcrumb,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],\n  args: {\n    breadcrumbs: [\n      {\n        label: 'quis',\n        routerLink: '/',\n        icon: faSolidHouse,\n      },\n      {\n        label: 'ullam',\n        routerLink: '/category',\n      },\n      {\n        label: 'officiis',\n        routerLink: '/category/subcategory',\n      },\n      {\n        label: 'deleniti',\n        routerLink: '/category/subcategory/1',\n      },\n      {\n        label: 'laudantium',\n        routerLink: '/category/subcategory/2',\n      },\n      {\n        label: 'voluptatem ipsum',\n        href: '/category/subcategory/current-page',\n      },\n    ],\n  },\n  argTypes: {\n    breadcrumbs: { control: { type: 'object' } },\n  },\n}"
         }
       ],
+      "projects/dragone/ui/checkbox/src/checkbox.stories.ts": [
+        {
+          "name": "Checked",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n  },\n}",
+          "rawdescription": "Checkbox in stato checked (selezionato).",
+          "description": "<p>Checkbox in stato checked (selezionato).</p>\n"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    checked: false,\n    disabled: false,\n    checkedChange: fn(),\n  },\n}",
+          "rawdescription": "Checkbox di default in stato non selezionato.",
+          "description": "<p>Checkbox di default in stato non selezionato.</p>\n"
+        },
+        {
+          "name": "Disabled",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    disabled: true,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const checkboxElement = canvas.getByRole('checkbox');\n\n    // Verifica che il checkbox sia disabilitato\n    await expect(checkboxElement).toHaveAttribute('aria-disabled', 'true');\n    await expect(checkboxElement).toHaveAttribute('data-disabled');\n  },\n}",
+          "rawdescription": "Checkbox in stato disabilitato, non interagibile.",
+          "description": "<p>Checkbox in stato disabilitato, non interagibile.</p>\n"
+        },
+        {
+          "name": "DisabledChecked",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n    disabled: true,\n  },\n}",
+          "rawdescription": "Checkbox disabilitato in stato checked.",
+          "description": "<p>Checkbox disabilitato in stato checked.</p>\n"
+        },
+        {
+          "name": "InteractionTest",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const checkboxElement = canvas.getByRole('checkbox');\n\n    // Stato iniziale: non checked\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n    await expect(checkboxElement).not.toHaveAttribute('data-checked');\n\n    // Click per selezionare\n    await userEvent.click(checkboxElement);\n\n    // Verifica stato checked\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'true');\n    await expect(checkboxElement).toHaveAttribute('data-checked');\n\n    // Click per deselezionare\n    await userEvent.click(checkboxElement);\n\n    // Verifica stato non checked\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n    await expect(checkboxElement).not.toHaveAttribute('data-checked');\n  },\n}",
+          "rawdescription": "Test di interazione: verifica che il checkbox cambi stato al click.",
+          "description": "<p>Test di interazione: verifica che il checkbox cambi stato al click.</p>\n"
+        },
+        {
+          "name": "KeyboardNavigation",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const checkboxElement = canvas.getByRole('checkbox');\n\n    // Focus con Tab\n    await userEvent.tab();\n    await expect(checkboxElement).toHaveFocus();\n    await expect(checkboxElement).toHaveAttribute('data-focus-visible');\n\n    // Stato iniziale\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n\n    // Seleziona con Space\n    await userEvent.keyboard(' ');\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'true');\n\n    // Deseleziona con Space\n    await userEvent.keyboard(' ');\n    await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');\n  },\n}",
+          "rawdescription": "Test di accessibilità: verifica la navigazione da tastiera.",
+          "description": "<p>Test di accessibilità: verifica la navigazione da tastiera.</p>\n"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<CheckboxArgs>",
+          "defaultValue": "{\n  title: 'Dragone/UI/Checkbox',\n  component: Checkbox,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se il checkbox è selezionato',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita il checkbox impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  render: args => ({\n    props: args,\n    template: `<drgn-checkbox aria-label=\"Checkbox\" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`,\n  }),\n}"
+        }
+      ],
       "projects/dragone/ui/switch/src/switch.stories.ts": [
         {
           "name": "Checked",
@@ -379,7 +567,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n  },\r\n}",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n  },\n}",
           "rawdescription": "Switch in stato checked (attivo).",
           "description": "<p>Switch in stato checked (attivo).</p>\n"
         },
@@ -391,7 +579,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    disabled: false,\r\n    checkedChange: fn(),\r\n  },\r\n}",
+          "defaultValue": "{\n  args: {\n    checked: false,\n    disabled: false,\n    checkedChange: fn(),\n  },\n}",
           "rawdescription": "Switch di default in stato non selezionato.",
           "description": "<p>Switch di default in stato non selezionato.</p>\n"
         },
@@ -403,7 +591,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    disabled: true,\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Verifica che lo switch sia disabilitato\r\n    await expect(switchElement).toHaveAttribute('aria-disabled', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-disabled');\r\n  },\r\n}",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    disabled: true,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const switchElement = canvas.getByRole('switch');\n\n    // Verifica che lo switch sia disabilitato\n    await expect(switchElement).toHaveAttribute('aria-disabled', 'true');\n    await expect(switchElement).toHaveAttribute('data-disabled');\n  },\n}",
           "rawdescription": "Switch in stato disabilitato, non interagibile.",
           "description": "<p>Switch in stato disabilitato, non interagibile.</p>\n"
         },
@@ -415,7 +603,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  args: {\r\n    ...Default.args,\r\n    checked: true,\r\n    disabled: true,\r\n  },\r\n}",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n    disabled: true,\n  },\n}",
           "rawdescription": "Switch disabilitato in stato checked.",
           "description": "<p>Switch disabilitato in stato checked.</p>\n"
         },
@@ -427,7 +615,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Stato iniziale: non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n\r\n    // Click per attivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n    await expect(switchElement).toHaveAttribute('data-checked');\r\n\r\n    // Click per disattivare\r\n    await userEvent.click(switchElement);\r\n\r\n    // Verifica stato non checked\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    await expect(switchElement).not.toHaveAttribute('data-checked');\r\n  },\r\n}",
+          "defaultValue": "{\n  play: async ({ canvasElement, userEvent }) => {\n    const canvas = within(canvasElement);\n    const switchElement = canvas.getByRole('switch');\n\n    // Stato iniziale: non checked\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    await expect(switchElement).not.toHaveAttribute('data-checked');\n\n    // Click per attivare\n    await userEvent.click(switchElement);\n\n    // Verifica stato checked\n    await expect(switchElement).toHaveAttribute('aria-checked', 'true');\n    await expect(switchElement).toHaveAttribute('data-checked');\n\n    // Click per disattivare\n    await userEvent.click(switchElement);\n\n    // Verifica stato non checked\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    await expect(switchElement).not.toHaveAttribute('data-checked');\n  },\n}",
           "rawdescription": "Test di interazione: verifica che lo switch cambi stato al click.",
           "description": "<p>Test di interazione: verifica che lo switch cambi stato al click.</p>\n"
         },
@@ -439,7 +627,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  play: async ({ canvasElement, userEvent, step }) => {\r\n    const canvas = within(canvasElement);\r\n    const switchElement = canvas.getByRole('switch');\r\n\r\n    // Focus con Tab\r\n    await userEvent.tab();\r\n    await expect(switchElement).toHaveFocus();\r\n    await expect(switchElement).toHaveAttribute('data-focus-visible');\r\n\r\n    // Stato iniziale\r\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n\r\n    await step('Uso con Space', async () => {\r\n      // Attiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      // Disattiva con Space\r\n      await userEvent.keyboard(' ');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n\r\n    await step('Uso con Enter', async () => {\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\r\n\r\n      await userEvent.keyboard('{Enter}');\r\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\r\n    });\r\n  },\r\n}",
+          "defaultValue": "{\n  play: async ({ canvasElement, userEvent, step }) => {\n    const canvas = within(canvasElement);\n    const switchElement = canvas.getByRole('switch');\n\n    // Focus con Tab\n    await userEvent.tab();\n    await expect(switchElement).toHaveFocus();\n    await expect(switchElement).toHaveAttribute('data-focus-visible');\n\n    // Stato iniziale\n    await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n\n    await step('Uso con Space', async () => {\n      // Attiva con Space\n      await userEvent.keyboard(' ');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\n\n      // Disattiva con Space\n      await userEvent.keyboard(' ');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    });\n\n    await step('Uso con Enter', async () => {\n      await userEvent.keyboard('{Enter}');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'true');\n\n      await userEvent.keyboard('{Enter}');\n      await expect(switchElement).toHaveAttribute('aria-checked', 'false');\n    });\n  },\n}",
           "rawdescription": "Test di accessibilità: verifica la navigazione da tastiera.",
           "description": "<p>Test di accessibilità: verifica la navigazione da tastiera.</p>\n"
         },
@@ -451,7 +639,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<SwitchArgs>",
-          "defaultValue": "{\r\n  title: 'Dragone/UI/Switch',\r\n  component: Switch,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    checked: {\r\n      control: 'boolean',\r\n      description: 'Controlla se lo switch è attivo o meno',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disabilita lo switch impedendo interazioni',\r\n      table: {\r\n        type: { summary: 'boolean' },\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n    checkedChange: {\r\n      action: 'checkedChange',\r\n      description: 'Evento emesso quando lo stato checked cambia',\r\n      table: {\r\n        type: { summary: 'EventEmitter<boolean>' },\r\n      },\r\n    },\r\n  },\r\n  args: {\r\n    ariaLabel: 'switch',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-switch ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\r\n    `,\r\n  }),\r\n}"
+          "defaultValue": "{\n  title: 'Dragone/UI/Switch',\n  component: Switch,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se lo switch è attivo o meno',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita lo switch impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  args: {\n    ariaLabel: 'switch',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <drgn-switch aria-label=\"Switch\" ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\n    `,\n  }),\n}"
         },
         {
           "name": "WithLabel",
@@ -461,8 +649,8 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <div style=\"padding: 2rem;\">\r\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\r\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\r\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\r\n            Abilita notifiche\r\n          </span>\r\n        </label>\r\n      </div>\r\n    `,\r\n  }),\r\n}",
-          "rawdescription": "Variante con label personalizzata.\r\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
+          "defaultValue": "{\n  render: args => ({\n    props: args,\n    template: `\n      <div style=\"padding: 2rem;\">\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\n            Abilita notifiche\n          </span>\n        </label>\n      </div>\n    `,\n  }),\n}",
+          "rawdescription": "Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
           "description": "<p>Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l&#39;accessibilità.</p>\n"
         }
       ],
@@ -588,13 +776,24 @@
           "kind": 184
         }
       ],
-      "projects/dragone/ui/accordion/src/accordion.stories.ts": [
+      "projects/dragone/ui/checkbox/src/checkbox.stories.ts": [
+        {
+          "name": "CheckboxArgs",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "literal type",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 188
+        },
         {
           "name": "Story",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "StoryObj<Accordion>",
-          "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+          "rawtype": "StoryObj<CheckboxArgs>",
+          "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -608,6 +807,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<Breadcrumb>",
           "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 184
+        }
+      ],
+      "projects/dragone/ui/accordion/src/accordion.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<Accordion>",
+          "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -646,8 +858,8 @@
     "children": []
   },
   "coverage": {
-    "count": 25,
-    "status": "low",
+    "count": 35,
+    "status": "medium",
     "files": [
       {
         "filePath": "projects/dragone/ui/.storybook/preview.ts",
@@ -821,6 +1033,96 @@
       },
       {
         "filePath": "projects/dragone/ui/button/src/button.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Checked",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Disabled",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DisabledChecked",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "InteractionTest",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "KeyboardNavigation",
+        "coveragePercent": 100,
+        "coverageCount": "1/1",
+        "status": "very-good"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "CheckboxArgs",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",

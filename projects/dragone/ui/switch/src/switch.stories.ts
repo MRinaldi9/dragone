@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate } from '@storybook/angular';
+import type { Meta, StoryObj } from '@analogjs/storybook-angular';
+import { argsToTemplate } from '@analogjs/storybook-angular';
 import { expect, fn, within } from 'storybook/test';
 import { Switch } from './switch';
 

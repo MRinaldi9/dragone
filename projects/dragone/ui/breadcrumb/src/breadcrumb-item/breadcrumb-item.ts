@@ -35,7 +35,7 @@ type BreadcrumbWithEllipsis = {
   template: `
     @let config = breadcrumbConfiguration();
     @if (config.icon) {
-      <ng-icon [svg]="config.icon" />
+      <ng-icon data-testid="breadcrumb-icon" [svg]="config.icon" />
     }
     @if (config.href) {
       <a ngpFocusVisible target="_blank" rel="noopener noreferrer" [href]="config.href">{{
