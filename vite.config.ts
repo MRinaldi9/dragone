@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     exclude: [...defaultExclude, './projects/dragone/ui/.storybook/**'],
     coverage: {
+      enabled: true,
       reporter: ['lcov', 'html', 'text-summary'],
       reportsDirectory: '../../../coverage/dragone',
       exclude: [
@@ -25,6 +26,7 @@ export default defineConfig(({ mode }) => ({
         '**/index.ts',
         '**/public-api.ts',
         '**/*.js',
+        '**/*.css',
       ],
     },
     browser: {

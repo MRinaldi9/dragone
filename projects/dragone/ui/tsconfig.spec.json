@@ -5,15 +5,8 @@
   "compilerOptions": {
     "outDir": "../../../out-tsc/spec",
     "target": "es2022",
-    "types": [
-      "vitest/globals",
-      "node"
-    ]
+    "types": ["vitest/globals", "node"]
   },
-  "files": [
-    "./test-setup.ts"
-  ],
-  "include": [
-    "**/*.spec.ts"
-  ]
+  "files": ["./test-setup.ts"],
+  "include": ["**/*.spec.ts", "**/*.ts"]
 }
