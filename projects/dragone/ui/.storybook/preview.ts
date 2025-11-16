@@ -1,4 +1,5 @@
 import { applicationConfig, type Preview } from '@analogjs/storybook-angular';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import fakeRoutes from '../breadcrumb/src/test.routes';
@@ -25,7 +26,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    applicationConfig({ providers: [provideRouter(fakeRoutes)] }),
+    applicationConfig({ providers: [provideRouter(fakeRoutes), provideZonelessChangeDetection()] }),
     (storyFn, { args }) => {
       const story = storyFn();
 
