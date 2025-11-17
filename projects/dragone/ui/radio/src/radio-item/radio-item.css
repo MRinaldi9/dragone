@@ -1,0 +1,67 @@
+:host {
+  display: grid;
+  cursor: pointer;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(2, auto);
+  column-gap: 0.625rem;
+  background-color: var(--text-on-primary-light);
+  outline: none;
+}
+
+[ngpRadioIndicator] {
+  display: inline-flex;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  border-radius: 9999px;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--color-global-secondary-100);
+}
+
+.indicator-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: transparent;
+}
+
+.title {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  color: var(--color-global-secondary-100);
+}
+
+:host[data-hover] {
+  & [ngpRadioIndicator] {
+    border-color: var(--color-global-dark-primary-110);
+  }
+  & .title {
+    color: var(--color-global-dark-primary-110);
+  }
+}
+
+:host[data-checked] {
+  & .indicator-dot {
+    background-color: var(--color-global-secondary-100);
+  }
+}
+
+:host[data-focus-visible] {
+  & [ngpRadioIndicator] {
+    border-color: var(--interactive-primary-focus);
+    outline: 1px solid var(--interactive-primary-focus);
+    outline-offset: 3px;
+  }
+}
+
+:host-context([data-disabled]),
+:host[data-disabled] {
+  cursor: not-allowed;
+  & [ngpRadioIndicator] {
+    border-color: var(--bg-disabled);
+    background-color: var(--bg-disabled);
+  }
+}
