@@ -1,13 +1,13 @@
 /// <reference types="vitest" />
 import angular from '@analogjs/vite-plugin-angular';
 import { playwright } from '@vitest/browser-playwright';
-import { defineConfig, PluginOption } from 'vite';
+import { defineConfig } from 'vite';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import { coverageConfigDefaults, defaultExclude } from 'vitest/config';
 
 export default defineConfig(({ mode }) => ({
   root: './projects/dragone/ui',
-  plugins: [angular() as PluginOption, viteTsconfigPaths()],
+  plugins: [angular(), viteTsconfigPaths()],
   cacheDir: '../../../node_modules/.vite',
   test: {
     globals: true,
