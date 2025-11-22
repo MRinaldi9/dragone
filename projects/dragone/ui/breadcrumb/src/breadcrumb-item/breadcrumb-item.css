@@ -23,6 +23,13 @@
       cursor: pointer;
     }
   }
+  & button {
+    background: none;
+    border: none;
+    padding: 3px;
+    color: inherit;
+    cursor: pointer;
+  }
   &:has(.active-route) {
     ng-icon {
       color: var(--interactive-secondary-default);

@@ -52,13 +52,13 @@ type BreadcrumbWithEllipsis = {
         {{ config.label }}
       </a>
     } @else {
-      <a
+      <button
+        aria-label="Opens the remaining breadcrumbs"
         ngpFocusVisible
-        tabindex="0"
         (click)="breadcrumbVisualization($event)"
-        (keyup)="breadcrumbVisualization($event)"
-        >{{ config.label }}</a
       >
+        {{ config.label }}
+      </button>
     }
   `,
   styleUrl: './breadcrumb-item.css',

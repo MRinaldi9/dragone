@@ -238,16 +238,6 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<Accordion>",
-        "defaultValue": "{\n  title: 'Dragone/UI/Accordion',\n  component: Accordion,\n  tags: ['autodocs'],\n  args: {\n    collapse: true,\n    type: 'single',\n    disabled: false,\n    orientation: 'vertical',\n    heading: 'Dragone',\n    accordionChange: fn(),\n    accordionVariant: 'dark',\n  },\n  argTypes: {\n    collapse: {\n      type: 'boolean',\n      control: { type: 'boolean' },\n      description: 'Allows all accordion items to be collapsed',\n    },\n    heading: { control: 'text' },\n    type: {\n      type: 'string',\n      control: 'select',\n      options: ['single', 'multiple'],\n      table: { defaultValue: { summary: 'single' } },\n    },\n    accordionVariant: {\n      type: 'string',\n      control: 'select',\n      options: ['dark', 'light'],\n      table: { defaultValue: { summary: 'dark' } },\n    },\n    disabled: {\n      description: 'Disables the accordion if set to true',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n    accordionChange: { type: 'function', control: false },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -258,11 +248,11 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
-        "type": "Meta<CheckboxArgs>",
-        "defaultValue": "{\n  title: 'Dragone/UI/Checkbox',\n  component: Checkbox,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se il checkbox è selezionato',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita il checkbox impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  render: args => ({\n    props: args,\n    template: `<drgn-checkbox aria-label=\"Checkbox\" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`,\n  }),\n}"
+        "type": "Meta<Accordion>",
+        "defaultValue": "{\n  title: 'Dragone/UI/Accordion',\n  component: Accordion,\n  tags: ['autodocs'],\n  args: {\n    collapse: true,\n    type: 'single',\n    disabled: false,\n    orientation: 'vertical',\n    heading: 'Dragone',\n    accordionChange: fn(),\n    accordionVariant: 'dark',\n  },\n  argTypes: {\n    collapse: {\n      type: 'boolean',\n      control: { type: 'boolean' },\n      description: 'Allows all accordion items to be collapsed',\n    },\n    heading: { control: 'text' },\n    type: {\n      type: 'string',\n      control: 'select',\n      options: ['single', 'multiple'],\n      table: { defaultValue: { summary: 'single' } },\n    },\n    accordionVariant: {\n      type: 'string',\n      control: 'select',\n      options: ['dark', 'light'],\n      table: { defaultValue: { summary: 'dark' } },\n    },\n    disabled: {\n      description: 'Disables the accordion if set to true',\n      type: 'boolean',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n      },\n    },\n    accordionChange: { type: 'function', control: false },\n  },\n  decorators: [moduleMetadata({ imports: [AccordionItem] })],\n}"
       },
       {
         "name": "meta",
@@ -273,6 +263,16 @@
         "deprecationMessage": "",
         "type": "Meta<ButtonStory>",
         "defaultValue": "{\r\n  title: 'Dragone/UI/Button',\r\n  component: Button,\r\n  tags: ['autodocs'],\r\n  args: {\r\n    focusVisible: fn(),\r\n    label: 'Dragone',\r\n    disabled: false,\r\n    icon: false,\r\n    showLeadingIcon: false,\r\n    showTrailingIcon: false,\r\n    size: 'large',\r\n    variant: 'primary',\r\n  },\r\n  argTypes: {\r\n    focusVisible: { type: 'function', control: false },\r\n    label: { control: 'text' },\r\n    showLeadingIcon: { control: 'boolean' },\r\n    showTrailingIcon: { control: 'boolean' },\r\n    size: {\r\n      description: 'The size of the button',\r\n      type: 'string',\r\n      options: ['small', 'medium', 'large'],\r\n      control: { type: 'select' },\r\n      table: {\r\n        defaultValue: { summary: 'large' },\r\n      },\r\n    },\r\n    variant: {\r\n      description: 'The variant of the button',\r\n      type: 'string',\r\n      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],\r\n      control: { type: 'select' },\r\n      table: {\r\n        defaultValue: { summary: 'primary' },\r\n      },\r\n    },\r\n    disabled: {\r\n      description: 'Whether the button is disabled',\r\n      type: 'boolean',\r\n      control: { type: 'boolean' },\r\n      table: {\r\n        defaultValue: { summary: 'false' },\r\n      },\r\n    },\r\n  },\r\n  decorators: [\r\n    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),\r\n  ],\r\n  render: args => {\r\n    return {\r\n      props: args,\r\n      template: `\r\n      <button drgn-button ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>\r\n        ${args.showLeadingIcon ? '<ng-icon slot=\"leading\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\r\n        ${args.label}\r\n        ${args.showTrailingIcon ? '<ng-icon slot=\"trailing\" name=\"fa-solid-arrow-right\"></ng-icon>' : ''}\r\n      </button>\r\n      `,\r\n    };\r\n  },\r\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<CheckboxArgs>",
+        "defaultValue": "{\n  title: 'Dragone/UI/Checkbox',\n  component: Checkbox,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se il checkbox è selezionato',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita il checkbox impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  render: args => ({\n    props: args,\n    template: `<drgn-checkbox aria-label=\"Checkbox\" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`,\n  }),\n}"
       },
       {
         "name": "meta",
@@ -426,17 +426,6 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<Accordion>",
-        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 184
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
         "rawtype": "StoryObj<Breadcrumb>",
         "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
         "deprecated": false,
@@ -448,8 +437,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<CheckboxArgs>",
-        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "rawtype": "StoryObj<Accordion>",
+        "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -461,6 +450,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ButtonStory>",
         "file": "projects/dragone/ui/button/src/button.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<CheckboxArgs>",
+        "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -968,19 +968,6 @@
           "kind": 184
         }
       ],
-      "projects/dragone/ui/accordion/src/accordion.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<Accordion>",
-          "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 184
-        }
-      ],
       "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts": [
         {
           "name": "Story",
@@ -988,6 +975,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<Breadcrumb>",
           "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 184
+        }
+      ],
+      "projects/dragone/ui/accordion/src/accordion.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<Accordion>",
+          "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
