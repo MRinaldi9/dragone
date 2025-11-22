@@ -1,15 +1,9 @@
 import '@analogjs/vitest-angular/setup-snapshots';
+import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
 import '@angular/compiler';
-import { NgModule, provideZonelessChangeDetection } from '@angular/core';
-import { getTestBed } from '@angular/core/testing';
-import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
+import { ɵgetCleanupHook as getCleanupHook } from '@angular/core/testing';
+import { afterEach, beforeEach } from 'vitest';
 
-@NgModule({
-  providers: [provideZonelessChangeDetection()],
-})
-export class ZonelessTestModule {}
-
-getTestBed().initTestEnvironment(
-  [BrowserTestingModule, ZonelessTestModule],
-  platformBrowserTesting(),
-);
+beforeEach(getCleanupHook(false));
+afterEach(getCleanupHook(true));
+setupTestBed();
