@@ -3,9 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "schematicCollections": [
-      "angular-eslint"
-    ]
+    "schematicCollections": ["angular-eslint"]
   },
   "schematics": {
     "@schematics/angular:component": {
@@ -34,19 +32,12 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@analogjs/vitest-angular:test",
-          "options": {
-            "watch": true,
-            "coverage": true
-          }
+          "builder": "@analogjs/vitest-angular:test"
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/dragone/ui/**/*.ts",
-              "projects/dragone/ui/**/*.html"
-            ],
+            "lintFilePatterns": ["projects/dragone/ui/**/*.ts", "projects/dragone/ui/**/*.html"],
             "eslintConfig": "projects/dragone/ui/eslint.config.js",
             "concurrency": "auto"
           }
@@ -56,16 +47,9 @@
           "options": {
             "configDir": "projects/dragone/ui/.storybook",
             "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "projects/dragone/ui"
-            ],
+            "compodocArgs": ["-e", "json", "-d", "projects/dragone/ui"],
             "port": 6006,
-            "styles": [
-              "../src/main.css"
-            ]
+            "styles": ["../src/main.css"]
           }
         },
         "build-storybook": {
@@ -73,16 +57,9 @@
           "options": {
             "configDir": "projects/dragone/ui/.storybook",
             "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "projects/dragone/ui"
-            ],
+            "compodocArgs": ["-e", "json", "-d", "projects/dragone/ui"],
             "outputDir": "storybook-static",
-            "styles": [
-              "../src/main.css"
-            ]
+            "styles": ["../src/main.css"]
           }
         }
       }
