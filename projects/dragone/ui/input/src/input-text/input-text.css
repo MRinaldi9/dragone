@@ -1,0 +1,39 @@
+:host {
+  &:not(:where(drgn-input-group *)) {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--data-entry-border-default);
+    border-radius: 4px;
+    padding: 1rem;
+    background-color: var(--color-global-primary-000);
+    color: var(--data-entry-label-default);
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: var(--data-entry-placeholder-default);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: var(--data-entry-label-hover);
+    }
+
+    &:focus {
+      border-color: var(--interactive-primary-default);
+      outline: none;
+    }
+
+    &[data-focus-visible] {
+      outline: none;
+      box-shadow:
+        0 0 0 3px var(--color-global-primary-000),
+        0 0 0 5px var(--interactive-primary-default);
+    }
+
+    &:disabled {
+      background-color: var(--bg-disabled);
+      border-color: transparent;
+      color: var(--text-disabled);
+      cursor: not-allowed;
+    }
+  }
+}
