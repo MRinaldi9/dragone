@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  border: 1px solid var(--data-entry-border-default);
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: var(--color-global-primary-000);
+  transition: border-color 0.2s;
+
+  /* Input nel gruppo */
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0;
+    background: transparent;
+    color: var(--data-entry-label-default);
+    min-width: 0; /* Previene overflow */
+
+    &::placeholder {
+      color: var(--data-entry-placeholder-default);
+    }
+  }
+
+  /* Stati interattivi */
+  &:hover:not(:has(input:disabled)) {
+    border-color: var(--data-entry-label-hover);
+  }
+
+  &:focus-within:not(:has(input:disabled)) {
+    border-color: var(--interactive-primary-default);
+    outline: none;
+    box-shadow:
+      0 0 0 3px var(--color-global-primary-000),
+      0 0 0 5px var(--interactive-primary-default);
+  }
+
+  /* Stato errore */
+  &:has(input[aria-invalid='true']:not(input:disabled), input.ng-invalid:not(input:disabled)) {
+    border-color: var(--interactive-alert-default);
+    & ng-icon {
+      color: var(--interactive-alert-default);
+    }
+  }
+
+  &:has(input[data-validation='valid']:not(input:disabled), input.ng-valid:not(input:disabled)) {
+    border-color: var(--interactive-success-default);
+    & ng-icon {
+      color: var(--interactive-success-default);
+    }
+  }
+
+  &:has(input[data-validation='warning']:not(input:disabled)) {
+    border-color: var(--color-global-semantic-warning-100);
+    & ng-icon {
+      color: var(--color-global-semantic-warning-100);
+    }
+  }
+
+  /* Stato disabled */
+  &:has(input:disabled) {
+    background-color: var(--bg-disabled);
+    border-color: transparent;
+    color: var(--text-disabled);
+    cursor: not-allowed;
+
+    & input {
+      cursor: not-allowed;
+    }
+  }
+}

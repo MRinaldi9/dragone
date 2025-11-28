@@ -90,6 +90,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Inserisci il testo...',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <input drgn-input=\"text\" ${argsToTemplate(args)}/>\r\n    `,\r\n  }),\r\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/dragone/ui/radio/src/radio.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -143,6 +153,16 @@
         "description": "<p>Switch in stato disabilitato, non interagibile.</p>\n"
       },
       {
+        "name": "Disabled",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Disabled input',\r\n    disabled: true,\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <ng-icon slot=\"leading\" name=\"faSolidUser\" />\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
+      },
+      {
         "name": "DisabledChecked",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -165,6 +185,16 @@
         "defaultValue": "{\n  args: {\n    ...Default.args,\n    checked: true,\n    disabled: true,\n  },\n}",
         "rawdescription": "Switch disabilitato in stato checked.",
         "description": "<p>Switch disabilitato in stato checked.</p>\n"
+      },
+      {
+        "name": "ErrorState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  args: {\r\n    validationState: 'invalid',\r\n    placeholder: 'Invalid input',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n        <ng-icon slot=\"trailing\" name=\"faSolidTriangleExclamation\" />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
       },
       {
         "name": "IconOnly",
@@ -238,16 +268,6 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<Breadcrumb>",
-        "defaultValue": "{\n  title: 'Dragone/UI/Breadcrumb',\n  component: Breadcrumb,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],\n  args: {\n    breadcrumbs: [\n      {\n        label: 'quis',\n        routerLink: '/',\n        icon: faSolidHouse,\n      },\n      {\n        label: 'ullam',\n        routerLink: '/category',\n      },\n      {\n        label: 'officiis',\n        routerLink: '/category/subcategory',\n      },\n      {\n        label: 'deleniti',\n        routerLink: '/category/subcategory/1',\n      },\n      {\n        label: 'laudantium',\n        routerLink: '/category/subcategory/2',\n      },\n      {\n        label: 'voluptatem ipsum',\n        href: '/category/subcategory/current-page',\n      },\n    ],\n  },\n  argTypes: {\n    breadcrumbs: { control: { type: 'object' } },\n  },\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -268,11 +288,31 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<Breadcrumb>",
+        "defaultValue": "{\n  title: 'Dragone/UI/Breadcrumb',\n  component: Breadcrumb,\n  tags: ['autodocs'],\n  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],\n  args: {\n    breadcrumbs: [\n      {\n        label: 'quis',\n        routerLink: '/',\n        icon: faSolidHouse,\n      },\n      {\n        label: 'ullam',\n        routerLink: '/category',\n      },\n      {\n        label: 'officiis',\n        routerLink: '/category/subcategory',\n      },\n      {\n        label: 'deleniti',\n        routerLink: '/category/subcategory/1',\n      },\n      {\n        label: 'laudantium',\n        routerLink: '/category/subcategory/2',\n      },\n      {\n        label: 'voluptatem ipsum',\n        href: '/category/subcategory/current-page',\n      },\n    ],\n  },\n  argTypes: {\n    breadcrumbs: { control: { type: 'object' } },\n  },\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<CheckboxArgs>",
         "defaultValue": "{\n  title: 'Dragone/UI/Checkbox',\n  component: Checkbox,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se il checkbox è selezionato',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita il checkbox impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  render: args => ({\n    props: args,\n    template: `<drgn-checkbox aria-label=\"Checkbox\" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`,\n  }),\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<InputProps>",
+        "defaultValue": "{\r\n  title: 'Dragone/UI/Input',\r\n  component: InputText,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'email', 'password', 'tel', 'url', 'number'],\r\n      description: 'Tipo di input HTML',\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Testo placeholder',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Stato disabilitato',\r\n    },\r\n    readOnly: {\r\n      control: 'boolean',\r\n      description: 'Stato readonly',\r\n    },\r\n    required: {\r\n      control: 'boolean',\r\n      description: 'Campo obbligatorio',\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: \"Valore dell'input\",\r\n    },\r\n  },\r\n}"
       },
       {
         "name": "meta",
@@ -293,6 +333,16 @@
         "deprecationMessage": "",
         "type": "Meta<SwitchArgs>",
         "defaultValue": "{\n  title: 'Dragone/UI/Switch',\n  component: Switch,\n  tags: ['autodocs'],\n  argTypes: {\n    checked: {\n      control: 'boolean',\n      description: 'Controlla se lo switch è attivo o meno',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disabilita lo switch impedendo interazioni',\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    checkedChange: {\n      action: 'checkedChange',\n      description: 'Evento emesso quando lo stato checked cambia',\n      table: {\n        type: { summary: 'EventEmitter<boolean>' },\n      },\n    },\n  },\n  args: {\n    ariaLabel: 'switch',\n  },\n  render: args => ({\n    props: args,\n    template: `\n      <drgn-switch aria-label=\"Switch\" ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>\n    `,\n  }),\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<InputGroupStory>",
+        "defaultValue": "{\r\n  title: 'Dragone/UI/Input Group',\r\n  component: InputGroup,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [InputText, NgIcon, FormsModule],\r\n      providers: [\r\n        provideIcons({\r\n          faSolidMagnifyingGlass,\r\n          faSolidTriangleExclamation,\r\n          faSolidUser,\r\n          faSolidXmark,\r\n        }),\r\n      ],\r\n    }),\r\n  ],\r\n  args: {\r\n    placeholder: 'Enter text...',\r\n    value: '',\r\n  },\r\n  argTypes: {\r\n    placeholder: { control: 'text' },\r\n    value: { control: 'text' },\r\n    validationState: {\r\n      control: { type: 'select' },\r\n      options: ['valid', 'invalid', 'warning', null],\r\n    },\r\n  },\r\n}"
       },
       {
         "name": "Preselected",
@@ -355,6 +405,16 @@
         "defaultValue": "{\r\n  ...Template,\r\n  args: {\r\n    variant: 'tertiary',\r\n  },\r\n}"
       },
       {
+        "name": "WithBothIcons",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <ng-icon slot=\"leading\" name=\"faSolidUser\" />\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n        <ng-icon slot=\"trailing\" name=\"faSolidXmark\" />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
+      },
+      {
         "name": "WithLabel",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -365,6 +425,16 @@
         "defaultValue": "{\n  render: args => ({\n    props: args,\n    template: `\n      <div style=\"padding: 2rem;\">\n        <label style=\"display: flex; align-items: center; gap: 0.5rem; cursor: pointer;\">\n          <drgn-switch ${argsToTemplate(args)}></drgn-switch>\n          <span style=\"font-family: var(--typography-global-font-family-01); font-size: var(--typography-global-font-size-04);\">\n            Abilita notifiche\n          </span>\n        </label>\n      </div>\n    `,\n  }),\n}",
         "rawdescription": "Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l'accessibilità.",
         "description": "<p>Variante con label personalizzata.\nMostra come usare lo switch insieme a una label per migliorare l&#39;accessibilità.</p>\n"
+      },
+      {
+        "name": "WithLeadingIcon",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group >\r\n        <ng-icon slot=\"leading\" name=\"faSolidUser\" />\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
       },
       {
         "name": "WithLongLabels",
@@ -385,6 +455,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\r\n  ...Template,\r\n  args: {\r\n    showTrailingIcon: true,\r\n  },\r\n}"
+      },
+      {
+        "name": "WithTrailingIcon",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n        <ng-icon slot=\"trailing\" name=\"faSolidMagnifyingGlass\" />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
       }
     ],
     "functions": [],
@@ -412,6 +492,28 @@
         "kind": 188
       },
       {
+        "name": "InputGroupStory",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "unknown",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 194
+      },
+      {
+        "name": "InputProps",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "unknown",
+        "file": "projects/dragone/ui/input/src/input.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 194
+      },
+      {
         "name": "RadioProps",
         "ctype": "miscellaneous",
         "subtype": "typealias",
@@ -421,17 +523,6 @@
         "deprecationMessage": "",
         "description": "",
         "kind": 188
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<Breadcrumb>",
-        "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 184
       },
       {
         "name": "Story",
@@ -459,8 +550,30 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<Breadcrumb>",
+        "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<CheckboxArgs>",
         "file": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<InputProps>",
+        "file": "projects/dragone/ui/input/src/input.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -483,6 +596,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<SwitchArgs>",
         "file": "projects/dragone/ui/switch/src/switch.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 184
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<InputGroupStory>",
+        "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -818,6 +942,28 @@
           "defaultValue": "{\r\n  ...Template,\r\n  args: {\r\n    showTrailingIcon: true,\r\n  },\r\n}"
         }
       ],
+      "projects/dragone/ui/input/src/input.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Inserisci il testo...',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <input drgn-input=\"text\" ${argsToTemplate(args)}/>\r\n    `,\r\n  }),\r\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<InputProps>",
+          "defaultValue": "{\r\n  title: 'Dragone/UI/Input',\r\n  component: InputText,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'email', 'password', 'tel', 'url', 'number'],\r\n      description: 'Tipo di input HTML',\r\n    },\r\n    placeholder: {\r\n      control: 'text',\r\n      description: 'Testo placeholder',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Stato disabilitato',\r\n    },\r\n    readOnly: {\r\n      control: 'boolean',\r\n      description: 'Stato readonly',\r\n    },\r\n    required: {\r\n      control: 'boolean',\r\n      description: 'Campo obbligatorio',\r\n    },\r\n    value: {\r\n      control: 'text',\r\n      description: \"Valore dell'input\",\r\n    },\r\n  },\r\n}"
+        }
+      ],
       "projects/dragone/ui/radio/src/radio.stories.ts": [
         {
           "name": "Default",
@@ -878,6 +1024,68 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  render: args => ({\n    props: args,\n    template: `\n      <drgn-radio-group ${argsToTemplate(args, { exclude: ['darkMode'] })}>\n        <drgn-radio-item value=\"option1\">\n          Questa è un'opzione con un'etichetta molto lunga che potrebbe andare su più righe\n        </drgn-radio-item>\n        <drgn-radio-item value=\"option2\">\n          Un'altra opzione con testo lungo per verificare il comportamento del layout\n        </drgn-radio-item>\n        <drgn-radio-item value=\"option3\">Opzione breve</drgn-radio-item>\n      </drgn-radio-group>\n    `,\n  }),\n  args: {\n    value: '',\n    disabled: false,\n  },\n}"
+        }
+      ],
+      "projects/dragone/ui/input/src/input-group/input-group.stories.ts": [
+        {
+          "name": "Disabled",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Disabled input',\r\n    disabled: true,\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <ng-icon slot=\"leading\" name=\"faSolidUser\" />\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
+        },
+        {
+          "name": "ErrorState",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  args: {\r\n    validationState: 'invalid',\r\n    placeholder: 'Invalid input',\r\n  },\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n        <ng-icon slot=\"trailing\" name=\"faSolidTriangleExclamation\" />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<InputGroupStory>",
+          "defaultValue": "{\r\n  title: 'Dragone/UI/Input Group',\r\n  component: InputGroup,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [InputText, NgIcon, FormsModule],\r\n      providers: [\r\n        provideIcons({\r\n          faSolidMagnifyingGlass,\r\n          faSolidTriangleExclamation,\r\n          faSolidUser,\r\n          faSolidXmark,\r\n        }),\r\n      ],\r\n    }),\r\n  ],\r\n  args: {\r\n    placeholder: 'Enter text...',\r\n    value: '',\r\n  },\r\n  argTypes: {\r\n    placeholder: { control: 'text' },\r\n    value: { control: 'text' },\r\n    validationState: {\r\n      control: { type: 'select' },\r\n      options: ['valid', 'invalid', 'warning', null],\r\n    },\r\n  },\r\n}"
+        },
+        {
+          "name": "WithBothIcons",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <ng-icon slot=\"leading\" name=\"faSolidUser\" />\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n        <ng-icon slot=\"trailing\" name=\"faSolidXmark\" />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
+        },
+        {
+          "name": "WithLeadingIcon",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group >\r\n        <ng-icon slot=\"leading\" name=\"faSolidUser\" />\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
+        },
+        {
+          "name": "WithTrailingIcon",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\r\n  render: args => ({\r\n    props: args,\r\n    template: `\r\n      <drgn-input-group>\r\n        <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />\r\n        <ng-icon slot=\"trailing\" name=\"faSolidMagnifyingGlass\" />\r\n      </drgn-input-group>\r\n    `,\r\n  }),\r\n}"
         }
       ],
       "projects/dragone/ui/.storybook/preview.ts": [
@@ -944,6 +1152,54 @@
           "kind": 184
         }
       ],
+      "projects/dragone/ui/input/src/input-group/input-group.stories.ts": [
+        {
+          "name": "InputGroupStory",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "unknown",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 194
+        },
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<InputGroupStory>",
+          "file": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 184
+        }
+      ],
+      "projects/dragone/ui/input/src/input.stories.ts": [
+        {
+          "name": "InputProps",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "unknown",
+          "file": "projects/dragone/ui/input/src/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 194
+        },
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<InputProps>",
+          "file": "projects/dragone/ui/input/src/input.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 184
+        }
+      ],
       "projects/dragone/ui/radio/src/radio.stories.ts": [
         {
           "name": "RadioProps",
@@ -968,19 +1224,6 @@
           "kind": 184
         }
       ],
-      "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<Breadcrumb>",
-          "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 184
-        }
-      ],
       "projects/dragone/ui/accordion/src/accordion.stories.ts": [
         {
           "name": "Story",
@@ -988,6 +1231,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<Accordion>",
           "file": "projects/dragone/ui/accordion/src/accordion.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 184
+        }
+      ],
+      "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<Breadcrumb>",
+          "file": "projects/dragone/ui/breadcrumb/src/breadcrumb.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -1026,8 +1282,8 @@
     "children": []
   },
   "coverage": {
-    "count": 28,
-    "status": "medium",
+    "count": 22,
+    "status": "low",
     "files": [
       {
         "filePath": "projects/dragone/ui/.storybook/preview.ts",
@@ -1291,6 +1547,126 @@
       },
       {
         "filePath": "projects/dragone/ui/checkbox/src/checkbox.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Disabled",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "ErrorState",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithBothIcons",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithLeadingIcon",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithTrailingIcon",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "InputGroupStory",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input-group/input-group.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "InputProps",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "projects/dragone/ui/input/src/input.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
