@@ -15,6 +15,8 @@ pre-commit:
     - name: Lint Dragone UI staged files
       run: pnpx eslint --fix -c projects/dragone/ui/eslint.config.js {staged_files}
       stage_fixed: true
+      glob: ".{ts, html, css, js}"
     - name: Format Dragone UI staged files
       run: pnpx prettier -w {staged_files}
       stage_fixed: true
+      glob: ".{ts, html, css, js}"
