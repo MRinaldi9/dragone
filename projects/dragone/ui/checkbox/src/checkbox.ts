@@ -40,7 +40,7 @@ export class Checkbox implements ControlValueAccessor {
   }
 
   writeValue(checked: boolean): void {
-    this.internalState().checked.set(checked);
+    this.internalState().setChecked(checked);
   }
   registerOnChange(fn: ChangeFn<boolean>): void {
     this.changeFn = fn;
@@ -49,6 +49,6 @@ export class Checkbox implements ControlValueAccessor {
     this.touchedFn = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    this.internalState().disabled.set(isDisabled);
+    this.internalState().setDisabled(isDisabled);
   }
 }
