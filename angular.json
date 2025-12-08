@@ -3,11 +3,16 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "schematicCollections": ["angular-eslint"]
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   },
   "schematics": {
     "@schematics/angular:component": {
       "changeDetection": "OnPush",
+      "path": "projects/dragone/ui"
+    },
+    "@schematics/angular:directive": {
       "path": "projects/dragone/ui"
     }
   },
@@ -37,7 +42,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/dragone/ui/**/*.ts", "projects/dragone/ui/**/*.html"],
+            "lintFilePatterns": [
+              "projects/dragone/ui/**/*.ts",
+              "projects/dragone/ui/**/*.html"
+            ],
             "eslintConfig": "projects/dragone/ui/eslint.config.js",
             "concurrency": "auto"
           }
@@ -47,9 +55,17 @@
           "options": {
             "configDir": "projects/dragone/ui/.storybook",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "projects/dragone/ui"],
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/dragone/ui"
+            ],
             "port": 6006,
-            "styles": ["../src/main.css"]
+            "styles": [
+              "../src/main.css"
+            ],
+            "experimentalZoneless": true
           }
         },
         "build-storybook": {
@@ -57,9 +73,17 @@
           "options": {
             "configDir": "projects/dragone/ui/.storybook",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "projects/dragone/ui"],
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/dragone/ui"
+            ],
             "outputDir": "storybook-static",
-            "styles": ["../src/main.css"]
+            "styles": [
+              "../src/main.css"
+            ],
+            "experimentalZoneless": true
           }
         }
       }
