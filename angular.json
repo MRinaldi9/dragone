@@ -46,24 +46,24 @@
               "projects/dragone/ui/**/*.ts",
               "projects/dragone/ui/**/*.html"
             ],
-            "eslintConfig": "projects/dragone/ui/eslint.config.js",
+            "eslintConfig": "projects/dragone/ui/eslint.config.mjs",
             "concurrency": "auto"
           }
         },
         "storybook": {
           "builder": "@analogjs/storybook-angular:start-storybook",
           "options": {
-            "configDir": "projects/dragone/ui/.storybook",
             "compodoc": true,
+            "configDir": ".storybook",
             "compodocArgs": [
               "-e",
               "json",
               "-d",
-              "projects/dragone/ui"
+              "."
             ],
             "port": 6006,
             "styles": [
-              "../src/main.css"
+              "../projects/dragone/ui/src/main.css"
             ],
             "experimentalZoneless": true
           }
@@ -71,17 +71,17 @@
         "build-storybook": {
           "builder": "@analogjs/storybook-angular:build-storybook",
           "options": {
-            "configDir": "projects/dragone/ui/.storybook",
+            "configDir": ".storybook",
             "compodoc": true,
             "compodocArgs": [
               "-e",
               "json",
               "-d",
-              "projects/dragone/ui"
+              "."
             ],
             "outputDir": "storybook-static",
             "styles": [
-              "../src/main.css"
+              "../projects/dragone/ui/src/main.css"
             ],
             "experimentalZoneless": true
           }
