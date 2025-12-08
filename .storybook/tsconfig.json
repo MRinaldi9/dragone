@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.lib.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "types": [
       "node"
@@ -9,10 +9,10 @@
   },
   "exclude": [
     "../src/test.ts",
-    "../**/*.spec.ts"
+    "../projects/**/*.spec.ts"
   ],
   "include": [
-    "../**/*.stories.*",
+    "../projects/**/*.stories.*",
     "./preview.ts"
   ],
   "files": [
