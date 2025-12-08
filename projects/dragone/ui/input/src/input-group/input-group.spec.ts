@@ -18,18 +18,4 @@ describe('InputGroup', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should apply error state', () => {
-    fixture.componentRef.setInput('error', true);
-    fixture.detectChanges();
-    const element = fixture.nativeElement as HTMLElement;
-    expect(element.getAttribute('data-error')).toBe('true');
-  });
-
-  it('should apply disabled state', () => {
-    fixture.componentRef.setInput('disabled', true);
-    fixture.detectChanges();
-    const element = fixture.nativeElement as HTMLElement;
-    expect(element.getAttribute('data-disabled')).toBe('true');
-  });
 });

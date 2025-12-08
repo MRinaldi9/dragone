@@ -26,9 +26,8 @@ describe('Breadcrumb', () => {
   it('should show empty message', () => {
     const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
     expect(breadcrumbItems.length).toBe(1);
-
-    const anchor = breadcrumbItems[0].query(By.css('a'));
-    expect(anchor.nativeElement.textContent).toBe('No breadcrumbs available');
+    const anchor = breadcrumbItems[0].query(By.css('button'));
+    expect(anchor.nativeElement.textContent.trim()).toBe('No breadcrumbs available');
   });
 
   it('should show normal breadcrumb items', async () => {

@@ -30,7 +30,7 @@ describe('Checkbox', () => {
     const changeFnSpy = vi.fn();
     component.registerOnChange(changeFnSpy);
 
-    fixture.debugElement.triggerEventHandler('click');
+    (fixture.nativeElement as HTMLElement).dispatchEvent(new Event('click'));
     expect(changeFnSpy).toHaveBeenCalledWith(true);
   });
 
