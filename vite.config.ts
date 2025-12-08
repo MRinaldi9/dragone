@@ -38,6 +38,7 @@ export default defineConfig(({ mode }) => {
         headless: isExtensionRunning,
         provider: playwright(),
         instances: [{ browser: 'chromium' }],
+        screenshotFailures: !isExtensionRunning,
       },
     },
     define: {
