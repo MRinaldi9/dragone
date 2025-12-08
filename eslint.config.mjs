@@ -1,19 +1,20 @@
-// @ts-check
-const eslint = require('@eslint/js');
-const tseslint = require('typescript-eslint');
-const angular = require('angular-eslint');
-const eslintConfig = require('eslint-config-prettier/flat');
+import eslint from '@eslint/js';
+import { configs as angularConfigs, processInlineTemplates } from 'angular-eslint';
+import eslintConfig from 'eslint-config-prettier/flat';
+import { configs as storybookEslint } from 'eslint-plugin-storybook';
+import { defineConfig } from 'eslint/config';
+import { configs as tsEslintConfig } from 'typescript-eslint';
 
-module.exports = tseslint.config(
+export default defineConfig(
   {
     files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
+      ...tsEslintConfig.recommended,
+      ...tsEslintConfig.stylistic,
+      ...angularConfigs.tsRecommended,
     ],
-    processor: angular.processInlineTemplates,
+    processor: processInlineTemplates,
     rules: {
       '@angular-eslint/sort-lifecycle-methods': 'error',
       '@angular-eslint/no-input-rename': 'off',
@@ -36,7 +37,7 @@ module.exports = tseslint.config(
   },
   {
     files: ['**/*.html'],
-    extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    extends: [...angularConfigs.templateRecommended, ...angularConfigs.templateAccessibility],
     rules: {
       '@angular-eslint/template/conditional-complexity': 'error',
       '@angular-eslint/template/cyclomatic-complexity': 'error',
@@ -51,5 +52,7 @@ module.exports = tseslint.config(
       '@angular-eslint/template/prefer-static-string-properties': 'error',
     },
   },
+  storybookEslint['flat/recommended'],
+  { ignores: ['!.storybook'] },
   eslintConfig,
 );
