@@ -10,6 +10,7 @@ type TooltipStory = TooltipTrigger & {
     | string
     | { title?: string; body?: string; action?: () => void; actionLabel?: string };
   darkMode: boolean;
+  tooltipDisabled?: boolean;
 };
 
 const meta: Meta<TooltipStory> = {
@@ -34,6 +35,7 @@ const meta: Meta<TooltipStory> = {
         },
       },
     },
+    tooltipDisabled: { control: 'boolean' },
   },
   render: args => ({
     props: args,
