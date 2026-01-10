@@ -1,9 +1,9 @@
+import '../projects/dragone/ui/src/main.css'
 import { applicationConfig, type Preview } from '@analogjs/storybook-angular';
-import { provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
-import fakeRoutes from '../projects/dragone/ui/breadcrumb/src/test.routes';
 import docJson from '../documentation.json';
+import fakeRoutes from '../projects/dragone/ui/breadcrumb/src/test.routes';
 setCompodocJson(docJson);
 
 const preview: Preview = {
@@ -29,7 +29,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    applicationConfig({ providers: [provideRouter(fakeRoutes), provideZonelessChangeDetection()] }),
+    applicationConfig({ providers: [provideRouter(fakeRoutes)] }),
     (storyFn, { args }) => {
       const story = storyFn();
 

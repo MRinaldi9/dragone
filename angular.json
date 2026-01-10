@@ -62,9 +62,6 @@
               "."
             ],
             "port": 6006,
-            "styles": [
-              "../projects/dragone/ui/src/main.css"
-            ],
             "experimentalZoneless": true
           }
         },
