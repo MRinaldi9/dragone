@@ -16,7 +16,7 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
   template: `
     <button
       ngpAccordionTrigger
-      drgn-button
+      drgnButton
       class="drgn-label-md-600"
       [variant]="variant()"
       [disabled]="isDisabled()"

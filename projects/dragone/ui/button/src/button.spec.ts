@@ -7,7 +7,7 @@ import { Button, ButtonSize, ButtonVariant } from './button';
   imports: [Button],
   template: `
     <button
-      drgn-button
+      drgnButton
       [variant]="variant()"
       [size]="size()"
       [icon]="isIconOnly()"
