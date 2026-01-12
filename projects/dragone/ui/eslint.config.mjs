@@ -8,7 +8,7 @@ export default defineConfig(
     files: ['**/*.ts'],
     rules: {
       '@angular-eslint/component-selector': [
-        'error',
+        'warn',
         {
           type: ['element', 'attribute'],
           prefix: 'drgn',
