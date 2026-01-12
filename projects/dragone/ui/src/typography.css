@@ -8,6 +8,16 @@
   margin: 0;
 }
 
+.drgn-h4-lg {
+  font-family: var(--typography-global-font-family-01);
+  font-size: var(--typography-global-font-size-08);
+  line-height: var(--typography-global-line-height-md);
+  font-weight: var(--typography-global-font-weight-700);
+  font-style: var(--typography-style-normal);
+  letter-spacing: 0;
+  margin: 0;
+}
+
 .drgn-label-md-700 {
   font-family: var(--typography-global-font-family-01);
   font-size: var(--typography-global-font-size-04);
@@ -36,6 +46,15 @@
   font-style: var(--typography-style-normal);
   letter-spacing: 0;
   margin: 0;
+}
+
+.drgn-p-lg-01 {
+  font-family: var(--typography-global-font-family-01);
+  font-size: var(--typography-global-font-size-05);
+  line-height: var(--typography-global-line-height-md);
+  font-weight: var(--typography-global-font-weight-400);
+  font-style: var(--typography-style-normal);
+  letter-spacing: 0;
 }
 
 .drgn-label-md-400 {
