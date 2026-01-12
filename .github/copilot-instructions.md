@@ -41,7 +41,7 @@ ng g c <name> --project=@dragone/ui --flat --path projects/dragone/ui/<name>/src
 
 ```typescript
 @Component({
-  selector: 'button[drgn-button]',  // Usa prefisso drgn (angular.json)
+  selector: 'button[drgnButton]',  // Usa prefisso drgn (angular.json)
   template: `...`,                   // Inline se <15 righe
   styleUrl: './button.css',
   changeDetection: ChangeDetectionStrategy.OnPush,  // Default OnPush
