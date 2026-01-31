@@ -1,11 +1,9 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { fn } from 'storybook/test';
 import { Alert } from './alert';
 
 type AlertStory = Alert & {
   darkMode: boolean;
-  title: string;
-  message: string;
-  closeable: boolean;
 };
 
 const meta: Meta<AlertStory> = {
@@ -15,7 +13,8 @@ const meta: Meta<AlertStory> = {
   args: {
     alertTheme: 'light',
     aspect: 'desktop',
-    title: 'This is an alert title',
+    alertType: 'info',
+    ctaClick: fn(),
   },
   argTypes: {
     title: {
@@ -35,6 +34,21 @@ const meta: Meta<AlertStory> = {
         defaultValue: { summary: 'light' },
       },
     },
+    alertType: {
+      options: ['info', 'success', 'warning', 'error'],
+      control: { type: 'select' },
+      table: {
+        defaultValue: { summary: 'info' },
+      },
+    },
+    ctaText: {
+      control: 'text',
+    },
+    ctaClick: {
+      if: { arg: 'ctaText', truthy: true },
+      type: 'function',
+      control: false,
+    },
   },
 };
 
@@ -42,7 +56,10 @@ export default meta;
 type Story = StoryObj<AlertStory>;
 
 export const Info: Story = {
-  args: {},
+  args: {
+    title: 'This is an alert title',
+    ctaText: 'CTA',
+  },
   render: args => ({
     props: args,
     template: `
