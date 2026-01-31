@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { Button } from '@dragone/ui/button';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { NgIcon } from '@ng-icons/core';
 import {
   faSolidCircleCheck,
   faSolidCircleExclamation,
@@ -21,27 +21,19 @@ const TYPE_TO_ICON = {
   selector: 'drgn-alert',
   imports: [NgIcon, Button],
   template: `
-    <ng-icon size="24" class="alert-icon" [svg]="alertType()" />
+    <ng-icon size="24" class="alert-icon" data-testid="alert-icon" [svg]="alertType()" />
     <h4 class="drgn-h4-lg alert-title">{{ title() }}</h4>
 
     <div class="drgn-p-lg-01 alert-body">
       <ng-content />
     </div>
     @if (ctaText()) {
-      <button drgnButton variant="tertiary" class="alert-action" (click)="ctaClick.emit()">
+      <button drgnButton variant="tertiary" class="alert-action" (click)="ctaClick.emit($event)">
         {{ ctaText() }}
       </button>
     }
   `,
   styleUrl: './alert.css',
-  providers: [
-    provideIcons({
-      faSolidCircleInfo,
-      faSolidCircleCheck,
-      faSolidCircleExclamation,
-      faSolidTriangleExclamation,
-    }),
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'alert',
@@ -73,5 +65,5 @@ export class Alert {
    * Optional call to action text for the alert.
    */
   readonly ctaText = input<string>();
-  readonly ctaClick = output<void>();
+  readonly ctaClick = output<PointerEvent>();
 }
