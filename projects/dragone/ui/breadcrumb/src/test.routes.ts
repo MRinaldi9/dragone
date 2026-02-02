@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/prefer-on-push-component-change-detection */
 import { Component } from '@angular/core';
 import { RouterOutlet, Routes } from '@angular/router';
 

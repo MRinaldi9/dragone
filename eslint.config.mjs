@@ -1,6 +1,6 @@
-import eslint from '@eslint/js';
 import { configs as angularConfigs, processInlineTemplates } from 'angular-eslint';
 import eslintConfig from 'eslint-config-prettier/flat';
+import oxlint from 'eslint-plugin-oxlint';
 import { configs as storybookEslint } from 'eslint-plugin-storybook';
 import { defineConfig } from 'eslint/config';
 import { configs as tsEslintConfig } from 'typescript-eslint';
@@ -8,32 +8,9 @@ import { configs as tsEslintConfig } from 'typescript-eslint';
 export default defineConfig(
   {
     files: ['**/*.ts'],
-    extends: [
-      eslint.configs.recommended,
-      ...tsEslintConfig.recommended,
-      ...tsEslintConfig.stylistic,
-      ...angularConfigs.tsRecommended,
-    ],
+    extends: [...tsEslintConfig.recommended],
     processor: processInlineTemplates,
-    rules: {
-      '@angular-eslint/sort-lifecycle-methods': 'error',
-      '@angular-eslint/no-input-rename': 'off',
-      '@angular-eslint/prefer-on-push-component-change-detection': 'error',
-      '@angular-eslint/sort-keys-in-type-decorator': 'error',
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          args: 'all',
-          argsIgnorePattern: '^_',
-          caughtErrors: 'all',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
-    },
+    rules: {},
   },
   {
     files: ['**/*.html'],
@@ -52,7 +29,8 @@ export default defineConfig(
       '@angular-eslint/template/prefer-static-string-properties': 'error',
     },
   },
+  { ignores: ['!.storybook', 'coverage/**', 'node_modules/**', 'dist/**'] },
   storybookEslint['flat/recommended'],
-  { ignores: ['!.storybook'] },
   eslintConfig,
+  oxlint.configs['flat/recommended'],
 );
