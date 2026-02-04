@@ -18,8 +18,7 @@
     "format": "prettier -w \"**/*.{ts,js,css,scss,html}\"",
     "commit": "cz",
     "storybook": "ng run @dragone/ui:storybook",
-    "build-storybook": "ng run @dragone/ui:build-storybook",
-    "postinstall": "pnpx playwright install"
+    "build-storybook": "ng run @dragone/ui:build-storybook"
   },
   "dependencies": {
     "@angular/cdk": "^21.1.1",
