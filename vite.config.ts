@@ -6,8 +6,8 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 import { coverageConfigDefaults, defaultExclude } from 'vitest/config';
 
 export default defineConfig(({ mode }) => {
-  const isExtensionRunning = process.env['VITEST_VSCODE'] === 'true';
-
+  const isHeadless =
+    process.env['VITEST_VSCODE'] === 'true' || process.env['CI'] === 'true';
   return {
     root: './projects/dragone/ui',
     plugins: [angular(), viteTsconfigPaths()],
@@ -35,10 +35,10 @@ export default defineConfig(({ mode }) => {
       },
       browser: {
         enabled: true,
-        headless: isExtensionRunning,
+        headless: isHeadless,
         provider: playwright(),
         instances: [{ browser: 'chromium' }],
-        screenshotFailures: !isExtensionRunning,
+        screenshotFailures: !isHeadless,
       },
     },
     define: {
