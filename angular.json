@@ -21,7 +21,7 @@
     "@dragone/ui": {
       "projectType": "library",
       "root": "projects/dragone/ui",
-      "sourceRoot": "projects/dragone/ui/src",
+      "sourceRoot": "projects/dragone/ui",
       "prefix": "drgn",
       "architect": {
         "build": {

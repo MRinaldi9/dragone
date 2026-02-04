@@ -3,14 +3,14 @@
   "extends": [
     "../../../.oxlintrc.json"
   ],
-  "plugins": [
-    "vitest"
-  ],
   "overrides": [
     {
       "files": [
         "**/*.test.ts",
         "**/*.spec.ts"
+      ],
+      "plugins": [
+        "vitest"
       ],
       "rules": {
         "vitest/no-disabled-tests": "error",
