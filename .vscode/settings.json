@@ -3,5 +3,11 @@
     {
       "file": ".github/commit-message-instructions.md"
     }
-  ]
+  ],
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
