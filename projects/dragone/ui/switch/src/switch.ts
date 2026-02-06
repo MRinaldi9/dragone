@@ -7,7 +7,9 @@ import { ChangeFn, provideValueAccessor, TouchedFn } from 'ng-primitives/utils';
 @Component({
   selector: 'drgn-switch',
   imports: [NgpSwitchThumb],
-  template: ` <span ngpSwitchThumb></span> `,
+  template: `
+    <span ngpSwitchThumb></span>
+  `,
   styleUrl: './switch.css',
   providers: [provideValueAccessor(Switch)],
   changeDetection: ChangeDetectionStrategy.OnPush,

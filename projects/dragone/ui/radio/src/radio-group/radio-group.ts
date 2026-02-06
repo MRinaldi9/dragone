@@ -6,7 +6,9 @@ import { ChangeFn, provideValueAccessor, TouchedFn } from 'ng-primitives/utils';
 @Component({
   selector: 'drgn-radio-group',
   imports: [],
-  template: `<ng-content />`,
+  template: `
+    <ng-content />
+  `,
   styleUrl: './radio-group.css',
   providers: [provideValueAccessor(RadioGroup)],
   changeDetection: ChangeDetectionStrategy.OnPush,

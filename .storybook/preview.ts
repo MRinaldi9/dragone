@@ -1,4 +1,4 @@
-import '../projects/dragone/ui/src/main.css'
+import '../projects/dragone/ui/src/main.css';
 import { applicationConfig, type Preview } from '@analogjs/storybook-angular';
 import { provideRouter } from '@angular/router';
 import { setCompodocJson } from '@storybook/addon-docs/angular';

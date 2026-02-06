@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet, Routes } from '@angular/router';
 
 @Component({
-  template: `<h1>Home</h1>`,
+  template: `
+    <h1>Home</h1>
+  `,
 })
 class Home {}
 
@@ -16,7 +18,9 @@ class Home {}
 class Category {}
 
 @Component({
-  template: `<h1>Subcategory Page</h1>`,
+  template: `
+    <h1>Subcategory Page</h1>
+  `,
 })
 class Subcategory {}
 
