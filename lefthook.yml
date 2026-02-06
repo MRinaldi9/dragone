@@ -17,10 +17,10 @@ pre-commit:
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: ESLint Dragone
-      run: pnpx eslint --fix -c projects/dragone/ui/eslint.config.js {staged_files}
+      run: pnpx eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: Format Dragone UI staged files
-      run: pnpx oxlint {staged_files}
+      run: pnpx oxfmt {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
