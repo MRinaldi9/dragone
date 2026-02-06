@@ -2,12 +2,6 @@
   "name": "dragone",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.28.2",
-  "engines": {
-    "npm": "Please use pnpm instead of NPM to install dependencies",
-    "yarn": "Please use pnpm instead of Yarn to install dependencies",
-    "pnpm": "10.28.2"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -69,10 +63,9 @@
     "eslint-plugin-storybook": "10.2.1",
     "lefthook": "^2.0.16",
     "ng-packagr": "^21.1.0",
+    "oxfmt": "^0.28.0",
     "oxlint": "^1.43.0",
     "playwright": "^1.58.0",
-    "prettier": "^3.8.1",
-    "prettier-plugin-organize-imports": "^4.3.0",
     "storybook": "10.2.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "8.54.0",
@@ -85,21 +78,10 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "arrowParens": "avoid",
-    "experimentalTernaries": true,
-    "plugins": [
-      "prettier-plugin-organize-imports"
-    ],
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  }
+  "engines": {
+    "npm": "Please use pnpm instead of NPM to install dependencies",
+    "pnpm": "10.28.2",
+    "yarn": "Please use pnpm instead of Yarn to install dependencies"
+  },
+  "packageManager": "pnpm@10.28.2"
 }
