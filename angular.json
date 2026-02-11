@@ -14,6 +14,9 @@
     },
     "@schematics/angular:directive": {
       "path": "projects/dragone/ui"
+    },
+    "@schematics/angular:pipe": {
+      "path": "projects/dragone/ui"
     }
   },
   "newProjectRoot": "projects",
