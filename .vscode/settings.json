@@ -9,5 +9,7 @@
   "editor.formatOnSave": true,
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  },
+  "oxc.enable.oxlint": true,
+  "oxc.enable.oxfmt": true
 }
