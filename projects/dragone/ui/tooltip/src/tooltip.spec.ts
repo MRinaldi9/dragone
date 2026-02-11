@@ -40,7 +40,14 @@ describe('Tooltip', () => {
       .query(By.directive(TooltipTrigger))
       .injector.get(TooltipTrigger);
   });
-
+  it('should not display the tooltip on hover', async () => {
+    component.tooltipDisabled.set(true);
+    await fixture.whenStable();
+    await userEvent.hover(btnToHover);
+    const tooltip = await page.getByRole('tooltip');
+    expect(tooltip).not.toBeInTheDocument();
+    expect(tooltipTriggerDirective['stateTooltip']().context()).toBe('This is a helpful tooltip');
+  });
   it('should display the tooltip on hover', async () => {
     await userEvent.hover(btnToHover);
     const tooltip = await page.getByRole('tooltip');
@@ -50,14 +57,7 @@ describe('Tooltip', () => {
     expect(tooltipTriggerDirective['stateTooltip']().context()).toBe('This is a helpful tooltip');
     expect(tooltipInstance['bodyTooltip']()).toBeUndefined();
   });
-  it('should not display the tooltip on hover', async () => {
-    component.tooltipDisabled.set(true);
-    await fixture.whenStable();
-    await userEvent.hover(btnToHover);
-    const tooltip = await page.getByRole('tooltip');
-    expect(tooltip).not.toBeInTheDocument();
-    expect(tooltipTriggerDirective['stateTooltip']().context()).toBe('This is a helpful tooltip');
-  });
+
   it('should show title and body', async () => {
     component.tooltipContent.set({ title: 'Tooltip Title', body: 'Tooltip Body' });
     await fixture.whenStable();

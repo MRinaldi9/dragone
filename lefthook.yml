@@ -13,14 +13,14 @@ pre-commit:
   parallel: true
   jobs:
     - name: Oxlint Dragone UI staged files
-      run: pnpx oxlint --fix {staged_files}
+      run: pnpm run lint:oxlint {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: ESLint Dragone
-      run: pnpx eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
+      run: pnpm run lint:eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: Format Dragone UI staged files
-      run: pnpx oxfmt {staged_files}
+      run: pnpm run format {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
