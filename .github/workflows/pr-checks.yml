@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lint-eslint:
+  Eslint-Template-Angular:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -30,7 +30,7 @@ jobs:
       - name: Run ESLint
         run: pnpm lint:eslint
 
-  lint-oxlint:
+  Oxlint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -51,7 +51,7 @@ jobs:
       - name: Run Oxlint
         run: pnpm lint:oxlint --format=github
 
-  oxlint-check:
+  Oxfmt-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -72,7 +72,7 @@ jobs:
       - name: Run Oxfmt check
         run: pnpm format:check
 
-  test:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

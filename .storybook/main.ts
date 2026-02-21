@@ -8,8 +8,8 @@ const config: StorybookConfig = {
     name: '@analogjs/storybook-angular',
     options: {},
   },
-  async viteFinal(config) {
-    return mergeConfig(config, {
+  async viteFinal(viteConfig) {
+    return mergeConfig(viteConfig, {
       plugins: [viteTsconfigPaths()],
     });
   },

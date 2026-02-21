@@ -52,9 +52,10 @@ export class Breadcrumb {
   constructor() {
     afterRenderEffect(() => {
       const { isCollapsed, list } = untracked(() => {
-        const isCollapsed = this.showEllipsis();
-        const list = this.breadcrumbListElement()?.nativeElement;
-        return { isCollapsed, list };
+        return {
+          isCollapsed: this.showEllipsis(),
+          list: this.breadcrumbListElement()?.nativeElement,
+        };
       });
       const { width: hostWidth } = this.hostDimensions();
 
