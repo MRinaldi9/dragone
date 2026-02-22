@@ -1,10 +1,8 @@
- 
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
- 
 import { ListenerOptions } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EventManager, EventManagerPlugin } from '@angular/platform-browser';
 import { provideEventsPlugin } from './provider';
+import { noop } from 'rxjs';
 
 class MockPlugin extends EventManagerPlugin {
   override supports(eventName: string): boolean {
@@ -13,16 +11,16 @@ class MockPlugin extends EventManagerPlugin {
   override addEventListener(
     element: HTMLElement,
     eventName: string,
-    handler: Function,
+    handler: VoidFunction,
     options?: ListenerOptions,
-  ): Function {
-    return () => {};
+  ): VoidFunction {
+    return noop;
   }
 }
 
 describe('provideEventsPlugin', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       providers: [provideEventsPlugin(MockPlugin)],
     });
   });
