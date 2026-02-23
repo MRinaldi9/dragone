@@ -38,9 +38,6 @@ importers:
       '@ng-icons/font-awesome':
         specifier: ^33.1.0
         version: 33.1.0
-      '@ng-icons/mynaui':
-        specifier: ^33.1.0
-        version: 33.1.0
       ng-primitives:
         specifier: 0.109.4
         version: 0.109.4(9acd067f056d954ee1034e69f1255ba3)
@@ -2083,9 +2080,6 @@ packages:
 
   '@ng-icons/font-awesome@33.1.0':
     resolution: {integrity: sha512-6eaW1Vd91KoCrISKtz3KMnbO3J5ui7MWguOPURFhNWLmzcrPEtfi5IyvZNS02VIxU6+is+QZE8LY8tDiVcrCoA==}
-
-  '@ng-icons/mynaui@33.1.0':
-    resolution: {integrity: sha512-mKi+f9n4HgcO4Kx31slDY1npUjuR3kxN5ss+eimpP5uOy1lzwzh2lD1sV9mlu6vlyTknXzbZ55c8QcJ/TkFO4g==}
 
   '@ngtools/webpack@21.1.4':
     resolution: {integrity: sha512-CgKnMofIVGTwNPqFNZmkmr2aLOFUG/AKm8lauXU+juwSaY7Z28eguFd+J42uVUOnasLxINQY9y7kr9f6deTrcg==}
@@ -9973,10 +9967,6 @@ snapshots:
       tslib: 2.8.1
 
   '@ng-icons/font-awesome@33.1.0':
-    dependencies:
-      tslib: 2.8.1
-
-  '@ng-icons/mynaui@33.1.0':
     dependencies:
       tslib: 2.8.1
 

@@ -29,7 +29,6 @@
     "@floating-ui/dom": "^1.7.5",
     "@ng-icons/core": "^33.1.0",
     "@ng-icons/font-awesome": "^33.1.0",
-    "@ng-icons/mynaui": "^33.1.0",
     "ng-primitives": "0.109.4",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1"
