@@ -5,8 +5,7 @@ import { uniqueId } from 'ng-primitives/utils';
 export type InputValidity = 'valid' | 'invalid' | 'warning';
 
 @Component({
-  selector: 'input[drgn-input-text],input[drgn-input="text"]',
-  imports: [],
+  selector: 'input[drgnInputText],input[drgn-input-text]',
   template: ``,
   styleUrl: './input-text.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

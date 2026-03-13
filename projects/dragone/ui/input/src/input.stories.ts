@@ -49,7 +49,7 @@ export const Default: Story = {
   render: args => ({
     props: args,
     template: `
-      <input drgn-input="text" ${argsToTemplate(args)}/>
+      <input drgnInputText ${argsToTemplate(args)}/>
     `,
   }),
 };
