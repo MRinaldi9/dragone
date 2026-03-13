@@ -6,7 +6,7 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger';
 
 @Component({
-  selector: 'button[drgnButton]',
+  selector: 'button[drgnButton],button[drgn-button]',
   template: `
     <ng-content select="[slot='leading']" />
     <ng-content />
