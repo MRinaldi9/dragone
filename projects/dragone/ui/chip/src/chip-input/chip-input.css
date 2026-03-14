@@ -1,0 +1,61 @@
+:host {
+  display: block flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 3px;
+  padding-left: 13px;
+  color: white;
+  border-radius: 100px;
+  background-color: var(--interactive-secondary-default);
+  &:hover {
+    background-color: var(--interactive-secondary-hover);
+    & .close-button {
+      background-color: var(--interactive-primary-hover);
+    }
+  }
+  &[data-focus-visible='keyboard'] {
+    outline: none;
+    box-shadow:
+      0 0 0 3px var(--color-global-primary-000),
+      0 0 0 5px var(--interactive-primary-default);
+    background-color: var(--interactive-secondary-hover);
+    & .close-button {
+      background-color: var(--interactive-primary-hover);
+    }
+  }
+  &:not([data-disabled]):has(.close-button:active) {
+    background-color: var(--interactive-secondary-pressed);
+  }
+  &[data-disabled] {
+    background-color: var(--bg-disabled);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+    & .close-button {
+      background-color: var(--bg-disabled);
+      border-color: transparent;
+      color: var(--text-disabled);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding-inline: 0;
+  line-height: 0;
+  background-color: var(--interactive-primary-default);
+  color: white;
+  border: 1px solid var(--color-global-mid-primary-70);
+  cursor: pointer;
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--interactive-primary-default);
+    background-color: var(--interactive-primary-hover);
+  }
+  &:not(:disabled):active {
+    background-color: var(--interactive-primary-pressed);
+  }
+}
