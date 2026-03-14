@@ -29,7 +29,7 @@ const meta: Meta<ChipInput> = {
     disabled: {
       control: 'boolean',
       description: 'Disabilita la chip, rendendola non interattiva.',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: false } },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
   },
   render: args => ({
