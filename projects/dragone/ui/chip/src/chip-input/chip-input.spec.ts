@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChipInput } from './chip-input';
+import { inputBinding, signal } from '@angular/core';
 
 describe('ChipInput', () => {
   let component: ChipInput;
   let fixture: ComponentFixture<ChipInput>;
-
+  const label = signal('Test Chip');
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ChipInput],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChipInput);
+    fixture = TestBed.createComponent(ChipInput, { bindings: [inputBinding('label', label)] });
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
