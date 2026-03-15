@@ -1,5 +1,34 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "sortImports": {
+    "order": "asc",
+    "groups": [
+      [
+        "side_effect",
+        "side_effect_style"
+      ],
+      "builtin",
+      "external",
+      [
+        "internal",
+        "subpath"
+      ],
+      [
+        "parent",
+        "sibling",
+        "index"
+      ],
+      "style",
+      "unknown"
+    ],
+    "newlinesBetween": true,
+    "partitionByComment": false,
+    "partitionByNewline": false,
+    "sortSideEffects": false,
+    "internalPattern": [
+      "@dragone/"
+    ]
+  },
   "printWidth": 100,
   "singleQuote": true,
   "arrowParens": "avoid",

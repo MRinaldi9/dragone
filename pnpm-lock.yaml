@@ -39,7 +39,7 @@ importers:
         specifier: ^33.1.0
         version: 33.1.0
       ng-primitives:
-        specifier: 0.111.1
+        specifier: ^0.111.1
         version: 0.111.1(062d50bbe1affbacf9d113e4c66960d3)
       rxjs:
         specifier: ~7.8.2
@@ -123,12 +123,6 @@ importers:
       eslint:
         specifier: ^10.0.3
         version: 10.0.3(jiti@2.5.1)
-      eslint-config-prettier:
-        specifier: ^10.1.8
-        version: 10.1.8(eslint@10.0.3(jiti@2.5.1))
-      eslint-plugin-oxlint:
-        specifier: ^1.55.0
-        version: 1.55.0
       eslint-plugin-storybook:
         specifier: 10.2.19
         version: 10.2.19(eslint@10.0.3(jiti@2.5.1))(storybook@10.2.19(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3)
@@ -4506,15 +4500,6 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
-
-  eslint-config-prettier@10.1.8:
-    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
-    hasBin: true
-    peerDependencies:
-      eslint: '>=7.0.0'
-
-  eslint-plugin-oxlint@1.55.0:
-    resolution: {integrity: sha512-5ng7DOuikSE64e7hX2HBqEWdmql+Q4FWppBoBkxKKflLt1j9LXhab5BN3bYJKyrAihuK1/VH2JvfNefeOZAqpA==}
 
   eslint-plugin-storybook@10.2.19:
     resolution: {integrity: sha512-JwwNgG24mkwwiJp/VIwUuJ9QIXoeCZteSZ7PEpb8DUhKpzCrNxJOeg7i5ep6yLexWAVjfFLG4OnFeV8cVS2PAg==}
@@ -11048,8 +11033,8 @@ snapshots:
 
   '@testing-library/dom@10.4.1':
     dependencies:
-      '@babel/code-frame': 7.28.6
-      '@babel/runtime': 7.28.4
+      '@babel/code-frame': 7.29.0
+      '@babel/runtime': 7.28.6
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       dom-accessibility-api: 0.5.16
@@ -12772,14 +12757,6 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-prettier@10.1.8(eslint@10.0.3(jiti@2.5.1)):
-    dependencies:
-      eslint: 10.0.3(jiti@2.5.1)
-
-  eslint-plugin-oxlint@1.55.0:
-    dependencies:
-      jsonc-parser: 3.3.1
-
   eslint-plugin-storybook@10.2.19(eslint@10.0.3(jiti@2.5.1))(storybook@10.2.19(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/utils': 8.56.0(eslint@10.0.3(jiti@2.5.1))(typescript@5.9.3)
@@ -13700,7 +13677,7 @@ snapshots:
       whatwg-encoding: 3.1.1
       whatwg-mimetype: 4.0.0
       whatwg-url: 15.1.0
-      ws: 8.18.3
+      ws: 8.19.0
       xml-name-validator: 5.0.0
     transitivePeerDependencies:
       - bufferutil
