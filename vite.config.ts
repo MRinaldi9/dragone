@@ -41,6 +41,7 @@ export default defineConfig(({ mode }) => {
         provider: playwright(),
         instances: [{ browser: 'chromium' }],
         screenshotFailures: !isHeadless,
+        viewport: { width: 1920, height: 1080 },
       },
     },
     define: {
