@@ -1,13 +1,12 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { type Meta, type StoryObj, argsToTemplate } from '@analogjs/storybook-angular';
 import { expect, fn, userEvent, within } from 'storybook/test';
+
 import { Checkbox } from './checkbox';
 
-type CheckboxArgs = {
-  checked: boolean;
-  disabled: boolean;
+type CheckboxArgs = Checkbox & {
   darkMode: boolean;
   checkedChange: (checked: boolean) => void;
-  indeterminateChange: (indeterminate: boolean) => void;
+  readonly: boolean;
 };
 
 const meta: Meta<CheckboxArgs> = {
@@ -36,6 +35,23 @@ const meta: Meta<CheckboxArgs> = {
       description: 'Evento emesso quando lo stato checked cambia',
       table: {
         type: { summary: 'EventEmitter<boolean>' },
+      },
+    },
+    hidden: {
+      control: 'boolean',
+      description: 'Nasconde il checkbox quando impostato a true',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    readonly: {
+      control: 'boolean',
+      description:
+        "Rende il checkbox di sola lettura, impedendo modifiche ma mantenendo l'interattività visiva",
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
   },

@@ -26,10 +26,13 @@
   }
   &[data-disabled],
   &:disabled {
-    cursor: not-allowed;
     background-color: var(--bg-disabled);
     border-color: var(--bg-disabled);
     color: var(--text-disabled);
+    pointer-events: none;
+  }
+  &[hidden] {
+    display: none;
   }
 }
 

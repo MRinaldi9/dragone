@@ -1,54 +1,57 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  model,
+  output,
+} from '@angular/core';
+import { type FormCheckboxControl } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidMinus } from '@ng-icons/font-awesome/solid';
 import { injectCheckboxState, NgpCheckbox } from 'ng-primitives/checkbox';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
-import { ChangeFn, provideValueAccessor, TouchedFn } from 'ng-primitives/utils';
 
 @Component({
   selector: 'drgn-checkbox',
   imports: [NgIcon],
   template: `
-    @if (internalState().checked()) {
+    @if (checked()) {
       <ng-icon name="faSolidCheck" />
     }
   `,
   styleUrl: './checkbox.css',
-  providers: [provideValueAccessor(Checkbox), provideIcons({ faSolidCheck, faSolidMinus })],
+  providers: [provideIcons({ faSolidCheck, faSolidMinus })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '(blur)': 'touchedFn?.()',
+    '(blur)': 'touched.emit(true)',
+    '(click)': 'toggle()',
+    '[hidden]': 'hidden()',
+    '[attr.readonly]': 'rdl() ? "" : null',
+    '[attr.name]': 'name() ? name() : null',
   },
   hostDirectives: [
     NgpFocusVisible,
     {
       directive: NgpCheckbox,
-      inputs: ['ngpCheckboxChecked: checked', 'ngpCheckboxDisabled: disabled'],
-      outputs: ['ngpCheckboxCheckedChange: checkedChange'],
+      inputs: ['ngpCheckboxChecked:checked', 'ngpCheckboxDisabled:disabled'],
     },
   ],
 })
-export class Checkbox implements ControlValueAccessor {
-  protected readonly internalState = injectCheckboxState();
+export class Checkbox implements FormCheckboxControl {
+  readonly #internalState = injectCheckboxState();
+  readonly checked = model<boolean>(false);
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly hidden = input(false, { transform: booleanAttribute });
+  readonly touched = output<boolean>();
+  readonly rdl = input(false, { transform: booleanAttribute, alias: 'readonly' });
+  readonly name = input<string>('');
 
-  private changeFn: ChangeFn<boolean> | undefined;
-  protected touchedFn: TouchedFn | undefined;
-
-  constructor() {
-    this.internalState().checkedChange.subscribe(checked => this.changeFn?.(checked));
-  }
-
-  writeValue(checked: boolean): void {
-    this.internalState().setChecked(checked);
-  }
-  registerOnChange(fn: ChangeFn<boolean>): void {
-    this.changeFn = fn;
-  }
-  registerOnTouched(fn: TouchedFn): void {
-    this.touchedFn = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.internalState().setDisabled(isDisabled);
+  protected toggle() {
+    if (this.rdl()) {
+      this.#internalState().setChecked(this.checked());
+      return;
+    }
+    this.checked.update(v => !v);
   }
 }
