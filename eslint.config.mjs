@@ -7,7 +7,9 @@ export default defineConfig(
     extends: [...tsEslintConfig.recommended],
     files: ['**/*.ts'],
     processor: processInlineTemplates,
-    rules: {},
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off'
+    },
   },
   {
     extends: [...angularConfigs.templateRecommended, ...angularConfigs.templateAccessibility],
