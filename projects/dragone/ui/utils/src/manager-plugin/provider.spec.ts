@@ -1,24 +1,19 @@
-import { ListenerOptions } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EventManager, EventManagerPlugin } from '@angular/platform-browser';
-import { provideEventsPlugin } from './provider';
 import { noop } from 'rxjs';
+
+import { provideEventsPlugin } from './provider';
 
 class MockPlugin extends EventManagerPlugin {
   override supports(eventName: string): boolean {
     return eventName.includes('mock');
   }
-  override addEventListener(
-    element: HTMLElement,
-    eventName: string,
-    handler: VoidFunction,
-    options?: ListenerOptions,
-  ): VoidFunction {
+  override addEventListener(): VoidFunction {
     return noop;
   }
 }
 
-describe('provideEventsPlugin', () => {
+describe(provideEventsPlugin, () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideEventsPlugin(MockPlugin)],

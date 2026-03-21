@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { inputBinding, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
+
 import { StatusTag, Tag } from './tag';
 
-describe('Tag', () => {
+describe(Tag, () => {
   let component: Tag;
   let fixture: ComponentFixture<Tag>;
   let componentLocator: ReturnType<typeof page.elementLocator>;

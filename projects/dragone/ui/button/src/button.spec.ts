@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inputBinding, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
+
 import { Button, ButtonSize, ButtonVariant } from './button';
 
 @Component({
@@ -25,7 +26,7 @@ class TestHostComponent {
   isDisabled = signal(false);
 }
 
-describe(Button.name, () => {
+describe(Button, () => {
   let component: Button;
   let fixture: ComponentFixture<Button>;
   const size = signal<ButtonSize>('large');

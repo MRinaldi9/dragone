@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Mock } from 'vitest';
 import { Locator, page, userEvent } from 'vitest/browser';
+
 import { TooltipTrigger } from './tooltip-trigger/tooltip-trigger';
 import { Tooltip, TooltipContext } from './tooltip/tooltip';
 
@@ -21,7 +21,7 @@ class TestHostComponent {
   tooltipDisabled = signal(false);
 }
 
-describe('Tooltip', () => {
+describe(Tooltip, () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
   let btnToHover: Locator;
@@ -35,7 +35,7 @@ describe('Tooltip', () => {
     component = fixture.componentInstance;
 
     await fixture.whenStable();
-    btnToHover = await page.getByRole('button', { name: 'Hover me' });
+    btnToHover = page.getByRole('button', { name: 'Hover me' });
     tooltipTriggerDirective = fixture.debugElement
       .query(By.directive(TooltipTrigger))
       .injector.get(TooltipTrigger);
@@ -44,13 +44,13 @@ describe('Tooltip', () => {
     component.tooltipDisabled.set(true);
     await fixture.whenStable();
     await userEvent.hover(btnToHover);
-    const tooltip = await page.getByRole('tooltip');
+    const tooltip = page.getByRole('tooltip');
     expect(tooltip).not.toBeInTheDocument();
     expect(tooltipTriggerDirective['stateTooltip']().context()).toBe('This is a helpful tooltip');
   });
-  it('should display the tooltip on hover', async () => {
+  it('should display the tooltip on hover', { repeats: 3 }, async () => {
     await userEvent.hover(btnToHover);
-    const tooltip = await page.getByRole('tooltip');
+    const tooltip = page.getByRole('tooltip');
     const tooltipInstance = fixture.debugElement.query(By.directive(Tooltip)).injector.get(Tooltip);
     expect(tooltip).toBeInTheDocument();
     expect(tooltip).toHaveTextContent('This is a helpful tooltip');
