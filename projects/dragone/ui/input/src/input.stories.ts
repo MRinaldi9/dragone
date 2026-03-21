@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate } from '@storybook/angular';
+import { type Meta, type StoryObj, argsToTemplate } from '@analogjs/storybook-angular';
+
 import { InputText } from './input-text/input-text';
 
 type InputProps = HTMLInputElement & {
