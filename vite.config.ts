@@ -6,7 +6,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig(({ mode }) => {
-  console.log(process.env['CI']);
+  console.log(process.env['CI'] === 'true');
   const isHeadless = process.env['VITEST_VSCODE'] === 'true' || process.env['CI'] === 'true';
   return {
     root: './projects/dragone/ui',
