@@ -1,12 +1,8 @@
-import { Directive, input } from '@angular/core';
+import { Directive } from '@angular/core';
 import { NgpDescription } from 'ng-primitives/form-field';
-import { uniqueId } from 'ng-primitives/utils';
 
 @Directive({
   selector: '[drgnDescription]',
-  host: { '[id]': 'id()' },
-  hostDirectives: [NgpDescription],
+  hostDirectives: [{ directive: NgpDescription, inputs: ['id'] }],
 })
-export class Description {
-  readonly id = input(uniqueId('drgn-description'));
-}
+export class Description {}

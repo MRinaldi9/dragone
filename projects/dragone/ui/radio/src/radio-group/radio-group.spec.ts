@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RadioGroup } from './radio-group';
 
-describe('RadioGroup', () => {
+describe(RadioGroup, () => {
   let component: RadioGroup<unknown>;
   let fixture: ComponentFixture<RadioGroup<unknown>>;
 

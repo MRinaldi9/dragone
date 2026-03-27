@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { page, userEvent } from 'vitest/browser';
+
 import { ChipSelected } from './chip-selected';
 
-describe('ChipSelected', () => {
+describe(ChipSelected, () => {
   describe('Standalone behavior', () => {
     @Component({
       imports: [ChipSelected],
