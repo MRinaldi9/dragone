@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { inputBinding, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Locator, page } from 'vitest/browser';
+
 import { Select } from './select';
 
 type TestOption = {
@@ -9,7 +9,7 @@ type TestOption = {
   value: string;
 };
 
-describe('Select', () => {
+describe(Select, () => {
   let component: Select<TestOption>;
   let fixture: ComponentFixture<Select<TestOption>>;
   let componentLocator: Locator;

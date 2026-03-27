@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
+
 import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item/accordion-item';
 
@@ -26,7 +26,7 @@ class TestHostAccordion {
   disabledAccordionItem = signal(false);
 }
 
-describe('Accordion', () => {
+describe(Accordion, () => {
   let component: TestHostAccordion;
   let fixture: ComponentFixture<TestHostAccordion>;
 

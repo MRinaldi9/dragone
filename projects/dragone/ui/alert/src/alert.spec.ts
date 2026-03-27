@@ -1,13 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { inputBinding, outputBinding, signal } from '@angular/core';
-import { Locator, page } from 'vitest/browser';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { faSolidCircleCheck, faSolidCircleInfo } from '@ng-icons/font-awesome/solid';
+import { Locator, page } from 'vitest/browser';
+
 import { Alert } from './alert';
 
-describe('Alert', () => {
+describe(Alert, () => {
   let component: Alert;
   let fixture: ComponentFixture<Alert>;
   let locatorComponent: Locator;

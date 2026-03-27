@@ -39,7 +39,6 @@ export default defineConfig({
         'typescript/adjacent-overload-signatures': 'error',
         // Eslint
         'for-direction': 'error',
-        'init-declarations': ['error', 'never'],
         'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
         'no-array-constructor': 'error',
         'no-async-promise-executor': 'error',

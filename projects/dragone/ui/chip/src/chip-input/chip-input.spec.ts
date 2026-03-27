@@ -1,9 +1,9 @@
+import { inputBinding, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChipInput } from './chip-input';
-import { inputBinding, signal } from '@angular/core';
 
-describe('ChipInput', () => {
+describe(ChipInput, () => {
   let component: ChipInput;
   let fixture: ComponentFixture<ChipInput>;
   const label = signal('Test Chip');

@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { inputBinding, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+
 import { Breadcrumb } from './breadcrumb';
 import { BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
 
-describe('Breadcrumb', () => {
+describe(Breadcrumb, () => {
   let component: Breadcrumb;
   let fixture: ComponentFixture<Breadcrumb>;
   const breadcrumbs = signal<BreadcrumbProps[]>([]);
@@ -25,7 +25,7 @@ describe('Breadcrumb', () => {
 
   it('should show empty message', () => {
     const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
-    expect(breadcrumbItems.length).toBe(1);
+    expect(breadcrumbItems).toHaveLength(1);
     const anchor = breadcrumbItems[0].query(By.css('button'));
     expect(anchor.nativeElement.textContent.trim()).toBe('No breadcrumbs available');
   });
@@ -39,7 +39,7 @@ describe('Breadcrumb', () => {
     await fixture.whenStable();
 
     const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
-    expect(breadcrumbItems.length).toBe(3);
+    expect(breadcrumbItems).toHaveLength(3);
 
     const labels = breadcrumbItems.map(item =>
       item.query(By.css('a')).nativeElement.textContent.trim(),
@@ -60,7 +60,7 @@ describe('Breadcrumb', () => {
     await fixture.whenStable();
 
     const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
-    expect(breadcrumbItems.length).toBe(3);
+    expect(breadcrumbItems).toHaveLength(3);
     expect(component['firstItem']()).toEqual({ label: 'home', routerLink: '/' });
     expect(component['lastItem']()).toEqual({
       label: 'details',

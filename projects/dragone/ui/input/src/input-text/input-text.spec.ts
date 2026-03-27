@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputText } from './input-text';
 
-describe('InputText', () => {
+describe(InputText, () => {
   let component: InputText;
   let fixture: ComponentFixture<InputText>;
 
