@@ -1,0 +1,21 @@
+.field-container {
+  display: flex;
+  flex-direction: var(--direction);
+  gap: 4px;
+}
+
+:host([data-control-layout='horizontal']) {
+  & .control {
+    order: 1;
+  }
+  & .label {
+    order: 2;
+  }
+  & .description {
+    order: 3;
+  }
+}
+
+.error-message {
+  color: var(--color-global-semantic-alert-100);
+}
