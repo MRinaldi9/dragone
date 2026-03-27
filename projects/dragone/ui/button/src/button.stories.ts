@@ -7,6 +7,7 @@ import {
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowRight } from '@ng-icons/font-awesome/solid';
 import { expect, fn } from 'storybook/test';
+
 import { Button } from './button';
 
 type ButtonStory = Button & {

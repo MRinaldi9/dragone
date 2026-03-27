@@ -1,5 +1,6 @@
 import { Directive } from '@angular/core';
 import { injectTooltipTriggerState, NgpTooltipTrigger } from 'ng-primitives/tooltip';
+
 import { Tooltip } from '../tooltip/tooltip';
 
 @Directive({

@@ -71,6 +71,7 @@
     "*.config.mjs",
     "angular.json",
     "projects/**/*.json",
-    "tsconfig.node.json"
+    "tsconfig.node.json",
+    ".agents/*"
   ],
 }

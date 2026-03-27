@@ -1,7 +1,8 @@
 import { type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { fn } from 'storybook/test';
-import { ChipInput } from './chip-input';
 import { faSolidUser } from '@ng-icons/font-awesome/solid';
+import { fn } from 'storybook/test';
+
+import { ChipInput } from './chip-input';
 
 const meta: Meta<ChipInput> = {
   title: 'Dragone/UI/Chip/Input',

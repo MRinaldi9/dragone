@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
-import { Button } from '@dragone/ui/button';
 import { NgpTooltip, injectTooltipContext } from 'ng-primitives/tooltip';
+
+import { Button } from '@dragone/ui/button';
 
 export type TooltipContext =
   | string

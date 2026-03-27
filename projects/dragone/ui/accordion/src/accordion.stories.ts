@@ -5,6 +5,7 @@ import {
   type StoryObj,
 } from '@analogjs/storybook-angular';
 import { fn } from 'storybook/test';
+
 import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item/accordion-item';
 

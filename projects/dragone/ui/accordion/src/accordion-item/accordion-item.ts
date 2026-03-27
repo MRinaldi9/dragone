@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ButtonVariant } from '@dragone/ui/button';
 import { NgpAccordionContent, NgpAccordionItem } from 'ng-primitives/accordion';
+
+import { ButtonVariant } from '@dragone/ui/button';
+
 import { AccordionHeader, AriaLevel } from '../accordion-header/accordion-header';
 
 @Component({

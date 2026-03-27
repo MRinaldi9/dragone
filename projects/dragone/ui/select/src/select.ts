@@ -18,6 +18,7 @@ import {
   NgpSelectPortal,
 } from 'ng-primitives/select';
 import { ChangeFn, provideValueAccessor, TouchedFn, uniqueId } from 'ng-primitives/utils';
+
 import { OptionMapperPipe } from './utils/option-mapper-pipe';
 import { OptionSelectedPipe } from './utils/option-selected-pipe';
 

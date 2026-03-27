@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { Button } from '@dragone/ui/button';
 import { NgIcon } from '@ng-icons/core';
 import {
   faSolidCircleCheck,
@@ -7,6 +6,8 @@ import {
   faSolidCircleInfo,
   faSolidTriangleExclamation,
 } from '@ng-icons/font-awesome/solid';
+
+import { Button } from '@dragone/ui/button';
 
 export type AlertPolite = 'off' | 'polite' | 'assertive';
 
