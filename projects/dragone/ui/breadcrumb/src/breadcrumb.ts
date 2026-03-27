@@ -10,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { injectDimensions } from 'ng-primitives/internal';
+
 import { BreadcrumbItem, BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
 
 @Component({

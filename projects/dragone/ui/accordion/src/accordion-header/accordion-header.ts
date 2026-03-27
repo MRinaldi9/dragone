@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { Button, ButtonVariant } from '@dragone/ui/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
@@ -7,6 +6,8 @@ import {
   injectAccordionState,
   NgpAccordionTrigger,
 } from 'ng-primitives/accordion';
+
+import { Button, ButtonVariant } from '@dragone/ui/button';
 
 export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
 

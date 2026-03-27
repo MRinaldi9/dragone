@@ -1,4 +1,5 @@
 import { type Meta, type StoryObj } from '@analogjs/storybook-angular';
+
 import { Tag } from './tag';
 
 type TagStory = Tag & {

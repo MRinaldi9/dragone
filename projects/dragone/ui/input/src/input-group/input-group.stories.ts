@@ -12,6 +12,7 @@ import {
   faSolidUser,
   faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
+
 import { InputText } from '../input-text/input-text';
 import { InputGroup } from './input-group';
 

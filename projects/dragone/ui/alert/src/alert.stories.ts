@@ -1,5 +1,6 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
 import { fn } from 'storybook/test';
+
 import { Alert } from './alert';
 
 type AlertStory = Alert & {

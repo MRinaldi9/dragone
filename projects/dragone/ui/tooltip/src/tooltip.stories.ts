@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@analogjs/storybook-angular';
 import { argsToTemplate, moduleMetadata } from '@analogjs/storybook-angular';
 import { provideTooltipConfig } from 'ng-primitives/tooltip';
 import { expect, fn } from 'storybook/test';
+
 import { TooltipTrigger } from './tooltip-trigger/tooltip-trigger';
 import { Tooltip } from './tooltip/tooltip';
 

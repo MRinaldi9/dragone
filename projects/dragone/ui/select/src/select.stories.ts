@@ -1,6 +1,7 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { Select } from './select';
 import { fn } from 'storybook/test';
+
+import { Select } from './select';
 
 type SelectStory = Select<string | { label: string; value: string } | number> & {
   darkMode: boolean;
