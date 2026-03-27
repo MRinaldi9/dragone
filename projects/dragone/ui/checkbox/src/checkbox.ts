@@ -34,7 +34,7 @@ import { NgpFocusVisible } from 'ng-primitives/interactions';
     NgpFocusVisible,
     {
       directive: NgpCheckbox,
-      inputs: ['ngpCheckboxChecked:checked', 'ngpCheckboxDisabled:disabled'],
+      inputs: ['ngpCheckboxChecked:checked', 'ngpCheckboxDisabled:disabled', 'id'],
     },
   ],
 })
