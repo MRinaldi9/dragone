@@ -1,7 +1,7 @@
-.field-container {
-  display: flex;
-  flex-direction: var(--direction);
-  gap: 4px;
+:host {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
 }
 
 :host([data-control-layout='horizontal']) {
@@ -16,6 +16,59 @@
   }
 }
 
+.field-container {
+  display: flex;
+  flex-direction: var(--direction);
+  gap: 4px;
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-bottom: 4px;
+}
+
 .error-message {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   color: var(--color-global-semantic-alert-100);
+}
+
+.error-enter {
+  animation: error-in 180ms ease-out both;
+}
+
+.error-leave {
+  animation: error-out 140ms ease-in both;
+}
+
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-enter,
+  .error-leave {
+    animation: none;
+  }
 }
