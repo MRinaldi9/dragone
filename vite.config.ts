@@ -2,15 +2,17 @@
 import angular from '@analogjs/vite-plugin-angular';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
 import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig(({ mode }) => {
   const isHeadless = process.env['VITEST_VSCODE'] === 'true' || process.env['CI'] === 'true';
   return {
     root: './projects/dragone/ui',
-    plugins: [angular(), viteTsconfigPaths()],
+    plugins: [angular()],
     cacheDir: '../../../node_modules/.vite',
+    resolve: {
+      tsconfigPaths: true,
+    },
     test: {
       tags: [
         { name: 'unit', description: 'Unit tests' },

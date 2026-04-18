@@ -15,7 +15,7 @@ export default defineConfig({
     {
       files: ['**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)', '**/*.story.@(ts|tsx|js|jsx|mjs|cjs)'],
       jsPlugins: ['eslint-plugin-storybook'],
-      plugins: ['react'],
+      plugins: [],
       rules: {
         'import-x/no-anonymous-default-export': 'off',
         'react-hooks/rules-of-hooks': 'off',
