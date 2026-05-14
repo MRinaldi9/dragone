@@ -1,7 +1,7 @@
-onlyBuiltDependencies:
-  - '@compodoc/compodoc'
-  - '@parcel/watcher'
-  - esbuild
-  - lefthook
-  - lmdb
-  - msgpackr-extract
+allowBuilds:
+  '@compodoc/compodoc': true
+  '@parcel/watcher': true
+  esbuild: true
+  lefthook: true
+  lmdb: true
+  msgpackr-extract: true
