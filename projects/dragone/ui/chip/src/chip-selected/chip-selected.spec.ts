@@ -24,7 +24,7 @@ describe(ChipSelected, () => {
     class TestHostComponent {
       selected = signal(false);
       disabled = signal(false);
-      onChange = vi.fn();
+      onChange = vi.fn<() => void>();
     }
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
@@ -76,9 +76,7 @@ describe(ChipSelected, () => {
   describe('Forms integrations', () => {
     @Component({
       imports: [ChipSelected, ReactiveFormsModule],
-      template: `
-        <button drgn-chip-selected [formControl]="f">Test</button>
-      `,
+      template: ` <button drgn-chip-selected [formControl]="f">Test</button> `,
       changeDetection: ChangeDetectionStrategy.OnPush,
     })
     class TestHostFormComponent {

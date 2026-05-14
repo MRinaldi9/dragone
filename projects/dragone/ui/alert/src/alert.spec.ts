@@ -12,7 +12,7 @@ describe(Alert, () => {
   let locatorComponent: Locator;
   const alertType = signal<'info' | 'success' | 'warning' | 'error'>('info');
   const ctaText = signal('');
-  const ctaMock = vi.fn();
+  const ctaMock = vi.fn<() => void>();
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Alert],

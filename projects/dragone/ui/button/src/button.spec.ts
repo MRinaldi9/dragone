@@ -95,7 +95,7 @@ describe(Button, () => {
   });
   describe('Test outputs', () => {
     it('should emit native event', () => {
-      const clickSpy = vi.fn();
+      const clickSpy = vi.fn<() => void>();
       fixture.nativeElement.addEventListener('click', clickSpy);
       fixture.nativeElement.click();
       expect(clickSpy).toHaveBeenCalled();

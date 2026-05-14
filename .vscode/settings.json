@@ -18,4 +18,5 @@
     "~/.copilot/instructions": true,
     "~/.claude/rules": true
   },
+  "js/ts.tsdk.path": "node_modules\\typescript\\lib",
 }

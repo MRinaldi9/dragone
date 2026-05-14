@@ -75,7 +75,7 @@ describe(Tooltip, () => {
     component.tooltipContent.set({
       title: 'Full Tooltip',
       body: 'This is the body of the full tooltip',
-      action: vi.fn(),
+      action: vi.fn<() => void>(),
       actionLabel: 'Click Me',
     });
     await fixture.whenStable();

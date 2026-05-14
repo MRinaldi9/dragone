@@ -119,7 +119,7 @@ export default defineConfig({
         'vitest/prefer-to-have-length': 'warn',
         'vitest/valid-describe-callback': 'off',
         'vitest/valid-expect': 'error',
-        'vitest/valid-title': 'error',
+        'vitest/valid-title': 'off',
         'vitest/prefer-describe-function-title': 'error',
       },
     },
