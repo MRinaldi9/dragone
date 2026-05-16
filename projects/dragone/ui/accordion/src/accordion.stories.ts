@@ -58,27 +58,24 @@ export default meta;
 type Story = StoryObj<Accordion>;
 
 export const AccordionSingle: Story = {
-  render: args => {
-    return {
-      props: args,
-      template: `
+  render: args => ({
+    props: args,
+    template: `
       <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
         <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
       </drgn-accordion>
       `,
-    };
-  },
+  }),
 };
 export const AccordionMultiple: Story = {
   args: {
     type: 'multiple',
   },
-  render: args => {
-    return {
-      props: args,
-      template: `
+  render: args => ({
+    props: args,
+    template: `
       <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
         <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -88,6 +85,5 @@ export const AccordionMultiple: Story = {
         </drgn-accordion-item>
       </drgn-accordion>
       `,
-    };
-  },
+  }),
 };

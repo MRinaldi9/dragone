@@ -1,6 +1,6 @@
 import { inputBinding, signal, twoWayBinding } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
-import { Locator, page } from 'vitest/browser';
+import { type Locator, page } from 'vitest/browser';
 
 import { Checkbox } from './checkbox';
 
@@ -35,7 +35,7 @@ describe(Checkbox, () => {
   });
 
   it('should have checked state to false', { tags: ['unit'] }, () => {
-    expect(component.checked()).toBe(false);
+    expect(component.checked()).toBeFalsy();
   });
 
   it('should set disabled the component', { tags: ['component'] }, async () => {
@@ -49,21 +49,21 @@ describe(Checkbox, () => {
     disabled.set(true);
     await fixture.whenStable();
 
-    expect(component.disabled()).toBe(true);
+    expect(component.disabled()).toBeTruthy();
   });
 
   it('should change checked status if clicked', { tags: ['component'] }, async () => {
-    expect(component.checked()).toBe(false);
+    expect(component.checked()).toBeFalsy();
     await locator.click();
-    expect(component.checked()).toBe(true);
+    expect(component.checked()).toBeTruthy();
     await expect.element(locator).toHaveAttribute('aria-checked', 'true');
   });
 
-  // it('should have touchedFn called on blur', () => {
-  //   const touchedFnSpy = vi.fn();
-  //   component.registerOnTouched(touchedFnSpy);
+  // It('should have touchedFn called on blur', () => {
+  //   Const touchedFnSpy = vi.fn();
+  //   Component.registerOnTouched(touchedFnSpy);
 
-  //   fixture.debugElement.triggerEventHandler('blur', {});
-  //   expect(touchedFnSpy).toHaveBeenCalled();
+  //   Fixture.debugElement.triggerEventHandler('blur', {});
+  //   Expect(touchedFnSpy).toHaveBeenCalled();
   // });
 });

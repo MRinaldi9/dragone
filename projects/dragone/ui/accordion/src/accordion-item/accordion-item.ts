@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgpAccordionContent, NgpAccordionItem } from 'ng-primitives/accordion';
 
-import { ButtonVariant } from '@dragone/ui/button';
+import type { ButtonVariant } from '@dragone/ui/button';
 
-import { AccordionHeader, AriaLevel } from '../accordion-header/accordion-header';
+import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-header';
 
 @Component({
   selector: 'drgn-accordion-item',
@@ -35,6 +35,6 @@ export class AccordionItem {
     Extract<ButtonVariant, 'primary' | 'tertiary'>,
     'dark' | 'light'
   >('primary', {
-    transform: v => (v === 'dark' ? 'primary' : 'tertiary'),
+    transform: variant => (variant === 'dark' ? 'primary' : 'tertiary'),
   });
 }

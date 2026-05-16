@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck } from '@ng-icons/font-awesome/solid';
 import { NgpButton } from 'ng-primitives/button';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 import { injectToggleState, NgpToggle } from 'ng-primitives/toggle';
-import { ChangeFn, provideValueAccessor } from 'ng-primitives/utils';
+import { type ChangeFn, provideValueAccessor } from 'ng-primitives/utils';
 @Component({
   selector: 'button[drgn-chip-selected]',
   imports: [NgIcon],

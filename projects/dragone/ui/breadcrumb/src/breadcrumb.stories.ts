@@ -1,4 +1,9 @@
-import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@analogjs/storybook-angular';
+import {
+  argsToTemplate,
+  type Meta,
+  moduleMetadata,
+  type StoryObj,
+} from '@analogjs/storybook-angular';
 import { RouterOutlet } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
 
@@ -59,10 +64,10 @@ export const BreadcrumbSingle: Story = {
   }),
 };
 
-// export const LongPath: Story = {
-//   render: args => ({
-//     props: args,
-//     template: `
+// Export const LongPath: Story = {
+//   Render: args => ({
+//     Props: args,
+//     Template: `
 //       <drgn-breadcrumb>
 //         <drgn-breadcrumb-item href="#">Home</drgn-breadcrumb-item>
 //         <drgn-breadcrumb-item href="#">Primo Livello Molto Lungo</drgn-breadcrumb-item>
@@ -71,8 +76,8 @@ export const BreadcrumbSingle: Story = {
 //         <drgn-breadcrumb-item>Pagina Corrente</drgn-breadcrumb-item>
 //       </drgn-breadcrumb>
 //     `,
-//     moduleMetadata: {
-//       imports: [DrgnBreadcrumbComponent, DrgnBreadcrumbItemComponent],
+//     ModuleMetadata: {
+//       Imports: [DrgnBreadcrumbComponent, DrgnBreadcrumbItemComponent],
 //     },
 //   }),
 // };

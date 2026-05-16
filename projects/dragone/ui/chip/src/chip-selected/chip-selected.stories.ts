@@ -3,12 +3,12 @@ import { fn } from 'storybook/test';
 
 import { ChipSelected } from './chip-selected';
 
-type ChipSelectedArgs = {
+interface ChipSelectedArgs {
   selected: boolean;
   disabled: boolean;
   label: string;
   selectedChange: (selected: boolean) => void;
-};
+}
 
 const meta: Meta<ChipSelectedArgs> = {
   title: 'Dragone/UI/Chip/Selected',

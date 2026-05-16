@@ -7,7 +7,7 @@ import {
   linkedSignal,
   output,
 } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
@@ -17,7 +17,9 @@ import {
   NgpSelectOption,
   NgpSelectPortal,
 } from 'ng-primitives/select';
-import { ChangeFn, provideValueAccessor, TouchedFn, uniqueId } from 'ng-primitives/utils';
+import { type ChangeFn, provideValueAccessor, type TouchedFn, uniqueId } from 'ng-primitives/utils';
+
+import { isNotNil } from '@dragone/ui/utils';
 
 import { OptionMapperPipe } from './utils/option-mapper-pipe';
 import { OptionSelectedPipe } from './utils/option-selected-pipe';
@@ -106,7 +108,7 @@ export class Select<T> implements ControlValueAccessor {
     if (isMultiple && Array.isArray(value)) {
       return value.length > 0;
     }
-    return value !== undefined && value !== null;
+    return isNotNil(value);
   });
 
   constructor() {

@@ -68,18 +68,16 @@ const meta: Meta<ButtonStory> = {
   decorators: [
     moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
   ],
-  render: args => {
-    return {
-      props: args,
-      template: `
+  render: args => ({
+    props: args,
+    template: `
       <button drgnButton ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>
         ${args.showLeadingIcon ? '<ng-icon slot="leading" name="fa-solid-arrow-right"></ng-icon>' : ''}
         ${args.label}
         ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon>' : ''}
       </button>
       `,
-    };
-  },
+  }),
 };
 
 export default meta;

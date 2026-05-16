@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Mock } from 'vitest';
-import { Locator, page, userEvent } from 'vitest/browser';
+import type { Mock } from 'vitest';
+import { type Locator, page, userEvent } from 'vitest/browser';
 
 import { TooltipTrigger } from './tooltip-trigger/tooltip-trigger';
-import { Tooltip, TooltipContext } from './tooltip/tooltip';
+import { type TooltipContext, Tooltip } from './tooltip/tooltip';
 
 @Component({
   imports: [TooltipTrigger],
@@ -92,6 +92,6 @@ describe(Tooltip, () => {
       actionLabel: 'Click Me',
     });
     await userEvent.click(await page.getByRole('button', { name: 'Click Me' }));
-    expect((component.tooltipContent() as { action: Mock }).action).toHaveBeenCalled();
+    expect((component.tooltipContent() as { action: Mock }).action).toHaveBeenCalledWith();
   });
 });

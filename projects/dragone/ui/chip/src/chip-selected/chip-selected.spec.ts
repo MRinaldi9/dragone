@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { page, userEvent } from 'vitest/browser';
 
 import { ChipSelected } from './chip-selected';
 
 describe(ChipSelected, () => {
-  describe('Standalone behavior', () => {
+  describe('standalone behavior', () => {
     @Component({
       imports: [ChipSelected],
       template: `
@@ -73,14 +73,14 @@ describe(ChipSelected, () => {
     });
   });
 
-  describe('Forms integrations', () => {
+  describe('forms integrations', () => {
     @Component({
       imports: [ChipSelected, ReactiveFormsModule],
-      template: ` <button drgn-chip-selected [formControl]="f">Test</button> `,
+      template: ` <button drgn-chip-selected [formControl]="fcontrol">Test</button> `,
       changeDetection: ChangeDetectionStrategy.OnPush,
     })
     class TestHostFormComponent {
-      f = new FormControl(false, { nonNullable: true });
+      fcontrol = new FormControl(false, { nonNullable: true });
     }
     let component: TestHostFormComponent;
     let fixture: ComponentFixture<TestHostFormComponent>;
@@ -97,26 +97,26 @@ describe(ChipSelected, () => {
     it('should toggle selected state on click', async () => {
       const button = page.getByRole('button');
       await button.click();
-      expect(component.f.value).toBe(true);
+      expect(component.fcontrol.value).toBeTruthy();
       expect(button).toHaveAttribute('aria-pressed', 'true');
     });
     it('should reflect form control value', async () => {
       const button = page.getByRole('button');
-      component.f.setValue(true);
+      component.fcontrol.setValue(true);
       await fixture.whenStable();
       expect(button).toHaveAttribute('aria-pressed', 'true');
     });
     it('should disable when form control is disabled', async () => {
       const button = page.getByRole('button');
-      component.f.disable();
+      component.fcontrol.disable();
       await fixture.whenStable();
       expect(button).toBeDisabled();
     });
     it('should trigger touched state on blur', async () => {
-      expect(component.f.touched).toBe(false);
+      expect(component.fcontrol.touched).toBeFalsy();
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
-      expect(component.f.touched).toBe(true);
+      expect(component.fcontrol.touched).toBeTruthy();
     });
   });
 });

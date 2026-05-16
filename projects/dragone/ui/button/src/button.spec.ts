@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inputBinding, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
 
-import { Button, ButtonSize, ButtonVariant } from './button';
+import { Button, type ButtonSize, type ButtonVariant } from './button';
 
 @Component({
   imports: [Button],
@@ -61,10 +61,10 @@ describe(Button, () => {
   it('should create and default property', () => {
     expect(component).toBeTruthy();
     expect(component.size()).toBe('large');
-    expect(component.isIconOnly()).toBe(false);
+    expect(component.isIconOnly()).toBeFalsy();
     expect(component.variant()).toBe('primary');
   });
-  describe('Test Inputs', () => {
+  describe('test Inputs', () => {
     let fixtureHost: ComponentFixture<TestHostComponent>;
     it('should change size', async () => {
       size.set('medium');
@@ -76,7 +76,7 @@ describe(Button, () => {
     it('should change isIconOnly', async () => {
       isIconOnly.set(true);
       await fixture.whenStable();
-      expect(component.isIconOnly()).toBe(true);
+      expect(component.isIconOnly()).toBeTruthy();
     });
     it('should change variant', async () => {
       variant.set('danger');
@@ -93,12 +93,12 @@ describe(Button, () => {
       await expect.element(btnHtml).toHaveAttribute('data-disabled');
     });
   });
-  describe('Test outputs', () => {
+  describe('test outputs', () => {
     it('should emit native event', () => {
       const clickSpy = vi.fn<() => void>();
       fixture.nativeElement.addEventListener('click', clickSpy);
       fixture.nativeElement.click();
-      expect(clickSpy).toHaveBeenCalled();
+      expect(clickSpy).toHaveBeenCalledWith();
       fixture.nativeElement.removeEventListener('click', clickSpy);
     });
   });

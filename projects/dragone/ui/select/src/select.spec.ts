@@ -1,13 +1,13 @@
 import { inputBinding, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Locator, page } from 'vitest/browser';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { type Locator, page } from 'vitest/browser';
 
 import { Select } from './select';
 
-type TestOption = {
+interface TestOption {
   label: string;
   value: string;
-};
+}
 
 describe(Select, () => {
   let component: Select<TestOption>;

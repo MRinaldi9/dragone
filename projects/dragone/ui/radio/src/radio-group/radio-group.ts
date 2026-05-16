@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
 import { injectRadioGroupState, NgpRadioGroup } from 'ng-primitives/radio';
-import { ChangeFn, provideValueAccessor, TouchedFn } from 'ng-primitives/utils';
+import { type ChangeFn, provideValueAccessor, type TouchedFn } from 'ng-primitives/utils';
 
 @Component({
   selector: 'drgn-radio-group',
   imports: [],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   styleUrl: './radio-group.css',
   providers: [provideValueAccessor(RadioGroup)],
   changeDetection: ChangeDetectionStrategy.OnPush,

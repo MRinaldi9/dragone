@@ -8,26 +8,26 @@ export type BreadcrumbProps =
   | BreadcrumbWithHref
   | BreadcrumbWithEllipsis;
 
-type BreadcrumbWithRouterLink = {
+interface BreadcrumbWithRouterLink {
   label: string;
   routerLink: RouterLink['routerLink'];
   href?: null;
   icon?: string;
-};
+}
 
-type BreadcrumbWithHref = {
+interface BreadcrumbWithHref {
   label: string;
   routerLink?: null;
   href: string;
   icon?: string;
-};
+}
 
-type BreadcrumbWithEllipsis = {
+interface BreadcrumbWithEllipsis {
   label: string;
   routerLink?: null;
   href?: null;
   icon?: null;
-};
+}
 
 @Component({
   selector: 'drgn-breadcrumb-item',
@@ -71,7 +71,7 @@ export class BreadcrumbItem {
   readonly breadcrumbConfiguration = input.required<BreadcrumbProps>();
   readonly openBreadcrumb = output();
 
-  protected breadcrumbVisualization(event: Event) {
+  protected breadcrumbVisualization(event: Event): void {
     event.preventDefault();
     this.openBreadcrumb.emit();
   }

@@ -86,14 +86,12 @@ const meta: Meta<SelectStory> = {
       control: false,
     },
   },
-  render: args => {
-    return {
-      props: args,
-      template: `
+  render: args => ({
+    props: args,
+    template: `
         <drgn-select ${argsToTemplate(args, { exclude: ['darkMode'] })}/>
       `,
-    };
-  },
+  }),
 };
 
 export default meta;

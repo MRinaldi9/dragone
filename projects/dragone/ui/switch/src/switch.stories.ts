@@ -1,16 +1,15 @@
-import type { Meta, StoryObj } from '@analogjs/storybook-angular';
-import { argsToTemplate } from '@analogjs/storybook-angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
 import { expect, fn, within } from 'storybook/test';
 
 import { Switch } from './switch';
 
-type SwitchArgs = {
+interface SwitchArgs {
   checked: boolean;
   disabled: boolean;
   checkedChange: (checked: boolean) => void;
   darkMode?: boolean;
   ariaLabel?: string;
-};
+}
 
 const meta: Meta<SwitchArgs> = {
   title: 'Dragone/UI/Switch',

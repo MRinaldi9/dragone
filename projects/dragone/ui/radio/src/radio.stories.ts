@@ -8,13 +8,13 @@ import {
 import { RadioGroup } from './radio-group/radio-group';
 import { RadioItem } from './radio-item/radio-item';
 
-type RadioProps = {
+interface RadioProps {
   darkMode?: boolean;
   value: string;
   disabled: boolean;
   valueChange: (value: string) => void;
   orientation: 'horizontal' | 'vertical';
-};
+}
 
 const meta: Meta<RadioProps> = {
   title: 'Dragone/UI/Radio',

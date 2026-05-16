@@ -7,7 +7,7 @@ import {
   NgpAccordionTrigger,
 } from 'ng-primitives/accordion';
 
-import { Button, ButtonVariant } from '@dragone/ui/button';
+import { Button, type ButtonVariant } from '@dragone/ui/button';
 
 export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
 

@@ -3,15 +3,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
   input,
   linkedSignal,
   untracked,
   viewChild,
+  type ElementRef,
 } from '@angular/core';
 import { injectDimensions } from 'ng-primitives/internal';
 
-import { BreadcrumbItem, BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
+import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
 
 @Component({
   selector: 'drgn-breadcrumb',
@@ -52,12 +52,10 @@ export class Breadcrumb {
 
   constructor() {
     afterRenderEffect(() => {
-      const { isCollapsed, list } = untracked(() => {
-        return {
-          isCollapsed: this.showEllipsis(),
-          list: this.breadcrumbListElement()?.nativeElement,
-        };
-      });
+      const { isCollapsed, list } = untracked(() => ({
+        isCollapsed: this.showEllipsis(),
+        list: this.breadcrumbListElement()?.nativeElement,
+      }));
       const { width: hostWidth } = this.hostDimensions();
 
       if (isCollapsed || !list || !hostWidth) {

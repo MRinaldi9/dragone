@@ -1,15 +1,15 @@
 import { inputBinding, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
 
-import { StatusTag, Tag } from './tag';
+import { type StatusTag, Tag } from './tag';
 
 describe(Tag, () => {
   let component: Tag;
   let fixture: ComponentFixture<Tag>;
   let componentLocator: ReturnType<typeof page.elementLocator>;
   const status = signal<StatusTag>('neutral');
-  const ariaLabel = signal<string | undefined>(undefined);
+  const ariaLabel = signal<string | null>(null);
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -26,14 +26,14 @@ describe(Tag, () => {
 
   afterEach(() => {
     status.set('neutral');
-    ariaLabel.set(undefined);
+    ariaLabel.set(null);
   });
 
   it('should have role status', async () => {
     await expect.element(componentLocator.element()).toHaveAttribute('role', 'status');
   });
 
-  it('should have default aria-label as undefined', async () => {
+  it('should have default aria-label as null', async () => {
     await expect.element(componentLocator.element()).not.toHaveAttribute('aria-label');
   });
 

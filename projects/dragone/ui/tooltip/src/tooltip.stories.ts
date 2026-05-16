@@ -1,5 +1,9 @@
-import type { Meta, StoryObj } from '@analogjs/storybook-angular';
-import { argsToTemplate, moduleMetadata } from '@analogjs/storybook-angular';
+import {
+  type Meta,
+  type StoryObj,
+  argsToTemplate,
+  moduleMetadata,
+} from '@analogjs/storybook-angular';
 import { provideTooltipConfig } from 'ng-primitives/tooltip';
 import { expect, fn } from 'storybook/test';
 

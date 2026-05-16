@@ -1,4 +1,4 @@
-import { type StorybookConfig } from '@analogjs/storybook-angular';
+import type { StorybookConfig } from '@analogjs/storybook-angular';
 
 const config: StorybookConfig = {
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],

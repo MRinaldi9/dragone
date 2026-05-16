@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import type { Meta, StoryObj } from '@analogjs/storybook-angular';
 import { faSolidUser } from '@ng-icons/font-awesome/solid';
 import { fn } from 'storybook/test';
 

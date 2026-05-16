@@ -1,10 +1,10 @@
 import { inputBinding, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
 import { Breadcrumb } from './breadcrumb';
-import { BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
+import type { BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
 
 describe(Breadcrumb, () => {
   let component: Breadcrumb;

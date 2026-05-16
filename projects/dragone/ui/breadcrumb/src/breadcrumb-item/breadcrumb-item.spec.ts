@@ -1,11 +1,11 @@
 import { inputBinding, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
 import { page } from 'vitest/browser';
 
-import { BreadcrumbItem, BreadcrumbProps } from './breadcrumb-item';
+import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item';
 
 describe(BreadcrumbItem, () => {
   let component: BreadcrumbItem;

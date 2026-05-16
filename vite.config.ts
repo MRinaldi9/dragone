@@ -7,24 +7,26 @@ import { coverageConfigDefaults } from 'vitest/config';
 export default defineConfig(({ mode }) => {
   const isHeadless = process.env['VITEST_VSCODE'] === 'true' || process.env['CI'] === 'true';
   return {
-    root: './projects/dragone/ui',
-    plugins: [angular()],
     cacheDir: '../../../node_modules/.vite',
+    define: {
+      'import.meta.vitest': mode !== 'production',
+    },
+    plugins: [angular()],
     resolve: {
       tsconfigPaths: true,
     },
+    root: './projects/dragone/ui',
     test: {
-      tags: [
-        { name: 'unit', description: 'Unit tests' },
-        { name: 'component', description: 'Component tests' },
-      ],
-      globals: true,
-      setupFiles: ['./test-setup.ts'],
-      include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+      browser: {
+        enabled: true,
+        headless: isHeadless,
+        instances: [{ browser: 'chromium' }],
+        provider: playwright(),
+        screenshotFailures: !isHeadless,
+        viewport: { height: 1080, width: 1920 },
+      },
       coverage: {
         enabled: true,
-        reporter: ['lcov', 'html', 'text-summary'],
-        reportsDirectory: '../../../coverage/dragone',
         exclude: [
           ...coverageConfigDefaults.exclude,
           'index.ts',
@@ -35,18 +37,16 @@ export default defineConfig(({ mode }) => {
           '**/*.js',
           '**/*.css',
         ],
+        reporter: ['lcov', 'html', 'text-summary'],
+        reportsDirectory: '../../../coverage/dragone',
       },
-      browser: {
-        enabled: true,
-        headless: isHeadless,
-        provider: playwright(),
-        instances: [{ browser: 'chromium' }],
-        screenshotFailures: !isHeadless,
-        viewport: { width: 1920, height: 1080 },
-      },
-    },
-    define: {
-      'import.meta.vitest': mode !== 'production',
+      globals: true,
+      include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+      setupFiles: ['./test-setup.ts'],
+      tags: [
+        { description: 'Unit tests', name: 'unit' },
+        { description: 'Component tests', name: 'component' },
+      ],
     },
   };
 });

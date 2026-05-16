@@ -6,7 +6,7 @@ import {
   model,
   output,
 } from '@angular/core';
-import { type FormCheckboxControl } from '@angular/forms/signals';
+import type { FormCheckboxControl } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidMinus } from '@ng-icons/font-awesome/solid';
 import { ngpCheckbox, NgpCheckbox } from 'ng-primitives/checkbox';
@@ -44,7 +44,7 @@ export class Checkbox implements FormCheckboxControl {
       checked: this.checked,
       disabled: this.disabled,
       id: this.id,
-      onCheckedChange: v => this.checked.set(v),
+      onCheckedChange: value => this.checked.set(value),
     });
   }
 }

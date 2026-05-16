@@ -55,7 +55,7 @@ export class Tooltip {
   protected bodyTooltip = computed(() => {
     const context = this.content();
     if (typeof context === 'string') {
-      return undefined;
+      return;
     }
     return context?.body;
   });
@@ -63,7 +63,7 @@ export class Tooltip {
   protected actionTooltip = computed(() => {
     const context = this.content();
     if (typeof context === 'string' || !('action' in context)) {
-      return undefined;
+      return;
     }
     return { action: context.action, label: context.actionLabel };
   });

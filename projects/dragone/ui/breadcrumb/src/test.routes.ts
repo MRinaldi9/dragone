@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet, Routes } from '@angular/router';
+import { RouterOutlet, type Routes } from '@angular/router';
 
 @Component({
-  template: `
-    <h1>Home</h1>
-  `,
+  template: ` <h1>Home</h1> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class Home {}
@@ -20,9 +18,7 @@ class Home {}
 class Category {}
 
 @Component({
-  template: `
-    <h1>Subcategory Page</h1>
-  `,
+  template: ` <h1>Subcategory Page</h1> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class Subcategory {}

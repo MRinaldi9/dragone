@@ -1,8 +1,8 @@
 import { inputBinding, outputBinding, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { faSolidCircleCheck, faSolidCircleInfo } from '@ng-icons/font-awesome/solid';
-import { Locator, page } from 'vitest/browser';
+import { type Locator, page } from 'vitest/browser';
 
 import { Alert } from './alert';
 
@@ -59,6 +59,6 @@ describe(Alert, () => {
 
     const btnDe = fixture.debugElement.query(By.css('button'));
     btnDe.triggerEventHandler('click');
-    expect(ctaMock).toHaveBeenCalled();
+    expect(ctaMock).toHaveBeenCalledWith();
   });
 });

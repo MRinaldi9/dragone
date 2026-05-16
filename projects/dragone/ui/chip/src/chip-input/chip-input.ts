@@ -3,7 +3,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 
-import { convertToSvgIcon, SvgIcon } from '@dragone/ui/utils';
+import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
 
 @Component({
   selector: 'drgn-chip-input',

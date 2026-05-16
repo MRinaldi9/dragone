@@ -1,15 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 import { injectSwitchState, NgpSwitch, NgpSwitchThumb } from 'ng-primitives/switch';
-import { ChangeFn, provideValueAccessor, TouchedFn } from 'ng-primitives/utils';
+import { provideValueAccessor, type ChangeFn, type TouchedFn } from 'ng-primitives/utils';
 
 @Component({
   selector: 'drgn-switch',
   imports: [NgpSwitchThumb],
-  template: `
-    <span ngpSwitchThumb></span>
-  `,
+  template: ` <span ngpSwitchThumb></span> `,
   styleUrl: './switch.css',
   providers: [provideValueAccessor(Switch)],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,7 +32,7 @@ export class Switch implements ControlValueAccessor {
   protected touchedFn: TouchedFn | undefined;
 
   constructor() {
-    this.internalState().checkedChange.subscribe(v => this.changeFn?.(v));
+    this.internalState().checkedChange.subscribe(val => this.changeFn?.(val));
   }
 
   writeValue(checked: boolean): void {

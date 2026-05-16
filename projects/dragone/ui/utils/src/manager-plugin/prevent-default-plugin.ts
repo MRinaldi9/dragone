@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
-import { ListenerOptions } from '@angular/core';
+import type { ListenerOptions } from '@angular/core';
 import { EventManagerPlugin } from '@angular/platform-browser';
 
 export class PreventDefaultPlugin extends EventManagerPlugin {
@@ -12,13 +12,13 @@ export class PreventDefaultPlugin extends EventManagerPlugin {
     handler: Function,
     options?: ListenerOptions,
   ): Function {
-    const originalEventName = eventName.split('.')[0];
+    const [originalEventName] = eventName.split('.');
     return this.manager.addEventListener(
       element,
       originalEventName,
-      (e: Event) => {
-        e.preventDefault();
-        handler(e);
+      (event: Event) => {
+        event.preventDefault();
+        handler(event);
       },
       options,
     );
