@@ -6,6 +6,8 @@ import { Checkbox } from './checkbox';
 type CheckboxArgs = Checkbox & {
   darkMode: boolean;
   checkedChange: (checked: boolean) => void;
+  checked: boolean;
+  disabled: boolean;
 };
 
 const meta: Meta<CheckboxArgs> = {
@@ -39,6 +41,14 @@ const meta: Meta<CheckboxArgs> = {
     hidden: {
       control: 'boolean',
       description: 'Nasconde il checkbox quando impostato a true',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    readonly: {
+      control: 'boolean',
+      description: 'Rende il checkbox di sola lettura, non interagibile',
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },

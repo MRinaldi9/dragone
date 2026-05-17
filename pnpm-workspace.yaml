@@ -5,3 +5,10 @@ allowBuilds:
   lefthook: true
   lmdb: true
   msgpackr-extract: true
+ovverides:
+  '@analogjs/vite-plugin-angular>@angular-devkit/build-angular': '22.0.0-rc.0'
+  '@analogjs/vite-plugin-angular>@angular/build': '22.0.0-rc.0'
+  '@storybook/angular>typescript': '6.0.3'
+  '@angular/cdk>@angular/common': '22.0.0-rc.0'
+  '@angular/cdk>@angular/core': '22.0.0-rc.0'
+  '@angular/cdk>@angular/platform-browser': '22.0.0-rc.0'

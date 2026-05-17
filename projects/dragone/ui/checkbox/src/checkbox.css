@@ -34,10 +34,12 @@
   &[hidden] {
     display: none;
   }
-}
-
-:host(:not([data-disabled]):hover) ng-icon {
-  color: var(--data-entry-label-hover);
+  &:not([data-disabled]):hover ng-icon {
+    color: var(--data-entry-label-hover);
+  }
+  &[readonly] {
+    pointer-events: none;
+  }
 }
 
 ng-icon {

@@ -121,6 +121,7 @@ export default defineConfig({
       rules: {
         'init-declarations': ['off'],
         'max-statements': 'off',
+        'typescript/explicit-function-return-type': 'off',
         'vitest/consistent-test-filename': 'off',
         'vitest/expect-expect': 'error',
         'vitest/max-expects': 'off',

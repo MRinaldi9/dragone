@@ -1,23 +1,14 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  model,
-  output,
-} from '@angular/core';
-import type { FormCheckboxControl } from '@angular/forms/signals';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidMinus } from '@ng-icons/font-awesome/solid';
-import { ngpCheckbox, NgpCheckbox } from 'ng-primitives/checkbox';
+import { injectCheckboxState, NgpCheckbox } from 'ng-primitives/checkbox';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
-import { uniqueId } from 'ng-primitives/utils';
 
 @Component({
   selector: 'drgn-checkbox',
   imports: [NgIcon],
   template: `
-    @if (checked()) {
+    @if (_checked()) {
       <ng-icon name="faSolidCheck" />
     }
   `,
@@ -25,26 +16,30 @@ import { uniqueId } from 'ng-primitives/utils';
   providers: [provideIcons({ faSolidCheck, faSolidMinus })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '(blur)': 'touched.emit(true)',
     '[hidden]': 'hidden()',
     '[attr.name]': 'name() ? name() : null',
+    '[attr.readonly]': 'readonly() ? "" : null',
+    '(blur)': 'touch.emit()',
   },
-  hostDirectives: [NgpFocusVisible, NgpCheckbox],
+  hostDirectives: [
+    NgpFocusVisible,
+    {
+      directive: NgpCheckbox,
+      inputs: ['ngpCheckboxChecked:checked', 'ngpCheckboxDisabled:disabled', 'id'],
+      outputs: ['ngpCheckboxCheckedChange:checkedChange'],
+    },
+  ],
 })
-export class Checkbox implements FormCheckboxControl {
-  readonly id = input(uniqueId('drgn-checkbox'));
-  readonly checked = model<boolean>(false);
-  readonly disabled = input(false, { transform: booleanAttribute });
+export class Checkbox {
+  readonly readonly = input(false, { transform: booleanAttribute });
   readonly hidden = input(false, { transform: booleanAttribute });
-  readonly touched = output<boolean>();
   readonly name = input<string>('');
+  readonly touch = output<void>();
+  readonly #checkboxState = injectCheckboxState();
 
-  constructor() {
-    ngpCheckbox({
-      checked: this.checked,
-      disabled: this.disabled,
-      id: this.id,
-      onCheckedChange: value => this.checked.set(value),
-    });
+  protected readonly _checked = this.#checkboxState().checked;
+
+  reset?(): void {
+    throw new Error('Method not implemented.');
   }
 }
