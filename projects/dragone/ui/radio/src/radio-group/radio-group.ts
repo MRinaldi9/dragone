@@ -1,6 +1,5 @@
 import {
   booleanAttribute,
-  ChangeDetectionStrategy,
   Component,
   computed,
   contentChildren,
@@ -10,6 +9,7 @@ import {
 } from '@angular/core';
 import { injectRadioGroupState, NgpRadioGroup } from 'ng-primitives/radio';
 
+import { provideRadioGroupContext } from '../radio-group-context';
 import { RadioItem } from '../radio-item/radio-item';
 
 @Component({
@@ -17,7 +17,7 @@ import { RadioItem } from '../radio-item/radio-item';
   imports: [],
   template: ` <ng-content /> `,
   styleUrl: './radio-group.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideRadioGroupContext(RadioGroup)],
   host: {
     '(focusout)': 'touched($event)',
     '[style.--direction]': 'direction()',

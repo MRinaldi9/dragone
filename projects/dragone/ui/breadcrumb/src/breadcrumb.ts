@@ -1,6 +1,5 @@
 import {
   afterRenderEffect,
-  ChangeDetectionStrategy,
   Component,
   computed,
   input,
@@ -35,7 +34,6 @@ import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item/breadcru
     </ol>
   `,
   styleUrl: './breadcrumb.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'navigation',
     'aria-label': 'Breadcrumb',

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, untracked } from '@angular/core';
+import { Component, effect, untracked } from '@angular/core';
 import {
   injectRadioGroupState,
   injectRadioItemState,
@@ -6,7 +6,7 @@ import {
   NgpRadioItem,
 } from 'ng-primitives/radio';
 
-import { RadioGroup } from '../radio-group/radio-group';
+import { injectRadioGroupContext } from '../radio-group-context';
 
 @Component({
   selector: 'drgn-radio-item',
@@ -20,7 +20,6 @@ import { RadioGroup } from '../radio-group/radio-group';
     </p>
   `,
   styleUrl: './radio-item.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.readonly]': 'radioGroupReadonly() ? "" : null',
   },
@@ -34,7 +33,7 @@ import { RadioGroup } from '../radio-group/radio-group';
 export class RadioItem {
   readonly #state = injectRadioItemState();
   readonly #radioGroupState = injectRadioGroupState();
-  protected readonly radioGroupReadonly = inject(RadioGroup).readonly;
+  protected readonly radioGroupReadonly = injectRadioGroupContext().readonly;
 
   constructor() {
     effect(() => {

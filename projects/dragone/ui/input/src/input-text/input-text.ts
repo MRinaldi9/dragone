@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 import { uniqueId } from 'ng-primitives/utils';
 
@@ -8,7 +8,6 @@ export type InputValidity = 'valid' | 'invalid' | 'warning';
   selector: 'input[drgnInputText],input[drgn-input-text]',
   template: ``,
   styleUrl: './input-text.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     type: 'text',
     class: 'drgn-label-md-400',

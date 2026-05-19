@@ -26,7 +26,6 @@ export default defineConfig({
         '@angular-eslint/no-output-rename': 'error',
         '@angular-eslint/no-outputs-metadata-property': 'error',
         '@angular-eslint/prefer-inject': 'error',
-        '@angular-eslint/prefer-on-push-component-change-detection': 'error',
         '@angular-eslint/prefer-standalone': 'error',
         '@angular-eslint/sort-keys-in-type-decorator': 'error',
         '@angular-eslint/sort-lifecycle-methods': 'error',

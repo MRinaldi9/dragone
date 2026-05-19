@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { NgpAccordionContent, NgpAccordionItem } from 'ng-primitives/accordion';
 
 import type { ButtonVariant } from '@dragone/ui/button';
@@ -20,7 +20,6 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
   `,
   styleUrl: './accordion-item.css',
   providers: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
       directive: NgpAccordionItem,

@@ -1,5 +1,5 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { form, FormField as FormSignal, required } from '@angular/forms/signals';
 
 import { Checkbox } from '@dragone/ui/checkbox';
@@ -14,7 +14,6 @@ import { FormContainer } from './form-container/form-container';
       <drgn-checkbox [formField]="form.checkBox" />
     </drgn-form-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormFieldStory {
   readonly label = input<string>('Label');

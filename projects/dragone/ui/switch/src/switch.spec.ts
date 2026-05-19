@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inputBinding,
-  outputBinding,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, inputBinding, outputBinding, signal, viewChild } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { form, FormField } from '@angular/forms/signals';
 import { NgpSwitch } from 'ng-primitives/switch';
@@ -18,7 +11,6 @@ const setupForm = () => {
   @Component({
     imports: [FormField, Switch],
     template: `<drgn-switch [formField]="field" />`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
   })
   class FormCmp {
     readonly field = form(signal(false));

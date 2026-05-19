@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
@@ -62,7 +62,6 @@ interface BreadcrumbWithEllipsis {
     }
   `,
   styleUrl: './breadcrumb-item.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'listitem',
   },

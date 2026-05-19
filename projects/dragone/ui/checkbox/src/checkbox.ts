@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { booleanAttribute, Component, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidMinus } from '@ng-icons/font-awesome/solid';
 import { injectCheckboxState, NgpCheckbox } from 'ng-primitives/checkbox';
@@ -14,7 +14,6 @@ import { NgpFocusVisible } from 'ng-primitives/interactions';
   `,
   styleUrl: './checkbox.css',
   providers: [provideIcons({ faSolidCheck, faSolidMinus })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[hidden]': 'hidden()',
     '[attr.name]': 'name() ? name() : null',
@@ -38,8 +37,4 @@ export class Checkbox {
   readonly #checkboxState = injectCheckboxState();
 
   protected readonly _checked = this.#checkboxState().checked;
-
-  reset?(): void {
-    throw new Error('Method not implemented.');
-  }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
@@ -28,7 +28,6 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
   `,
   styleUrl: './accordion-header.css',
   providers: [provideIcons({ faSolidChevronDown })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'heading',
     '[ariaLevel]': 'ariaLevel()',

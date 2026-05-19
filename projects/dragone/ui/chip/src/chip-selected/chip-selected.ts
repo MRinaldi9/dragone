@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import type { ControlValueAccessor } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -16,7 +16,6 @@ import { type ChangeFn, provideValueAccessor } from 'ng-primitives/utils';
   `,
   styleUrl: './chip-selected.css',
   providers: [provideValueAccessor(ChipSelected), provideIcons({ faSolidCheck })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'drgn-label-md-700',
     '(blur)': 'onTouched?.()',

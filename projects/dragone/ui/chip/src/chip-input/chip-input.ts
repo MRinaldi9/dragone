@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
@@ -25,7 +25,6 @@ import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
   `,
   styleUrl: './chip-input.css',
   providers: [provideIcons({ faSolidXmark })],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'drgn-label-md-700',
     tabindex: '0',

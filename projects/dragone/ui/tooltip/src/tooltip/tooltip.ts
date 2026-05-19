@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { NgpTooltip, injectTooltipContext } from 'ng-primitives/tooltip';
 
 import { Button } from '@dragone/ui/button';
@@ -33,7 +33,6 @@ export type TooltipContext =
     }
   `,
   styleUrl: './tooltip.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [NgpTooltip],
 })
 export class Tooltip {

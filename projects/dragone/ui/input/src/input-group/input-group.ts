@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'drgn-input-group',
@@ -8,6 +8,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <ng-content select="[slot='trailing']" />
   `,
   styleUrl: './input-group.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputGroup {}

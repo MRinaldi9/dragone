@@ -1,15 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 export type StatusTag = 'alert' | 'info' | 'success' | 'warning' | 'neutral';
 
 @Component({
   selector: 'drgn-tag',
   imports: [],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   styleUrl: './tag.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'drgn-label-md-700',
     role: 'status',

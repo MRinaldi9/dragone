@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  input,
-  linkedSignal,
-  output,
-} from '@angular/core';
+import { Component, computed, effect, input, linkedSignal, output } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidChevronDown } from '@ng-icons/font-awesome/solid';
@@ -62,7 +54,6 @@ type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
   `,
   styleUrl: './select.css',
   providers: [provideIcons({ faSolidChevronDown, faSolidCheck }), provideValueAccessor(Select)],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'drgn-label-md-400',
     '[ariaLabel]': 'ariaLabelledBy() ? undefined : (ariaLabel() || placeholder())',

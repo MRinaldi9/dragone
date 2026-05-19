@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { page, userEvent } from 'vitest/browser';
@@ -19,7 +19,6 @@ describe(ChipSelected, () => {
           Test
         </button>
       `,
-      changeDetection: ChangeDetectionStrategy.OnPush,
     })
     class TestHostComponent {
       selected = signal(false);
@@ -77,7 +76,6 @@ describe(ChipSelected, () => {
     @Component({
       imports: [ChipSelected, ReactiveFormsModule],
       template: ` <button drgn-chip-selected [formControl]="fcontrol">Test</button> `,
-      changeDetection: ChangeDetectionStrategy.OnPush,
     })
     class TestHostFormComponent {
       fcontrol = new FormControl(false, { nonNullable: true });

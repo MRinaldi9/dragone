@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { booleanAttribute, Component, input, output } from '@angular/core';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 import { injectSwitchState, NgpSwitch, NgpSwitchThumb } from 'ng-primitives/switch';
 
@@ -7,7 +7,6 @@ import { injectSwitchState, NgpSwitch, NgpSwitchThumb } from 'ng-primitives/swit
   imports: [NgpSwitchThumb],
   template: ` <span ngpSwitchThumb></span> `,
   styleUrl: './switch.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'switch',
     tabindex: '0',

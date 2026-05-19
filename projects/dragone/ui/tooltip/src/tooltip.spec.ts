@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import type { Mock } from 'vitest';
@@ -14,7 +14,6 @@ import { type TooltipContext, Tooltip } from './tooltip/tooltip';
       Hover me
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
   tooltipContent = signal<TooltipContext>('This is a helpful tooltip');

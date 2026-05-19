@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
 
@@ -18,7 +18,6 @@ import { AccordionItem } from './accordion-item/accordion-item';
       </drgn-accordion-item>
     </drgn-accordion>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostAccordion {
   variantColor = signal<'light' | 'dark'>('dark');

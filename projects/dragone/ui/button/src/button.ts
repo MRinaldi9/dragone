@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { booleanAttribute, Component, input } from '@angular/core';
 import { NgpButton } from 'ng-primitives/button';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 
@@ -13,7 +13,6 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'da
     <ng-content select="[slot='trailing']" />
   `,
   styleUrl: './button.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.data-size]': 'size()',
     '[attr.data-variant]': 'variant()',

@@ -1,11 +1,4 @@
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  contentChild,
-  input,
-} from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, input } from '@angular/core';
 import { FORM_FIELD } from '@angular/forms/signals';
 import { NgpFormField } from 'ng-primitives/form-field';
 
@@ -29,7 +22,9 @@ import { ValidationError } from '../validation-error/validation-error';
         <ng-content select="[formField]"> Errata configurazione </ng-content>
       </div>
       @if (description()) {
-        <small class="drgn-helper-text-xs-400 description" drgnDescription>{{ description() }}</small>
+        <small class="drgn-helper-text-xs-400 description" drgnDescription>{{
+          description()
+        }}</small>
       }
     </div>
     @for (error of errors(); track error.kind) {
@@ -45,7 +40,6 @@ import { ValidationError } from '../validation-error/validation-error';
     }
   `,
   styleUrl: './form-container.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[style.--direction]': 'inline() ? "row" : "column"',
     '[attr.data-control-layout]': 'inline() ? "horizontal" : "vertical"',

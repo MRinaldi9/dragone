@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import {
   faSolidCircleCheck,
@@ -35,7 +35,6 @@ const TYPE_TO_ICON = {
     }
   `,
   styleUrl: './alert.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'alert',
     '[ariaLive]': 'politeness()',

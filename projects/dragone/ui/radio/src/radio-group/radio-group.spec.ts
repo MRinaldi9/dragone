@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, inputBinding, signal } from '@angular/core';
+import { Component, input, inputBinding, signal } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { page, userEvent, type Locator } from 'vitest/browser';
 
@@ -8,32 +8,37 @@ import { RadioGroup } from './radio-group';
 @Component({
   imports: [RadioGroup, RadioItem],
   template: `
-    <drgn-radio-group orientation="vertical" [disabled]="disabled()">
+    <drgn-radio-group orientation="vertical" [disabled]="disabled()" [readonly]="readonly()">
       <drgn-radio-item value="option1">Opzione 1</drgn-radio-item>
       <drgn-radio-item value="option2">Opzione 2</drgn-radio-item>
       <drgn-radio-item value="option3">Opzione 3</drgn-radio-item>
     </drgn-radio-group>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RadioGroupTest {
   disabled = input(false);
+  readonly = input(false);
 }
 
 describe(RadioGroup, () => {
   let fixture: ComponentFixture<RadioGroupTest>;
   let locator: Locator;
   const disabled = signal(false);
+  const readonly = signal(false);
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [RadioGroupTest],
     });
 
     fixture = TestBed.createComponent(RadioGroupTest, {
-      bindings: [inputBinding('disabled', disabled)],
+      bindings: [inputBinding('disabled', disabled), inputBinding('readonly', readonly)],
     });
     await fixture.whenStable();
     locator = page.elementLocator(fixture.nativeElement);
+  });
+  afterEach(() => {
+    disabled.set(false);
+    readonly.set(false);
   });
 
   it('should focus and select the first radio item on keyboard navigation', async () => {
@@ -58,6 +63,15 @@ describe(RadioGroup, () => {
 
   it('should not change selection when disabled', async () => {
     disabled.set(true);
+    await fixture.whenStable();
+    const radioItems = locator.getByRole('radio').all();
+    const firstRadioItem = radioItems.at(0);
+    assert(firstRadioItem, 'Expected at least one radio item');
+    await userEvent.tab();
+    await expect.element(firstRadioItem).toHaveAttribute('aria-checked', 'false');
+  });
+  it('should not change selection when readonly', async () => {
+    readonly.set(true);
     await fixture.whenStable();
     const radioItems = locator.getByRole('radio').all();
     const firstRadioItem = radioItems.at(0);

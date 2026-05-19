@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inputBinding,
-  signal,
-  twoWayBinding,
-  viewChild,
-} from '@angular/core';
+import { Component, inputBinding, signal, twoWayBinding, viewChild } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { form, FormField } from '@angular/forms/signals';
 import { NgpCheckbox } from 'ng-primitives/checkbox';
@@ -17,7 +10,6 @@ const setupForm = () => {
   @Component({
     imports: [FormField, Checkbox],
     template: `<drgn-checkbox [formField]="field" />`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
   })
   class FormCmp {
     readonly field = form(signal(false));

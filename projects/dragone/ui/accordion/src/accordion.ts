@@ -1,14 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgpAccordion } from 'ng-primitives/accordion';
 
 @Component({
   selector: 'drgn-accordion',
   imports: [],
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   styleUrl: './accordion.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
       directive: NgpAccordion,

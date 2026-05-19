@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inputBinding, signal } from '@angular/core';
+import { Component, inputBinding, signal } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { page } from 'vitest/browser';
 
@@ -17,7 +17,6 @@ import { Button, type ButtonSize, type ButtonVariant } from './button';
       Dragone
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
   variant = signal<ButtonVariant>('primary');
