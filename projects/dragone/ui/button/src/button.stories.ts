@@ -11,6 +11,7 @@ import { expect, fn } from 'storybook/test';
 import { Button } from './button';
 
 type ButtonStory = Button & {
+  darkMode: boolean;
   disabled: boolean;
   icon: boolean;
   focusVisible: () => boolean;

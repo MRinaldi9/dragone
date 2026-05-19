@@ -4,17 +4,18 @@ import {
   type Meta,
   type StoryObj,
 } from '@analogjs/storybook-angular';
+import { fn } from 'storybook/test';
 
 import { RadioGroup } from './radio-group/radio-group';
 import { RadioItem } from './radio-item/radio-item';
 
-interface RadioProps {
+type RadioProps = RadioGroup<string> & {
   darkMode?: boolean;
   value: string;
   disabled: boolean;
   valueChange: (value: string) => void;
   orientation: 'horizontal' | 'vertical';
-}
+};
 
 const meta: Meta<RadioProps> = {
   title: 'Dragone/UI/Radio',
@@ -42,6 +43,27 @@ const meta: Meta<RadioProps> = {
       options: ['horizontal', 'vertical'],
       table: { defaultValue: { summary: 'horizontal' } },
     },
+    touch: {
+      type: 'function',
+      control: false,
+      description: 'Evento emesso quando il gruppo perde il focus',
+    },
+    readonly: {
+      control: 'boolean',
+      description: 'Rende il gruppo di sola lettura, non interagibile',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hidden: {
+      control: 'boolean',
+      description: 'Nasconde il gruppo quando impostato a true',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
   },
 };
 
@@ -62,6 +84,7 @@ export const Default: Story = {
   args: {
     disabled: false,
     orientation: 'vertical',
+    touch: fn(),
   },
 };
 

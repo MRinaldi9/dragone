@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgpRadioIndicator, NgpRadioItem } from 'ng-primitives/radio';
+import { ChangeDetectionStrategy, Component, effect, inject, untracked } from '@angular/core';
+import {
+  injectRadioGroupState,
+  injectRadioItemState,
+  NgpRadioIndicator,
+  NgpRadioItem,
+} from 'ng-primitives/radio';
+
+import { RadioGroup } from '../radio-group/radio-group';
 
 @Component({
   selector: 'drgn-radio-item',
@@ -14,6 +21,9 @@ import { NgpRadioIndicator, NgpRadioItem } from 'ng-primitives/radio';
   `,
   styleUrl: './radio-item.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.readonly]': 'radioGroupReadonly() ? "" : null',
+  },
   hostDirectives: [
     {
       directive: NgpRadioItem,
@@ -21,4 +31,21 @@ import { NgpRadioIndicator, NgpRadioItem } from 'ng-primitives/radio';
     },
   ],
 })
-export class RadioItem {}
+export class RadioItem {
+  readonly #state = injectRadioItemState();
+  readonly #radioGroupState = injectRadioGroupState();
+  protected readonly radioGroupReadonly = inject(RadioGroup).readonly;
+
+  constructor() {
+    effect(() => {
+      const internalState = untracked(() => this.#state());
+      const disabled = this.#radioGroupState().disabled();
+      internalState.disabled.set(disabled);
+    });
+    effect(() => {
+      this.#radioGroupState().value();
+      const isReadonly = this.radioGroupReadonly();
+      if (isReadonly) untracked(() => this.#radioGroupState().value.set(null));
+    });
+  }
+}

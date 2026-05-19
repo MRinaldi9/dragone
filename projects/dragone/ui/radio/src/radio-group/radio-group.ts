@@ -1,18 +1,29 @@
-import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
-import type { ControlValueAccessor } from '@angular/forms';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChildren,
+  ElementRef,
+  input,
+  output,
+} from '@angular/core';
 import { injectRadioGroupState, NgpRadioGroup } from 'ng-primitives/radio';
-import { type ChangeFn, provideValueAccessor, type TouchedFn } from 'ng-primitives/utils';
+
+import { RadioItem } from '../radio-item/radio-item';
 
 @Component({
   selector: 'drgn-radio-group',
   imports: [],
   template: ` <ng-content /> `,
   styleUrl: './radio-group.css',
-  providers: [provideValueAccessor(RadioGroup)],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '(blur)': 'onTouched?.()',
+    '(focusout)': 'touched($event)',
     '[style.--direction]': 'direction()',
+    '[attr.readonly]': 'readonly() ? "" : null',
+    '[attr.name]': 'name() ? name() : null',
+    '[attr.hidden]': 'hidden() ? "" : null',
   },
   hostDirectives: [
     {
@@ -27,28 +38,32 @@ import { type ChangeFn, provideValueAccessor, type TouchedFn } from 'ng-primitiv
     },
   ],
 })
-export class RadioGroup<T> implements ControlValueAccessor {
-  private readonly radioGroupState = injectRadioGroupState<T>();
+export class RadioGroup<T> {
+  readonly readonly = input(false, { transform: booleanAttribute });
+  readonly hidden = input(false, { transform: booleanAttribute });
+  readonly name = input<string>();
+  protected readonly radioItems = contentChildren<RadioItem, ElementRef<HTMLElement>>(RadioItem, {
+    read: ElementRef,
+  });
+  readonly touch = output<void>();
+  readonly #radioGroupState = injectRadioGroupState<T>();
+
   protected direction = computed(() =>
-    this.radioGroupState().orientation() === 'horizontal' ? 'row' : 'column',
+    this.#radioGroupState().orientation() === 'horizontal' ? 'row' : 'column',
   );
-  protected onTouched: TouchedFn | undefined;
-  private onChange: ChangeFn<T | null> | undefined;
 
-  constructor() {
-    this.radioGroupState().valueChange.subscribe(value => this.onChange?.(value));
+  focus(options?: FocusOptions): void {
+    this.radioItems().at(0)?.nativeElement.focus(options);
   }
 
-  writeValue(val: T): void {
-    this.radioGroupState().value.set(val);
+  reset(): void {
+    this.#radioGroupState().value.set(null);
   }
-  registerOnChange(fn: ChangeFn<T | null>): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: TouchedFn): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.radioGroupState().disabled.set(isDisabled);
+
+  protected touched(event: FocusEvent): void {
+    const target = event.relatedTarget as HTMLElement | null;
+    if (!this.radioItems().some(item => item.nativeElement === target)) {
+      this.touch.emit();
+    }
   }
 }
