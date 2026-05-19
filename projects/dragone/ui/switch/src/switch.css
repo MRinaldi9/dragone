@@ -32,6 +32,12 @@
       border-color: var(--interactive-primary-hover);
     }
   }
+  &[hidden] {
+    display: none;
+  }
+  &[readonly] {
+    pointer-events: none;
+  }
 }
 
 [ngpSwitchThumb] {

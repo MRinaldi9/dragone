@@ -3,13 +3,13 @@ import { expect, fn, within } from 'storybook/test';
 
 import { Switch } from './switch';
 
-interface SwitchArgs {
+type SwitchArgs = Switch & {
   checked: boolean;
   disabled: boolean;
   checkedChange: (checked: boolean) => void;
   darkMode?: boolean;
   ariaLabel?: string;
-}
+};
 
 const meta: Meta<SwitchArgs> = {
   title: 'Dragone/UI/Switch',
@@ -37,6 +37,22 @@ const meta: Meta<SwitchArgs> = {
       description: 'Evento emesso quando lo stato checked cambia',
       table: {
         type: { summary: 'EventEmitter<boolean>' },
+      },
+    },
+    hidden: {
+      control: 'boolean',
+      description: 'Nasconde lo switch quando impostato a true',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    readonly: {
+      control: 'boolean',
+      description: 'Rende lo switch di sola lettura, non interagibile',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
       },
     },
   },

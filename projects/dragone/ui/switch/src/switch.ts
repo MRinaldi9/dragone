@@ -1,54 +1,40 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import type { ControlValueAccessor } from '@angular/forms';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 import { injectSwitchState, NgpSwitch, NgpSwitchThumb } from 'ng-primitives/switch';
-import { provideValueAccessor, type ChangeFn, type TouchedFn } from 'ng-primitives/utils';
 
 @Component({
   selector: 'drgn-switch',
   imports: [NgpSwitchThumb],
   template: ` <span ngpSwitchThumb></span> `,
   styleUrl: './switch.css',
-  providers: [provideValueAccessor(Switch)],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'switch',
     tabindex: '0',
-    '(blur)': 'touchedFn?.()',
+    '[hidden]': 'hidden()',
+    '[attr.readonly]': 'readonly() ? "" : null',
+    '[attr.name]': 'name() ? name() : null',
+    '(blur)': 'touch.emit()',
     '(keyup.enter)': 'toggle()',
   },
   hostDirectives: [
     NgpFocusVisible,
     {
       directive: NgpSwitch,
-      inputs: ['ngpSwitchChecked: checked', 'ngpSwitchDisabled: disabled'],
+      inputs: ['ngpSwitchChecked: checked', 'ngpSwitchDisabled: disabled', 'id'],
       outputs: ['ngpSwitchCheckedChange: checkedChange'],
     },
   ],
 })
-export class Switch implements ControlValueAccessor {
-  private readonly internalState = injectSwitchState();
-  private changeFn: ChangeFn<boolean> | undefined;
-  protected touchedFn: TouchedFn | undefined;
+export class Switch {
+  readonly readonly = input(false, { transform: booleanAttribute });
+  readonly hidden = input(false, { transform: booleanAttribute });
+  readonly name = input('');
+  readonly touch = output<void>();
 
-  constructor() {
-    this.internalState().checkedChange.subscribe(val => this.changeFn?.(val));
-  }
-
-  writeValue(checked: boolean): void {
-    this.internalState().checked.set(checked);
-  }
-  registerOnChange(fn: ChangeFn<boolean>): void {
-    this.changeFn = fn;
-  }
-  registerOnTouched(fn: TouchedFn): void {
-    this.touchedFn = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.internalState().disabled.set(isDisabled);
-  }
+  readonly #internalState = injectSwitchState();
 
   protected toggle(): void {
-    this.internalState().toggle();
+    this.#internalState().toggle();
   }
 }
