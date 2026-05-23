@@ -1,6 +1,11 @@
 Use conventional commit message format.
 Max line length for header, body and footer is 100 characters.
 
+## Types
+
+Use standard Conventional Commits types:
+`feat` | `fix` | `docs` | `style` | `refactor` | `perf` | `test` | `build` | `chore` | `ci` | `revert`
+
 ## Scopes
 
 Use the component name as scope when the change targets a specific component:
@@ -11,11 +16,13 @@ Use the component name as scope when the change targets a specific component:
 
 Use these scopes for cross-cutting changes:
 
-| Scope   | When to use                                                                 |
-|---------|-----------------------------------------------------------------------------|
-| `docs`  | CONTEXT.md, ADRs, README, any documentation file                            |
-| `ui`    | tokens.css, typography.css, utils, or any change that spans multiple components |
-| `config`| Any file matching `*.config.*`, angular.json, lefthook.yml, tsconfig*, package.json |
+| Scope   | When to use                                                                 | Common type       |
+|---------|-----------------------------------------------------------------------------|-------------------|
+| `docs`  | CONTEXT.md, ADRs, README, any documentation file                            | `docs`            |
+| `ui`    | tokens.css, typography.css, utils, or any change that spans multiple components | `feat` / `fix` |
+| `config`| Any file matching `*.config.*`, angular.json, lefthook.yml, tsconfig*, package.json | `chore` / `build` |
+
+Note: `config` is a **scope**, not a type. Always pair it with a valid type (e.g. `chore(config): ...`).
 
 ## Breaking changes
 
