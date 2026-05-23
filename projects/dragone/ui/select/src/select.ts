@@ -1,5 +1,5 @@
-import { Component, computed, effect, input, linkedSignal, output } from '@angular/core';
-import type { ControlValueAccessor } from '@angular/forms';
+import { booleanAttribute, Component, computed, input, linkedSignal, output } from '@angular/core';
+import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
@@ -9,12 +9,9 @@ import {
   NgpSelectOption,
   NgpSelectPortal,
 } from 'ng-primitives/select';
-import { type ChangeFn, provideValueAccessor, type TouchedFn, uniqueId } from 'ng-primitives/utils';
+import { map } from 'rxjs';
 
 import { isNotNil } from '@dragone/ui/utils';
-
-import { OptionMapperPipe } from './utils/option-mapper-pipe';
-import { OptionSelectedPipe } from './utils/option-selected-pipe';
 
 type OptionPrimitive = string | number | boolean;
 type OptionObject<T> = T & { disabled?: boolean };
@@ -22,59 +19,34 @@ type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
 
 @Component({
   selector: 'drgn-select',
-  imports: [
-    NgpSelectDropdown,
-    NgpSelectOption,
-    NgpSelectPortal,
-    NgIcon,
-    OptionMapperPipe,
-    OptionSelectedPipe,
-  ],
-  template: `
-    @if (canShowValue()) {
-      <span class="select-value">
-        {{ internalValue() | optionMap: optionLabel() }}
-      </span>
-    } @else {
-      <span data-testid="placeholder" class="select-placeholder">{{ placeholder() }}</span>
-    }
-    <ng-icon class="chevron" name="faSolidChevronDown" />
-    <div *ngpSelectPortal ngpSelectDropdown>
-      @for (option of options(); track option) {
-        <div class="drgn-label-md-400" ngpSelectOption [ngpSelectOptionValue]="option">
-          {{ option | optionMap: optionLabel() }}
-          @if (option | optionSelected: internalValue()) {
-            <ng-icon name="faSolidCheck" />
-          }
-        </div>
-      } @empty {
-        <div class="empty-message">Non ci sono elementi da visualizzare</div>
-      }
-    </div>
-  `,
+  imports: [NgpSelectDropdown, NgpSelectOption, NgpSelectPortal, NgIcon],
+  templateUrl: './select.component.html',
   styleUrl: './select.css',
-  providers: [provideIcons({ faSolidChevronDown, faSolidCheck }), provideValueAccessor(Select)],
+  providers: [provideIcons({ faSolidChevronDown, faSolidCheck })],
   host: {
     class: 'drgn-label-md-400',
     '[ariaLabel]': 'ariaLabelledBy() ? undefined : (ariaLabel() || placeholder())',
     '[attr.aria-labelledby]': 'ariaLabelledBy()',
-    '(blur)': 'onTouched?.()',
+    '[attr.name]': 'name()',
+    '[attr.readonly]': 'readonly() ? "" : undefined',
+    '[attr.hidden]': 'hidden() ? "" : undefined',
+    '(blur)': 'touch.emit()',
   },
   hostDirectives: [
     {
       directive: NgpSelect,
       inputs: [
+        'id',
         'ngpSelectDisabled: disabled',
         'ngpSelectValue: value',
         'ngpSelectMultiple: multiple',
-        'ngpSelectCompareWith: compareWith',
+        'ngpSelectCompareWith: compare',
       ],
-      outputs: ['ngpSelectOpenChange: openChange'],
+      outputs: ['ngpSelectOpenChange: openChange', 'ngpSelectValueChange: valueChange'],
     },
   ],
 })
-export class Select<T> implements ControlValueAccessor {
-  readonly id = input<string>(uniqueId('drgn-select'));
+export class Select<T> {
   readonly options = input<Option<T>[]>();
   readonly placeholder = input<string>();
   /**
@@ -85,11 +57,23 @@ export class Select<T> implements ControlValueAccessor {
   readonly optionValue = input<T extends object ? keyof T : never>();
   readonly ariaLabel = input<string>();
   readonly ariaLabelledBy = input<string>();
-  readonly valueChange = output<Option<T> | Option<T>[]>();
-  protected onChange: ChangeFn<Option<T> | Option<T>[]> | undefined;
-  protected onTouched: TouchedFn | undefined;
-
+  readonly readonly = input(false, { transform: booleanAttribute });
+  readonly hidden = input(false, { transform: booleanAttribute });
+  readonly name = input<string>();
+  readonly touch = output<void>();
   readonly #internalState = injectSelectState();
+
+  readonly valueChange = outputFromObservable(
+    outputToObservable(this.#internalState().valueChange).pipe(
+      map((value: Option<T> | Option<T>[] | null | undefined) => {
+        if (Array.isArray(value)) {
+          return value.map(val => this.mapOutputValue(val));
+        }
+        return this.mapOutputValue(value);
+      }),
+    ),
+  );
+
   protected readonly internalValue = linkedSignal<Option<T> | Option<T>[]>(
     this.#internalState().value,
   );
@@ -102,26 +86,77 @@ export class Select<T> implements ControlValueAccessor {
     return isNotNil(value);
   });
 
-  constructor() {
-    this.#internalState().valueChange.subscribe(value => {
-      this.onChange?.(value);
-      this.valueChange.emit(this.optionValue() ? value[this.optionValue()] : value);
-    });
-    effect(() => {
-      this.#internalState().id.set(this.id());
-    });
+  /**
+   * Value shown inside the trigger when at least one option is selected.
+   * It applies `optionLabel` mapping when provided.
+   */
+  protected readonly mappedValue = computed(() => this.mapOption(this.internalValue()));
+
+  /**
+   * View model used by the dropdown template.
+   * It precomputes label and selected state for each option.
+   */
+  protected readonly optionItems = computed(() => {
+    const selectedValue = this.internalValue();
+    return (this.options() ?? []).map(option => ({
+      value: option,
+      label: this.mapOption(option),
+      selected: this.isOptionSelected(option, selectedValue),
+    }));
+  });
+
+  /**
+   * Maps one option (or a list of options) to its display label.
+   * If `optionLabel` is not set, the original value is returned.
+   */
+  private mapOption(value: Option<T> | Option<T>[] | null | undefined): unknown {
+    if (typeof value !== 'object' || !value) {
+      return value;
+    }
+    const key = this.optionLabel();
+    if (!key) {
+      return value;
+    }
+    if (Array.isArray(value)) {
+      return value.map(option => this.getOptionProp(option, key));
+    }
+    return this.getOptionProp(value, key);
   }
 
-  writeValue(formValue: Option<T> | Option<T>[]): void {
-    this.#internalState().value.set(formValue);
+  /**
+   * Returns whether the current option is selected.
+   * Selection is delegated to `compareWith` from `ng-primitives` state.
+   */
+  private isOptionSelected(
+    currOption: Option<T>,
+    selectedValue: Option<T> | Option<T>[] | null | undefined,
+  ): boolean {
+    const compareWith = this.#internalState().compareWith();
+    if (Array.isArray(selectedValue)) {
+      return selectedValue.some(value => compareWith(value, currOption));
+    }
+    return compareWith(selectedValue, currOption);
   }
-  registerOnChange(fn: ChangeFn<Option<T> | Option<T>[]>): void {
-    this.onChange = fn;
+
+  /**
+   * Safely reads a property from an option object using the configured key.
+   */
+  private getOptionProp(option: Option<T>, key: T extends object ? keyof T : never): unknown {
+    return (option as Record<PropertyKey, unknown>)[key as PropertyKey];
   }
-  registerOnTouched(fn: TouchedFn): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.#internalState().disabled.set(isDisabled);
+
+  /**
+   * Maps emitted values for `valueChange`.
+   * If `optionValue` is configured, emits the extracted property; otherwise emits the raw option.
+   */
+  private mapOutputValue(value: Option<T> | null | undefined): unknown {
+    if (!isNotNil(value)) {
+      return value;
+    }
+    const key = this.optionValue();
+    if (!key || typeof value !== 'object') {
+      return value;
+    }
+    return this.getOptionProp(value, key);
   }
 }

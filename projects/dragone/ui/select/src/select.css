@@ -19,6 +19,12 @@
     background-color: var(--bg-disabled);
     border-color: var(--bg-disabled);
   }
+  &[readonly] {
+    pointer-events: none;
+  }
+  &[hidden] {
+    display: none;
+  }
 }
 
 .select-value,

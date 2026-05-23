@@ -1,0 +1,21 @@
+@if (canShowValue()) {
+  <span class="select-value">
+    {{ mappedValue() }}
+  </span>
+} @else {
+  <span data-testid="placeholder" class="select-placeholder">{{ placeholder() }}</span>
+}
+<ng-icon class="chevron" name="faSolidChevronDown" />
+<!-- Dropdown -->
+<div *ngpSelectPortal ngpSelectDropdown>
+  @for (option of optionItems(); track option.value) {
+    <div class="drgn-label-md-400" ngpSelectOption [ngpSelectOptionValue]="option.value">
+      {{ option.label }}
+      @if (option.selected) {
+        <ng-icon name="faSolidCheck" />
+      }
+    </div>
+  } @empty {
+    <div class="empty-message">Non ci sono elementi da visualizzare</div>
+  }
+</div>

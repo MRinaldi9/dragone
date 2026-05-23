@@ -8,14 +8,6 @@ type SelectStory = Select<string | { label: string; value: string } | number> & 
   disabled: boolean;
   id: string;
   multiple: boolean;
-  valueChange: (
-    value:
-      | string
-      | string[]
-      | { label: string; value: string }
-      | { label: string; value: string }[],
-  ) => void;
-  openChange: (isOpen: boolean) => void;
 };
 
 const meta: Meta<SelectStory> = {
@@ -84,6 +76,22 @@ const meta: Meta<SelectStory> = {
       description: 'Event emitted when the select dropdown opens or closes',
       action: 'openChange',
       control: false,
+    },
+    hidden: {
+      type: 'boolean',
+      description: 'Whether the select is hidden',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    readonly: {
+      type: 'boolean',
+      description: 'Whether the select is read-only',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
     },
   },
   render: args => ({

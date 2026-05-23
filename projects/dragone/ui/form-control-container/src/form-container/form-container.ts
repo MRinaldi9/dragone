@@ -22,9 +22,9 @@ import { ValidationError } from '../validation-error/validation-error';
         <ng-content select="[formField]"> Errata configurazione </ng-content>
       </div>
       @if (description()) {
-        <small class="drgn-helper-text-xs-400 description" drgnDescription>{{
-          description()
-        }}</small>
+        <small class="drgn-helper-text-xs-400 description" drgnDescription>
+          {{ description() }}
+        </small>
       }
     </div>
     @for (error of errors(); track error.kind) {
@@ -35,8 +35,9 @@ import { ValidationError } from '../validation-error/validation-error';
         animate.leave="error-leave"
         [attr.role]="$first ? 'alert' : null"
         [validator]="error.kind"
-        >{{ error.message }}</span
       >
+        {{ error.message }}
+      </span>
     }
   `,
   styleUrl: './form-container.css',

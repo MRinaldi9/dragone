@@ -120,6 +120,7 @@ export default defineConfig({
       files: ['**/*.spec.ts', '**/*.test.ts'],
       rules: {
         'init-declarations': ['off'],
+        'max-params': 'off',
         'max-statements': 'off',
         'typescript/explicit-function-return-type': 'off',
         'vitest/consistent-test-filename': 'off',
