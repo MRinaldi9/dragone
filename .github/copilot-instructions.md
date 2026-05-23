@@ -1,15 +1,36 @@
 # Istruzioni per GitHub Copilot
 
+> **Glossario canonico**: vedi `CONTEXT.md` alla root del repository.
+> **Decisioni architetturali**: vedi `docs/adr/`.
+
 ## Contesto del Progetto
 
-Monorepo **Angular 21** con **pnpm** che implementa il design system **Sirio** di INPS. La libreria `@dragone/ui` (`projects/dragone/ui`) esporta componenti UI riutilizzabili come secondary entry points (NX style per distribuzioni separate).
+**Dragone** è un design system Angular superset di [Sirio](https://www.inps.design/3e7e2b0f5/p/37c451-ciao-italia) (INPS). La libreria `@dragone/ui` (`projects/dragone/ui`) esporta componenti UI riutilizzabili come secondary entry points.
 
 **Punti salienti architetturali:**
 - **Secondary Entry Points**: Ogni componente è una distribuzione indipendente (es. `@dragone/ui/button`, `@dragone/ui/checkbox`)
-- **ng-primitives**: Componenti wrapper attorno a primitive headless di `ng-primitives` (Button, Checkbox, Radio, Switch)
+- **ng-primitives first**: I componenti delegano comportamento, a11y e state a `ng-primitives` tramite `hostDirectives`. Vedi `docs/adr/0002-ng-primitives-first.md`.
 - **Standalone Components**: No NgModules, solo standalone APIs
 - **Vitest + Playwright**: Test con `@analogjs/vitest-angular` + browser automation
 - **Storybook**: Component test e Dev environment principale con Analog Angular integration
+
+## Workflow per la Creazione di un Nuovo Componente
+
+**SEMPRE seguire questo ordine:**
+
+1. **Consulta ng-primitives MCP** — cerca se esiste una Primitive per il comportamento richiesto (es. `NgpSwitch`, `NgpSelect`, `NgpAccordion`)
+2. **Decidi il selector** — vedi regola sotto
+3. **Componi via `hostDirectives`** — inietta lo state con `inject*State()`, non reimplementarlo
+4. **Implementa solo ciò che ng-primitives non copre** — logica presentazionale, token CSS, surface API
+
+### Regola Selector (vedi `docs/adr/0001-selector-strategy.md`)
+
+| Scenario | Selector da usare | Esempio |
+|---|---|---|
+| Componente senza template proprio, potenzia elemento nativo | `nativeEl[drgnName]` | `button[drgnButton]`, `input[drgnInputText]` |
+| Componente con template non banale o comportamento nativo insufficiente | `drgn-name` | `drgn-select`, `drgn-checkbox` |
+
+**Regola euristica**: se il componente può vivere senza template (o con template vuoto), usa l'attribute selector.
 
 ## Convenzioni Essenziali
 
@@ -172,7 +193,9 @@ play: async ({ canvasElement }) => {
 
 ### 5. Anatomia di un Nuovo Componente (Template Generico)
 
-Quando implementi un componente nuovo, segui questa sequenza di file:
+Quando implementi un componente nuovo, segui questa sequenza di file.
+
+> **Prima di scrivere codice**: consulta ng-primitives MCP per trovare la Primitive adatta. Il selector dipende dalla decisione (vedi sezione "Regola Selector" sopra).
 
 #### File: `projects/dragone/ui/<component>/ng-package.json`
 ```json
@@ -194,30 +217,56 @@ export * from './src/<component>';
 export { <Component> } from './public-api';
 ```
 
-#### File: `projects/dragone/ui/<component>/src/<component>.ts`
+#### Caso A — Attribute Selector (elemento nativo, no template proprio)
 ```typescript
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { NgpComponent } from 'ng-primitives/component'; // Se necessario
+import { Component, input } from '@angular/core';
+import { NgpSomePrimitive } from 'ng-primitives/some-primitive'; // dalla MCP
+import { NgpFocusVisible } from 'ng-primitives/interactions';
 
 @Component({
-  selector: 'drgn-<component>',  // o 'element[drgn<Component>]' per attribute selector
-  template: `<ng-content />`,
+  selector: 'nativeEl[drgn<Component>]',  // es. button[drgnButton], input[drgnInput]
+  template: ``,                            // vuoto o solo ng-content
   styleUrl: './<component>.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[attr.data-variant]': 'variant()',  // Data attributes per varianti visive
-    class: 'drgn-label-md-700',          // Typography class dal tokens
+    '[attr.data-variant]': 'variant()',
+    class: 'drgn-label-md-400',
   },
   hostDirectives: [
-    // Composizione con ng-primitives se necessario
-    // { directive: NgpComponent, inputs: ['disabled'] },
+    NgpFocusVisible,
+    { directive: NgpSomePrimitive, inputs: ['ngpSomePrimitiveDisabled: disabled'] },
   ],
 })
 export class <Component> {
   readonly variant = input<'default' | 'secondary'>('default');
-  readonly disabled = input(false);
-  // Output per eventi
-  // readonly action = output<void>();
+}
+```
+
+#### Caso B — Element Selector (template non banale o nativo insufficiente)
+```typescript
+import { Component, input } from '@angular/core';
+import { injectSomePrimitiveState, NgpSomePrimitive } from 'ng-primitives/some-primitive';
+import { NgpFocusVisible } from 'ng-primitives/interactions';
+
+@Component({
+  selector: 'drgn-<component>',
+  template: `
+    <!-- template composito -->
+    <ng-content />
+  `,
+  styleUrl: './<component>.css',
+  host: {
+    '[attr.data-variant]': 'variant()',
+    class: 'drgn-label-md-400',
+  },
+  hostDirectives: [
+    NgpFocusVisible,
+    { directive: NgpSomePrimitive, inputs: ['ngpSomePrimitiveDisabled: disabled'] },
+  ],
+})
+export class <Component> {
+  readonly variant = input<'default' | 'secondary'>('default');
+  readonly #state = injectSomePrimitiveState();
+  // Leggi state dalla Primitive, non reimplementarlo
 }
 ```
 
@@ -315,11 +364,12 @@ export const Default: Story = {
 ```
 
 **Checklist implementazione:**
-- [ ] Tutti e 6 i file creati (`ng-package.json`, `public-api.ts`, `index.ts`, `.ts`, `.css`, `.spec.ts`, `.stories.ts`)
-- [ ] Selector usa prefisso `drgn`
-- [ ] `ChangeDetectionStrategy.OnPush`
+- [ ] ng-primitives MCP consultato — Primitive identificata (o assenza documentata)
+- [ ] Selector scelto secondo la regola (attribute vs element)
+- [ ] Tutti i file creati (`ng-package.json`, `public-api.ts`, `index.ts`, `.ts`, `.css`, `.spec.ts`, `.stories.ts`)
+- [ ] State letto da `inject*State()` della Primitive, non reimplementato
 - [ ] CSS usa solo token da `tokens.css`
-- [ ] Inputs con `input()` API (signal-based)
+- [ ] Inputs con `input()` API (signal-based); `model()` per two-way binding se necessario
 - [ ] `.spec.ts` copre almeno la creazione e una proprietà
 - [ ] Stories con `tags: ['autodocs']` per auto-generazione docs
 
