@@ -14,7 +14,7 @@ describe(ChipSelected, () => {
           drgn-chip-selected
           [selected]="selected()"
           [disabled]="disabled()"
-          (selectedChange)="onChange($event)"
+          (selectedChange)="handleSelectedChange($event)"
         >
           Test
         </button>
@@ -23,7 +23,12 @@ describe(ChipSelected, () => {
     class TestHostComponent {
       selected = signal(false);
       disabled = signal(false);
-      onChange = vi.fn<() => void>();
+      onChange = vi.fn<(selected: boolean) => void>();
+
+      handleSelectedChange(selected: boolean): void {
+        this.selected.set(selected);
+        this.onChange(selected);
+      }
     }
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
@@ -46,8 +51,8 @@ describe(ChipSelected, () => {
     it('should toggle selected state on click', async () => {
       const button = page.getByRole('button');
       await button.click();
+      await expect.element(button).toHaveAttribute('aria-pressed', 'true');
       expect(component.onChange).toHaveBeenCalledWith(true);
-      expect(button).toHaveAttribute('aria-pressed', 'true');
     });
 
     it('should reflect disabled state', async () => {

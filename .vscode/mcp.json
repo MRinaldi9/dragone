@@ -21,9 +21,8 @@
       "url": "https://mcp.figma.com/mcp"
     },
     "ngp-mcp": {
-      "command": "npx",
+      "command": "pnx",
       "args": [
-        "-y",
         "@ng-primitives/mcp"
       ]
     }

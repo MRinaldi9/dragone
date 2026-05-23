@@ -1,6 +1,5 @@
 import { inputBinding, outputBinding, signal } from '@angular/core';
 import { type ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { faSolidCircleCheck, faSolidCircleInfo } from '@ng-icons/font-awesome/solid';
 import { type Locator, page } from 'vitest/browser';
 
@@ -57,8 +56,8 @@ describe(Alert, () => {
     const button = locatorComponent.getByRole('button', { name: 'Click me' });
     await expect.element(button).toBeVisible();
 
-    const btnDe = fixture.debugElement.query(By.css('button'));
-    btnDe.triggerEventHandler('click');
-    expect(ctaMock).toHaveBeenCalledWith();
+    await button.click();
+
+    expect(ctaMock).toHaveBeenCalledWith(expect.anything());
   });
 });
