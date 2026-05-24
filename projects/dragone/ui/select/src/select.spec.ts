@@ -107,6 +107,19 @@ describe(Select, () => {
     expect(componentLocator.element().ariaLabel).toBe('Custom aria label');
   });
 
+  it('should emit valueChange once per option selection', async () => {
+    const valueChangeSpy = vi.fn<(value: unknown) => void>();
+    component.valueChange.subscribe(valueChangeSpy);
+
+    await componentLocator.click();
+    const optionEl = await vi.waitUntil(() => page.getByRole('option', { name: 'Opzione A' }));
+    await optionEl.click();
+    await fixture.whenStable();
+
+    expect(valueChangeSpy).toHaveBeenNthCalledWith(1, options()[0]);
+    expect(valueChangeSpy.mock.calls[1]).toBeUndefined();
+  });
+
   describe('form integration', () => {
     it('should update form field value on simple option select', async () => {
       const { component, locator, whenStable } = setupForm(['foo', 'bar']);

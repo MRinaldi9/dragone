@@ -16,6 +16,7 @@ import { isNotNil } from '@dragone/ui/utils';
 type OptionPrimitive = string | number | boolean;
 type OptionObject<T> = T & { disabled?: boolean };
 type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
+type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
 
 @Component({
   selector: 'drgn-select',
@@ -42,12 +43,13 @@ type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
         'ngpSelectMultiple: multiple',
         'ngpSelectCompareWith: compare',
       ],
-      outputs: ['ngpSelectOpenChange: openChange', 'ngpSelectValueChange: valueChange'],
+      outputs: ['ngpSelectOpenChange: openChange'],
     },
   ],
 })
 export class Select<T> {
   readonly options = input<Option<T>[]>();
+  readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
   /**
    * A string that maps an option to its display label. If not provided, the option itself will be used as the label.
@@ -65,7 +67,7 @@ export class Select<T> {
 
   readonly valueChange = outputFromObservable(
     outputToObservable(this.#internalState().valueChange).pipe(
-      map((value: Option<T> | Option<T>[] | null | undefined) => {
+      map((value: SelectValue<T>) => {
         if (Array.isArray(value)) {
           return value.map(val => this.mapOutputValue(val));
         }
@@ -127,10 +129,7 @@ export class Select<T> {
    * Returns whether the current option is selected.
    * Selection is delegated to `compareWith` from `ng-primitives` state.
    */
-  private isOptionSelected(
-    currOption: Option<T>,
-    selectedValue: Option<T> | Option<T>[] | null | undefined,
-  ): boolean {
+  private isOptionSelected(currOption: Option<T>, selectedValue: SelectValue<T>): boolean {
     const compareWith = this.#internalState().compareWith();
     if (Array.isArray(selectedValue)) {
       return selectedValue.some(value => compareWith(value, currOption));
