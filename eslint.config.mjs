@@ -1,7 +1,7 @@
 import { configs as angularConfigs, processInlineTemplates } from 'angular-eslint';
 import { defineConfig } from 'eslint/config';
 import { configs as tsEslintConfig } from 'typescript-eslint';
-
+import oxlint from 'eslint-plugin-oxlint';
 export default defineConfig(
   {
     extends: [...tsEslintConfig.recommended],
@@ -29,4 +29,5 @@ export default defineConfig(
     },
   },
   { ignores: ['!.storybook', 'coverage/**', 'node_modules/**', 'dist/**'] },
+  ...oxlint.configs['flat/recommended']
 );
