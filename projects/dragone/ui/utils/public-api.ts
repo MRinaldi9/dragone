@@ -4,3 +4,4 @@ export * from './src/manager-plugin/provider';
 export * from './src/utility-types';
 export * from './src/utility-types/svg';
 export * from './src/functions/is-nil';
+export * from './src/functions/to-element';
