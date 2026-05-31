@@ -1,10 +1,23 @@
 {
   "version": 1,
   "skills": {
+    "accessibility": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/accessibility/SKILL.md",
+      "computedHash": "ebfa09617a2ac4fd64afd73267726b787145a8d14294df3f8802b462c91594ab"
+    },
     "angular-developer": {
       "source": "angular/skills",
       "sourceType": "github",
-      "computedHash": "ccf9dd7e66a387eb0c40f34bcbfd5727edba70407b28b08e1c2dbe48e22a223e"
+      "skillPath": "angular-developer/SKILL.md",
+      "computedHash": "766b27c6654b09c93f245a819ac01dc88e68844535997dbd2c980c242a9e8625"
+    },
+    "angular-new-app": {
+      "source": "angular/skills",
+      "sourceType": "github",
+      "skillPath": "angular-new-app/SKILL.md",
+      "computedHash": "d9f712544847ab80ef7ed20043820afd275c394ca05340c2f20a0f051e35d945"
     },
     "caveman": {
       "source": "mattpocock/skills",
@@ -28,7 +41,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "computedHash": "59849672f8fce76b73055f6c9270236212e444c9aa63d02481bdf3cf788edb9f"
+      "computedHash": "7c212cee6a823b956aaec7dff2a846814fe9986caa2e62313734010c7bd3db70"
     },
     "handoff": {
       "source": "mattpocock/skills",
