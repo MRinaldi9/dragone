@@ -1,6 +1,6 @@
 import { booleanAttribute, Component, input } from '@angular/core';
 import { NgpButton } from 'ng-primitives/button';
-import { NgpFocusVisible } from 'ng-primitives/interactions';
+import { NgpFocus, NgpFocusVisible } from 'ng-primitives/interactions';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger';
@@ -26,6 +26,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'da
       inputs: ['ngpFocusVisibleDisabled:focusVisibleDisabled'],
       outputs: ['ngpFocusVisible:focusVisible'],
     },
+    NgpFocus,
   ],
 })
 export class Button {

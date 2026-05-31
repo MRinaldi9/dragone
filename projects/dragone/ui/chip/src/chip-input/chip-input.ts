@@ -27,7 +27,7 @@ import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
   providers: [provideIcons({ faSolidXmark })],
   host: {
     class: 'drgn-label-md-700',
-    tabindex: '0',
+    tabindex: '-1',
     '[attr.data-disabled]': 'disabled() ? "" : null',
   },
   hostDirectives: [NgpFocusVisible],
@@ -35,8 +35,11 @@ import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
 export class ChipInput {
   readonly disabled = input<boolean>(false);
   readonly label = input.required<string>();
+  readonly removeAriaLabel = input<string>();
   readonly icon = input<SvgIcon, string>(undefined, { transform: icon => convertToSvgIcon(icon) });
   readonly remove = output<void>();
 
-  protected readonly ariaLabelBtn = computed(() => `Remove ${this.label()}`);
+  protected readonly ariaLabelBtn = computed(
+    () => this.removeAriaLabel() ?? `Remove ${this.label()}`,
+  );
 }

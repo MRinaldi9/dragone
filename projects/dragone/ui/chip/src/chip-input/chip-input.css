@@ -1,5 +1,5 @@
 :host {
-  display: block flex;
+  display: inline-flex;
   gap: 0.5rem;
   align-items: center;
   padding: 3px;
@@ -13,7 +13,8 @@
       background-color: var(--interactive-primary-hover);
     }
   }
-  &[data-focus-visible='keyboard'] {
+  &[data-focus-visible='keyboard'],
+  &:has(.close-button:focus-visible) {
     outline: none;
     box-shadow:
       0 0 0 3px var(--color-global-primary-000),
@@ -52,8 +53,7 @@
   cursor: pointer;
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px var(--interactive-primary-default);
-    background-color: var(--interactive-primary-hover);
+    box-shadow: none;
   }
   &:not(:disabled):active {
     background-color: var(--interactive-primary-pressed);

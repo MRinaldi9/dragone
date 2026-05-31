@@ -10,7 +10,8 @@
   &[data-icon-only='true'] {
     padding: 16px;
   }
-  &[data-focus-visible] {
+  &[data-focus-visible],
+  &[data-focus].cdk-program-focused {
     outline: none;
     box-shadow:
       0 0 0 3px var(--color-global-primary-000),
