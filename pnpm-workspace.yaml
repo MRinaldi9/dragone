@@ -5,6 +5,8 @@ allowBuilds:
   lefthook: true
   lmdb: true
   msgpackr-extract: true
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: false
 ovverides:
   '@analogjs/vite-plugin-angular@2.5.2>@angular/build': '$@angular/build'
   '@analogjs/vite-plugin-angular@2.5.2>@angular-devkit/build-angular': '-'
