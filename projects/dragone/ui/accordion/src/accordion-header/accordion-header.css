@@ -10,6 +10,10 @@ ng-icon {
   font-size: 1.25rem;
   color: var(--ngp-text-secondary);
   transition: transform 0.2s ease-in-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 [ngpAccordionTrigger][data-open] ng-icon {

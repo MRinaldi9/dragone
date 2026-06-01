@@ -4,9 +4,8 @@
     margin-bottom: 2px;
   }
 }
-
 .accordion-container {
-  padding: 0 4rem;
+  padding: 2rem 4rem;
 }
 
 [ngpAccordionContent] {
@@ -15,38 +14,58 @@
   box-sizing: border-box;
 }
 
-[ngpAccordionContent][data-open] {
-  border: 1px solid var(--bg-primary-light-40);
-  & .accordion-container {
-    animation: slideDown 0.2s ease-in-out forwards;
-  }
+/*
+ * Use inset box-shadow instead of border: border changes the element's width by 1px
+ * when it appears/disappears, causing text reflow (visible as flickering).
+ * box-shadow: inset is visually identical but does not affect the box model.
+ * Include data-enter and data-exit so the shadow persists throughout the animation.
+ */
+[ngpAccordionContent][data-open],
+[ngpAccordionContent][data-enter],
+[ngpAccordionContent][data-exit] {
+  box-shadow: inset 0 0 0 1px var(--bg-primary-light-40);
 }
 
-[ngpAccordionContent][data-closed] .accordion-container {
+/*
+ * Animate [ngpAccordionContent] directly (not a child) so that scrollHeight stays
+ * stable while the ResizeObserver runs. data-enter / data-exit are set by ng-primitives
+ * and cleared on animationend / animationcancel.
+ */
+[ngpAccordionContent][data-enter] {
+  animation: slideDown 0.2s ease-in-out forwards;
+}
+
+[ngpAccordionContent][data-closed] {
   animation: slideUp 0.2s ease-in-out forwards;
 }
 
 @keyframes slideDown {
   from {
     height: 0;
-    border: 0;
   }
   to {
-    height: calc(var(--ngp-accordion-content-height) + 2rem);
-    padding: 2rem 4rem;
+    height: var(--ngp-accordion-content-height);
   }
 }
 
 @keyframes slideUp {
-  0% {
-    height: calc(var(--ngp-accordion-content-height) + 2rem);
-    padding: 2rem 4rem;
+  from {
+    height: var(--ngp-accordion-content-height);
   }
-  50% {
-    padding: 1rem 4rem;
-  }
-  100% {
+  to {
     height: 0;
-    padding: 0 4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /*
+   * Do NOT use animation: none — ng-primitives relies on animationend to clear
+   * data-enter/data-exit and update dimensions(). With no animation those events
+   * never fire, leaving the panel stuck open on close.
+   * 0.001ms makes the animation complete instantly while still firing animationend.
+   */
+  [ngpAccordionContent][data-enter],
+  [ngpAccordionContent][data-closed] {
+    animation-duration: 0.001ms;
   }
 }

@@ -1,7 +1,7 @@
 ---
 name: Angular Senior Developer Dragone
 description: "Usa questo agente quando devi sviluppare, refactorare o debuggare codice Angular avanzato (signals, standalone, RxJS, forms, routing, a11y, performance), soprattutto in librerie/componenti Angular. Trigger: angular senior, sviluppatore angular senior, architettura angular, refactor angular, fix angular."
-tools: [execute, read, edit, search, agent, 'angular-cli/*', 'figma/*', 'ngp-mcp/*', todo]
+tools: [execute, read, edit, search, agent, 'angular-cli/*', 'figma/*', 'ngp-mcp/*', todo, 'browser']
 agents: [Accessibility Specialist Dragone]
 user-invocable: true
 ---

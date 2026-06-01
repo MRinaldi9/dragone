@@ -9,7 +9,18 @@ import { fn } from 'storybook/test';
 import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item/accordion-item';
 
-const meta: Meta<Accordion> = {
+interface AccordionMeta {
+  darkMode: boolean;
+  accordionVariant: 'dark' | 'light';
+  heading: string;
+  collapse: boolean;
+  type: 'single' | 'multiple';
+  orientation: 'vertical' | 'horizontal';
+  disabled: boolean;
+  accordionChange: VoidFunction;
+}
+
+const meta: Meta<AccordionMeta> = {
   title: 'Dragone/UI/Accordion',
   component: Accordion,
   tags: ['autodocs'],
@@ -55,7 +66,7 @@ const meta: Meta<Accordion> = {
 };
 
 export default meta;
-type Story = StoryObj<Accordion>;
+type Story = StoryObj<AccordionMeta>;
 
 export const AccordionSingle: Story = {
   render: args => ({
