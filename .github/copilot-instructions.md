@@ -313,17 +313,15 @@ describe('<Component>', () => {
 
     fixture = TestBed.createComponent(<Component>);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should apply data-variant attribute', () => {
-    fixture.componentRef.setInput('variant', 'secondary');
-    fixture.detectChanges();
-    expect(fixture.nativeElement.getAttribute('data-variant')).toBe('secondary');
+  it('should cover at least one public behavior', () => {
+    // Esempio: verifica attr host, output, o stato osservabile
   });
 });
 ```
@@ -370,7 +368,7 @@ export const Default: Story = {
 - [ ] State letto da `inject*State()` della Primitive, non reimplementato
 - [ ] CSS usa solo token da `tokens.css`
 - [ ] Inputs con `input()` API (signal-based); `model()` per two-way binding se necessario
-- [ ] `.spec.ts` copre almeno la creazione e una proprietà
+- [ ] `.spec.ts` segue il pattern ufficiale della skill `angular-testing`
 - [ ] Stories con `tags: ['autodocs']` per auto-generazione docs
 
 ## Workflow di Sviluppo
@@ -393,6 +391,11 @@ pnpm commit                 # Commitizen per Conventional Commits
 - **Config**: `vite.config.ts` definisce root in `projects/dragone/ui`
 - **Coverage**: Report in `coverage/dragone/` (lcov + html)
   - Automaticamente esclude: `index.ts`, `public-api.ts`, `*.stories.ts`, `*.css`, `*.js`
+
+**Linee guida test (fonte unica):**
+- Segui la skill `angular-testing`: `.agents/skills/angular-testing/SKILL.md`
+- Per ricette avanzate usa il reference: `.agents/skills/angular-testing/references/testing-patterns.md`
+- In questo file evita di duplicare snippet test dettagliati; mantieni solo principi e rimandi.
 
 ### Git Workflow
 
