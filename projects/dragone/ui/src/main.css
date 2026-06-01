@@ -1,5 +1,6 @@
 @import './tokens.css';
 @import './typography.css';
+@import '@angular/cdk/a11y-prebuilt.css';
 
 p {
   margin-block-end: 0;
