@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { EventManager, EventManagerPlugin } from '@angular/platform-browser';
 import { noop } from 'rxjs';
 
-import { provideEventsPlugin } from './provider';
+import { provideEventsPlugin } from './provide-event-plugins';
 
 class MockPlugin extends EventManagerPlugin {
   override supports(eventName: string): boolean {

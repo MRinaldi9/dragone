@@ -1,4 +1,4 @@
-import type { Branded } from './index';
+import type { Branded } from './branding';
 
 export type SvgIcon = Branded<string, 'SvgIcon'>;
 
