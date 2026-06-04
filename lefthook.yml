@@ -3,6 +3,7 @@
 #   Refer for explanation to following link:
 #   https://lefthook.dev/configuration/
 #
+colors: true
 commit-msg:
   commands:
     'lint commit message':
@@ -13,11 +14,11 @@ pre-commit:
   parallel: true
   jobs:
     - name: Oxlint Dragone UI staged files
-      run: pnpm run lint:oxlint {staged_files}
+      run: pnpm oxlint {staged_files} --no-error-on-unmatched-pattern
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: ESLint Dragone
-      run: pnpm run lint:eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
+      run: pnpm eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: Format Dragone UI staged files
