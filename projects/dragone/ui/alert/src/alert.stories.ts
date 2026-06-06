@@ -5,6 +5,7 @@ import { Alert } from './alert';
 
 type AlertStory = Alert & {
   darkMode: boolean;
+  theme: 'light' | 'dark';
 };
 
 const meta: Meta<AlertStory> = {
@@ -12,9 +13,11 @@ const meta: Meta<AlertStory> = {
   component: Alert,
   tags: ['autodocs'],
   args: {
-    alertTheme: 'light',
+    theme: 'light',
     aspect: 'desktop',
     alertType: 'info',
+    titleAsHeading: false,
+    headingLevel: 4,
     ctaClick: fn(),
   },
   argTypes: {
@@ -28,7 +31,7 @@ const meta: Meta<AlertStory> = {
         defaultValue: { summary: 'desktop' },
       },
     },
-    alertTheme: {
+    theme: {
       options: ['light', 'dark'],
       control: { type: 'select' },
       table: {
@@ -40,6 +43,20 @@ const meta: Meta<AlertStory> = {
       control: { type: 'select' },
       table: {
         defaultValue: { summary: 'info' },
+      },
+    },
+    titleAsHeading: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    headingLevel: {
+      options: [1, 2, 3, 4, 5, 6],
+      control: { type: 'select' },
+      if: { arg: 'titleAsHeading', truthy: true },
+      table: {
+        defaultValue: { summary: '4' },
       },
     },
     ctaText: {
