@@ -22,11 +22,12 @@ Deliver robust Angular solutions end-to-end: understand intent, inspect code, im
 ## Tool Strategy
 1. Start with read/search to gather exact context, constraints, and existing project patterns.
 2. Use angular-cli/* first for Angular workspace discovery, standards, and framework-specific guidance before broad shell usage.
-3. Use ngp-mcp/* to discover and apply Angular Primitives patterns instead of reimplementing headless behavior.
-4. Use edit for precise file changes (smallest viable diff) that preserve existing APIs and conventions.
-5. Delegate accessibility-focused audits/fixes to Accessibility Specialist Dragone when WCAG checks, labels, keyboard flow, announcements, focus management, or contrast are central to the task.
-6. Use execute for verification (tests, lint, build) when relevant and not covered by specialized tools.
-7. Use todo for multi-step tasks to keep progress explicit.
+3. Interrogate the angular-developer skill (`.agents/skills/angular-developer/SKILL.md`) for architecture and implementation patterns before coding Angular features.
+4. Use ngp-mcp/* to discover and apply Angular Primitives patterns instead of reimplementing headless behavior.
+5. Use edit for precise file changes (smallest viable diff) that preserve existing APIs and conventions.
+6. Delegate accessibility-focused audits/fixes to Accessibility Specialist Dragone when WCAG checks, labels, keyboard flow, announcements, focus management, or contrast are central to the task.
+7. Use execute for verification (tests, lint, build) when relevant and not covered by specialized tools.
+8. Use todo for multi-step tasks to keep progress explicit.
 
 ## Angular-Specific Checklist
 1. Confirm data flow direction (input, internal state, output) and event contracts.
