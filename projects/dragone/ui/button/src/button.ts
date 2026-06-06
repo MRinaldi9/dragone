@@ -2,6 +2,8 @@ import { booleanAttribute, Component, input } from '@angular/core';
 import { NgpButton } from 'ng-primitives/button';
 import { NgpFocus, NgpFocusVisible } from 'ng-primitives/interactions';
 
+import { Theme } from '@dragone/ui/utils';
+
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger';
 
@@ -25,6 +27,10 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'da
       directive: NgpFocusVisible,
       inputs: ['ngpFocusVisibleDisabled:focusVisibleDisabled'],
       outputs: ['ngpFocusVisible:focusVisible'],
+    },
+    {
+      directive: Theme,
+      inputs: ['theme'],
     },
     NgpFocus,
   ],
