@@ -37,7 +37,7 @@ Selettore Angular del tipo `drgn-name` (es. `drgn-select`). Si usa quando il Com
 _Avoid_: custom element, web component
 
 **Token**:
-Variabile CSS definita in `projects/dragone/ui/src/tokens.css`. Unico modo ammesso per esprimere valori di stile nei Component. Organizzati su tre livelli: Global (primitivi, non usare), Alias (semantici, preferire), Specific (contestuali).
+Variabile CSS definita in `projects/dragone/ui/src/tokens.css`. Unico modo ammesso per esprimere valori di stile nei Component. I token canonici consumati dai Component usano prefisso `drgn` e naming per dominio semantico (es. `drgn-color-*`, `drgn-typography-*`, `drgn-elevation-*`).
 _Avoid_: variabile CSS (generico), design token (usa semplicemente "token")
 
 ## Example dialogue
