@@ -1,6 +1,19 @@
-import { computed, Directive, inject, InjectionToken, input, type Signal } from '@angular/core';
+import {
+  assertInInjectionContext,
+  computed,
+  Directive,
+  inject,
+  InjectionToken,
+  input,
+  type Signal,
+} from '@angular/core';
 
 export const DRGN_THEME_CONTEXT = new InjectionToken<Theme>('DRGN_THEME_CONTEXT');
+
+export const injectThemeState = (): Theme => {
+  assertInInjectionContext(injectThemeState);
+  return inject(DRGN_THEME_CONTEXT);
+};
 
 @Directive({
   selector: '[drgnTheme]',

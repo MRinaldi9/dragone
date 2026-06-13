@@ -4,7 +4,7 @@
   grid-template-columns: auto 1fr;
   grid-template-rows: repeat(2, auto);
   column-gap: 0.625rem;
-  background-color: var(--text-on-primary-light);
+  background-color: var(--drgn-color-surface-base);
   outline: none;
 }
 
@@ -18,7 +18,7 @@
   border-radius: 9999px;
   width: 1rem;
   height: 1rem;
-  border: 1px solid var(--color-global-secondary-100);
+  border: 1px solid var(--drgn-color-text-data-entry-default);
 }
 
 .indicator-dot {
@@ -31,28 +31,28 @@
 .title {
   grid-column-start: 2;
   grid-row-start: 1;
-  color: var(--color-global-secondary-100);
+  color: var(--drgn-color-text-data-entry-default);
 }
 
 :host[data-hover] {
   & [ngpRadioIndicator] {
-    border-color: var(--color-global-dark-primary-110);
+    border-color: var(--drgn-color-text-data-entry-hover);
   }
   & .title {
-    color: var(--color-global-dark-primary-110);
+    color: var(--drgn-color-text-data-entry-hover);
   }
 }
 
 :host[data-checked] {
   & .indicator-dot {
-    background-color: var(--color-global-secondary-100);
+    background-color: var(--drgn-color-text-data-entry-default);
   }
 }
 
 :host[data-focus-visible] {
   & [ngpRadioIndicator] {
-    border-color: var(--interactive-primary-focus);
-    outline: 1px solid var(--interactive-primary-focus);
+    border-color: var(--drgn-color-focus-ring-primary);
+    outline: 1px solid var(--drgn-color-focus-ring-primary);
     outline-offset: 3px;
   }
 }
@@ -61,7 +61,7 @@
 :host[data-disabled] {
   cursor: not-allowed;
   & [ngpRadioIndicator] {
-    border-color: var(--bg-disabled);
-    background-color: var(--bg-disabled);
+    border-color: var(--drgn-color-surface-disabled);
+    background-color: var(--drgn-color-surface-disabled);
   }
 }

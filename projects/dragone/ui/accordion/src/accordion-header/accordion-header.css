@@ -4,11 +4,15 @@
   justify-content: space-between;
   width: 100%;
   border-radius: 0;
+  align-items: center;
+}
+
+[ngpAccordionTrigger][data-open] ng-icon {
+  transform: rotateX(180deg);
 }
 
 ng-icon {
-  font-size: 1.25rem;
-  color: var(--ngp-text-secondary);
+  color: var(--drgn-color-text-default);
   transition: transform 0.2s ease-in-out;
 
   @media (prefers-reduced-motion: reduce) {
@@ -16,6 +20,8 @@ ng-icon {
   }
 }
 
-[ngpAccordionTrigger][data-open] ng-icon {
-  transform: rotateX(180deg);
+:host-context([data-theme='light']) {
+  ng-icon {
+    color: var(--drgn-color-text-primary-dark-110);
+  }
 }

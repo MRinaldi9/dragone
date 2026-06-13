@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-on-primary-light);
+  color: var(--drgn-color-text-inverse);
   padding: 12px 42px;
   border-radius: 4px;
   border-width: 0;
@@ -14,110 +14,110 @@
   &[data-focus].cdk-program-focused {
     outline: none;
     box-shadow:
-      0 0 0 3px var(--color-global-primary-000),
-      0 0 0 5px var(--interactive-primary-default),
+      0 0 0 3px var(--drgn-color-focus-ring-outline),
+      0 0 0 5px var(--drgn-color-focus-ring-primary),
       0 0 10px 0 rgba(0, 125, 179, 0.7);
   }
   &:disabled {
-    background-color: var(--bg-disabled);
-    color: var(--text-disabled);
+    background-color: var(--drgn-color-surface-disabled);
+    color: var(--drgn-color-text-disabled);
     cursor: not-allowed;
   }
   &[data-variant='primary']:not(:disabled) {
-    background-color: var(--interactive-primary-default);
+    background-color: var(--drgn-color-interactive-primary-default);
     &:hover {
-      background-color: var(--interactive-primary-hover);
+      background-color: var(--drgn-color-interactive-primary-hover);
     }
     &:active {
-      background-color: var(--interactive-primary-pressed);
+      background-color: var(--drgn-color-interactive-primary-pressed);
     }
   }
   &[data-variant='secondary']:not(:disabled) {
-    background-color: var(--interactive-secondary-default);
+    background-color: var(--drgn-color-interactive-secondary-default);
     &:hover {
-      background-color: var(--interactive-secondary-hover);
+      background-color: var(--drgn-color-interactive-secondary-hover);
     }
     &:active {
-      background-color: var(--interactive-secondary-pressed);
+      background-color: var(--drgn-color-interactive-secondary-pressed);
     }
   }
   &[data-variant='danger']:not(:disabled) {
-    background-color: var(--interactive-alert-default);
+    background-color: var(--drgn-color-interactive-alert-default);
     &:hover {
-      background-color: var(--interactive-alert-hover);
+      background-color: var(--drgn-color-interactive-alert-hover);
     }
     &:active {
-      background-color: var(--interactive-alert-pressed);
+      background-color: var(--drgn-color-interactive-alert-pressed);
     }
   }
   &[data-variant='tertiary']:not([ngpAccordionTrigger]) {
     background-color: transparent;
     &:not(:disabled) {
-      color: var(--interactive-primary-default);
-      border: 2px solid var(--interactive-primary-default);
+      color: var(--drgn-color-interactive-primary-default);
+      border: 2px solid var(--drgn-color-interactive-primary-default);
       &:hover {
-        color: var(--interactive-primary-hover);
-        border: 2px solid var(--interactive-primary-hover);
+        color: var(--drgn-color-interactive-primary-hover);
+        border: 2px solid var(--drgn-color-interactive-primary-hover);
       }
       &:active {
-        color: var(--interactive-primary-pressed);
-        border: 2px solid var(--interactive-primary-pressed);
+        color: var(--drgn-color-interactive-primary-pressed);
+        border: 2px solid var(--drgn-color-interactive-primary-pressed);
       }
     }
     &:disabled {
-      color: var(--text-disabled);
-      border: 2px solid var(--bg-disabled);
+      color: var(--drgn-color-text-disabled);
+      border: 2px solid var(--drgn-color-surface-disabled);
     }
   }
   &[data-variant='ghost'] {
     background-color: transparent;
     &:not(:disabled) {
-      color: var(--interactive-primary-default);
+      color: var(--drgn-color-interactive-primary-default);
       &:hover {
-        color: var(--interactive-primary-hover);
+        color: var(--drgn-color-interactive-primary-hover);
       }
       &:active {
-        color: var(--text-on-primary-light);
-        background-color: var(--interactive-primary-pressed);
+        color: var(--drgn-color-text-inverse);
+        background-color: var(--drgn-color-interactive-primary-pressed);
       }
     }
     &:disabled {
-      color: var(--text-disabled);
+      color: var(--drgn-color-text-disabled);
     }
   }
   &[data-variant='tertiary'][ngpAccordionTrigger] {
-    background-color: var(--color-global-primary-000);
+    background-color: var(--drgn-color-surface-base);
     &:not(:disabled) {
-      color: var(--bg-primary-dark-110);
-      border: 1px solid var(--bg-primary-light-50);
+      color: var(--drgn-color-surface-primary-strong);
+      border: 1px solid var(--drgn-color-surface-primary-muted);
       &:hover,
       &[data-open] {
-        background-color: var(--bg-primary-light-40);
+        background-color: var(--drgn-color-surface-primary-subtle);
       }
     }
     &:disabled {
-      color: var(--text-disabled);
-      border: 1px solid var(--bg-disabled);
+      color: var(--drgn-color-text-disabled);
+      border: 1px solid var(--drgn-color-surface-disabled);
     }
   }
   &[data-theme='dark'] {
     &[data-variant='tertiary'] {
       background-color: transparent;
       &:not(:disabled) {
-        color: var(--interactive-accent-default);
-        border: 2px solid var(--interactive-accent-default);
+        color: var(--drgn-color-interactive-accent-default);
+        border: 2px solid var(--drgn-color-interactive-accent-default);
         &:hover {
-          color: var(--interactive-accent-hover);
-          border: 2px solid var(--interactive-accent-hover);
+          color: var(--drgn-color-interactive-accent-hover);
+          border: 2px solid var(--drgn-color-interactive-accent-hover);
         }
         &:active {
-          color: var(--interactive-accent-pressed);
-          border: 2px solid var(--interactive-accent-pressed);
+          color: var(--drgn-color-interactive-accent-pressed);
+          border: 2px solid var(--drgn-color-interactive-accent-pressed);
         }
       }
       &:disabled {
-        color: var(--text-disabled);
-        border: 2px solid var(--bg-disabled);
+        color: var(--drgn-color-text-disabled);
+        border: 2px solid var(--drgn-color-surface-disabled);
       }
     }
   }
@@ -127,20 +127,20 @@
   &[data-variant='tertiary'] {
     background-color: transparent;
     &:not(:disabled) {
-      color: var(--interactive-accent-default);
-      border: 2px solid var(--interactive-accent-default);
+      color: var(--drgn-color-interactive-accent-default);
+      border: 2px solid var(--drgn-color-interactive-accent-default);
       &:hover {
-        color: var(--interactive-accent-hover);
-        border: 2px solid var(--interactive-accent-hover);
+        color: var(--drgn-color-interactive-accent-hover);
+        border: 2px solid var(--drgn-color-interactive-accent-hover);
       }
       &:active {
-        color: var(--interactive-accent-pressed);
-        border: 2px solid var(--interactive-accent-pressed);
+        color: var(--drgn-color-interactive-accent-pressed);
+        border: 2px solid var(--drgn-color-interactive-accent-pressed);
       }
     }
     &:disabled {
-      color: var(--text-disabled);
-      border: 2px solid var(--bg-disabled);
+      color: var(--drgn-color-text-disabled);
+      border: 2px solid var(--drgn-color-surface-disabled);
     }
   }
 }

@@ -1,7 +1,4 @@
 :root {
-  /* ---------------------------
-     Color Palette (kept original hex values)
-     --------------------------- */
   --color-global-primary-100: #2f6dd5;
   --color-global-primary-000: #ffffff;
   --color-global-secondary-100: #454d56;
@@ -35,48 +32,169 @@
   --color-global-semantic-success-120: #00382e;
   --color-global-semantic-success-130: #001a15;
   --color-global-semantic-alert-100: #aa224f;
-  --color-global-semantic-alert-110: #7f1a3b;
-  --color-global-semantic-alert-120: #551128;
-  --color-global-semantic-alert-130: #3f0d1b;
   --color-global-semantic-warning-110: #9c3a16;
   --color-global-semantic-warning-100: #cb4d1e;
   --color-global-semantic-warning-90: #f97c1d;
   --color-global-semantic-warning-80: #ffa217;
   --color-global-semantic-info-100: #2f6dd5;
-
-  /* Gradients (renamed to avoid confusion with color tokens) */
-  --gradient-global-01: linear-gradient(
+  --color-global-semantic-alert-110: #7f1a3b;
+  --color-global-semantic-alert-120: #551128;
+  --color-global-semantic-alert-130: #3f0d1b;
+  --color-global-gradient-01: linear-gradient(
     90deg,
     rgba(47, 109, 213, 1) 0%,
     rgba(24, 206, 231, 1) 100%
   );
-  --gradient-global-02: linear-gradient(
+  --color-global-gradient-02: linear-gradient(
     -90deg,
     rgba(0, 36, 96, 1) 0%,
     rgba(47, 109, 213, 1) 50%,
     rgba(24, 206, 231, 1) 100%
   );
-  --gradient-global-03: linear-gradient(90deg, rgba(47, 109, 213, 1) 0%, rgba(0, 36, 96, 1) 100%);
+  --color-global-gradient-03: linear-gradient(
+    90deg,
+    rgba(47, 109, 213, 1) 0%,
+    rgba(0, 36, 96, 1) 100%
+  );
+  --color-alias-interactive-accent-default: #18cee7;
+  --color-alias-interactive-accent-hover: #8ce7f3;
+  --color-alias-interactive-accent-focus: #18cee7;
+  --color-alias-interactive-accent-pressed: #0f7d8a;
+  --color-alias-interactive-primary-000-default: #ffffff;
+  --color-alias-interactive-primary-default: #2f6dd5;
+  --color-alias-interactive-primary-hover: #00368f;
+  --color-alias-interactive-primary-focus: #2f6dd5;
+  --color-alias-interactive-primary-pressed: #00173d;
+  --color-alias-interactive-secondary-default: #454d56;
+  --color-alias-interactive-secondary-hover: #2d3339;
+  --color-alias-interactive-secondary-focus: #454d56;
+  --color-alias-interactive-secondary-pressed: #0b0d0e;
+  --color-alias-interactive-alert-default: #aa224f;
+  --color-alias-interactive-alert-hover: #7f1a3b;
+  --color-alias-interactive-alert-focus: #aa224f;
+  --color-alias-interactive-alert-pressed: #3f0d1b;
+  --color-alias-interactive-warning-default: #cb4d1e;
+  --color-alias-interactive-warning-hover: #ffa217;
+  --color-alias-interactive-warning-focus: #cb4d1e;
+  --color-alias-interactive-warning-pressed: #9c3a16;
+  --color-alias-interactive-success-default: #008069;
+  --color-alias-interactive-success-hover: #005c4b;
+  --color-alias-interactive-success-focus: #008069;
+  --color-alias-interactive-success-pressed: #001a15;
+  --color-alias-text-color-disabled: #5b6571;
+  --color-alias-text-color-primary-100: #2f6dd5;
+  --color-alias-text-color-primary-light-0: #ffffff;
+  --color-alias-text-color-primary-light-40: #f2f6fc;
+  --color-alias-text-color-primary-light-50: #d9e4f7;
+  --color-alias-text-color-secondary-dark-100: #454d56;
+  --color-alias-text-color-secondary-dark-130: #000000;
+  --color-alias-text-color-primary-dark-110: #00368f;
+  --color-alias-background-color-disabled: #e3e5e8;
+  --color-alias-background-color-primary-light-40: #f2f6fc;
+  --color-alias-background-color-primary-light-50: #d9e4f7;
+  --color-alias-background-color-primary-light-60: #aec6ef;
+  --color-alias-background-color-primary-light-0: #ffffff;
+  --color-alias-background-color-primary-dark-110: #00368f;
+  --color-alias-background-color-primary-dark-115: #002460;
+  --color-alias-background-color-primary-dark-120: #00173d;
+  --color-alias-background-color-secondary-light-40: #e3e5e8;
+  --color-alias-background-color-secondary-light-50: #c6ccd2;
+  --color-alias-background-color-secondary-mid-90: #5b6571;
+  --color-alias-background-color-secondary-dark-110: #2d3339;
+  --color-alias-background-color-secondary-dark-120: #17191c;
+  --color-alias-background-color-secondary-dark-125: #0b0d0e;
+  --color-alias-background-color-secondary-dark-130: #000000;
+  --color-alias-interactive-border-focus: #0065d1;
+  --color-alias-gradient-accent-primary-dark: linear-gradient(
+    -90deg,
+    rgba(0, 36, 96, 1) 0%,
+    rgba(47, 109, 213, 1) 50%,
+    rgba(24, 206, 231, 1) 100%
+  );
+  --color-alias-gradient-accent-primary: linear-gradient(
+    90deg,
+    rgba(47, 109, 213, 1) 0%,
+    rgba(24, 206, 231, 1) 100%
+  );
+  --color-alias-overlay-90-dark-primary-120: rgba(0, 23, 61, 0.9);
+  --color-alias-overlay-15-secondary-100: rgba(69, 77, 86, 0.15);
+  --color-alias-overlay-25-primary-000: rgba(255, 255, 255, 0.25);
+  --color-alias-app-interactive-secondary-default: #5b6772;
+  --color-alias-app-interactive-primary-active: #2f6dd5;
+  --color-alias-app-interactive-primary-000-default: #ffffff;
+  --color-specific-data-entry-label-color-default: #454d56;
+  --color-specific-data-entry-label-color-hover: #00368f;
+  --color-specific-data-entry-label-color-focus: #2f6dd5;
+  --color-specific-data-entry-label-color-valued: #454d56;
+  --color-specific-data-entry-label-color-alert: #aa224f;
+  --color-specific-data-entry-label-color-warning: #cb4d1e;
+  --color-specific-data-entry-label-color-success: #008069;
+  --color-specific-data-entry-placeholder-color-default: #454d56;
+  --color-specific-data-entry-placeholder-color-hover: #00368f;
+  --color-specific-data-entry-placeholder-color-focus: #2f6dd5;
+  --color-specific-data-entry-placeholder-color-valued: #454d56;
+  --color-specific-data-entry-border-color-default: #454d56;
+  --color-specific-data-entry-border-color-hover: #00368f;
+  --color-specific-data-entry-border-color-focus: #2f6dd5;
+  --color-specific-data-entry-border-color-valued: #454d56;
+  --color-specific-data-entry-border-color-alert: #aa224f;
+  --color-specific-data-entry-border-color-warning: #cb4d1e;
+  --color-specific-data-entry-border-color-success: #008069;
+  --color-specific-data-entry-placeholder-color-warning: #cb4d1e;
+  --color-specific-data-entry-placeholder-color-alert: #aa224f;
+  --color-specific-data-entry-placeholder-color-success: #008069;
+  --color-specific-option-background-color-hover: #00368f;
+  --color-specific-option-background-color-focus: #2f6dd5;
+  --color-specific-option-background-color-pressed: #00173d;
+  --color-specific-option-background-color-valued: #2f6dd5;
+  --color-specific-progressbar-background-color: linear-gradient(
+    -90deg,
+    rgba(0, 36, 96, 1) 0%,
+    rgba(47, 109, 213, 1) 50%,
+    rgba(24, 206, 231, 1) 100%
+  );
+  --color-specific-card-overlay-gradient-img: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
 
-  /* Overlays */
-  --overlay-dark-primary-120-90: rgba(0, 23, 61, 0.9);
-  --overlay-secondary-100-15: rgba(69, 77, 86, 0.15);
-  --overlay-primary-000-25: rgba(255, 255, 255, 0.25);
+  /* ─── font-family: nomi con spazi racchiusi tra virgolette ─── */
+  --typography-global-font-family-01: 'Titillium Web';
+  --typography-global-font-family-02: 'Lora';
+  --typography-global-font-family-03: 'Roboto Mono';
 
-  /* ---------------------------
-     Typography
-     - Font families quoted + fallbacks
-     - font-sizes in px (explicit)
-     - line-heights unitless (multipliers)
-     - font-weights numeric
-     --------------------------- */
+  /* ─── line-height: valori numerici con unità px ─── */
+  --typography-global-line-heights-01: 16px;
+  --typography-global-line-heights-02: 18px;
+  --typography-global-line-heights-03: 21px;
+  --typography-global-line-heights-04: 24px;
+  --typography-global-line-heights-05: 27px;
+  --typography-global-line-heights-06: 30px;
+  --typography-global-line-heights-07: 36px;
+  --typography-global-line-heights-08: 42px;
+  --typography-global-line-heights-09: 48px;
+  --typography-global-line-heights-10: 54px;
+  --typography-global-line-heights-11: 60px;
+  --typography-global-line-heights-12: 66px;
+  --typography-global-line-heights-13: 72px;
+  --typography-global-line-heights-14: 78px;
+  --typography-global-line-heights-15: 84px;
 
-  /* Font families */
-  --typography-global-font-family-01: 'Titillium Web', 'Helvetica Neue', Arial, sans-serif;
-  --typography-global-font-family-02: 'Lora', Georgia, 'Times New Roman', serif;
-  --typography-global-font-family-03: 'Roboto Mono', 'Courier New', monospace;
+  /* ─── font-weight: valori numerici al posto di stringhe descrittive ─── */
+  --typography-global-font-weights-300: 300;
+  --typography-global-font-weights-400: 400;
+  --typography-global-font-weights-500: 500;
+  --typography-global-font-weights-600: 600;
+  --typography-global-font-weights-700: 700;
+  /* italic: il peso rimane numerico; lo stile corsivo va applicato via font-style */
+  --typography-global-font-weights-700-i: 700;
+  --typography-global-font-weights-600-i: 600;
+  --typography-global-font-weights-500-i: 500;
+  --typography-global-font-weights-400-i: 400;
+  --typography-global-font-weights-300-i: 300;
 
-  /* Font sizes (px) */
+  /* ─── font-size: valori numerici con unità px ─── */
   --typography-global-font-size-01: 10px;
   --typography-global-font-size-02: 12px;
   --typography-global-font-size-03: 14px;
@@ -93,115 +211,89 @@
   --typography-global-font-size-14: 52px;
   --typography-global-font-size-15: 56px;
 
-  /* Line-heights (unitless multipliers) */
-  --typography-global-line-height-xs: 1.2;
-  --typography-global-line-height-sm: 1.25;
-  --typography-global-line-height-md: 1.5;
-  --typography-global-line-height-lg: 1.6;
+  /* ─── font-family alias: nomi con spazi racchiusi tra virgolette ─── */
+  --typography-alias-font-family-heading-01: 'Titillium Web';
+  --typography-alias-font-family-text-01: 'Titillium Web';
+  --typography-alias-font-family-text-02: 'Lora';
+  --typography-alias-font-family-number-03: 'Roboto Mono';
 
-  /* Font weights (numeric) */
-  --typography-global-font-weight-300: 300;
-  --typography-global-font-weight-400: 400;
-  --typography-global-font-weight-500: 500;
-  --typography-global-font-weight-600: 600;
-  --typography-global-font-weight-700: 700;
+  /* ─── font-size alias: valori con unità px ─── */
+  --typography-alias-h1-xl-size-15: 56px;
+  --typography-alias-h1-lg-size-14: 52px;
+  --typography-alias-h1-md-size-13: 48px;
+  --typography-alias-h2-lg-size-12: 44px;
+  --typography-alias-h2-md-size-11: 40px;
+  --typography-alias-h3-lg-size-10: 36px;
+  --typography-alias-h3-md-size-09: 32px;
+  --typography-alias-h4-lg-size-08: 28px;
+  --typography-alias-h4-md-size-07: 24px;
+  --typography-alias-h5-md-size-06: 20px;
+  --typography-alias-h6-md-size-05: 18px;
+  --typography-alias-p-lg-size-05: 18px;
+  --typography-alias-p-md-size-04: 16px;
+  --typography-alias-label-xl-size-06: 20px;
+  --typography-alias-label-lg-size-05: 18px;
+  --typography-alias-label-md-size-04: 16px;
+  --typography-alias-label-xs-size-02: 12px;
+  --typography-alias-disclaimer-md-size-03: 14px;
+  --typography-alias-disclaimer-md-size-04: 16px;
+  --typography-alias-link-h3-md-size-09: 32px;
+  --typography-alias-link-h4-md-size-07: 24px;
+  --typography-alias-link-p-lg-size-05: 18px;
+  --typography-alias-link-p-md-size-04: 16px;
 
-  /* Font styles */
-  --typography-style-normal: normal;
-  --typography-style-italic: italic;
+  /* ─── line-height alias: valori con unità px ─── */
+  --typography-alias-h1-xl-line-height-15: 84px;
+  --typography-alias-h1-lg-line-height-14: 78px;
+  --typography-alias-h1-md-line-height-13: 72px;
+  --typography-alias-h2-lg-line-height-12: 66px;
+  --typography-alias-h2-md-line-height-11: 60px;
+  --typography-alias-h3-lg-line-height-10: 54px;
+  --typography-alias-h3-md-line-height-09: 48px;
+  --typography-alias-h4-lg-line-height-08: 42px;
+  --typography-alias-h4-md-line-height-07: 36px;
+  --typography-alias-h5-md-line-height-06: 30px;
+  --typography-alias-h6-md-line-height-05: 27px;
+  --typography-alias-p-lg-line-height-05: 27px;
+  --typography-alias-p-md-line-height-04: 24px;
+  --typography-alias-label-xl-line-height-03: 21px;
+  --typography-alias-label-line-height-01: 16px;
+  --typography-alias-label-line-height-02: 18px;
+  --typography-alias-label-line-height-03: 21px;
+  --typography-alias-label-line-height-04: 24px;
+  --typography-alias-label-line-height-05: 27px;
+  --typography-alias-label-line-height-06: 30px;
+  --typography-alias-disclaimer-md-line-height-04: 24px;
+  --typography-alias-disclaimer-md-line-height-03: 21px;
+  --typography-alias-link-h3-md-line-height-09: 48px;
+  --typography-alias-link-h4-md-line-height-07: 36px;
+  --typography-alias-link-p-lg-line-height-05: 27px;
+  --typography-alias-link-p-md-line-height-04: 24px;
 
-  /* Aliases for semantic typography (examples) */
-  --typography-h1-size-xl: var(--typography-global-font-size-15); /* 56px */
-  --typography-h1-line-height-xl: 1.5; /* 84px / 56px = 1.5 */
-  --typography-h2-size-lg: var(--typography-global-font-size-14); /* 52px */
-  --typography-h2-line-height-lg: 1.5;
-  --typography-p-size-md: var(--typography-global-font-size-04); /* 16px */
-  --typography-p-line-height-md: var(--typography-global-line-height-md);
+  /* ─── font-weight alias: valori numerici ─── */
+  --typography-alias-h1-font-weight-700: 700;
+  --typography-alias-h2-font-weight-700: 700;
+  --typography-alias-h3-font-weight-700: 700;
+  --typography-alias-h4-font-weight-700: 700;
+  --typography-alias-h5-font-weight-600: 600;
+  --typography-alias-h6-font-weight-600: 600;
+  --typography-alias-p-font-weight-400: 400;
+  --typography-alias-label-font-weight-700: 700;
+  --typography-alias-label-font-weight-600: 600;
+  --typography-alias-label-font-weight-400: 400;
+  --typography-alias-disclaimer-font-weight-400: 400;
+  --typography-alias-link-font-weight-700: 700;
 
-  /* ---------------------------
-     Interactive / Alias colors (preserve original values but ensure clear naming)
-     --------------------------- */
-  --interactive-accent-default: var(--color-global-accent-100);
-  --interactive-accent-hover: var(--color-global-accent-70);
-  --interactive-accent-focus: var(--color-global-accent-100);
-  --interactive-accent-pressed: var(--color-global-accent-120);
+  /* ─── specific typography: valori con unità px ─── */
+  --typography-specific-ios-tabbar-label-xs-size: 11px;
+  --typography-specific-app-navigation-title-xl-size: 24px;
+  --typography-specific-app-navigation-title-md-size: 16px;
+  --typography-specific-app-navigation-title-xl-line-height: 36px;
+  --typography-specific-app-navigation-title-md-line-height: 24px;
+  --typography-specific-app-navigation-title-font-weight-600: 600;
 
-  --interactive-primary-default: var(--color-global-primary-100);
-  --interactive-primary-hover: var(--color-global-dark-primary-110);
-  --interactive-primary-focus: var(--color-global-primary-100);
-  --interactive-primary-pressed: var(--color-global-dark-primary-120);
-
-  --interactive-secondary-default: var(--color-global-secondary-100);
-  --interactive-secondary-hover: var(--color-global-dark-secondary-110);
-  --interactive-secondary-focus: var(--color-global-secondary-100);
-  --interactive-secondary-pressed: var(--color-global-dark-secondary-125);
-
-  --interactive-alert-default: var(--color-global-semantic-alert-100);
-  --interactive-alert-hover: var(--color-global-semantic-alert-110);
-  --interactive-alert-focus: var(--color-global-semantic-alert-100);
-  --interactive-alert-pressed: var(--color-global-semantic-alert-130);
-
-  --interactive-warning-default: var(--color-global-semantic-warning-100);
-  --interactive-warning-hover: var(--color-global-semantic-warning-80);
-  --interactive-warning-focus: var(--color-global-semantic-warning-100);
-  --interactive-warning-pressed: var(--color-global-semantic-warning-110);
-
-  --interactive-success-default: var(--color-global-semantic-success-100);
-  --interactive-success-hover: var(--color-global-semantic-success-110);
-  --interactive-success-focus: var(--color-global-semantic-success-100);
-  --interactive-success-pressed: var(--color-global-semantic-success-130);
-
-  /* Text & background semantic aliases */
-  --text-disabled: #5b6571;
-  --text-primary: var(--color-global-primary-100);
-  --text-on-primary-light: var(--color-global-primary-000);
-  --bg-disabled: var(--color-global-light-secondary-40);
-  --bg-primary-light-40: var(--color-global-light-primary-40);
-  --bg-primary-light-50: var(--color-global-light-primary-50);
-  --bg-primary-dark-110: var(--color-global-dark-primary-110);
-
-  /* Specific component tokens (kept but referencing cleaned aliases) */
-  --data-entry-label-default: var(--color-global-secondary-100);
-  --data-entry-label-hover: var(--interactive-primary-hover);
-  --data-entry-label-focus: var(--interactive-primary-default);
-  --data-entry-placeholder-default: var(--color-global-secondary-100);
-  --data-entry-border-default: var(--color-global-secondary-100);
-  --option-background-hover: var(--interactive-primary-hover);
-  --option-background-focus: var(--interactive-primary-default);
-  --option-background-pressed: var(--color-global-dark-primary-120);
-
-  --progressbar-background: var(--gradient-global-02);
-  --card-overlay-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-
-  /* Elevation (kept in px, consider rem if root scaling needed) */
-  --elevation-01: 0px 0px 16px 0px rgba(227, 229, 232, 1);
-  --elevation-02: 0px 0px 24px 0px rgba(227, 229, 232, 1);
-  --elevation-03: 0px 0px 32px 0px rgba(227, 229, 232, 1);
-  --elevation-04: 0px 0px 40px 0px rgba(227, 229, 232, 1);
-
-  /* ---------------------------
-     Backwards-compatibility aliases (map old names to new tokens)
-     - Keep these so existing code keeps working; gradually migrate to new naming
-     --------------------------- */
-  --color-global-gradient-01: var(--gradient-global-01);
-  --color-global-gradient-02: var(--gradient-global-02);
-  --color-global-gradient-03: var(--gradient-global-03);
-
-  /* Typography compatibility */
-  --typography-global-line-heights-01: 1.6;
-  --typography-global-line-heights-02: 1.5;
-  --typography-global-line-heights-03: 1.5;
-  --typography-global-line-heights-04: 1.5;
-
-  --typography-global-font-weights-300: 300;
-  --typography-global-font-weights-400: 400;
-  --typography-global-font-weights-500: 500;
-  --typography-global-font-weights-600: 600;
-  --typography-global-font-weights-700: 700;
-
-  /* Notes:
-     - Use font-sizes (px) directly or convert to rem at build-time (recommended).
-     - Prefer unitless line-heights (multipliers) for predictable vertical rhythm.
-     - Use the semantic aliases (interactive-*, text-*, bg-*) in components rather than raw hex values.
-  */
+  --elevation-elevation-01: 0px 0px 16px 0px rgba(227, 229, 232, 1);
+  --elevation-elevation-02: 0px 0px 24px 0px rgba(227, 229, 232, 1);
+  --elevation-elevation-03: 0px 0px 32px 0px rgba(227, 229, 232, 1);
+  --elevation-elevation-04: 0px 0px 40px 0px rgba(227, 229, 232, 1);
 }

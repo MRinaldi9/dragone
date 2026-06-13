@@ -1,14 +1,14 @@
 :host {
   display: flex;
   align-items: baseline;
-  color: var(--interactive-primary-default);
-  font-family: var(--typography-global-font-family-01);
-  font-style: var(--typography-style-normal);
-  font-weight: var(--typography-global-font-weight-600);
-  font-size: var(--typography-global-font-size-04);
+  color: var(--drgn-color-interactive-primary-default);
+  font-family: var(--drgn-typography-font-family-base);
+  font-style: var(--drgn-typography-font-style-normal);
+  font-weight: var(--drgn-typography-weight-semibold);
+  font-size: var(--drgn-typography-size-p-md);
   flex: none;
   &:not(:has(.active-route)):hover {
-    color: var(--interactive-primary-hover);
+    color: var(--drgn-color-interactive-primary-hover);
   }
   & a {
     padding: 3px;
@@ -16,7 +16,7 @@
     text-decoration: none;
     &[data-focus-visible],
     &:focus-visible {
-      outline: 1px solid var(--interactive-primary-focus);
+      outline: 1px solid var(--drgn-color-focus-ring-primary);
       border-radius: 3px;
     }
     &:not([href]):not([routerLink]) {
@@ -32,7 +32,7 @@
   }
   &:has(.active-route) {
     ng-icon {
-      color: var(--interactive-secondary-default);
+      color: var(--drgn-color-interactive-secondary-default);
     }
   }
   & ng-icon {
@@ -49,5 +49,5 @@
 }
 
 .active-route {
-  color: var(--interactive-secondary-default);
+  color: var(--drgn-color-interactive-secondary-default);
 }

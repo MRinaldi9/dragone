@@ -1,0 +1,82 @@
+:root {
+  /* Canonical Dragone tokens consumed by components */
+  --drgn-color-text-primary: var(--color-alias-text-color-secondary-dark-130);
+  --drgn-color-text-primary-dark-110: var(--color-alias-text-color-primary-dark-110);
+  --drgn-color-text-secondary: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-inverse: var(--color-alias-text-color-primary-light-0);
+  --drgn-color-text-disabled: var(--color-alias-text-color-disabled);
+  --drgn-color-text-default: var(--color-alias-interactive-primary-000-default);
+
+  --drgn-color-surface-base: var(--color-alias-background-color-primary-light-0);
+  --drgn-color-surface-disabled: var(--color-alias-background-color-disabled);
+  --drgn-color-surface-primary-subtle: var(--color-alias-background-color-primary-light-40);
+  --drgn-color-surface-primary-muted: var(--color-alias-background-color-primary-light-50);
+  --drgn-color-surface-primary-strong: var(--color-alias-background-color-primary-dark-110);
+  --drgn-color-surface-primary-darker: var(--color-alias-background-color-primary-dark-115);
+  --drgn-color-surface-secondary-strong: var(--color-alias-background-color-secondary-dark-120);
+
+  --drgn-color-border-data-entry-default: var(--color-specific-data-entry-border-color-default);
+  --drgn-color-border-data-entry-hover: var(--color-specific-data-entry-border-color-hover);
+  --drgn-color-border-data-entry-focus: var(--color-specific-data-entry-border-color-focus);
+  --drgn-color-border-accent-subtle: var(--color-global-mid-primary-70);
+
+  --drgn-color-text-data-entry-default: var(--color-specific-data-entry-label-color-default);
+  --drgn-color-text-data-entry-hover: var(--color-specific-data-entry-label-color-hover);
+  --drgn-color-text-data-entry-focus: var(--color-specific-data-entry-label-color-focus);
+
+  --drgn-color-text-placeholder-default: var(--color-specific-data-entry-placeholder-color-default);
+
+  --drgn-color-interactive-primary-default: var(--color-alias-interactive-primary-default);
+  --drgn-color-interactive-primary-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-color-interactive-primary-pressed: var(--color-alias-interactive-primary-pressed);
+
+  --drgn-color-interactive-secondary-default: var(--color-alias-interactive-secondary-default);
+  --drgn-color-interactive-secondary-hover: var(--color-alias-interactive-secondary-hover);
+  --drgn-color-interactive-secondary-pressed: var(--color-alias-interactive-secondary-pressed);
+
+  --drgn-color-interactive-alert-default: var(--color-alias-interactive-alert-default);
+  --drgn-color-interactive-alert-hover: var(--color-alias-interactive-alert-hover);
+  --drgn-color-interactive-alert-pressed: var(--color-alias-interactive-alert-pressed);
+
+  --drgn-color-interactive-warning-default: var(--color-alias-interactive-warning-default);
+  --drgn-color-interactive-warning-hover: var(--color-alias-interactive-warning-hover);
+  --drgn-color-interactive-success-default: var(--color-alias-interactive-success-default);
+
+  --drgn-color-interactive-accent-default: var(--color-alias-interactive-accent-default);
+  --drgn-color-interactive-accent-hover: var(--color-alias-interactive-accent-hover);
+  --drgn-color-interactive-accent-pressed: var(--color-alias-interactive-accent-pressed);
+
+  --drgn-color-option-background-focus: var(--color-specific-option-background-color-focus);
+  --drgn-color-option-background-hover: var(--color-specific-option-background-color-hover);
+  --drgn-color-option-background-pressed: var(--color-specific-option-background-color-pressed);
+
+  --drgn-color-focus-ring-outline: var(--color-global-primary-000);
+  --drgn-color-focus-ring-primary: var(--color-alias-interactive-primary-default);
+
+  --drgn-typography-font-family-base: var(--typography-global-font-family-01);
+  --drgn-typography-font-style-normal: normal;
+  --drgn-typography-letter-spacing-default: 0;
+
+  --drgn-typography-size-h1-xl: var(--typography-alias-h1-xl-size-15);
+  --drgn-typography-line-height-h1-xl: var(--typography-alias-h1-xl-line-height-15);
+  --drgn-typography-size-h4-lg: var(--typography-alias-h4-lg-size-08);
+  --drgn-typography-line-height-h4-lg: var(--typography-alias-h4-lg-line-height-08);
+  --drgn-typography-size-label-md: var(--typography-alias-label-md-size-04);
+  --drgn-typography-line-height-label-md: var(--typography-alias-label-line-height-04);
+  --drgn-typography-size-p-md: var(--typography-alias-p-md-size-04);
+  --drgn-typography-line-height-p-md: var(--typography-alias-p-md-line-height-04);
+  --drgn-typography-size-p-lg: var(--typography-alias-p-lg-size-05);
+  --drgn-typography-line-height-p-lg: var(--typography-alias-p-lg-line-height-05);
+  --drgn-typography-size-helper-text-xs: var(--typography-alias-label-xs-size-02);
+  --drgn-typography-line-height-helper-text-xs: var(--typography-alias-label-line-height-01);
+
+  --drgn-typography-weight-regular: var(--typography-global-font-weights-400);
+  --drgn-typography-weight-semibold: var(--typography-global-font-weights-600);
+  --drgn-typography-weight-bold: var(--typography-global-font-weights-700);
+
+  --drgn-runtime-select-width: var(--ngp-select-width);
+  --drgn-runtime-shadow-lg: var(--ngp-shadow-lg);
+  --drgn-runtime-select-transform-origin: var(--ngp-select-transform-origin);
+  --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
+  --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+}

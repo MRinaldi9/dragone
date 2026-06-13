@@ -10,7 +10,7 @@
 }
 
 [ngpAccordionContent] {
-  color: var(--color-global-dark-secondary-130);
+  color: var(--drgn-color-text-primary);
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -24,7 +24,7 @@
 [ngpAccordionContent][data-open],
 [ngpAccordionContent][data-enter],
 [ngpAccordionContent][data-exit] {
-  box-shadow: inset 0 0 0 1px var(--bg-primary-light-40);
+  box-shadow: inset 0 0 0 1px var(--drgn-color-surface-primary-subtle);
 }
 
 /*
@@ -45,13 +45,13 @@
     height: 0;
   }
   to {
-    height: var(--ngp-accordion-content-height);
+    height: var(--drgn-runtime-accordion-content-height);
   }
 }
 
 @keyframes slideUp {
   from {
-    height: var(--ngp-accordion-content-height);
+    height: var(--drgn-runtime-accordion-content-height);
   }
   to {
     height: 0;

@@ -1,78 +1,78 @@
 .drgn-h1-xl {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-h1-size-xl);
-  line-height: var(--typography-h1-line-height-xl);
-  font-weight: var(--typography-global-font-weight-600);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-h1-xl);
+  line-height: var(--drgn-typography-line-height-h1-xl);
+  font-weight: var(--drgn-typography-weight-semibold);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }
 
 .drgn-h4-lg {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-08);
-  line-height: var(--typography-global-line-height-md);
-  font-weight: var(--typography-global-font-weight-700);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-h4-lg);
+  line-height: var(--drgn-typography-line-height-h4-lg);
+  font-weight: var(--drgn-typography-weight-bold);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }
 
 .drgn-label-md-700 {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-04);
-  line-height: var(--typography-global-line-height-md);
-  font-weight: var(--typography-global-font-weight-700);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+  font-weight: var(--drgn-typography-weight-bold);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }
 
 .drgn-label-md-600 {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-04);
-  line-height: var(--typography-global-line-height-md);
-  font-weight: var(--typography-global-font-weight-600);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+  font-weight: var(--drgn-typography-weight-semibold);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }
 
 .drgn-p-md-01 {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-04);
-  line-height: var(--typography-global-line-height-md);
-  font-weight: var(--typography-global-font-weight-400);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-p-md);
+  line-height: var(--drgn-typography-line-height-p-md);
+  font-weight: var(--drgn-typography-weight-regular);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }
 
 .drgn-p-lg-01 {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-05);
-  line-height: var(--typography-global-line-height-md);
-  font-weight: var(--typography-global-font-weight-400);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-p-lg);
+  line-height: var(--drgn-typography-line-height-p-lg);
+  font-weight: var(--drgn-typography-weight-regular);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
 }
 
 .drgn-label-md-400 {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-04);
-  line-height: var(--typography-global-line-height-md);
-  font-weight: var(--typography-global-font-weight-400);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+  font-weight: var(--drgn-typography-weight-regular);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }
 
 .drgn-helper-text-xs-400 {
-  font-family: var(--typography-global-font-family-01);
-  font-size: var(--typography-global-font-size-02);
-  line-height: var(--typography-global-line-height-xs);
-  font-weight: var(--typography-global-font-weight-400);
-  font-style: var(--typography-style-normal);
-  letter-spacing: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-helper-text-xs);
+  line-height: var(--drgn-typography-line-height-helper-text-xs);
+  font-weight: var(--drgn-typography-weight-regular);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   margin: 0;
 }

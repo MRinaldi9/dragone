@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NgpAccordionContent, NgpAccordionItem } from 'ng-primitives/accordion';
 
-import type { ButtonVariant } from '@dragone/ui/button';
+import { injectThemeState, Theme } from '@dragone/ui/utils';
 
 import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-header';
 
@@ -9,7 +9,7 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
   selector: 'drgn-accordion-item',
   imports: [NgpAccordionContent, AccordionHeader],
   template: `
-    <drgn-accordion-header [ariaLevel]="headingAriaLevel()" [variant]="accordionVariant()">
+    <drgn-accordion-header [ariaLevel]="headingAriaLevel()" [variant]="btnVariant()">
       {{ heading() }}
     </drgn-accordion-header>
     <div class="drgn-p-md-01" ngpAccordionContent>
@@ -25,15 +25,18 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
       directive: NgpAccordionItem,
       inputs: ['ngpAccordionItemValue: value', 'ngpAccordionItemDisabled: disabled'],
     },
+    {
+      directive: Theme,
+      inputs: ['theme:accordionVariant'],
+    },
   ],
 })
 export class AccordionItem {
   readonly heading = input.required<string>();
   readonly headingAriaLevel = input<AriaLevel>(3);
-  readonly accordionVariant = input<
-    Extract<ButtonVariant, 'primary' | 'tertiary'>,
-    'dark' | 'light'
-  >('primary', {
-    transform: variant => (variant === 'dark' ? 'primary' : 'tertiary'),
-  });
+
+  readonly #themeState = injectThemeState();
+  readonly btnVariant = computed((theme = this.#themeState.resolvedTheme()) =>
+    theme === 'dark' ? 'primary' : 'tertiary',
+  );
 }

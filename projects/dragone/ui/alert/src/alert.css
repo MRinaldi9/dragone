@@ -5,27 +5,27 @@
   gap: 0.5rem 1rem; /* row-gap column-gap */
   align-items: baseline;
   &[data-theme='light'] {
-    background-color: var(--color-global-light-primary-40);
+    background-color: var(--drgn-color-surface-primary-subtle);
     & .alert-icon {
-      color: var(--color-global-secondary-100);
+      color: var(--drgn-color-text-secondary);
     }
     & .alert-title {
-      color: var(--color-global-secondary-100);
+      color: var(--drgn-color-text-secondary);
     }
     & .alert-body {
-      color: var(--color-global-dark-primary-130);
+      color: var(--drgn-color-text-primary);
     }
   }
   &[data-theme='dark'] {
-    background-color: var(--color-global-dark-primary-115);
+    background-color: var(--drgn-color-surface-primary-darker);
     & .alert-icon {
-      color: var(--color-global-light-primary-40);
+      color: var(--drgn-color-text-inverse);
     }
     & .alert-title {
-      color: var(--color-global-light-primary-40);
+      color: var(--drgn-color-text-inverse);
     }
     & .alert-body {
-      color: #ffffff;
+      color: var(--drgn-color-text-inverse);
     }
   }
   /* Variant-based padding */

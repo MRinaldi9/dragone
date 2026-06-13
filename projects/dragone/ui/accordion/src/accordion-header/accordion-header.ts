@@ -23,7 +23,7 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
       [disabled]="isDisabled()"
     >
       <ng-content />
-      <ng-icon slot="trailing" class="chevron-icon" name="faSolidChevronDown" />
+      <ng-icon size="1rem" slot="trailing" class="chevron-icon" name="faSolidChevronDown" />
     </button>
   `,
   styleUrl: './accordion-header.css',
