@@ -1,0 +1,83 @@
+<label class="searchbar__label drgn-label-md-600" [for]="inputId()">{{ label() }}</label>
+
+<div class="searchbar__container">
+  <div class="searchbar__field-wrapper" [attr.data-disabled]="disabled() ? '' : null">
+    <div class="searchbar__field">
+      <div class="searchbar__chips-row">
+        @if (multiple()) {
+          <ul class="searchbar__chips-list" [ariaLabel]="chipsListAriaLabel()">
+            @for (chip of chips(); track $index) {
+              <drgn-chip-input
+                role="listitem"
+                [label]="chip"
+                [disabled]="disabled()"
+                (remove)="onRemoveChip($index)"
+              />
+            }
+          </ul>
+        }
+        <input
+          #input
+          class="searchbar__chips-input drgn-label-md-400"
+          type="text"
+          [id]="inputId()"
+          [value]="value()"
+          [placeholder]="placeholder()"
+          [disabled]="disabled()"
+          [attr.aria-describedby]="helperText() ? helperId() : null"
+          (input)="value.set(input.value)"
+          (keydown.enter)="onSearch()"
+        />
+        @if (hasValue()) {
+          <button
+            type="button"
+            class="searchbar__clear-all drgn-label-md-700"
+            [disabled]="disabled()"
+            (click)="onClearAll()"
+          >
+            @if (isMultiSearch()) {
+              {{ clearAllLabel() }}
+            } @else {
+              <ng-icon name="faSolidXmark" size="1rem" aria-hidden="true" />
+            }
+          </button>
+        }
+      </div>
+
+      <!-- <div class="searchbar__input-row">
+        <input
+          class="searchbar__input drgn-label-md-400"
+          type="text"
+          [id]="inputId()"
+          [value]="value()"
+          [placeholder]="placeholder()"
+          [disabled]="disabled()"
+          [attr.aria-describedby]="helperText() ? helperId() : null"
+          (input)="onInput($event)"
+          (keydown.enter)="onSearch()"
+        />
+
+        @if (hasValue()) {
+          <button
+            type="button"
+            class="searchbar__clear-input"
+            [attr.aria-label]="clearInputAriaLabel()"
+            [disabled]="disabled()"
+            (click)="onClearValue()"
+          >
+            <ng-icon name="faSolidXmark" size="1rem" aria-hidden="true" />
+          </button>
+        }
+      </div> -->
+    </div>
+
+    <button drgnButton type="button" [disabled]="disabled()" (click)="onSearch()">
+      {{ searchLabel() }}
+      <ng-icon slot="trailing" name="faSolidMagnifyingGlass" size="1rem" aria-hidden="true" />
+    </button>
+  </div>
+
+  @if (helperText()) {
+    <p class="searchbar__helper drgn-helper-text-xs-400" [id]="helperId()">{{ helperText() }}</p>
+  }
+</div>
