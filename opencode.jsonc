@@ -3,17 +3,12 @@
   "default_agent": "angular-architect",
   "formatter": {
     "prettier": {
-      "disabled": true
+      "disabled": true,
     },
     "oxfmt": {
-      "command": [
-        "pnpm",
-        "format"
-      ],
-      "extensions": [
-        ".ts",
-      ]
-    }
+      "command": ["pnpm", "format"],
+      "extensions": [".ts"],
+    },
   },
   // "mcp": {
   //   "angular-cli": {

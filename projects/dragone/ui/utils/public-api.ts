@@ -3,6 +3,8 @@ export * from './src/event-plugins/prevent-default-event.plugin';
 export * from './src/event-plugins/provide-event-plugins';
 export * from './src/types/branding';
 export * from './src/types/svg-icon';
+export * from './src/types/public-members';
 export * from './src/predicates/is-nil';
 export * from './src/dom/to-element';
 export * from './src/theming/theme';
+export * from './src/predicates/to-value';
