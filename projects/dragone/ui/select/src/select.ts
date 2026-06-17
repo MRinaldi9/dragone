@@ -18,6 +18,13 @@ type OptionObject<T> = T & { disabled?: boolean };
 type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
 type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
 
+/**
+ * The type of a resolved option value after applying `optionLabel` or `optionValue` mapping.
+ * - When `T` is primitive, the resolved type is `T` itself.
+ * - When `T` is an object, it can be either `T` or one of its property values.
+ */
+type SelectResolved<T> = Option<T> | (T extends object ? T[keyof T] : never);
+
 @Component({
   selector: 'drgn-select',
   imports: [NgpSelectDropdown, NgpSelectOption, NgpSelectPortal, NgIcon],
@@ -63,11 +70,11 @@ export class Select<T> {
   readonly hidden = input(false, { transform: booleanAttribute });
   readonly name = input<string>();
   readonly touch = output<void>();
-  readonly #internalState = injectSelectState();
+  readonly #internalState = injectSelectState<SelectValue<T>>();
 
   readonly valueChange = outputFromObservable(
     outputToObservable(this.#internalState().valueChange).pipe(
-      map((value: SelectValue<T>) => {
+      map(value => {
         if (Array.isArray(value)) {
           return value.map(val => this.mapOutputValue(val));
         }
@@ -76,9 +83,7 @@ export class Select<T> {
     ),
   );
 
-  protected readonly internalValue = linkedSignal<Option<T> | Option<T>[]>(
-    this.#internalState().value,
-  );
+  protected readonly internalValue = linkedSignal(this.#internalState().value);
   protected readonly canShowValue = computed(() => {
     const isMultiple = this.#internalState().multiple();
     const value = this.internalValue();
@@ -100,18 +105,22 @@ export class Select<T> {
    */
   protected readonly optionItems = computed(() => {
     const selectedValue = this.internalValue();
-    return (this.options() ?? []).map(option => ({
-      value: option,
-      label: this.mapOption(option),
-      selected: this.isOptionSelected(option, selectedValue),
-    }));
+    return (
+      this.options()?.map(option => ({
+        value: option,
+        label: this.mapOption(option),
+        selected: this.isOptionSelected(option, selectedValue),
+      })) ?? []
+    );
   });
 
   /**
    * Maps one option (or a list of options) to its display label.
    * If `optionLabel` is not set, the original value is returned.
    */
-  private mapOption(value: Option<T> | Option<T>[] | null | undefined): unknown {
+  private mapOption(
+    value: Option<T> | Option<T>[] | null | undefined,
+  ): SelectResolved<T> | SelectResolved<T>[] | null | undefined {
     if (typeof value !== 'object' || !value) {
       return value;
     }
@@ -140,15 +149,22 @@ export class Select<T> {
   /**
    * Safely reads a property from an option object using the configured key.
    */
-  private getOptionProp(option: Option<T>, key: T extends object ? keyof T : never): unknown {
-    return (option as Record<PropertyKey, unknown>)[key as PropertyKey];
+  private getOptionProp(
+    option: Option<T>,
+    key: T extends object ? keyof T : never,
+  ): T extends object ? T[keyof T] : never {
+    return (option as Record<PropertyKey, unknown>)[key as PropertyKey] as T extends object
+      ? T[keyof T]
+      : never;
   }
 
   /**
    * Maps emitted values for `valueChange`.
    * If `optionValue` is configured, emits the extracted property; otherwise emits the raw option.
    */
-  private mapOutputValue(value: Option<T> | null | undefined): unknown {
+  private mapOutputValue(
+    value: Option<T> | null | undefined,
+  ): SelectResolved<T> | null | undefined {
     if (!isNotNil(value)) {
       return value;
     }

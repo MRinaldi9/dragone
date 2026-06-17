@@ -1,0 +1,11 @@
+<drgn-input-group>
+  <input
+    #inputDate
+    type="text"
+    [value]="valueDate()"
+    (input)="valueDate.set(inputDate.value)"
+    [attr.data-invalid]="isValidDate() ? null : ''"
+    [attr.aria-invalid]="!isValidDate() || undefined"
+  />
+  <ng-icon slot="trailing" name="faSolidCalendar" />
+</drgn-input-group>

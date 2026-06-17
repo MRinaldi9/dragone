@@ -11,6 +11,7 @@ describe(Alert, () => {
   let locatorComponent: Locator;
   const alertType = signal<'info' | 'success' | 'warning' | 'error'>('info');
   const ctaText = signal('');
+  const titleAsHeading = signal(false);
   const ctaMock = vi.fn<() => void>();
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,6 +23,7 @@ describe(Alert, () => {
         inputBinding('title', () => 'Test Alert'),
         inputBinding('alertType', alertType),
         inputBinding('ctaText', ctaText),
+        inputBinding('titleAsHeading', titleAsHeading),
         outputBinding('ctaClick', ctaMock),
       ],
     });
@@ -30,12 +32,20 @@ describe(Alert, () => {
     await fixture.whenStable();
   });
 
-  it('must show title', async () => {
-    expect(component.title()).toBe('Test Alert');
-    await expect
-      .element(locatorComponent.getByRole('heading', { name: 'Test Alert' }))
-      .toBeVisible();
-  });
+  it.each([{ role: 'paragraph' } as const, { role: 'heading' } as const])(
+    'must show title',
+    async ({ role }) => {
+      expect(component.title()).toBe('Test Alert');
+      if (role === 'heading') {
+        titleAsHeading.set(true);
+        await fixture.whenStable();
+      }
+      const title = locatorComponent.getByText('Test Alert');
+      await expect.element(title).toBeVisible();
+
+      await expect.element(title).toHaveRole(role);
+    },
+  );
 
   it('show default icon for info type', async () => {
     const icon = locatorComponent.getByTestId('alert-icon');

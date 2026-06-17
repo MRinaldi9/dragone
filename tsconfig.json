@@ -4,8 +4,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@dragone/ui/*": ["./projects/dragone/ui/*"],
-      "@dragone/ui": ["./projects/dragone/ui"]
+      "@dragone/ui/*": [
+        "./projects/dragone/ui/*"
+      ],
+      "@dragone/ui": [
+        "./projects/dragone/ui"
+      ]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -16,9 +20,13 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2023",
-    "module": "preserve",
-    "inlineSourceMap": true
+    "target": "es2025",
+    "module": "esnext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "inlineSourceMap": true,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
