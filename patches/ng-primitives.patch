@@ -1,0 +1,13 @@
+diff --git a/fesm2022/ng-primitives-date-picker.mjs b/fesm2022/ng-primitives-date-picker.mjs
+index 42476f0eadaf89ac364059b14ddb184a0d169a47..a7eb72850f5a529d5ca167e5b6fc546913e955e0 100644
+--- a/fesm2022/ng-primitives-date-picker.mjs
++++ b/fesm2022/ng-primitives-date-picker.mjs
+@@ -776,7 +776,7 @@ class NgpDatePickerRowRender {
+                 days: lastDayOfWeekOffset,
+             });
+             // collect all the days to display.
+-            while (firstDay <= lastDay) {
++            while (this.dateAdapter.compare(firstDay,lastDay) <= 0) {
+                 days.push(firstDay);
+                 firstDay = this.dateAdapter.add(firstDay, { days: 1 });
+             }

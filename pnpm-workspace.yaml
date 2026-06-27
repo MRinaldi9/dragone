@@ -11,3 +11,5 @@ ovverides:
   '@analogjs/vite-plugin-angular@2.5.2>@angular/build': '$@angular/build'
   '@analogjs/vite-plugin-angular@2.5.2>@angular-devkit/build-angular': '-'
   '@storybook/angular@10.4.1>typescript': '$typescript'
+patchedDependencies:
+  ng-primitives: patches/ng-primitives.patch

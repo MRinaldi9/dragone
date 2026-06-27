@@ -6,33 +6,37 @@
       "disabled": true,
     },
     "oxfmt": {
-      "command": ["pnpm", "format"],
-      "extensions": [".ts"],
+      "command": [
+        "pnpm",
+        "format"
+      ],
+      "extensions": [
+        ".ts"
+      ],
     },
   },
-  // "mcp": {
-  //   "angular-cli": {
-  //     "enabled": true,
-  //     "command": [
-  //       "pnpm",
-  //       "exec",
-  //       "ng",
-  //       "mcp"
-  //     ],
-  //     "type": "local"
-  //   },
-  //   "ngp-mcp": {
-  //     "command": [
-  //       "pnx",
-  //       "@ng-primitives/mcp"
-  //     ],
-  //     "enabled": true,
-  //     "type": "local"
-  //   },
-  //   "figma": {
-  //     "type": "remote",
-  //     "url": "https://mcp.figma.com/mcp",
-  //     "enabled": true
-  //   },
-  // }
+  "mcp": {
+    "angular-cli": {
+      "enabled": true,
+      "command": [
+        "pnx",
+        "@angular/cli",
+        "mcp"
+      ],
+      "type": "local"
+    },
+    "ngp-mcp": {
+      "command": [
+        "pnx",
+        "@ng-primitives/mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "figma": {
+      "type": "remote",
+      "url": "http://172.20.240.1:3845/mcp",
+      "enabled": false
+    },
+  }
 }
