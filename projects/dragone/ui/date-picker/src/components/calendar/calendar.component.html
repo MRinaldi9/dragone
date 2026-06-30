@@ -1,0 +1,27 @@
+<div class="date-picker-header">
+  <button ngpDatePickerPreviousMonth aria-label="previous month">
+    <ng-icon name="faSolidAngleLeft" />
+  </button>
+  <button ngpDatePickerLabel class="drgn-label-md-600">
+    {{ label() }}
+  </button>
+  <button ngpDatePickerNextMonth aria-label="next month">
+    <ng-icon name="faSolidAngleRight" />
+  </button>
+</div>
+<table ngpDatePickerGrid>
+  <thead>
+    <tr>
+      @for (day of dayHeaders(); track day.abbr) {
+        <th scope="col" [attr.abbr]="day.abbr">{{ day.label }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngpDatePickerRowRender>
+      <td *drgnCalendarCellRender="let date" ngpDatePickerCell>
+        <button ngpDatePickerDateButton>{{ dayOfMonth(date) }}</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

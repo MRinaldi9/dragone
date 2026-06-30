@@ -1,0 +1,21 @@
+<drgn-input-group>
+  <input #inputCalendar date-picker [attr.aria-describedby]="ariaDescribedByInput()" />
+  <button
+    type="button"
+    slot="trailing"
+    drgnButton
+    icon
+    variant="ghost"
+    style="padding: 0.1rem"
+    ngpPopoverTriggerPlacement="bottom-start"
+    [ngpPopoverTriggerOffset]="{ mainAxis: 32, crossAxis: -16 }"
+    [ngpPopoverTrigger]="calendarPopover"
+    [ngpPopoverTriggerAnchor]="inputCalendar"
+    [ariaLabel]="ariaLabelCalendar()"
+  >
+    <ng-icon slot="trailing" name="faSolidCalendarDay" />
+  </button>
+</drgn-input-group>
+<ng-template #calendarPopover>
+  <drgn-calendar ngpPopover />
+</ng-template>

@@ -1,48 +1,27 @@
 import type { InputSignal, InputSignalWithTransform, OutputRef } from '@angular/core';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, effect, input } from '@angular/core';
 import type { ValidationError } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidCalendar } from '@ng-icons/font-awesome/solid';
-import {
-  NgpDatePicker,
-  NgpDatePickerCell,
-  NgpDatePickerCellRender,
-  NgpDatePickerDateButton,
-  NgpDatePickerGrid,
-  NgpDatePickerLabel,
-  NgpDatePickerNextMonth,
-  NgpDatePickerPreviousMonth,
-  NgpDatePickerRowRender,
-} from 'ng-primitives/date-picker';
+import { faSolidCalendarDay } from '@ng-icons/font-awesome/solid';
+import { injectDatePickerState, NgpDatePicker } from 'ng-primitives/date-picker';
 import { injectDateAdapter } from 'ng-primitives/date-time';
+import { NgpPopoverTrigger, NgpPopover } from 'ng-primitives/popover';
 
+import { Button } from '@dragone/ui/button';
 import { InputGroup } from '@dragone/ui/input';
+import { toValue } from '@dragone/ui/utils';
 
+import { Calendar } from './components/calendar/calendar';
 import { InputDatePicker } from './components/input-date-picker';
-import { DATE_PICKER_STATE_TOKEN } from './providers/date-picker-state';
+import { provideDatePickerApi } from './providers/date-picker-api';
 import { parseLocaleDateString } from './utils/parse-date';
 
 @Component({
   selector: 'drgn-date-picker',
-  imports: [
-    NgIcon,
-    NgpDatePickerLabel,
-    NgpDatePickerNextMonth,
-    NgpDatePickerPreviousMonth,
-    NgpDatePickerGrid,
-    NgpDatePickerCell,
-    NgpDatePickerRowRender,
-    NgpDatePickerCellRender,
-    NgpDatePickerDateButton,
-    InputGroup,
-    InputDatePicker,
-  ],
-  templateUrl: './date-picker.html',
+  imports: [NgIcon, InputGroup, InputDatePicker, Calendar, Button, NgpPopoverTrigger, NgpPopover],
+  templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.css',
-  providers: [
-    provideIcons({ faSolidCalendar }),
-    { provide: DATE_PICKER_STATE_TOKEN, useExisting: DatePicker },
-  ],
+  providers: [provideIcons({ faSolidCalendarDay }), provideDatePickerApi(DatePicker)],
   hostDirectives: [
     {
       directive: NgpDatePicker,
@@ -51,6 +30,9 @@ import { parseLocaleDateString } from './utils/parse-date';
         'ngpDatePickerMin: min',
         'ngpDatePickerMax: max',
         'ngpDatePickerDisabled: disabled',
+        'ngpDatePickerFirstDayOfWeek: firstDayOfWeek',
+        'ngpDatePickerDateDisabled: dateDisabled',
+        'ngpDatePickerFocusedDate: focusedDate',
       ],
       outputs: ['ngpDatePickerDateChange: valueChange'],
     },
@@ -76,7 +58,10 @@ export class DatePicker<T extends Temporal.PlainDateTime | Date> {
     month: '2-digit',
     year: 'numeric',
   });
+  readonly ariaLabelCalendar = input('Scegli Data');
+  readonly ariaDescribedByInput = input<string>();
   readonly #adapter = injectDateAdapter<T>();
+  readonly #datePickerState = injectDatePickerState<T>();
 
   /** Formatter derived from locale / options inputs — re‑created only when those change. */
   readonly #formatter = computed(() => new Intl.DateTimeFormat(this.locale(), this.options()));
@@ -88,6 +73,17 @@ export class DatePicker<T extends Temporal.PlainDateTime | Date> {
     throw new Error('Method not implemented.');
   }
 
+  constructor() {
+    const refEffect = effect(() => {
+      const date = toValue(this.#datePickerState().date);
+      if (date) {
+        toValue.untracked(this.#datePickerState().focusedDate.set(date));
+      }
+      refEffect.destroy();
+    });
+    this.#datePickerState().firstDayOfWeek.set(1);
+  }
+
   /** Format a date value to string, handling `undefined`. */
   format(value: T | undefined): string {
     if (value === undefined) return '';
@@ -95,8 +91,8 @@ export class DatePicker<T extends Temporal.PlainDateTime | Date> {
   }
 
   /**
-   * Parse a locale‑formatted string into a Date/Temporal object, using the current
-   * formatter (which is derived from {@link locale} / {@link options}).
+   * Parse a locale‑formatted string into a Date/Temporal object, using the current formatter (which
+   * is derived from {@link locale} / {@link options}).
    */
   parseDate(value: string): T | undefined {
     return parseLocaleDateString(value, this.#adapter, this.#formatter());

@@ -1,0 +1,140 @@
+:host {
+  position: absolute;
+  display: inline-block;
+  background-color: var(--drgn-color-surface-base);
+  border-radius: 4px;
+  box-shadow: var(--drgn-shadow-blur-md);
+  min-width: 280px;
+  &[data-enter] {
+    animation: popover-show 200ms ease-in-out;
+  }
+  &[data-exit] {
+    animation: popover-hide 200ms ease-in-out;
+  }
+}
+.date-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+}
+th {
+  font-size: 14px;
+  font-weight: 500;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  color: var(--ngp-text-secondary);
+}
+[ngpDatePickerLabel] {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--drgn-color-interactive-primary-default);
+  &:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--drgn-color-focus-ring-primary),
+      0 0 1px 0 rgba(0, 125, 179, 0.7);
+    border-radius: 8px;
+    outline: none;
+  }
+}
+
+[ngpDatePickerPreviousMonth],
+[ngpDatePickerNextMonth] {
+  all: unset;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  color: var(--drgn-color-interactive-primary-default);
+  &[data-hover] {
+    color: var(--drgn-color-interactive-primary-hover);
+  }
+  &[data-focus-visible] {
+    & ng-icon {
+      box-shadow:
+        0 0 0 2px var(--drgn-color-focus-ring-primary),
+        0 0 1px 0 rgba(0, 125, 179, 0.7);
+      border-radius: 8px;
+    }
+    &[data-press] ng-icon {
+      box-shadow:
+        0 0 0 3px var(--drgn-color-focus-ring-outline),
+        0 0 0 5px var(--drgn-color-interactive-primary-pressed),
+        0 0 10px 0 rgba(0, 125, 179, 0.7);
+    }
+  }
+  &[data-press] {
+    color: var(--drgn-color-interactive-primary-pressed);
+  }
+}
+[ngpDatePickerPreviousMonth][data-disabled],
+[ngpDatePickerNextMonth][data-disabled] {
+  cursor: not-allowed;
+  color: var(--ngp-text-disabled);
+}
+[ngpDatePickerDateButton] {
+  all: unset;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+[ngpDatePickerDateButton][data-today] {
+  color: var(--ngp-text-blue);
+}
+[ngpDatePickerDateButton][data-hover] {
+  background-color: var(--ngp-background-hover);
+}
+[ngpDatePickerDateButton][data-focus-visible] {
+  outline: 2px solid var(--ngp-focus-ring);
+  outline-offset: 2px;
+}
+[ngpDatePickerDateButton][data-press] {
+  background-color: var(--ngp-background-active);
+}
+[ngpDatePickerDateButton][data-outside-month] {
+  color: var(--ngp-text-disabled);
+}
+[ngpDatePickerDateButton][data-selected] {
+  background-color: var(--ngp-background-inverse);
+  color: var(--ngp-text-inverse);
+}
+[ngpDatePickerDateButton][data-selected][data-outside-month] {
+  background-color: var(--ngp-background-disabled);
+  color: var(--ngp-text-disabled);
+}
+[ngpDatePickerDateButton][data-disabled] {
+  cursor: not-allowed;
+  color: var(--ngp-text-disabled);
+}
+
+@keyframes popover-show {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes popover-hide {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}

@@ -79,4 +79,9 @@
   --drgn-runtime-select-transform-origin: var(--ngp-select-transform-origin);
   --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
   --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+
+  --drgn-shadow-blur-sm: var(--elevation-elevation-01);
+  --drgn-shadow-blur-md: var(--elevation-elevation-02);
+  --drgn-shadow-blur-lg: var(--elevation-elevation-03);
+  --drgn-shadow-blur-xl: var(--elevation-elevation-04);
 }

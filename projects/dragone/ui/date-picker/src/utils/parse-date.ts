@@ -8,8 +8,8 @@ import type { NgpDateAdapter } from 'ng-primitives/date-time';
 const REFERENCE_DATE = new Date(2000, 0, 15);
 
 /**
- * Supported date‑entry formats, tried in order from most‑specific to least‑specific.
- * Each entry lists the captured groups and the default values for missing fields.
+ * Supported date‑entry formats, tried in order from most‑specific to least‑specific. Each entry
+ * lists the captured groups and the default values for missing fields.
  */
 const DATE_ENTRY_FORMATS = [
   { parts: ['day', 'month', 'year'], defaults: {} },
@@ -27,10 +27,8 @@ const deriveDateSeparator = (fmt: Intl.DateTimeFormat): string => {
 };
 
 /**
- * Build an ordered list of regex patterns for the three supported date‑entry formats:
- *  1. day / month / year
- *  2. month / year
- *  3. year only
+ * Build an ordered list of regex patterns for the three supported date‑entry formats: 1. day /
+ * month / year 2. month / year 3. year only
  *
  * Patterns are built fresh each call — the cost is negligible (3 small regex).
  */
@@ -51,8 +49,8 @@ const buildDateParsePatterns = (fmt: Intl.DateTimeFormat): RegExp[] => {
 // ---------------------------------------------------------------------------
 
 /**
- * Try to match `input` against `regex` and, if successful, build a date object
- * from the captured groups using the field mapping in `formatEntry`.
+ * Try to match `input` against `regex` and, if successful, build a date object from the captured
+ * groups using the field mapping in `formatEntry`.
  */
 const tryParseDateEntry = <T>(
   input: string,
@@ -87,15 +85,14 @@ const tryParseDateEntry = <T>(
 /**
  * Parse a locale‑formatted date string into a typed date object.
  *
- * Tries the three supported formats in order (day/month/year, month/year, year)
- * and returns the first successful match. For the full format, the result is
- * round‑tripped through the formatter to reject ambiguous inputs (e.g. `02/03/04`
- * that might not match the locale’s canonical representation).
+ * Tries the three supported formats in order (day/month/year, month/year, year) and returns the
+ * first successful match. For the full format, the result is round‑tripped through the formatter to
+ * reject ambiguous inputs (e.g. `02/03/04` that might not match the locale’s canonical
+ * representation).
  *
- * This is a **pure function** — it has no DI dependencies and can be used
- * standalone.
+ * This is a **pure function** — it has no DI dependencies and can be used standalone.
  *
- * @param value   The raw string to parse.
+ * @param value The raw string to parse.
  * @param adapter An `NgpDateAdapter<T>` (e.g. from `injectDateAdapter()`).
  * @param formatter An `Intl.DateTimeFormat` matching the expected locale/options.
  * @returns The parsed date, or `undefined` if the string is not parseable.

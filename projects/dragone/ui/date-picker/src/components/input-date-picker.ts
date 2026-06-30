@@ -3,13 +3,16 @@ import { injectDatePickerState } from 'ng-primitives/date-picker';
 
 import { toValue } from '@dragone/ui/utils';
 
-import { injectDatePickerState as stateComponent } from '../providers/date-picker-state';
+import { injectDatePickerApi } from '../providers/date-picker-api';
 import { injectInputDebounceTimer } from '../providers/debounce-input-timer';
 
 @Directive({
   selector: 'input[date-picker]',
   host: {
     type: 'text',
+    role: 'combobox',
+    autocomplete: 'off',
+    'aria-autocomplete': 'none',
     '[value]': 'inputDate()',
     '(input)': 'changeDate($event)',
     '[attr.data-invalid]': 'isValidDate() ? null : ""',
@@ -18,16 +21,15 @@ import { injectInputDebounceTimer } from '../providers/debounce-input-timer';
 })
 export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
   readonly #datePickerState = injectDatePickerState<T>();
-  readonly #stateComp = stateComponent<T>();
+  readonly #stateComp = injectDatePickerApi<T>();
   readonly #debounceTimer = injectInputDebounceTimer();
   /**
    * The formatted date string displayed in the input.
    *
-   * - **Source** (`#datePickerState().date`): when the picker's value changes
-   *   (from calendar selection or programmatic set) the linked signal re-syncs
-   *   by formatting the new date.
-   * - **Local write**: when the user types in the input, `valueDate.set()` is
-   *   called directly, keeping the typed text visible until it is parsed.
+   * - **Source** (`#datePickerState().date`): when the picker's value changes (from calendar
+   *   selection or programmatic set) the linked signal re-syncs by formatting the new date.
+   * - **Local write**: when the user types in the input, `valueDate.set()` is called directly,
+   *   keeping the typed text visible until it is parsed.
    */
   protected inputDate = linkedSignal({
     source: this.#datePickerState().date,
@@ -35,14 +37,14 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
   });
 
   /**
-   * Debounced version of `valueDate`.
-   * Used to trigger validation & re‑parsing after the user stops typing.
+   * Debounced version of `valueDate`. Used to trigger validation & re‑parsing after the user stops
+   * typing.
    */
   private debouncedInputDate = debounced(this.inputDate, this.#debounceTimer);
 
   /**
-   * `true` when the currently displayed string is a valid date
-   * (either unchanged from the current picker value or parseable).
+   * `true` when the currently displayed string is a valid date (either unchanged from the current
+   * picker value or parseable).
    */
   isValidDate = computed(
     (raw = this.debouncedInputDate.value()) =>
@@ -56,7 +58,7 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
     effect(() => {
       const raw = this.debouncedInputDate.value();
       // No-op if the text hasn't diverged from the current picker value
-      if (raw === this.#stateComp.format(this.#datePickerState().date())) {
+      if (raw === this.#stateComp.format(toValue.untracked(this.#datePickerState().date))) {
         return;
       }
       const parsed = this.#stateComp.parseDate(raw);

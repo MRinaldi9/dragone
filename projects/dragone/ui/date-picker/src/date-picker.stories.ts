@@ -1,14 +1,9 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj,
-} from '@analogjs/storybook-angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@analogjs/storybook-angular';
 import { provideDateAdapter } from 'ng-primitives/date-time';
-import { fn } from 'storybook/test';
+
+import { TemporalAdapter } from '@dragone/ui/temporal-adapter';
 
 import { DatePicker } from './date-picker';
-import { TemporalAdapter } from './temporal-adapter';
 
 type MetaDatePicker = DatePicker<Temporal.PlainDateTime> & {
   value: Temporal.PlainDateTime;
@@ -66,7 +61,7 @@ const meta: Meta<MetaDatePicker> = {
   render: args => ({
     props: args,
     template: `
-      <drgn-date-picker ${argsToTemplate(args)}/>
+      <drgn-date-picker [(value)]="value" [keepInvalid]="keepInvalid"/>
     `,
   }),
 };
@@ -76,8 +71,7 @@ type Story = StoryObj<MetaDatePicker>;
 
 export const Default: Story = {
   args: {
-    value: Temporal.Now.plainDateTimeISO(),
+    // Value: Temporal.PlainDateTime.from({ year: 2024, month: 6, day: 1 }),
     keepInvalid: true,
-    valueChange: fn(),
   },
 };
