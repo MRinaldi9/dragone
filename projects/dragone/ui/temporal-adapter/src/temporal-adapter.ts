@@ -1,46 +1,46 @@
+// oxlint-disable id-length
 import { Platform } from '@angular/cdk/platform';
 import { inject, Injectable } from '@angular/core';
-import type { NgpDateAdapter, NgpDateUnits, NgpDuration } from 'ng-primitives/date-time';
+import type {
+  NgpDateAdapter,
+  NgpDateUnits,
+  NgpDuration,
+} from 'ng-primitives/date-time';
 /**
  * Date adapter backed by the ECMAScript Temporal API (`Temporal.PlainDateTime`).
  *
- * All operations are **immutable** — every method returns a new
- * `Temporal.PlainDateTime` instance without mutating the original.
+ * All operations are **immutable** — every method returns a new `Temporal.PlainDateTime` instance
+ * without mutating the original.
  *
  * @usageNotes
  *
- * ### Runtime requirements
+ *   ### Runtime requirements
  *
- * This adapter requires a JavaScript runtime that supports the
- * [Temporal proposal](https://tc39.es/proposal-temporal/docs/) natively:
+ *   This adapter requires a JavaScript runtime that supports the [Temporal
+ *   proposal](https://tc39.es/proposal-temporal/docs/) natively:
  *
- * - Chrome 133+ / Edge 133+
- * - Firefox 137+
- * - Safari 18.4+
+ *   - Chrome 133+ / Edge 133+
+ *   - Firefox 137+
+ *   - Safari 18.4+ No polyfill is bundled. If your target browsers do not support Temporal, use
+ *     `NgpNativeDateAdapter` (the default) or an adapter for Luxon / date-fns.
  *
- * No polyfill is bundled. If your target browsers do not support Temporal,
- * use `NgpNativeDateAdapter` (the default) or an adapter for Luxon / date-fns.
+ *   ### Wiring in the application
  *
- * ### Wiring in the application
- *
- * ```typescript
- * import { provideDateAdapter } from 'ng-primitives/date-time';
- * import { TemporalAdapter } from '@dragone/ui/date-picker';
- *
- * export const appConfig: ApplicationConfig = {
- *   providers: [
- *     provideDateAdapter(TemporalAdapter),
- *   ],
- * };
- * ```
+ *   ```typescript
+ *   import { provideDateAdapter } from 'ng-primitives/date-time';
+ *   import { TemporalAdapter } from '@dragone/ui/date-picker';
+ *   export const appConfig: ApplicationConfig = {
+ *     providers: [provideDateAdapter(TemporalAdapter)],
+ *   };
+ *   ```
  */
 @Injectable({ providedIn: 'root' })
 export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
   readonly #platform = inject(Platform);
 
   /**
-   * Create a `Temporal.PlainDateTime` from unit values.
-   * Missing fields fall back to the current date/time.
+   * Create a `Temporal.PlainDateTime` from unit values. Missing fields fall back to the current
+   * date/time.
    */
   create(values: NgpDateUnits): Temporal.PlainDateTime {
     const now = Temporal.Now.plainDateTimeISO();
@@ -72,10 +72,13 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
   }
 
   /**
-   * Return a new `Temporal.PlainDateTime` with the specified fields
-   * replaced. The original is never mutated.
+   * Return a new `Temporal.PlainDateTime` with the specified fields replaced. The original is never
+   * mutated.
    */
-  set(date: Temporal.PlainDateTime, values: NgpDateUnits): Temporal.PlainDateTime {
+  set(
+    date: Temporal.PlainDateTime,
+    values: NgpDateUnits,
+  ): Temporal.PlainDateTime {
     return date.with({
       ...(values.year !== undefined && { year: values.year }),
       ...(values.month !== undefined && { month: values.month }),
@@ -83,32 +86,37 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
       ...(values.hour !== undefined && { hour: values.hour }),
       ...(values.minute !== undefined && { minute: values.minute }),
       ...(values.second !== undefined && { second: values.second }),
-      ...(values.millisecond !== undefined && { millisecond: values.millisecond }),
+      ...(values.millisecond !== undefined && {
+        millisecond: values.millisecond,
+      }),
     });
   }
 
   /**
-   * Return a new `Temporal.PlainDateTime` with the given duration added.
-   * The field names of `NgpDuration` match `DurationLikeObject` directly,
-   * so no mapping is required.
+   * Return a new `Temporal.PlainDateTime` with the given duration added. The field names of
+   * `NgpDuration` match `DurationLikeObject` directly, so no mapping is required.
    */
-  add(date: Temporal.PlainDateTime, duration: NgpDuration): Temporal.PlainDateTime {
+  add(
+    date: Temporal.PlainDateTime,
+    duration: NgpDuration,
+  ): Temporal.PlainDateTime {
     return date.add(duration);
   }
 
-  /**
-   * Return a new `Temporal.PlainDateTime` with the given duration
-   * subtracted.
-   */
-  subtract(date: Temporal.PlainDateTime, duration: NgpDuration): Temporal.PlainDateTime {
+  /** Return a new `Temporal.PlainDateTime` with the given duration subtracted. */
+  subtract(
+    date: Temporal.PlainDateTime,
+    duration: NgpDuration,
+  ): Temporal.PlainDateTime {
     return date.subtract(duration);
   }
 
   /**
    * Compare two dates. Returns:
+   *
    * - `-1` if `a < b`
-   * - `0`  if `a === b`
-   * - `1`  if `a > b`
+   * - `0` if `a === b`
+   * - `1` if `a > b`
    */
   compare(a: Temporal.PlainDateTime, b: Temporal.PlainDateTime): number {
     return Temporal.PlainDateTime.compare(a, b);
@@ -168,7 +176,6 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
    * Get the day of the week.
    *
    * @returns `1` for Monday … `7` for Sunday.
-   *
    * @note `Temporal.PlainDateTime.dayOfWeek` uses the same ISO convention
    * (1=Monday … 7=Sunday), so no mapping is needed.
    */

@@ -1,8 +1,13 @@
+import { TestBed } from '@angular/core/testing';
+
 import { TemporalAdapter } from './temporal-adapter';
 
 describe(TemporalAdapter, () => {
   it('should get the day of the week (1-7)', () => {
-    const adapter = new TemporalAdapter();
+    TestBed.configureTestingModule({
+      providers: [TemporalAdapter],
+    });
+    const adapter = TestBed.inject(TemporalAdapter);
     const lastOfAugust2025 = adapter.create({ year: 2025, month: 8, day: 31 }); // Aug 31st, 2025 is a Sunday
     expect(adapter.getDay(lastOfAugust2025)).toBe(7);
     expect(adapter.getDay(adapter.add(lastOfAugust2025, { days: 1 }))).toBe(1);
