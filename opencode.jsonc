@@ -23,7 +23,7 @@
         "@angular/cli",
         "mcp"
       ],
-      "type": "local"
+      "type": "local",
     },
     "ngp-mcp": {
       "command": [
@@ -31,12 +31,12 @@
         "@ng-primitives/mcp"
       ],
       "enabled": true,
-      "type": "local"
+      "type": "local",
     },
     "figma": {
       "type": "remote",
       "url": "http://172.20.240.1:3845/mcp",
-      "enabled": false
+      "enabled": false,
     },
-  }
+  },
 }

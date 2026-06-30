@@ -33,6 +33,7 @@
   "singleQuote": true,
   "arrowParens": "avoid",
   "experimentalSortPackageJson": true,
+  "jsdoc": true,
   "ignorePatterns": [
     "node_modules",
     "pnpm-lock.yaml",
