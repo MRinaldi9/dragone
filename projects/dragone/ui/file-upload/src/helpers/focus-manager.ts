@@ -5,9 +5,8 @@ import { toElement } from '@dragone/ui/utils';
 /**
  * Coordina il focus dei pulsanti di rimozione chip dopo mutate della lista.
  *
- * API principale:
- * - `focusNext(filename)`: prova a focusare il successivo; se assente usa il precedente;
- *   fallback finale al pulsante upload (`fallbackElement`).
+ * API principale: - `focusNext(filename)`: prova a focusare il successivo; se assente usa il
+ * precedente; fallback finale al pulsante upload (`fallbackElement`).
  */
 @Directive({
   selector: 'ul[drgnFocusManager]',
@@ -30,13 +29,14 @@ export class FocusManager {
   /**
    * Esegue la strategia next/previous + fallback.
    *
-   * Nota: il focus e' chiamato dal template su `animate.leave`, quindi avviene
-   * quando l'elemento in uscita e' gia' marcato con classe leave.
+   * Nota: il focus e' chiamato dal template su `animate.leave`, quindi avviene quando l'elemento in
+   * uscita e' gia' marcato con classe leave.
    */
   focusNext(filename: string): void {
     const tmpArr = [...this.#focusMap.entries()];
     const currIndex = tmpArr.findIndex(([key]) => key === filename);
-    const nextIndex = currIndex + 1 < tmpArr.length ? currIndex + 1 : currIndex - 1;
+    const nextIndex =
+      currIndex + 1 < tmpArr.length ? currIndex + 1 : currIndex - 1;
     const btnToFocus = tmpArr[nextIndex]?.[1];
     if (btnToFocus && !btnToFocus.disabled) {
       btnToFocus.focus();

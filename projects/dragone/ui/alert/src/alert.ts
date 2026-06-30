@@ -55,25 +55,31 @@ export class Alert {
   readonly alertType = input<string, 'info' | 'success' | 'warning' | 'error'>(TYPE_TO_ICON.info, {
     transform: type => TYPE_TO_ICON[type],
   });
-  /** Defines the politeness level for screen readers.
+  /**
+   * Defines the politeness level for screen readers.
+   *
    * @default 'assertive'
    */
   readonly politeness = input<AlertPolite>('assertive');
-  /** Defines the variant of the alert.
+  /**
+   * Defines the variant of the alert.
+   *
    * @default 'desktop'
    */
   readonly aspect = input<'mobile' | 'desktop'>('desktop');
-  /** Defines whether the title should be exposed as a heading.
+  /**
+   * Defines whether the title should be exposed as a heading.
+   *
    * @default false
    */
   readonly titleAsHeading = input(false);
-  /** Defines the heading level used when titleAsHeading is true.
+  /**
+   * Defines the heading level used when titleAsHeading is true.
+   *
    * @default 4
    */
   readonly headingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(4);
-  /**
-   * Optional call to action text for the alert.
-   */
+  /** Optional call to action text for the alert. */
   readonly ctaText = input<string>();
   readonly ctaClick = output<PointerEvent>();
 

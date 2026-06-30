@@ -1,4 +1,8 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import {
+  argsToTemplate,
+  type Meta,
+  type StoryObj,
+} from '@analogjs/storybook-angular';
 import { fn } from 'storybook/test';
 
 import { ChipSelected } from './chip-selected';
@@ -28,12 +32,18 @@ const meta: Meta<ChipSelectedArgs> = {
     selected: {
       control: 'boolean',
       description: 'Stato di selezione della chip',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disabled: {
       control: 'boolean',
       description: 'Disabilita la chip impedendo interazioni',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     selectedChange: {
       action: 'selectedChange',
@@ -41,7 +51,7 @@ const meta: Meta<ChipSelectedArgs> = {
       table: { type: { summary: 'EventEmitter<boolean>' } },
     },
   },
-  render: args => ({
+  render: (args) => ({
     props: args,
     template: `
 			<button
@@ -58,32 +68,24 @@ const meta: Meta<ChipSelectedArgs> = {
 export default meta;
 type Story = StoryObj<ChipSelectedArgs>;
 
-/**
- * Chip non selezionata.
- */
+/** Chip non selezionata. */
 export const Default: Story = {};
 
-/**
- * Chip selezionata.
- */
+/** Chip selezionata. */
 export const Selected: Story = {
   args: {
     selected: true,
   },
 };
 
-/**
- * Chip disabilitata.
- */
+/** Chip disabilitata. */
 export const Disabled: Story = {
   args: {
     disabled: true,
   },
 };
 
-/**
- * Chip selezionata e disabilitata.
- */
+/** Chip selezionata e disabilitata. */
 export const DisabledSelected: Story = {
   args: {
     selected: true,

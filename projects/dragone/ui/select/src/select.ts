@@ -1,5 +1,15 @@
-import { booleanAttribute, Component, computed, input, linkedSignal, output } from '@angular/core';
-import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
+import {
+  booleanAttribute,
+  Component,
+  computed,
+  input,
+  linkedSignal,
+  output,
+} from '@angular/core';
+import {
+  outputFromObservable,
+  outputToObservable,
+} from '@angular/core/rxjs-interop';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
@@ -20,8 +30,8 @@ type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
 
 /**
  * The type of a resolved option value after applying `optionLabel` or `optionValue` mapping.
- * - When `T` is primitive, the resolved type is `T` itself.
- * - When `T` is an object, it can be either `T` or one of its property values.
+ * - when `T` is primitive, the resolved type is `T` itself.
+ * - when `T` is an object, it can be either `T` or one of its property values.
  */
 type SelectResolved<T> = Option<T> | (T extends object ? T[keyof T] : never);
 
@@ -33,7 +43,8 @@ type SelectResolved<T> = Option<T> | (T extends object ? T[keyof T] : never);
   providers: [provideIcons({ faSolidChevronDown, faSolidCheck })],
   host: {
     class: 'drgn-label-md-400',
-    '[ariaLabel]': 'ariaLabelledBy() ? undefined : (ariaLabel() || placeholder())',
+    '[ariaLabel]':
+      'ariaLabelledBy() ? undefined : (ariaLabel() || placeholder())',
     '[attr.aria-labelledby]': 'ariaLabelledBy()',
     '[attr.name]': 'name()',
     '[attr.readonly]': 'readonly() ? "" : undefined',
@@ -59,10 +70,14 @@ export class Select<T> {
   readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
   /**
-   * A string that maps an option to its display label. If not provided, the option itself will be used as the label.
+   * A string that maps an option to its display label. If not provided, the option itself will be
+   * used as the label.
    */
   readonly optionLabel = input<T extends object ? keyof T : never>();
-  /** A string that maps an option to its value. If not provided, the option itself will be used as the value. */
+  /**
+   * A string that maps an option to its value. If not provided, the option itself will be used as
+   * the value.
+   */
   readonly optionValue = input<T extends object ? keyof T : never>();
   readonly ariaLabel = input<string>();
   readonly ariaLabelledBy = input<string>();
@@ -74,9 +89,9 @@ export class Select<T> {
 
   readonly valueChange = outputFromObservable(
     outputToObservable(this.#internalState().valueChange).pipe(
-      map(value => {
+      map((value) => {
         if (Array.isArray(value)) {
-          return value.map(val => this.mapOutputValue(val));
+          return value.map((val) => this.mapOutputValue(val));
         }
         return this.mapOutputValue(value);
       }),
@@ -94,19 +109,21 @@ export class Select<T> {
   });
 
   /**
-   * Value shown inside the trigger when at least one option is selected.
-   * It applies `optionLabel` mapping when provided.
+   * Value shown inside the trigger when at least one option is selected. It applies `optionLabel`
+   * mapping when provided.
    */
-  protected readonly mappedValue = computed(() => this.mapOption(this.internalValue()));
+  protected readonly mappedValue = computed(() =>
+    this.mapOption(this.internalValue()),
+  );
 
   /**
-   * View model used by the dropdown template.
-   * It precomputes label and selected state for each option.
+   * View model used by the dropdown template. It precomputes label and selected state for each
+   * option.
    */
   protected readonly optionItems = computed(() => {
     const selectedValue = this.internalValue();
     return (
-      this.options()?.map(option => ({
+      this.options()?.map((option) => ({
         value: option,
         label: this.mapOption(option),
         selected: this.isOptionSelected(option, selectedValue),
@@ -115,8 +132,8 @@ export class Select<T> {
   });
 
   /**
-   * Maps one option (or a list of options) to its display label.
-   * If `optionLabel` is not set, the original value is returned.
+   * Maps one option (or a list of options) to its display label. If `optionLabel` is not set, the
+   * original value is returned.
    */
   private mapOption(
     value: Option<T> | Option<T>[] | null | undefined,
@@ -129,38 +146,39 @@ export class Select<T> {
       return value;
     }
     if (Array.isArray(value)) {
-      return value.map(option => this.getOptionProp(option, key));
+      return value.map((option) => this.getOptionProp(option, key));
     }
     return this.getOptionProp(value, key);
   }
 
   /**
-   * Returns whether the current option is selected.
-   * Selection is delegated to `compareWith` from `ng-primitives` state.
+   * Returns whether the current option is selected. Selection is delegated to `compareWith` from
+   * `ng-primitives` state.
    */
-  private isOptionSelected(currOption: Option<T>, selectedValue: SelectValue<T>): boolean {
+  private isOptionSelected(
+    currOption: Option<T>,
+    selectedValue: SelectValue<T>,
+  ): boolean {
     const compareWith = this.#internalState().compareWith();
     if (Array.isArray(selectedValue)) {
-      return selectedValue.some(value => compareWith(value, currOption));
+      return selectedValue.some((value) => compareWith(value, currOption));
     }
     return compareWith(selectedValue, currOption);
   }
 
-  /**
-   * Safely reads a property from an option object using the configured key.
-   */
+  /** Safely reads a property from an option object using the configured key. */
   private getOptionProp(
     option: Option<T>,
     key: T extends object ? keyof T : never,
   ): T extends object ? T[keyof T] : never {
-    return (option as Record<PropertyKey, unknown>)[key as PropertyKey] as T extends object
-      ? T[keyof T]
-      : never;
+    return (option as Record<PropertyKey, unknown>)[
+      key as PropertyKey
+    ] as T extends object ? T[keyof T] : never;
   }
 
   /**
-   * Maps emitted values for `valueChange`.
-   * If `optionValue` is configured, emits the extracted property; otherwise emits the raw option.
+   * Maps emitted values for `valueChange`. If `optionValue` is configured, emits the extracted
+   * property; otherwise emits the raw option.
    */
   private mapOutputValue(
     value: Option<T> | null | undefined,
