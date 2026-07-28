@@ -67,6 +67,16 @@
   margin: 0;
 }
 
+.drgn-label-md-number-400 {
+  font-family: var(--drgn-typography-font-family-number);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+  font-weight: var(--drgn-typography-weight-regular);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
+  margin: 0;
+}
+
 .drgn-helper-text-xs-400 {
   font-family: var(--drgn-typography-font-family-base);
   font-size: var(--drgn-typography-size-helper-text-xs);

@@ -11,15 +11,15 @@
 </div>
 <table ngpDatePickerGrid>
   <thead>
-    <tr>
+    <tr class="date-picker-day-headers">
       @for (day of dayHeaders(); track day.abbr) {
-        <th scope="col" [attr.abbr]="day.abbr">{{ day.label }}</th>
+        <th class="drgn-label-md-number-400" scope="col" [attr.abbr]="day.abbr">{{ day.label }}</th>
       }
     </tr>
   </thead>
   <tbody>
     <tr *ngpDatePickerRowRender>
-      <td *drgnCalendarCellRender="let date" ngpDatePickerCell>
+      <td *drgnCalendarCellRender="let date" class="drgn-label-md-number-400" ngpDatePickerCell>
         <button ngpDatePickerDateButton>{{ dayOfMonth(date) }}</button>
       </td>
     </tr>

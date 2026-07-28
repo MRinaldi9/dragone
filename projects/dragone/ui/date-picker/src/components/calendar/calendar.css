@@ -18,19 +18,24 @@
   justify-content: space-between;
   height: 40px;
 }
+.date-picker-day-headers {
+  background-color: var(--drgn-color-surface-primary-muted);
+}
 th {
-  font-size: 14px;
-  font-weight: 500;
-  width: 40px;
+  text-transform: capitalize;
+  padding: 0px;
+  width: 50px;
   height: 40px;
-  text-align: center;
-  color: var(--ngp-text-secondary);
+}
+[ngpDatePickerGrid] {
+  border-collapse: collapse;
 }
 [ngpDatePickerLabel] {
   cursor: pointer;
   background-color: transparent;
   border: none;
   color: var(--drgn-color-interactive-primary-default);
+  text-transform: capitalize;
   &:focus-visible {
     box-shadow:
       0 0 0 2px var(--drgn-color-focus-ring-primary),
@@ -73,15 +78,18 @@ th {
   &[data-press] {
     color: var(--drgn-color-interactive-primary-pressed);
   }
+  &[data-disabled] {
+    cursor: not-allowed;
+    color: var(--drgn-color-text-disabled);
+  }
 }
-[ngpDatePickerPreviousMonth][data-disabled],
-[ngpDatePickerNextMonth][data-disabled] {
-  cursor: not-allowed;
-  color: var(--ngp-text-disabled);
+[ngpDatePickerCell] {
+  padding: 0;
 }
+
 [ngpDatePickerDateButton] {
   all: unset;
-  width: 40px;
+  width: 50px;
   height: 40px;
   display: flex;
   align-items: center;

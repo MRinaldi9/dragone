@@ -54,6 +54,7 @@
   --drgn-color-focus-ring-primary: var(--color-alias-interactive-primary-default);
 
   --drgn-typography-font-family-base: var(--typography-global-font-family-01);
+  --drgn-typography-font-family-number: var(--typography-global-font-family-03);
   --drgn-typography-font-style-normal: normal;
   --drgn-typography-letter-spacing-default: 0;
 
