@@ -11,6 +11,7 @@ describe(Alert, () => {
   let locatorComponent: Locator;
   const alertType = signal<'info' | 'success' | 'warning' | 'error'>('info');
   const ctaText = signal('');
+  const titleAsHeading = signal(false);
   const ctaMock = vi.fn<() => void>();
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,6 +23,7 @@ describe(Alert, () => {
         inputBinding('title', () => 'Test Alert'),
         inputBinding('alertType', alertType),
         inputBinding('ctaText', ctaText),
+        inputBinding('titleAsHeading', titleAsHeading),
         outputBinding('ctaClick', ctaMock),
       ],
     });
@@ -32,6 +34,8 @@ describe(Alert, () => {
 
   it('must show title', async () => {
     expect(component.title()).toBe('Test Alert');
+    titleAsHeading.set(true);
+    await fixture.whenStable();
     await expect
       .element(locatorComponent.getByRole('heading', { name: 'Test Alert' }))
       .toBeVisible();

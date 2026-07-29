@@ -86,6 +86,7 @@ describe(Checkbox, () => {
       expect(component.stateDir().checked()).toBeFalsy();
       expect(component.field().value()).toBeFalsy();
     });
+
     it('should update form value on click', async () => {
       const { component, locator, whenStable } = setupForm();
       await whenStable();

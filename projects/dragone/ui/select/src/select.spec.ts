@@ -136,6 +136,7 @@ describe(Select, () => {
       expect(component.field().value()).toBe('foo');
       expect(component.stateDir().value()).toBe('foo');
     });
+
     it('should update form field value on object option select', async () => {
       const { component, locator, whenStable } = setupForm(options(), 'label', 'value');
       await whenStable();

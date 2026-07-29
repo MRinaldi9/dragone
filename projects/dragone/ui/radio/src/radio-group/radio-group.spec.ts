@@ -70,6 +70,7 @@ describe(RadioGroup, () => {
     await userEvent.tab();
     await expect.element(firstRadioItem).toHaveAttribute('aria-checked', 'false');
   });
+
   it('should not change selection when readonly', async () => {
     readonly.set(true);
     await fixture.whenStable();

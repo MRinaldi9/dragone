@@ -53,6 +53,7 @@ describe(Accordion, () => {
     const headerBtn = accordionItem.getByRole('button').query();
     expect(headerBtn?.textContent).toContain('Item 1');
   });
+
   it('should apply variant color based on input', async () => {
     const accordionItem = page.getByRole('heading', { name: 'Item 1' });
     const headerBtn = accordionItem.getByRole('button');

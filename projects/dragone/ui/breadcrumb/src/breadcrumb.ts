@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { injectDimensions } from 'ng-primitives/internal';
 
-import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
+import { BreadcrumbItem, type BreadcrumbType } from './breadcrumb-item/breadcrumb-item';
 
 @Component({
   selector: 'drgn-breadcrumb',
@@ -18,12 +18,16 @@ import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item/breadcru
   template: `
     <ol #breadcrumbList>
       @if (showEllipsis()) {
-        <drgn-breadcrumb-item [breadcrumbConfiguration]="firstItem()" />
-        <drgn-breadcrumb-item
-          [breadcrumbConfiguration]="{ label: '...' }"
-          (openBreadcrumb)="showEllipsis.set(false)"
-        />
-        <drgn-breadcrumb-item [breadcrumbConfiguration]="lastItem()" />
+        @let firstBread = firstItem();
+        @let lastBread = lastItem();
+        @if (firstBread && lastBread) {
+          <drgn-breadcrumb-item [breadcrumbConfiguration]="firstBread" />
+          <drgn-breadcrumb-item
+            [breadcrumbConfiguration]="{ label: '...' }"
+            (openBreadcrumb)="showEllipsis.set(false)"
+          />
+          <drgn-breadcrumb-item [breadcrumbConfiguration]="lastBread" />
+        }
       } @else {
         @for (item of breadcrumbs(); track $index) {
           <drgn-breadcrumb-item [breadcrumbConfiguration]="item" />
@@ -40,10 +44,10 @@ import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item/breadcru
   },
 })
 export class Breadcrumb {
-  readonly breadcrumbs = input.required<BreadcrumbProps[]>();
+  readonly breadcrumbs = input.required<BreadcrumbType[]>();
   protected readonly showEllipsis = linkedSignal(() => this.breadcrumbs().length >= 6);
-  protected readonly firstItem = computed(() => this.breadcrumbs().at(0)!);
-  protected readonly lastItem = computed(() => this.breadcrumbs().at(-1)!);
+  protected readonly firstItem = computed(() => this.breadcrumbs().at(0));
+  protected readonly lastItem = computed(() => this.breadcrumbs().at(-1));
   private readonly hostDimensions = injectDimensions();
   private readonly breadcrumbListElement =
     viewChild<ElementRef<HTMLOListElement>>('breadcrumbList');

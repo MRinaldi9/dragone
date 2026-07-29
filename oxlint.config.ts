@@ -19,6 +19,7 @@ export default defineConfig({
       files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.js', '**/*.cjs', '**/*.mjs'],
       rules: {
         // Eslint
+        'capitalized-comments': ['warn', 'always', { ignoreConsecutiveComments: true }],
         curly: ['error', 'multi-line'],
         'for-direction': 'error',
         'id-length': ['error', { checkGeneric: false, exceptions: ['_'] }],
@@ -112,6 +113,8 @@ export default defineConfig({
         'typescript/prefer-as-const': 'error',
         'typescript/prefer-namespace-keyword': 'error',
         'typescript/triple-slash-reference': 'error',
+        'unicorn/no-null': 'off',
+        'unicorn/prefer-spread': 'off',
         'use-isnan': 'error',
         'valid-typeof': 'error',
       },
@@ -134,6 +137,7 @@ export default defineConfig({
         'vitest/no-identical-title': 'error',
         'vitest/no-import-node-test': 'error',
         'vitest/no-standalone-expect': 'error',
+        'vitest/prefer-called-times': 'off',
         'vitest/prefer-describe-function-title': 'error',
         'vitest/prefer-expect-assertions': [
           'warn',

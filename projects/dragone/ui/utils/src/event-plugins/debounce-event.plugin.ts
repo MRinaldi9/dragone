@@ -7,7 +7,7 @@ export class DebouncePlugin extends EventManagerPlugin {
     return eventName.includes('debounce');
   }
   override addEventListener(element: HTMLElement, eventName: string, handler: Function): Function {
-    const [originalEvent, _, duration] = eventName.split('.'); // event.debounce.time
+    const [originalEvent, _, duration] = eventName.split('.'); // Event.debounce.time
     const sub = fromEvent(element, originalEvent)
       .pipe(debounceTime(this.normalizeToMs(duration)))
       .subscribe(event => handler(event));
@@ -20,13 +20,16 @@ export class DebouncePlugin extends EventManagerPlugin {
     if (!matchGroups) throw new Error('Wrong time format');
     const { time, unit } = matchGroups;
     switch (unit) {
-      case 's':
-        return parseInt(time, 10) * 1000;
+      case 's': {
+        return Number.parseInt(time, 10) * 1000;
+      }
       case '':
-      case 'ms':
-        return parseInt(time, 10);
-      default:
+      case 'ms': {
+        return Number.parseInt(time, 10);
+      }
+      default: {
         throw new Error('Unsupported time unit');
+      }
     }
   }
 }
