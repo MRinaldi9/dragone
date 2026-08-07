@@ -56,18 +56,21 @@ describe(Switch, () => {
     await locator.click();
     await expect.element(locator).toHaveAttribute('aria-checked', 'true');
   });
+
   it('should emit touch event on blur', async () => {
     await userEvent.tab();
     expect(touchSpy).not.toHaveBeenCalledWith();
     await userEvent.tab();
     expect(touchSpy).toHaveBeenCalledWith(undefined);
   });
+
   it('should not be interactive when readonly', async () => {
     readonly.set(true);
     await fixture.whenStable();
     await expect.element(locator).toHaveAttribute('readonly');
     await expect.element(locator).toHaveAttribute('aria-checked', 'false');
   });
+
   it('should be hidden when hidden is true', async () => {
     hidden.set(true);
     await fixture.whenStable();

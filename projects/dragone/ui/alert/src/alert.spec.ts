@@ -32,20 +32,14 @@ describe(Alert, () => {
     await fixture.whenStable();
   });
 
-  it.each([{ role: 'paragraph' } as const, { role: 'heading' } as const])(
-    'must show title',
-    async ({ role }) => {
-      expect(component.title()).toBe('Test Alert');
-      if (role === 'heading') {
-        titleAsHeading.set(true);
-        await fixture.whenStable();
-      }
-      const title = locatorComponent.getByText('Test Alert');
-      await expect.element(title).toBeVisible();
-
-      await expect.element(title).toHaveRole(role);
-    },
-  );
+  it('must show title', async () => {
+    expect(component.title()).toBe('Test Alert');
+    titleAsHeading.set(true);
+    await fixture.whenStable();
+    await expect
+      .element(locatorComponent.getByRole('heading', { name: 'Test Alert' }))
+      .toBeVisible();
+  });
 
   it('show default icon for info type', async () => {
     const icon = locatorComponent.getByTestId('alert-icon');

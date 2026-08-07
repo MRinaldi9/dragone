@@ -11,7 +11,7 @@ export class AriaLabelPipe implements PipeTransform {
       return `Remove file ${currFile.name}`;
     }
 
-    const duplicateIndex = duplicates.findIndex(file => file === currFile) + 1;
+    const duplicateIndex = duplicates.indexOf(currFile) + 1;
     return `Remove file ${currFile.name} (${duplicateIndex} of ${duplicates.length})`;
   }
 }

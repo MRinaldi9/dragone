@@ -3,10 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 
-export type BreadcrumbProps =
-  | BreadcrumbWithRouterLink
-  | BreadcrumbWithHref
-  | BreadcrumbWithEllipsis;
+export type BreadcrumbType = BreadcrumbWithRouterLink | BreadcrumbWithHref | BreadcrumbWithEllipsis;
 
 interface BreadcrumbWithRouterLink {
   label: string;
@@ -67,7 +64,7 @@ interface BreadcrumbWithEllipsis {
   },
 })
 export class BreadcrumbItem {
-  readonly breadcrumbConfiguration = input.required<BreadcrumbProps>();
+  readonly breadcrumbConfiguration = input.required<BreadcrumbType>();
   readonly openBreadcrumb = output();
 
   protected breadcrumbVisualization(event: Event): void {

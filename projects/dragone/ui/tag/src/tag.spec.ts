@@ -41,12 +41,14 @@ describe(Tag, () => {
     expect(component.statusTag()).toBe(status());
     await expect.element(componentLocator.element()).toHaveAttribute('data-status', 'neutral');
   });
+
   it('should update status attribute when statusTag input changes', async () => {
     status.set('success');
     await fixture.whenStable();
     expect(component.statusTag()).toBe(status());
     await expect.element(componentLocator.element()).toHaveAttribute('data-status', 'success');
   });
+
   it('should update aria-label attribute when ariaLabel input changes', async () => {
     ariaLabel.set('New Aria Label');
     await fixture.whenStable();

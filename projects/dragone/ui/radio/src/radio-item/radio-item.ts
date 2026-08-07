@@ -1,10 +1,5 @@
 import { Component, effect, untracked } from '@angular/core';
-import {
-  injectRadioGroupState,
-  injectRadioItemState,
-  NgpRadioIndicator,
-  NgpRadioItem,
-} from 'ng-primitives/radio';
+import { injectRadioGroupState, NgpRadioIndicator, NgpRadioItem } from 'ng-primitives/radio';
 
 import { injectRadioGroupContext } from '../radio-group-context';
 
@@ -31,16 +26,10 @@ import { injectRadioGroupContext } from '../radio-group-context';
   ],
 })
 export class RadioItem {
-  readonly #state = injectRadioItemState();
   readonly #radioGroupState = injectRadioGroupState();
   protected readonly radioGroupReadonly = injectRadioGroupContext().readonly;
 
   constructor() {
-    effect(() => {
-      const internalState = untracked(() => this.#state());
-      const disabled = this.#radioGroupState().disabled();
-      internalState.disabled.set(disabled);
-    });
     effect(() => {
       this.#radioGroupState().value();
       const isReadonly = this.radioGroupReadonly();

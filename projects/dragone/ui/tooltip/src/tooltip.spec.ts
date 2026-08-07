@@ -39,6 +39,7 @@ describe(Tooltip, () => {
       .query(By.directive(TooltipTrigger))
       .injector.get(TooltipTrigger);
   });
+
   it('should not display the tooltip on hover', async () => {
     component.tooltipDisabled.set(true);
     await fixture.whenStable();
@@ -47,6 +48,7 @@ describe(Tooltip, () => {
     expect(tooltip).not.toBeInTheDocument();
     expect(tooltipTriggerDirective['stateTooltip']().context()).toBe('This is a helpful tooltip');
   });
+
   it('should display the tooltip on hover', { repeats: 3 }, async () => {
     await userEvent.hover(btnToHover);
     const tooltip = page.getByRole('tooltip');
@@ -70,6 +72,7 @@ describe(Tooltip, () => {
       body: 'Tooltip Body',
     });
   });
+
   it('should show total tooltip', async () => {
     component.tooltipContent.set({
       title: 'Full Tooltip',

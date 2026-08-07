@@ -173,7 +173,7 @@ describe(FileUpload, () => {
     fixture.nativeElement.querySelector('button')?.dispatchEvent(new FocusEvent('blur'));
     await fixture.whenStable();
 
-    expect(touchSpy).toHaveBeenCalledTimes(1);
+    expect(touchSpy).toHaveBeenCalledOnce();
   });
 
   it('should remove a rendered chip when its remove button is clicked', async () => {
