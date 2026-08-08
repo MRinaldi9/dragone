@@ -26,6 +26,6 @@ export class TooltipTrigger {
   private stateTooltip = injectTooltipTriggerState();
 
   constructor() {
-    this.stateTooltip().tooltip.set(Tooltip);
+    this.stateTooltip().setTooltip(Tooltip);
   }
 }

@@ -57,7 +57,7 @@ export class RadioGroup<T> {
   }
 
   reset(): void {
-    this.#radioGroupState().value.set(null);
+    this.#radioGroupState().setValue(null);
   }
 
   protected touched(event: FocusEvent): void {

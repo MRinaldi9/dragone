@@ -33,7 +33,7 @@ export class RadioItem {
     effect(() => {
       this.#radioGroupState().value();
       const isReadonly = this.radioGroupReadonly();
-      if (isReadonly) untracked(() => this.#radioGroupState().value.set(null));
+      if (isReadonly) untracked(() => this.#radioGroupState().setValue(null));
     });
   }
 }
