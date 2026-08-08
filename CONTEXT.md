@@ -76,6 +76,12 @@ _Avoid_: Scale, dimension, spacing
 When a Sirio design token or component spec fails WCAG 2.2 AA, Dragone implements the spec faithfully, tracks the issue as a known limitation, and escalates to the Sirio design owners. Dragone does not patch the design. Consumers may override Component Tokens locally.
 _Avoid_: A11y workaround, accessibility fix
 
+### Testing
+
+**Test Host**:
+A test-only Angular Component that composes a Component under test, binding its signal inputs and observing its outputs, rendered with `render()` from `@wismaz/vitest-browser-angular`. The Component under test stays reactive to signal changes during the test.
+_Avoid_: Harness, fixture wrapper, test bench
+
 ## Rules
 
 - **WCAG 2.2 AA** is the accessibility standard, in both light and dark themes.

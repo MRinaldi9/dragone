@@ -82,6 +82,7 @@ export default defineConfig({
         'no-var': 'error',
         'oxc/no-async-await': 'off',
         'oxc/no-optional-chaining': 'off',
+        'oxc/no-rest-spread-properties': 'off',
         'prefer-const': 'error',
         'prefer-rest-params': 'error',
         'prefer-spread': 'error',

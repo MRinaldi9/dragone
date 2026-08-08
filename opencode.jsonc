@@ -6,30 +6,18 @@
       "disabled": true,
     },
     "oxfmt": {
-      "command": [
-        "pnpm",
-        "format"
-      ],
-      "extensions": [
-        ".ts"
-      ]
+      "command": ["pnpm", "format"],
+      "extensions": [".ts"],
     },
   },
   "mcp": {
     "angular-cli": {
       "enabled": true,
-      "command": [
-        "pnx",
-        "@angular/cli",
-        "mcp"
-      ],
+      "command": ["pnx", "@angular/cli", "mcp"],
       "type": "local",
     },
     "ngp-mcp": {
-      "command": [
-        "pnx",
-        "@ng-primitives/mcp"
-      ],
+      "command": ["pnx", "@ng-primitives/mcp"],
       "enabled": true,
       "type": "local",
     },
