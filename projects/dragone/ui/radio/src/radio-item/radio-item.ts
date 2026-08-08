@@ -1,6 +1,8 @@
 import { Component, effect, untracked } from '@angular/core';
 import { injectRadioGroupState, NgpRadioIndicator, NgpRadioItem } from 'ng-primitives/radio';
 
+import { createNotifier } from '@dragone/ui/utils';
+
 import { injectRadioGroupContext } from '../radio-group-context';
 
 @Component({
@@ -26,12 +28,13 @@ import { injectRadioGroupContext } from '../radio-group-context';
   ],
 })
 export class RadioItem {
-  readonly #radioGroupState = injectRadioGroupState();
   protected readonly radioGroupReadonly = injectRadioGroupContext().readonly;
+  readonly #radioGroupState = injectRadioGroupState();
+  readonly #notifierRadioGroup = createNotifier({ deps: [this.#radioGroupState().value] });
 
   constructor() {
     effect(() => {
-      this.#radioGroupState().value();
+      this.#notifierRadioGroup.listen();
       const isReadonly = this.radioGroupReadonly();
       if (isReadonly) untracked(() => this.#radioGroupState().setValue(null));
     });
