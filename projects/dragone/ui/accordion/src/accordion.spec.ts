@@ -1,6 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { type ComponentFixture, TestBed } from '@angular/core/testing';
-import { page } from 'vitest/browser';
+import { Component, input, signal } from '@angular/core';
+import { render } from '@wismaz/vitest-browser-angular';
 
 import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item/accordion-item';
@@ -20,73 +19,60 @@ import { AccordionItem } from './accordion-item/accordion-item';
   `,
 })
 class TestHostAccordion {
-  variantColor = signal<'light' | 'dark'>('dark');
-  disabledAccordion = signal(false);
-  disabledAccordionItem = signal(false);
+  variantColor = input<'light' | 'dark'>('dark');
+  disabledAccordion = input(false);
+  disabledAccordionItem = input(false);
 }
 
 describe(Accordion, () => {
-  let component: TestHostAccordion;
-  let fixture: ComponentFixture<TestHostAccordion>;
+  const disabledAccordion = signal(false);
+  const disabledAccordionItem = signal(false);
+  const variantColor = signal<'light' | 'dark'>('dark');
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [TestHostAccordion],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(TestHostAccordion);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+  afterEach(() => {
+    disabledAccordion.set(false);
+    disabledAccordionItem.set(false);
+    variantColor.set('dark');
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should render accordion with one item', async () => {
+    const { locator } = await render(TestHostAccordion);
+    const accordionItem = locator.getByRole('heading', { name: 'Item 1' });
+    await expect.element(accordionItem).toBeInTheDocument();
   });
 
-  it('should render accordion with one item', () => {
-    const accordionItems = page.getByRole('heading', { name: 'Item 1' }).all();
-    expect(accordionItems).toHaveLength(1);
-  });
+  it('should set heading for accordion item', async () => {
+    const { locator } = await render(TestHostAccordion);
 
-  it('should set heading for accordion item', () => {
-    const accordionItem = page.getByRole('heading', { name: 'Item 1' });
-    const headerBtn = accordionItem.getByRole('button').query();
-    expect(headerBtn?.textContent).toContain('Item 1');
+    const headerBtn = locator.getByRole('button');
+    await expect.element(headerBtn).toHaveTextContent('Item 1');
   });
 
   it('should apply variant color based on input', async () => {
-    const accordionItem = page.getByRole('heading', { name: 'Item 1' });
-    const headerBtn = accordionItem.getByRole('button');
-    expect(headerBtn).toHaveAttribute('data-variant', 'primary');
+    const { locator } = await render(TestHostAccordion, { inputs: { variantColor } });
+    const headerBtn = locator.getByRole('button');
+    await expect.element(headerBtn).toHaveAttribute('data-variant', 'primary');
 
-    // Change variant color to light
-    component.variantColor.set('light');
-    await fixture.whenStable();
-
-    expect(headerBtn).toHaveAttribute('data-variant', 'tertiary');
+    variantColor.set('light');
+    await expect.element(headerBtn).toHaveAttribute('data-variant', 'tertiary');
   });
 
   it('should disable accordion item when disabled input is true', async () => {
-    const accordionItem = page.getByRole('heading', { name: 'Item 1' });
-    const headerBtn = accordionItem.getByRole('button');
-    expect(headerBtn).not.toBeDisabled();
+    const { locator } = await render(TestHostAccordion, { inputs: { disabledAccordionItem } });
+    const headerBtn = locator.getByRole('button');
+    await expect.element(headerBtn).not.toBeDisabled();
+    disabledAccordionItem.set(true);
 
-    // Disable the accordion item
-    component.disabledAccordionItem.set(true);
-    await fixture.whenStable();
-
-    expect(headerBtn).toBeDisabled();
+    await expect.element(headerBtn).toBeDisabled();
   });
 
   it('should disable all accordion items when accordion disabled input is true', async () => {
-    const accordionItem = page.getByRole('heading', { name: 'Item 1' });
-    const headerBtn = accordionItem.getByRole('button');
-    expect(headerBtn).not.toBeDisabled();
+    const { locator } = await render(TestHostAccordion, { inputs: { disabledAccordion } });
 
-    // Disable the entire accordion
-    component.disabledAccordion.set(true);
-    await fixture.whenStable();
+    const headerBtn = locator.getByRole('button');
+    await expect.element(headerBtn).not.toBeDisabled();
 
-    expect(headerBtn).toBeDisabled();
+    disabledAccordion.set(true);
+    await expect.element(headerBtn).toBeDisabled();
   });
 });
