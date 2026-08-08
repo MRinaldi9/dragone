@@ -1,77 +1,61 @@
 # Dragone
 
-La libreria Dragone nasce dal design system [Sirio](https://www.inps.design/3e7e2b0f5/p/37c451-ciao-italia) e nasce per la creazione di un set robusto e coerente di componenti UI riutilizzabili per Angular.
+An independent [Angular](https://angular.dev) design system inspired by the [Sirio](https://www.inps.design/3e7e2b0f5/p/37c451-ciao-italia) design system (INPS), built on [ng-primitives](https://angularprimitives.com) for behavior and accessibility. Targeted at Italian public-sector digital services, released as open source.
+
+The [CONTEXT.md](./CONTEXT.md) defines the project's domain vocabulary. Architectural decisions are recorded in [docs/adr/](./docs/adr/).
 
 ## 🚀 Getting Started
 
-Per avviare il progetto sulla tua macchina locale, segui questi passaggi.
+### Prerequisites
 
-### Prerequisiti
+- [pnpm](https://pnpm.io) >= 11.0.0 (install globally via `npm install -g pnpm`)
+- Node.js >= 24.15.0
 
-Assicurati di avere `pnpm` installato globalmente. Se non ce l'hai, puoi installarlo con npm:
+### Install
 
 ```bash
-npm install -g pnpm
+git clone <repository-url>
+cd dragone
+pnpm install
 ```
 
-### Installazione
+## 💻 Development Workflow
 
-1.  Clona il repository:
-    ```bash
-    git clone <url-del-tuo-repository>
-    ```
-2.  Naviga nella directory del progetto:
-    ```bash
-    cd dragone
-    ```
-3.  Installa le dipendenze usando `pnpm`:
-    ```bash
-    pnpm install
-    ```
+This project uses **Storybook** as the primary environment for developing, previewing, and testing components in isolation.
 
-## 💻 Workflow di Sviluppo
-
-Questo progetto usa **Storybook** come ambiente primario per sviluppare, visualizzare e testare i componenti in isolamento.
-
-### Avviare Storybook
-
-Per avviare il server di sviluppo di Storybook, esegui:
+### Storybook
 
 ```bash
 pnpm storybook
 ```
 
-Questo aprirà Storybook nel tuo browser, dove potrai vedere tutti i componenti della libreria `@dragone/ui`.
+Opens Storybook in your browser with all `@dragone/ui` components, autodocs, and an a11y panel.
 
-### Costruire la Libreria
-
-Per creare una build di produzione della libreria `@dragone/ui`, esegui:
+### Build the Library
 
 ```bash
 pnpm build @dragone/ui
 ```
 
-Gli artefatti della build verranno salvati nella directory `dist/projects/dragone/ui`.
+Output is written to `dist/projects/dragone/ui`.
 
-### Eseguire i Test
-
-Per eseguire i test unitari per la libreria, esegui:
+### Run Tests
 
 ```bash
 pnpm test
 ```
 
-## ✨ Qualità del Codice e Convenzioni
+Unit tests run via [Vitest](https://vitest.dev) in browser mode (Playwright).
 
-Questo progetto applica rigide convenzioni sulla qualità del codice e sui commit per mantenere uno standard elevato.
+## ✨ Code Quality & Conventions
 
-### Linting e Formattazione
+### Linting & Formatting
 
-- Per eseguire il linter: `pnpm lint`
-- Per formattare il codice con Prettier: `pnpm format`
+- Lint: `pnpm lint`
+- Format: `pnpm format`
 
-Questi controlli vengono eseguiti automaticamente prima di ogni commit, grazie a `lefthook`.
+Both run automatically on staged files before every commit via [lefthook](https://github.com/evilmartians/lefthook).
 
-### Messaggi di Commit
+### Commit Messages
 
-Tutti i messaggi di commit devono seguire lo standard [Conventional Commits](https://www.conventionalcommits.org/). Per aiutarti, un hook pre-commit avvierà automaticamente un prompt interattivo (`pnpm cz`) per guidarti nella creazione del messaggio.
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/). Use `pnpm commit` to create a commit via the interactive prompt (commitizen); the `commit-msg` hook validates your message with commitlint. Versioning is managed natively by pnpm — record a change intent with `pnpm change` in each PR that changes the published API, then apply the release plan with `pnpm version -r`.
