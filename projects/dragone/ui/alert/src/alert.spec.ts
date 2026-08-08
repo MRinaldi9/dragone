@@ -1,67 +1,54 @@
-import { inputBinding, outputBinding, signal } from '@angular/core';
-import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { faSolidCircleCheck, faSolidCircleInfo } from '@ng-icons/font-awesome/solid';
-import { type Locator, page } from 'vitest/browser';
+import { render } from '@wismaz/vitest-browser-angular';
 
 import { Alert } from './alert';
 
 describe(Alert, () => {
-  let component: Alert;
-  let fixture: ComponentFixture<Alert>;
-  let locatorComponent: Locator;
   const alertType = signal<'info' | 'success' | 'warning' | 'error'>('info');
   const ctaText = signal('');
   const titleAsHeading = signal(false);
-  const ctaMock = vi.fn<() => void>();
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Alert],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(Alert, {
-      bindings: [
-        inputBinding('title', () => 'Test Alert'),
-        inputBinding('alertType', alertType),
-        inputBinding('ctaText', ctaText),
-        inputBinding('titleAsHeading', titleAsHeading),
-        outputBinding('ctaClick', ctaMock),
-      ],
-    });
-    component = fixture.componentInstance;
-    locatorComponent = page.elementLocator(fixture.nativeElement);
-    await fixture.whenStable();
-  });
+  const title = signal('Test Alert');
+  const ctaClick = vi.fn<() => void>();
 
   it('must show title', async () => {
+    const { locator, componentClassInstance: component } = await render(Alert, {
+      inputs: { titleAsHeading, title },
+    });
     expect(component.title()).toBe('Test Alert');
     titleAsHeading.set(true);
-    await fixture.whenStable();
-    await expect
-      .element(locatorComponent.getByRole('heading', { name: 'Test Alert' }))
-      .toBeVisible();
+
+    await expect.element(locator.getByRole('heading', { name: 'Test Alert' })).toBeVisible();
   });
 
   it('show default icon for info type', async () => {
-    const icon = locatorComponent.getByTestId('alert-icon');
+    const { locator } = await render(Alert, { inputs: { alertType, title } });
+    const icon = locator.getByTestId('alert-icon');
     await expect.element(icon).toContainHTML(faSolidCircleInfo);
   });
 
   it('show semantic icon based on alert type', async () => {
-    const icon = locatorComponent.getByTestId('alert-icon');
+    const { locator } = await render(Alert, { inputs: { alertType, title } });
+    const icon = locator.getByTestId('alert-icon');
     alertType.set('success');
-    await fixture.whenStable();
+
     await expect.element(icon).toContainHTML(faSolidCircleCheck);
   });
 
   it('must emit ctaClick event on button click', async () => {
-    await expect.element(locatorComponent.getByRole('button').query()).toBeNull();
+    const { locator } = await render(Alert, {
+      inputs: { ctaText, title },
+      outputs: { ctaClick },
+    });
+    let btnLocator = locator.getByRole('button', { name: 'Click me' });
+    await expect.element(btnLocator).not.toBeInTheDocument();
     ctaText.set('Click me');
-    await fixture.whenStable();
-    const button = locatorComponent.getByRole('button', { name: 'Click me' });
-    await expect.element(button).toBeVisible();
 
-    await button.click();
+    btnLocator = locator.getByRole('button', { name: 'Click me' });
+    await expect.element(btnLocator).toBeInTheDocument();
 
-    expect(ctaMock).toHaveBeenCalledWith(expect.anything());
+    await btnLocator.click();
+
+    expect(ctaClick).toHaveBeenCalledWith(expect.anything());
   });
 });
