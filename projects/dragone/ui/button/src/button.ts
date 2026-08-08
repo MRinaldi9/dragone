@@ -18,7 +18,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'da
   host: {
     '[attr.data-size]': 'size()',
     '[attr.data-variant]': 'variant()',
-    '[attr.data-icon-only]': 'isIconOnly()',
+    '[attr.data-icon-only]': 'isIconOnly() ? "" : null',
     class: 'drgn-label-md-700',
   },
   hostDirectives: [

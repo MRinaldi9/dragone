@@ -1,4 +1,4 @@
-import { Component, input, signal, viewChild } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { render } from '@wismaz/vitest-browser-angular';
 
 import { Button, type ButtonSize, type ButtonVariant } from './button';
@@ -12,7 +12,7 @@ import { Button, type ButtonSize, type ButtonVariant } from './button';
       [size]="size()"
       [icon]="isIconOnly()"
       [disabled]="isDisabled()"
-      (click)="clickSpy()"
+      (click)="clickCta.emit()"
     >
       Dragone
     </button>
@@ -23,8 +23,7 @@ class TestHostComponent {
   readonly size = input<ButtonSize>('large');
   readonly isIconOnly = input(false);
   readonly isDisabled = input(false);
-  readonly clickSpy = vi.fn<() => void>();
-  readonly btnComp = viewChild.required(Button);
+  readonly clickCta = output<void>();
 }
 
 describe(Button, () => {
@@ -32,6 +31,7 @@ describe(Button, () => {
   const isIconOnly = signal<boolean>(false);
   const variant = signal<ButtonVariant>('primary');
   const isDisabled = signal<boolean>(false);
+  const clickSpy = vi.fn<() => void>();
 
   afterEach(() => {
     size.set('large');
@@ -41,72 +41,61 @@ describe(Button, () => {
   });
 
   it('should create with default properties', async () => {
-    const { componentClassInstance: component } = await render(TestHostComponent, {
+    const { locator } = await render(TestHostComponent, {
       inputs: { size, isIconOnly, variant, isDisabled },
     });
-    expect(component.btnComp()).toBeTruthy();
-    expect(component.btnComp().size()).toBe('large');
-    expect(component.btnComp().isIconOnly()).toBeFalsy();
-    expect(component.btnComp().variant()).toBe('primary');
+    const button = locator.getByRole('button');
+    await expect.element(button).toBeTruthy();
+    await expect.element(button).toHaveAttribute('data-size', 'large');
+    await expect.element(button).not.toHaveAttribute('data-icon-only');
+    await expect.element(button).toHaveAttribute('data-variant', 'primary');
   });
 
   it('should change size', async () => {
-    const { fixture, getByRole } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { size },
     });
     size.set('medium');
-    await fixture.whenStable();
 
-    await expect.element(getByRole('button')).toHaveAttribute('data-size', 'medium');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-size', 'medium');
   });
 
   it('should change isIconOnly', async () => {
-    const {
-      fixture,
-      componentClassInstance: component,
-      getByRole,
-    } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { isIconOnly },
     });
     isIconOnly.set(true);
-    await fixture.whenStable();
 
-    expect(component.isIconOnly()).toBeTruthy();
-    await expect.element(getByRole('button')).toHaveAttribute('data-icon-only', 'true');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-icon-only');
   });
 
   it('should change variant', async () => {
-    const {
-      fixture,
-      componentClassInstance: component,
-      getByRole,
-    } = await render(TestHostComponent, {
+    const { locator } = await render(TestHostComponent, {
       inputs: { size, isIconOnly, variant, isDisabled },
     });
     variant.set('danger');
-    await fixture.whenStable();
 
-    expect(component.variant()).toBe('danger');
-    await expect.element(getByRole('button')).toHaveAttribute('data-variant', 'danger');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-variant', 'danger');
   });
 
   it('should disable the button', async () => {
-    const { fixture, getByRole } = await render(TestHostComponent, {
+    const { locator } = await render(TestHostComponent, {
       inputs: { size, isIconOnly, variant, isDisabled },
     });
     isDisabled.set(true);
-    await fixture.whenStable();
+    const btnLocator = locator.getByRole('button');
 
-    await expect.element(getByRole('button')).toBeDisabled();
-    await expect.element(getByRole('button')).toHaveAttribute('data-disabled');
+    await expect.element(btnLocator).toBeDisabled();
+    await expect.element(btnLocator).toHaveAttribute('data-disabled');
   });
 
   it('should emit native click event', async () => {
-    const { componentClassInstance: component, getByRole } = await render(TestHostComponent, {
+    const { locator } = await render(TestHostComponent, {
       inputs: { size, isIconOnly, variant, isDisabled },
+      outputs: { clickCta: clickSpy },
     });
-    await getByRole('button').click();
+    await locator.getByRole('button').click();
 
-    expect(component.clickSpy).toHaveBeenCalledWith();
+    expect(clickSpy).toHaveBeenCalledWith();
   });
 });
