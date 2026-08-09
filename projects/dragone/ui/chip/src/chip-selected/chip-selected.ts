@@ -1,59 +1,45 @@
-import { Component } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import type { ControlValueAccessor } from '@angular/forms';
+import { booleanAttribute, Component, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck } from '@ng-icons/font-awesome/solid';
-import { NgpButton } from 'ng-primitives/button';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
+import { injectElementRef } from 'ng-primitives/internal';
 import { injectToggleState, NgpToggle } from 'ng-primitives/toggle';
-import { type ChangeFn, provideValueAccessor } from 'ng-primitives/utils';
+
+import { toElement } from '@dragone/ui/utils';
+
 @Component({
-  selector: 'button[drgn-chip-selected]',
+  selector: 'button[drgn-chip-selected], button[drgnChipSelected]',
   imports: [NgIcon],
   template: `
     <ng-icon class="chip-icon" size="1rem" name="faSolidCheck" />
     <ng-content />
   `,
   styleUrl: './chip-selected.css',
-  providers: [provideValueAccessor(ChipSelected), provideIcons({ faSolidCheck })],
+  providers: [provideIcons({ faSolidCheck })],
   host: {
     class: 'drgn-label-md-700',
-    '(blur)': 'onTouched?.()',
+    '[attr.data-hidden]': 'hidden() ? "" : null',
+    '[attr.name]': 'name()',
+    '(blur)': 'touch.emit()',
   },
   hostDirectives: [
     {
       directive: NgpToggle,
-      inputs: ['ngpToggleSelected: selected', 'ngpToggleDisabled: disabled'],
-      outputs: ['ngpToggleSelectedChange: selectedChange'],
-    },
-    {
-      directive: NgpButton,
-      inputs: ['disabled'],
+      inputs: ['ngpToggleSelected: checked', 'ngpToggleDisabled: disabled'],
+      outputs: ['ngpToggleSelectedChange: checkedChange'],
     },
     NgpFocusVisible,
   ],
 })
-export class ChipSelected implements ControlValueAccessor {
+export class ChipSelected {
+  readonly hidden = input(false, { transform: booleanAttribute });
+  readonly name = input<string>();
+  readonly touch = output();
+
   protected readonly state = injectToggleState();
-  private onChange?: ChangeFn<boolean>;
-  protected onTouched?: ChangeFn<void>;
+  readonly #element = toElement(injectElementRef());
 
-  constructor() {
-    this.state()
-      .selectedChange.pipe(takeUntilDestroyed())
-      .subscribe(selected => this.onChange?.(selected));
-  }
-
-  writeValue(value: boolean): void {
-    this.state().setSelected(value);
-  }
-  registerOnChange(fn: ChangeFn<boolean>): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: ChangeFn<void>): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.state().setDisabled(isDisabled);
+  focus(options?: FocusOptions): void {
+    this.#element?.focus(options);
   }
 }

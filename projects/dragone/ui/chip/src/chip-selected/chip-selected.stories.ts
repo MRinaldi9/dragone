@@ -1,14 +1,13 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { fn } from 'storybook/test';
 
 import { ChipSelected } from './chip-selected';
 
-interface ChipSelectedArgs {
-  selected: boolean;
+type ChipSelectedArgs = ChipSelected & {
+  checked: boolean;
   disabled: boolean;
+  checkedChange: (checked: boolean) => void;
   label: string;
-  selectedChange: (selected: boolean) => void;
-}
+};
 
 const meta: Meta<ChipSelectedArgs> = {
   title: 'Dragone/UI/Chip/Selected',
@@ -16,16 +15,13 @@ const meta: Meta<ChipSelectedArgs> = {
   tags: ['autodocs'],
   args: {
     label: 'Chips',
-    selected: false,
-    disabled: false,
-    selectedChange: fn(),
   },
   argTypes: {
     label: {
       control: 'text',
       description: 'Testo visualizzato nella chip',
     },
-    selected: {
+    checked: {
       control: 'boolean',
       description: 'Stato di selezione della chip',
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
@@ -35,10 +31,20 @@ const meta: Meta<ChipSelectedArgs> = {
       description: 'Disabilita la chip impedendo interazioni',
       table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
     },
-    selectedChange: {
+    checkedChange: {
       action: 'selectedChange',
       description: 'Evento emesso quando lo stato selected cambia',
       table: { type: { summary: 'EventEmitter<boolean>' } },
+    },
+    hidden: {
+      control: 'boolean',
+      description: 'Nasconde la chip',
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+    },
+    name: {
+      control: 'text',
+      description: "Nome della chip, utile per l'identificazione in un gruppo di chip",
+      table: { type: { summary: 'string' } },
     },
   },
   render: args => ({
@@ -68,7 +74,7 @@ export const Default: Story = {};
  */
 export const Selected: Story = {
   args: {
-    selected: true,
+    checked: true,
   },
 };
 
@@ -86,7 +92,7 @@ export const Disabled: Story = {
  */
 export const DisabledSelected: Story = {
   args: {
-    selected: true,
+    checked: true,
     disabled: true,
   },
 };

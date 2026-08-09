@@ -67,4 +67,7 @@
       background-color: var(--drgn-color-surface-disabled);
     }
   }
+  &[data-hidden] {
+    display: none;
+  }
 }
