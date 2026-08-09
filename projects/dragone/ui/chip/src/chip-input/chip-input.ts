@@ -10,7 +10,7 @@ import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
   imports: [NgIcon],
   template: `
     @if (icon()) {
-      <ng-icon aria-hidden="true" size="1rem" [svg]="icon()" />
+      <ng-icon data-testid="leading-icon" aria-hidden="true" size="1rem" [svg]="icon()" />
     }
     <span class="drgn-chip__label">{{ label() }}</span>
     <button

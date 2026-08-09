@@ -82,6 +82,8 @@ _Avoid_: A11y workaround, accessibility fix
 A test-only Angular Component that composes a Component under test, binding its signal inputs and observing its outputs, rendered with `render()` from `@wismaz/vitest-browser-angular`. The Component under test stays reactive to signal changes during the test.
 _Avoid_: Harness, fixture wrapper, test bench
 
+The Test Host is one option, not a blanket requirement. It is the natural fit when the Component under test targets a native element selector (e.g. `Button` on `button[drgnButton]`) and therefore cannot be rendered on its own, or when a test needs to drive the component from a parent context, such as Angular form APIs. Components with their own element selector (e.g. `Alert` on `drgn-alert`) can be rendered directly with `render(Component, ...)`. Choose per Component, per test intent.
+
 ## Rules
 
 - **WCAG 2.2 AA** is the accessibility standard, in both light and dark themes.

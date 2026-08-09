@@ -43,7 +43,12 @@ Component tests run with [Vitest](https://vitest.dev) in **browser mode** (Playw
 pnpm test
 ```
 
-Tests compose a Component under test inside a dedicated **Test Host** component and render it with the `render()` API from [`@wismaz/vitest-browser-angular`](https://www.npmjs.com/package/@wismaz/vitest-browser-angular) — a community fork of `vitest-browser-angular`. The `render()` API keeps signal inputs reactive: updating a bound signal propagates to the Component once change detection runs.
+Component tests use the `render()` API from [`@wismaz/vitest-browser-angular`](https://www.npmjs.com/package/@wismaz/vitest-browser-angular) — a community fork of `vitest-browser-angular`. The `render()` API keeps signal inputs reactive: updating a bound signal propagates to the Component once change detection runs.
+
+Choose how to render a Component per Component, per test intent:
+
+- **Render directly** with `render(Component, ...)` when the Component has its own element selector (e.g. `Alert` on `drgn-alert`).
+- **Compose a Test Host** when the Component targets a native element selector and cannot be rendered on its own (e.g. `Button` on `button[drgnButton]`), or when the test needs to drive the Component from a parent context such as Angular form APIs.
 
 ```ts
 import { Component, input, viewChild } from '@angular/core';
