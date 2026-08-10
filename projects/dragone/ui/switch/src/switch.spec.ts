@@ -1,9 +1,10 @@
-import { Component, inputBinding, outputBinding, signal, viewChild } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { form, FormField } from '@angular/forms/signals';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// oxlint-disable typescript/no-explicit-any
+import { Component, signal, viewChild } from '@angular/core';
+import { disabled, form, FormField, hidden, readonly } from '@angular/forms/signals';
+import { render } from '@wismaz/vitest-browser-angular';
 import { NgpSwitch } from 'ng-primitives/switch';
-import type { Mock } from 'vitest';
-import { page, userEvent, type Locator } from 'vitest/browser';
+import { userEvent } from 'vitest/browser';
 
 import { Switch } from './switch';
 
@@ -13,80 +14,121 @@ const setupForm = () => {
     template: `<drgn-switch [formField]="field" />`,
   })
   class FormCmp {
-    readonly field = form(signal(false));
+    isDisabled = signal(false);
+    isReadonly = signal(false);
+    isHidden = signal(false);
+    readonly field = form(signal(false), path => {
+      disabled(path, { when: this.isDisabled });
+      readonly(path, { when: this.isReadonly });
+      hidden(path, { when: this.isHidden });
+    });
     readonly stateDir = viewChild.required(NgpSwitch);
   }
 
-  const fixture = TestBed.createComponent(FormCmp);
-  const component = fixture.componentInstance;
-  const locator = page.elementLocator(fixture.nativeElement);
-
-  return { component, locator, whenStable: (): Promise<void> => fixture.whenStable() };
+  return render(FormCmp);
 };
 
 describe(Switch, () => {
-  let fixture: ComponentFixture<Switch>;
-  let locator: Locator;
-  let touchSpy: Mock;
+  const touchSpy = vi.fn<() => void>();
   const readonly = signal(false);
   const hidden = signal(false);
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [Switch],
-    });
-    touchSpy = vi.fn<() => void>();
-    fixture = TestBed.createComponent(Switch, {
-      bindings: [
-        outputBinding('touch', touchSpy),
-        inputBinding('readonly', readonly),
-        inputBinding('hidden', hidden),
-      ],
-    });
-    await fixture.whenStable();
-    locator = page.elementLocator(fixture.nativeElement);
-  });
+  const disabled = signal(false);
+
   afterEach(() => {
-    touchSpy.mockReset();
     readonly.set(false);
     hidden.set(false);
+    disabled.set(false);
+    touchSpy.mockReset();
   });
 
   it('should toggle checked state on click', async () => {
+    const { locator } = await render(Switch);
     await expect.element(locator).toHaveAttribute('aria-checked', 'false');
     await locator.click();
     await expect.element(locator).toHaveAttribute('aria-checked', 'true');
   });
 
   it('should emit touch event on blur', async () => {
+    await render(Switch, { outputs: { touch: touchSpy } });
     await userEvent.tab();
-    expect(touchSpy).not.toHaveBeenCalledWith();
+    expect(touchSpy).not.toHaveBeenCalled();
     await userEvent.tab();
-    expect(touchSpy).toHaveBeenCalledWith(undefined);
+    expect(touchSpy).toHaveBeenCalledOnce();
   });
 
   it('should not be interactive when readonly', async () => {
+    const { locator } = await render(Switch, { inputs: { readonly } });
     readonly.set(true);
-    await fixture.whenStable();
-    await expect.element(locator).toHaveAttribute('readonly');
+
+    await expect.element(locator).toHaveAttribute('data-readonly');
     await expect.element(locator).toHaveAttribute('aria-checked', 'false');
   });
 
   it('should be hidden when hidden is true', async () => {
+    const { locator } = await render(Switch, { inputs: { hidden } });
     hidden.set(true);
-    await fixture.whenStable();
-    await expect.element(locator).toHaveAttribute('hidden');
+    await expect.element(locator).toHaveAttribute('data-hidden');
     await expect.element(locator).not.toBeInViewport();
+  });
+
+  it('should be disabled', async () => {
+    const { locator } = await render(Switch, { inputs: { disabled } as any });
+    await expect.element(locator).toHaveAttribute('aria-disabled', 'false');
+    disabled.set(true);
+    await expect.element(locator).toHaveAttribute('aria-disabled', 'true');
   });
 
   describe('form integration', () => {
     it('should update form value on toggle', async () => {
-      const { component, locator, whenStable } = setupForm();
-      await whenStable();
-      const switchLocator = locator.getByRole('switch');
-      await expect.element(switchLocator).toHaveAttribute('aria-checked', 'false');
-      await switchLocator.click();
-      await expect.element(switchLocator).toHaveAttribute('aria-checked', 'true');
-      expect(component.field().value).toBeTruthy();
+      const {
+        componentClassInstance: { field },
+        locator,
+      } = await setupForm();
+      const switchElement = await locator.getByRole('switch');
+      await expect.element(switchElement).toHaveAttribute('aria-checked', 'false');
+      expect(field().value()).toBeFalsy();
+      await switchElement.click();
+      await expect.element(switchElement).toHaveAttribute('aria-checked', 'true');
+      expect(field().value()).toBeTruthy();
+    });
+
+    it('should disable component trough form api', async () => {
+      const {
+        componentClassInstance: { field, isDisabled },
+        locator,
+      } = await setupForm();
+      const switchElement = await locator.getByRole('switch');
+      await expect.element(switchElement).toHaveAttribute('aria-disabled', 'false');
+      expect(field().disabled()).toBeFalsy();
+      isDisabled.set(true);
+      await expect.element(switchElement).toHaveAttribute('aria-disabled', 'true');
+      expect(field().disabled()).toBeTruthy();
+    });
+
+    it('should readonly component trough form api', async () => {
+      const {
+        componentClassInstance: { field, isReadonly },
+        locator,
+      } = await setupForm();
+      const switchElement = await locator.getByRole('switch');
+      await expect.element(switchElement).not.toHaveAttribute('data-readonly');
+      expect(field().readonly()).toBeFalsy();
+      isReadonly.set(true);
+      await expect.element(switchElement).toHaveAttribute('data-readonly');
+      expect(field().readonly()).toBeTruthy();
+    });
+
+    it('should hidden component trough form api', async () => {
+      const {
+        componentClassInstance: { field, isHidden },
+        locator,
+      } = await setupForm();
+      const switchElement = await locator.getByRole('switch');
+      await expect.element(switchElement).not.toHaveAttribute('data-hidden');
+      expect(field().hidden()).toBeFalsy();
+      isHidden.set(true);
+      await expect.element(switchElement).not.toBeInViewport();
+      expect(field().hidden()).toBeTruthy();
     });
   });
 });

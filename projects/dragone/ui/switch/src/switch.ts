@@ -10,8 +10,8 @@ import { injectSwitchState, NgpSwitch, NgpSwitchThumb } from 'ng-primitives/swit
   host: {
     role: 'switch',
     tabindex: '0',
-    '[hidden]': 'hidden()',
-    '[attr.readonly]': 'readonly() ? "" : null',
+    '[attr.data-hidden]': 'hidden() ? "" : null',
+    '[attr.data-readonly]': 'readonly() ? "" : null',
     '[attr.name]': 'name() ? name() : null',
     '(blur)': 'touch.emit()',
     '(keyup.enter)': 'toggle()',

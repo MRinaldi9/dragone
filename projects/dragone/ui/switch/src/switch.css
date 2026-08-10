@@ -32,10 +32,10 @@
       border-color: var(--drgn-color-interactive-primary-hover);
     }
   }
-  &[hidden] {
+  &[data-hidden] {
     display: none;
   }
-  &[readonly] {
+  &[data-readonly] {
     pointer-events: none;
   }
 }
