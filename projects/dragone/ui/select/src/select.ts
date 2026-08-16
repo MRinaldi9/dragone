@@ -14,7 +14,7 @@ import { map } from 'rxjs';
 import { isNotNil } from '@dragone/ui/utils';
 
 type OptionPrimitive = string | number | boolean;
-type OptionObject<T> = T & { disabled?: boolean };
+type OptionObject<T extends object = Record<string, unknown>> = T & { disabled?: boolean };
 type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
 type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
 
@@ -49,6 +49,10 @@ type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
 })
 export class Select<T> {
   readonly options = input<Option<T>[]>();
+  /**
+   * The selected value. Declared as an input so that `FormField` recognizes
+   * `Select` as a custom form control (paired with the `valueChange` output).
+   */
   readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
   /**
@@ -63,26 +67,19 @@ export class Select<T> {
   readonly hidden = input(false, { transform: booleanAttribute });
   readonly name = input<string>();
   readonly touch = output<void>();
-  readonly #internalState = injectSelectState();
+  readonly #internalState = injectSelectState<SelectValue<T>>();
 
   readonly valueChange = outputFromObservable(
     outputToObservable(this.#internalState().valueChange).pipe(
-      map((value: SelectValue<T>) => {
-        if (Array.isArray(value)) {
-          return value.map(val => this.mapOutputValue(val));
-        }
-        return this.mapOutputValue(value);
-      }),
+      map(value => this.mapByKey(value, this.optionValue())),
     ),
   );
 
-  protected readonly internalValue = linkedSignal<Option<T> | Option<T>[]>(
-    this.#internalState().value,
-  );
+  protected readonly internalValue = linkedSignal(this.#internalState().value);
+
   protected readonly canShowValue = computed(() => {
-    const isMultiple = this.#internalState().multiple();
     const value = this.internalValue();
-    if (isMultiple && Array.isArray(value)) {
+    if (this.#internalState().multiple() && Array.isArray(value)) {
       return value.length > 0;
     }
     return isNotNil(value);
@@ -92,7 +89,9 @@ export class Select<T> {
    * Value shown inside the trigger when at least one option is selected.
    * It applies `optionLabel` mapping when provided.
    */
-  protected readonly mappedValue = computed(() => this.mapOption(this.internalValue()));
+  protected readonly mappedValue = computed(() =>
+    this.mapByKey(this.internalValue(), this.optionLabel()),
+  );
 
   /**
    * View model used by the dropdown template.
@@ -102,27 +101,23 @@ export class Select<T> {
     const selectedValue = this.internalValue();
     return (this.options() ?? []).map(option => ({
       value: option,
-      label: this.mapOption(option),
+      label: this.mapByKey(option, this.optionLabel()),
       selected: this.isOptionSelected(option, selectedValue),
     }));
   });
 
   /**
-   * Maps one option (or a list of options) to its display label.
-   * If `optionLabel` is not set, the original value is returned.
+   * Maps a value (or a list of values) to its display/emitted form.
+   * When `key` is set, extracts that property from object values; otherwise returns the value as-is.
    */
-  private mapOption(value: Option<T> | Option<T>[] | null | undefined): unknown {
-    if (typeof value !== 'object' || !value) {
-      return value;
-    }
-    const key = this.optionLabel();
-    if (!key) {
-      return value;
-    }
+  private mapByKey(value: SelectValue<T>, key?: PropertyKey): unknown {
     if (Array.isArray(value)) {
-      return value.map(option => this.getOptionProp(option, key));
+      return value.map(option => this.mapByKey(option, key));
     }
-    return this.getOptionProp(value, key);
+    if (!isNotNil(value) || typeof value !== 'object' || !key) {
+      return value;
+    }
+    return (value as Record<PropertyKey, unknown>)[key];
   }
 
   /**
@@ -135,27 +130,5 @@ export class Select<T> {
       return selectedValue.some(value => compareWith(value, currOption));
     }
     return compareWith(selectedValue, currOption);
-  }
-
-  /**
-   * Safely reads a property from an option object using the configured key.
-   */
-  private getOptionProp(option: Option<T>, key: T extends object ? keyof T : never): unknown {
-    return (option as Record<PropertyKey, unknown>)[key as PropertyKey];
-  }
-
-  /**
-   * Maps emitted values for `valueChange`.
-   * If `optionValue` is configured, emits the extracted property; otherwise emits the raw option.
-   */
-  private mapOutputValue(value: Option<T> | null | undefined): unknown {
-    if (!isNotNil(value)) {
-      return value;
-    }
-    const key = this.optionValue();
-    if (!key || typeof value !== 'object') {
-      return value;
-    }
-    return this.getOptionProp(value, key);
   }
 }
