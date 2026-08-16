@@ -33,11 +33,12 @@
  * and cleared on animationend / animationcancel.
  */
 [ngpAccordionContent][data-enter] {
-  animation: slideDown 0.2s ease-in-out forwards;
+  animation: slideDown var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard)
+    forwards;
 }
 
 [ngpAccordionContent][data-closed] {
-  animation: slideUp 0.2s ease-in-out forwards;
+  animation: slideUp var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard) forwards;
 }
 
 @keyframes slideDown {
@@ -55,18 +56,5 @@
   }
   to {
     height: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /*
-   * Do NOT use animation: none — ng-primitives relies on animationend to clear
-   * data-enter/data-exit and update dimensions(). With no animation those events
-   * never fire, leaving the panel stuck open on close.
-   * 0.001ms makes the animation complete instantly while still firing animationend.
-   */
-  [ngpAccordionContent][data-enter],
-  [ngpAccordionContent][data-closed] {
-    animation-duration: 0.001ms;
   }
 }

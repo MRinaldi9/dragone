@@ -16,10 +16,10 @@
   }
 }
 :host[data-enter] {
-  animation: tooltip-show 200ms ease-in-out;
+  animation: tooltip-show var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter);
 }
 :host[data-exit] {
-  animation: tooltip-hide 200ms ease-in-out;
+  animation: tooltip-hide var(--drgn-motion-duration-medium) var(--drgn-motion-easing-exit);
 }
 
 @keyframes tooltip-show {

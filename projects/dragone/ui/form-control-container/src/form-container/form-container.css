@@ -35,11 +35,11 @@
 }
 
 .error-enter {
-  animation: error-in 180ms ease-out both;
+  animation: error-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter) both;
 }
 
 .error-leave {
-  animation: error-out 140ms ease-in both;
+  animation: error-out var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit) both;
 }
 
 @keyframes error-in {
@@ -63,12 +63,5 @@
   to {
     opacity: 0;
     transform: translateY(-4px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .error-enter,
-  .error-leave {
-    animation: none;
   }
 }

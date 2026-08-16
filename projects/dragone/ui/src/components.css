@@ -79,4 +79,20 @@
   --drgn-runtime-select-transform-origin: var(--ngp-select-transform-origin);
   --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
   --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+
+  --drgn-motion-duration-short: 100ms;
+  --drgn-motion-duration-medium: 200ms;
+  --drgn-motion-duration-long: 400ms;
+
+  --drgn-motion-easing-standard: ease;
+  --drgn-motion-easing-enter: ease-out;
+  --drgn-motion-easing-exit: ease-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --drgn-motion-duration-short: 0.001ms;
+    --drgn-motion-duration-medium: 0.001ms;
+    --drgn-motion-duration-long: 0.001ms;
+  }
 }

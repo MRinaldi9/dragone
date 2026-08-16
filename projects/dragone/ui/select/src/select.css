@@ -51,7 +51,7 @@ ng-icon.chevron {
   height: 100%;
   margin-inline: 0 16px;
   font-size: 16px;
-  transition: transform 0.1s ease-out;
+  transition: transform var(--drgn-motion-duration-short) var(--drgn-motion-easing-enter);
   transform: rotate(0deg);
 }
 
@@ -65,7 +65,7 @@ ng-icon.chevron {
   border-radius: 4px;
   outline: none;
   position: absolute;
-  animation: popover-show 0.1s ease-out;
+  animation: popover-show var(--drgn-motion-duration-short) var(--drgn-motion-easing-enter);
   width: var(--drgn-runtime-select-width);
   box-shadow: var(--drgn-runtime-shadow-lg);
   box-sizing: border-box;
@@ -75,10 +75,10 @@ ng-icon.chevron {
   transform-origin: var(--drgn-runtime-select-transform-origin);
 }
 [ngpSelectDropdown][data-enter] {
-  animation: select-show 0.1s ease-out;
+  animation: select-show var(--drgn-motion-duration-short) var(--drgn-motion-easing-enter);
 }
 [ngpSelectDropdown][data-exit] {
-  animation: select-hide 0.1s ease-out;
+  animation: select-hide var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit);
 }
 [ngpSelectOption] {
   display: flex;

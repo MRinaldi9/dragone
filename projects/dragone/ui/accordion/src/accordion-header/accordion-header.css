@@ -13,11 +13,7 @@
 
 ng-icon {
   color: var(--drgn-color-text-default);
-  transition: transform 0.2s ease-in-out;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
+  transition: transform var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard);
 }
 
 :host-context([data-theme='light']) {
