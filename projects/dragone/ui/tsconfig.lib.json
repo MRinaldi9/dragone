@@ -16,7 +16,8 @@
   "exclude": [
     "**/*.spec.ts",
     "**/*.stories.ts",
-    "oxlint.config.ts"
+    "oxlint.config.ts",
+    "test-setup.ts"
   ],
   "angularCompilerOptions": {
     "extendedDiagnostics": {

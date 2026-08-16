@@ -58,7 +58,6 @@ export default defineConfig({
         'storybook/story-exports': 'error',
         'storybook/use-storybook-expect': 'error',
         'storybook/use-storybook-testing-library': 'error',
-        'vitest/prefer-importing-vitest-globals': 'off',
       },
     },
   ],

@@ -80,6 +80,7 @@ export default defineConfig({
         'no-useless-catch': 'error',
         'no-useless-escape': ['error', { allowRegexCharacters: ['\\', '.'] }],
         'no-var': 'error',
+        'one-var': 'off',
         'oxc/no-async-await': 'off',
         'oxc/no-optional-chaining': 'off',
         'oxc/no-rest-spread-properties': 'off',
@@ -122,6 +123,7 @@ export default defineConfig({
     },
     {
       files: ['**/*.spec.ts', '**/*.test.ts'],
+      plugins: ['typescript', 'vitest', 'eslint', 'oxc'],
       rules: {
         'init-declarations': ['off'],
         'max-params': 'off',
@@ -159,5 +161,5 @@ export default defineConfig({
       },
     },
   ],
-  plugins: ['typescript', 'vitest', 'eslint', 'oxc'],
+  plugins: ['typescript', 'eslint', 'oxc'],
 });
