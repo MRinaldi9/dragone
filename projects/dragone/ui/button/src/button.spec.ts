@@ -96,6 +96,6 @@ describe(Button, () => {
     });
     await locator.getByRole('button').click();
 
-    expect(clickSpy).toHaveBeenCalledWith();
+    expect(clickSpy).toHaveBeenCalledOnce();
   });
 });
