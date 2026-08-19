@@ -22,6 +22,7 @@ export default defineConfig({
         'capitalized-comments': ['warn', 'always', { ignoreConsecutiveComments: true }],
         curly: ['error', 'multi-line'],
         'for-direction': 'error',
+        'func-style': ['off'],
         'id-length': ['error', { checkGeneric: false, exceptions: ['_'] }],
         'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
         'max-params': ['error', { max: 4 }],
