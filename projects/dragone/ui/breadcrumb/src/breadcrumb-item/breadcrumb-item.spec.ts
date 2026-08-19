@@ -1,51 +1,38 @@
-import { inputBinding, signal } from '@angular/core';
-import { type ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
-import { page } from 'vitest/browser';
+import { render } from '@wismaz/vitest-browser-angular';
 
-import { BreadcrumbItem, type BreadcrumbProps } from './breadcrumb-item';
+import { BreadcrumbItem, type BreadcrumbItemConfig } from './breadcrumb-item';
 
 describe(BreadcrumbItem, () => {
-  let component: BreadcrumbItem;
-  let fixture: ComponentFixture<BreadcrumbItem>;
-  const breadcrumb = signal<BreadcrumbProps>({
+  const breadcrumb = signal<BreadcrumbItemConfig>({
     label: 'Home',
     routerLink: '/',
     icon: faSolidHouse,
   });
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [BreadcrumbItem],
-      providers: [provideRouter([])],
-    }).compileComponents();
 
-    fixture = TestBed.createComponent(BreadcrumbItem, {
-      bindings: [inputBinding('breadcrumbConfiguration', breadcrumb)],
-    });
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  afterEach(() => {
+    breadcrumb.set({ label: 'Home', routerLink: '/', icon: faSolidHouse });
   });
 
   it('show breadcrumb item with icon', async () => {
-    const link = await page.getByRole('link');
-    const icon = await page.getByTestId('breadcrumb-icon');
-    expect(link).toHaveTextContent('Home');
-    expect(icon).toBeVisible();
+    const { locator } = await render(BreadcrumbItem, {
+      inputs: { breadcrumbConfiguration: breadcrumb },
+      providers: [provideRouter([])],
+    });
+
+    await expect.element(locator.getByRole('link')).toHaveTextContent('Home');
+    await expect.element(locator.getByTestId('breadcrumb-icon')).toBeVisible();
   });
 
-  it('show custom breadcrumb item', async () => {
-    let emitted = false;
-    component.openBreadcrumb.subscribe(() => (emitted = true));
+  it('show current page item as text with aria-current', async () => {
+    const { locator } = await render(BreadcrumbItem, {
+      inputs: { breadcrumbConfiguration: breadcrumb },
+      providers: [provideRouter([])],
+    });
+    breadcrumb.set({ label: 'Current page' });
 
-    breadcrumb.set({ label: '...' });
-    await fixture.whenStable();
-    const link = fixture.debugElement.query(By.css('[ngpFocusVisible]'));
-
-    expect(link.nativeElement).toHaveTextContent('...');
-
-    link.triggerEventHandler('click', new MouseEvent('click'));
-    await expect.poll(() => emitted).toBe(true);
+    await expect.element(locator.getByText('Current page')).toHaveAttribute('aria-current', 'page');
   });
 });

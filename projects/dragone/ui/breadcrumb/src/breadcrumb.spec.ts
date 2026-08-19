@@ -1,70 +1,82 @@
-import { inputBinding, signal } from '@angular/core';
-import { type ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { render } from '@wismaz/vitest-browser-angular';
 
 import { Breadcrumb } from './breadcrumb';
-import type { BreadcrumbProps } from './breadcrumb-item/breadcrumb-item';
+import type { BreadcrumbItemConfig } from './breadcrumb-item/breadcrumb-item';
 
 describe(Breadcrumb, () => {
-  let component: Breadcrumb;
-  let fixture: ComponentFixture<Breadcrumb>;
-  const breadcrumbs = signal<BreadcrumbProps[]>([]);
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  const breadcrumbs = signal<BreadcrumbItemConfig[]>([]);
+
+  const trail: BreadcrumbItemConfig[] = [
+    { label: 'home', routerLink: '/' },
+    { label: 'category', routerLink: '/category' },
+    { label: 'subcategory', routerLink: '/category/subcategory' },
+    { label: 'products', routerLink: '/category/subcategory/products' },
+    { label: 'items', routerLink: '/category/subcategory/products/items' },
+    { label: 'item1', routerLink: '/category/subcategory/products/items/item1' },
+    { label: 'details' },
+  ];
+
+  afterEach(() => {
+    breadcrumbs.set([]);
+  });
+
+  it('should render nothing when breadcrumbs is empty', async () => {
+    const { locator } = await render(Breadcrumb, {
+      inputs: { breadcrumbs },
       providers: [provideRouter([])],
-      imports: [Breadcrumb],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(Breadcrumb, {
-      bindings: [inputBinding('breadcrumbs', breadcrumbs)],
     });
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    await expect.element(locator.getByRole('listitem')).not.toBeInTheDocument();
   });
 
-  it('should show empty message', () => {
-    const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
-    expect(breadcrumbItems).toHaveLength(1);
-    const anchor = breadcrumbItems[0].query(By.css('button'));
-    expect(anchor.nativeElement.textContent.trim()).toBe('No breadcrumbs available');
-  });
-
-  it('should show normal breadcrumb items', async () => {
+  it('should render ancestors as links and the current page as text', async () => {
+    const { locator } = await render(Breadcrumb, {
+      inputs: { breadcrumbs },
+      providers: [provideRouter([])],
+    });
     breadcrumbs.set([
       { label: 'home', routerLink: '/' },
       { label: 'products', routerLink: '/products' },
-      { label: 'item', routerLink: '/products/item' },
+      { label: 'item' },
     ]);
-    await fixture.whenStable();
 
-    const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
-    expect(breadcrumbItems).toHaveLength(3);
+    const links = locator.getByRole('link');
+    await expect.poll(() => links.elements().length).toBe(2);
+    await expect.element(links.nth(0)).toHaveTextContent('home');
+    await expect.element(links.nth(1)).toHaveTextContent('products');
 
-    const labels = breadcrumbItems.map(item =>
-      item.query(By.css('a')).nativeElement.textContent.trim(),
-    );
-    expect(labels).toEqual(['home', 'products', 'item']);
+    await expect.element(locator.getByText('item')).toHaveAttribute('aria-current', 'page');
   });
 
-  it('should show ellipsis when more than 6 items', async () => {
-    breadcrumbs.set([
-      { label: 'home', routerLink: '/' },
-      { label: 'category', routerLink: '/category' },
-      { label: 'subcategory', routerLink: '/subcategory' },
-      { label: 'products', routerLink: '/products' },
-      { label: 'items', routerLink: '/items' },
-      { label: 'item1', routerLink: '/items/item1' },
-      { label: 'details', routerLink: '/items/item1/details' },
-    ]);
-    await fixture.whenStable();
-
-    const breadcrumbItems = fixture.debugElement.queryAll(By.css('[role="listitem"]'));
-    expect(breadcrumbItems).toHaveLength(3);
-    expect(component['firstItem']()).toEqual({ label: 'home', routerLink: '/' });
-    expect(component['lastItem']()).toEqual({
-      label: 'details',
-      routerLink: '/items/item1/details',
+  it('should collapse to first, ellipsis and last item when more than 6 items', async () => {
+    const { locator } = await render(Breadcrumb, {
+      inputs: { breadcrumbs },
+      providers: [provideRouter([])],
     });
+    breadcrumbs.set(trail);
+
+    const listitems = locator.getByRole('listitem');
+    await expect.poll(() => listitems.elements().length).toBe(3);
+    await expect.element(listitems.nth(0)).toHaveTextContent('home');
+    await expect.element(listitems.nth(2)).toHaveTextContent('details');
+
+    await expect.element(locator.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should expand breadcrumbs when ellipsis is clicked', async () => {
+    const { locator } = await render(Breadcrumb, {
+      inputs: { breadcrumbs },
+      providers: [provideRouter([])],
+    });
+    breadcrumbs.set(trail);
+
+    await locator.getByRole('button').click();
+
+    const listitems = locator.getByRole('listitem');
+    await expect.poll(() => listitems.elements().length).toBe(7);
+    await expect.element(locator.getByText('details')).toHaveAttribute('aria-current', 'page');
+    await expect.element(locator).toHaveClass('expanded');
   });
 });

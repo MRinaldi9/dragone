@@ -40,7 +40,6 @@ const meta: Meta<Breadcrumb> = {
       },
       {
         label: 'voluptatem ipsum',
-        href: '/category/subcategory/current-page',
       },
     ],
   },
@@ -52,7 +51,7 @@ const meta: Meta<Breadcrumb> = {
 export default meta;
 type Story = StoryObj<Breadcrumb>;
 
-export const BreadcrumbSingle: Story = {
+export const BreadcrumbDefault: Story = {
   render: args => ({
     props: args,
     template: `
@@ -63,21 +62,3 @@ export const BreadcrumbSingle: Story = {
     `,
   }),
 };
-
-// Export const LongPath: Story = {
-//   Render: args => ({
-//     Props: args,
-//     Template: `
-//       <drgn-breadcrumb>
-//         <drgn-breadcrumb-item href="#">Home</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item href="#">Primo Livello Molto Lungo</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item href="#">Secondo Livello</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item href="#">Terzo Livello Ancora Più Lungo del Precedente</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item>Pagina Corrente</drgn-breadcrumb-item>
-//       </drgn-breadcrumb>
-//     `,
-//     ModuleMetadata: {
-//       Imports: [DrgnBreadcrumbComponent, DrgnBreadcrumbItemComponent],
-//     },
-//   }),
-// };
