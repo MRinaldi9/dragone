@@ -1,4 +1,4 @@
-import type { BreadcrumbItemConfig } from '../breadcrumb-item/breadcrumb-item';
+import type { BreadcrumbItemConfig } from '../breadcrumb.model';
 
 export function validateBreadcrumbTrail(items: BreadcrumbItemConfig[]): string[] {
   const warnings: string[] = [];

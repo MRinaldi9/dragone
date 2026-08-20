@@ -16,8 +16,9 @@ import { injectDimensions } from 'ng-primitives/internal';
 import { createNotifier, toElement } from '@dragone/ui/utils';
 
 import { BreadcrumbEllipsis } from './breadcrumb-ellipsis/breadcrumb-ellipsis';
-import { BreadcrumbItem, type BreadcrumbItemConfig } from './breadcrumb-item/breadcrumb-item';
+import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';
 import { BreadcrumbSeparator } from './breadcrumb-separator/breadcrumb-separator';
+import type { BreadcrumbItemConfig } from './breadcrumb.model';
 import { validateBreadcrumbTrail } from './utils/validation-breadcrumb';
 
 @Component({
