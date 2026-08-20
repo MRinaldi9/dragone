@@ -19,7 +19,6 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
     </div>
   `,
   styleUrl: './accordion-item.css',
-  providers: [],
   hostDirectives: [
     {
       directive: NgpAccordionItem,

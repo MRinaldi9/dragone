@@ -11,6 +11,7 @@
 
 [ngpAccordionContent] {
   color: var(--drgn-color-text-primary);
+  background-color: var(--drgn-color-surface-base);
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -28,16 +29,27 @@
 }
 
 /*
+ * Collapsed end-state. data-closed is persistent, so a plain height keeps the
+ * panel collapsed after the exit animation ends (data-exit is cleared on
+ * animationend). A running animation overrides this declaration, so the
+ * slideUp animation still plays.
+ */
+[ngpAccordionContent][data-closed] {
+  height: 0;
+}
+
+/*
  * Animate [ngpAccordionContent] directly (not a child) so that scrollHeight stays
- * stable while the ResizeObserver runs. data-enter / data-exit are set by ng-primitives
- * and cleared on animationend / animationcancel.
+ * stable while the ResizeObserver runs. data-enter / data-exit are transient:
+ * set by ng-primitives on user interaction and cleared on animationend /
+ * animationcancel, so no animation plays on initial render.
  */
 [ngpAccordionContent][data-enter] {
   animation: slideDown var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard)
     forwards;
 }
 
-[ngpAccordionContent][data-closed] {
+[ngpAccordionContent][data-exit] {
   animation: slideUp var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard) forwards;
 }
 

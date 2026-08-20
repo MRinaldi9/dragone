@@ -7,7 +7,7 @@ import { AccordionItem } from './accordion-item/accordion-item';
 @Component({
   imports: [Accordion, AccordionItem],
   template: `
-    <drgn-accordion [disabled]="disabledAccordion()">
+    <drgn-accordion [disabled]="disabledAccordion()" [collapse]="collapseAccordion()">
       <drgn-accordion-item
         heading="Item 1"
         [accordionVariant]="variantColor()"
@@ -22,6 +22,7 @@ class TestHostAccordion {
   variantColor = input<'light' | 'dark'>('dark');
   disabledAccordion = input(false);
   disabledAccordionItem = input(false);
+  collapseAccordion = input(false);
 }
 
 describe(Accordion, () => {
@@ -74,5 +75,36 @@ describe(Accordion, () => {
 
     disabledAccordion.set(true);
     await expect.element(headerBtn).toBeDisabled();
+  });
+
+  it('should transition content states on open and close', async () => {
+    const collapseAccordion = signal(true);
+    const { locator } = await render(TestHostAccordion, { inputs: { collapseAccordion } });
+    const trigger = locator.getByRole('button');
+    const content = locator.getByRole('region');
+
+    // Initially closed: persistent data-closed state, hidden until found
+    await expect.element(content).toHaveAttribute('data-closed');
+    await expect.element(content).toHaveAttribute('hidden', 'until-found');
+
+    // Open: transient data-enter drives the slideDown animation
+    await trigger.click();
+    await expect.element(content).toHaveAttribute('data-open');
+    await expect.element(content).toHaveAttribute('data-enter');
+    await expect.element(content).not.toHaveAttribute('data-closed');
+
+    // animationend clears the transient state
+    content.element().dispatchEvent(new Event('animationend'));
+    await expect.element(content).not.toHaveAttribute('data-enter');
+
+    // Close: transient data-exit drives the slideUp animation
+    await trigger.click();
+    await expect.element(content).toHaveAttribute('data-exit');
+    await expect.element(content).toHaveAttribute('data-closed');
+
+    // animationend clears data-exit; data-closed keeps the panel collapsed
+    content.element().dispatchEvent(new Event('animationend'));
+    await expect.element(content).not.toHaveAttribute('data-exit');
+    await expect.element(content).toHaveAttribute('data-closed');
   });
 });

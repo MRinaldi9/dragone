@@ -1,3 +1,8 @@
+:host {
+  & button[data-focus-visible] {
+    text-decoration: underline;
+  }
+}
 [ngpAccordionTrigger] {
   display: flex;
   padding: 20px 16px;
