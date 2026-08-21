@@ -18,6 +18,7 @@ type ButtonStory = Button & {
   label: string;
   showLeadingIcon: boolean;
   showTrailingIcon: boolean;
+  status: 'info' | 'success' | 'warning' | 'danger' | 'neutral';
 };
 
 const meta: Meta<ButtonStory> = {
@@ -32,7 +33,7 @@ const meta: Meta<ButtonStory> = {
     showLeadingIcon: false,
     showTrailingIcon: false,
     size: 'large',
-    variant: 'primary',
+    semantic: 'primary',
   },
   argTypes: {
     focusVisible: { type: 'function', control: false },
@@ -48,10 +49,10 @@ const meta: Meta<ButtonStory> = {
         defaultValue: { summary: 'large' },
       },
     },
-    variant: {
+    semantic: {
       description: 'The variant of the button',
       type: 'string',
-      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],
+      options: ['primary', 'secondary', 'tertiary', 'ghost'],
       control: { type: 'select' },
       table: {
         defaultValue: { summary: 'primary' },
@@ -65,6 +66,12 @@ const meta: Meta<ButtonStory> = {
         defaultValue: { summary: 'false' },
       },
     },
+    status: {
+      description: 'The status of the button',
+      type: 'string',
+      options: ['neutral', 'danger'],
+      control: { type: 'select' },
+    },
   },
   decorators: [
     moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
@@ -73,9 +80,9 @@ const meta: Meta<ButtonStory> = {
     props: args,
     template: `
       <button drgnButton ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>
-        ${args.showLeadingIcon ? '<ng-icon slot="leading" name="fa-solid-arrow-right"></ng-icon>' : ''}
+        ${args.showLeadingIcon ? '<ng-icon slot="leading" name="fa-solid-arrow-right" size="1rem"></ng-icon>' : ''}
         ${args.label}
-        ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon>' : ''}
+        ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right" size="1rem"></ng-icon>' : ''}
       </button>
       `,
   }),
@@ -105,28 +112,21 @@ const Template: Story = {
 export const Primary: Story = {
   ...Template,
   args: {
-    variant: 'primary',
+    semantic: 'primary',
   },
 };
 
 export const Secondary: Story = {
   ...Template,
   args: {
-    variant: 'secondary',
+    semantic: 'secondary',
   },
 };
 
 export const Tertiary: Story = {
   ...Template,
   args: {
-    variant: 'tertiary',
-  },
-};
-
-export const Danger: Story = {
-  ...Template,
-  args: {
-    variant: 'danger',
+    semantic: 'tertiary',
   },
 };
 
