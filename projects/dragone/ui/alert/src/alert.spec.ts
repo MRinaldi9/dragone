@@ -2,10 +2,12 @@ import { signal } from '@angular/core';
 import { faSolidCircleCheck, faSolidCircleInfo } from '@ng-icons/font-awesome/solid';
 import { render } from '@wismaz/vitest-browser-angular';
 
+import type { StatusType } from '@dragone/ui/utils';
+
 import { Alert } from './alert';
 
 describe(Alert, () => {
-  const alertType = signal<'info' | 'success' | 'warning' | 'error'>('info');
+  const status = signal<StatusType>('info');
   const ctaText = signal('');
   const titleAsHeading = signal(false);
   const title = signal('Test Alert');
@@ -22,15 +24,15 @@ describe(Alert, () => {
   });
 
   it('show default icon for info type', async () => {
-    const { locator } = await render(Alert, { inputs: { alertType, title } });
+    const { locator } = await render(Alert, { inputs: { status, title } });
     const icon = locator.getByTestId('alert-icon');
     await expect.element(icon).toContainHTML(faSolidCircleInfo);
   });
 
   it('show semantic icon based on alert type', async () => {
-    const { locator } = await render(Alert, { inputs: { alertType, title } });
+    const { locator } = await render(Alert, { inputs: { status, title } });
     const icon = locator.getByTestId('alert-icon');
-    alertType.set('success');
+    status.set('success');
 
     await expect.element(icon).toContainHTML(faSolidCircleCheck);
   });

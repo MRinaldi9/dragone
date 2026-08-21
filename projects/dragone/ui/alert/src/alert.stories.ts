@@ -1,11 +1,15 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
 import { fn } from 'storybook/test';
 
+import type { LayoutType, StatusType } from '@dragone/ui/utils';
+
 import { Alert } from './alert';
 
 type AlertStory = Alert & {
   darkMode: boolean;
   theme: 'light' | 'dark';
+  status: StatusType;
+  layout: LayoutType;
 };
 
 const meta: Meta<AlertStory> = {
@@ -14,8 +18,8 @@ const meta: Meta<AlertStory> = {
   tags: ['autodocs'],
   args: {
     theme: 'light',
-    aspect: 'desktop',
-    alertType: 'info',
+    layout: 'desktop',
+    status: 'info',
     titleAsHeading: false,
     headingLevel: 4,
     ctaClick: fn(),
@@ -24,7 +28,7 @@ const meta: Meta<AlertStory> = {
     title: {
       control: 'text',
     },
-    aspect: {
+    layout: {
       options: ['mobile', 'desktop'],
       control: { type: 'select' },
       table: {
@@ -38,8 +42,8 @@ const meta: Meta<AlertStory> = {
         defaultValue: { summary: 'light' },
       },
     },
-    alertType: {
-      options: ['info', 'success', 'warning', 'error'],
+    status: {
+      options: ['info', 'success', 'warning', 'danger'],
       control: { type: 'select' },
       table: {
         defaultValue: { summary: 'info' },
