@@ -8,3 +8,4 @@ export * from './src/predicates/to-value';
 export * from './src/predicates/to-element';
 export * from './src/theming/theme';
 export * from './src/theming/status';
+export * from './src/logger/logger';

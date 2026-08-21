@@ -28,7 +28,7 @@ const isStatusType = (value: unknown): value is StatusType =>
 export class Status {
   readonly status = input<StatusType, LiteralUnion<StatusType, string>>('neutral', {
     alias: 'drgnStatus',
-    transform: val => (val === '' ? 'neutral' : castTo<StatusType>(val, isStatusType)),
+    transform: val => (val === '' ? 'neutral' : castTo(val, isStatusType)),
   });
 
   constructor() {
