@@ -11,7 +11,7 @@ import { AccordionItem } from './accordion-item/accordion-item';
 
 interface AccordionMeta {
   darkMode: boolean;
-  accordionVariant: 'dark' | 'light';
+  theme: 'dark' | 'light';
   heading: string;
   collapse: boolean;
   type: 'single' | 'multiple';
@@ -31,7 +31,7 @@ const meta: Meta<AccordionMeta> = {
     orientation: 'vertical',
     heading: 'Dragone',
     accordionChange: fn(),
-    accordionVariant: 'dark',
+    theme: 'dark',
   },
   argTypes: {
     collapse: {
@@ -46,7 +46,7 @@ const meta: Meta<AccordionMeta> = {
       options: ['single', 'multiple'],
       table: { defaultValue: { summary: 'single' } },
     },
-    accordionVariant: {
+    theme: {
       type: 'string',
       control: 'select',
       options: ['dark', 'light'],
@@ -72,7 +72,7 @@ export const AccordionSingle: Story = {
   render: args => ({
     props: args,
     template: `
-      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
+      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'theme'] })}>
         <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
@@ -87,7 +87,7 @@ export const AccordionMultiple: Story = {
   render: args => ({
     props: args,
     template: `
-      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
+      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'theme'] })}>
         <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>

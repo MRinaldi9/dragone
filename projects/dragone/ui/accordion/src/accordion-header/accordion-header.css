@@ -1,19 +1,35 @@
 :host {
-  & button[data-focus-visible] {
-    text-decoration: underline;
+  & button {
+    &[data-focus-visible] {
+      text-decoration: underline;
+    }
+    &[ngpAccordionTrigger] {
+      display: flex;
+      padding: 20px 16px;
+      justify-content: space-between;
+      width: 100%;
+      border-radius: 0;
+      align-items: center;
+      &[data-semantic='tertiary'] {
+        background-color: var(--drgn-color-surface-base);
+        &:not(:disabled) {
+          color: var(--drgn-color-surface-primary-strong);
+          border: 1px solid var(--drgn-color-surface-primary-muted);
+          &:hover,
+          &[data-open] {
+            background-color: var(--drgn-color-surface-primary-subtle);
+          }
+        }
+        &:disabled {
+          color: var(--drgn-color-text-disabled);
+          border: 1px solid var(--drgn-color-surface-disabled);
+        }
+      }
+      &[data-open] ng-icon {
+        transform: rotateX(180deg);
+      }
+    }
   }
-}
-[ngpAccordionTrigger] {
-  display: flex;
-  padding: 20px 16px;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 0;
-  align-items: center;
-}
-
-[ngpAccordionTrigger][data-open] ng-icon {
-  transform: rotateX(180deg);
 }
 
 ng-icon {
