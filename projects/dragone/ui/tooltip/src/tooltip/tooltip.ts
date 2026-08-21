@@ -23,8 +23,8 @@ export type TooltipContext =
         }
         @let actionCtx = actionTooltip();
         @if (actionCtx) {
-          <footer class="drgn-dark">
-            <button drgnButton variant="tertiary" (click)="actionCtx.action()">
+          <footer>
+            <button drgnButton theme="dark" semantic="tertiary" (click)="actionCtx.action()">
               {{ actionCtx.label }}
             </button>
           </footer>
