@@ -1,6 +1,6 @@
 import { isSignal, untracked as untr } from '@angular/core';
 
-import type { MaybeSignal } from '../types/branding';
+import type { MaybeSignal } from '../types/utils';
 
 export interface ToValueFn {
   <T>(val: MaybeSignal<T>): T;

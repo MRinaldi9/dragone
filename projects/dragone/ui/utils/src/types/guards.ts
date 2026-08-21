@@ -1,6 +1,15 @@
-import type { Branded } from './branding';
+import type { Nil, SvgIcon } from './utils';
 
-export type SvgIcon = Branded<string, 'SvgIcon'>;
+export function isNil(value: unknown): value is Nil {
+  return value === null || value === undefined;
+}
+
+export function castTo<T>(val: unknown, checker: (check: unknown) => check is T): T {
+  if (checker(val)) {
+    return val;
+  }
+  throw new Error('Value does not match the expected type.');
+}
 
 const _SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
 

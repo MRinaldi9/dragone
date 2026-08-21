@@ -1,6 +1,6 @@
 import { isSignal, untracked, type ElementRef } from '@angular/core';
 
-import type { MaybeSignal } from '../types/branding';
+import type { MaybeSignal } from '../types/utils';
 
 export interface toElementFn {
   <T extends Element>(elementRef: MaybeSignal<ElementRef<T> | null | undefined>): T | undefined;
