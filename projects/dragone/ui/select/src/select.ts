@@ -11,12 +11,13 @@ import {
 } from 'ng-primitives/select';
 import { map } from 'rxjs';
 
-import { isNotNil } from '@dragone/ui/utils';
+import { isNil, type KeyOf, type LiteralUnion } from '@dragone/ui/utils';
 
 type OptionPrimitive = string | number | boolean;
 type OptionObject<T extends object = Record<string, unknown>> = T & { disabled?: boolean };
 type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
 type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
+type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
 
 @Component({
   selector: 'drgn-select',
@@ -58,9 +59,9 @@ export class Select<T> {
   /**
    * A string that maps an option to its display label. If not provided, the option itself will be used as the label.
    */
-  readonly optionLabel = input<T extends object ? keyof T : never>();
+  readonly optionLabel = input<OptionKey<T>>();
   /** A string that maps an option to its value. If not provided, the option itself will be used as the value. */
-  readonly optionValue = input<T extends object ? keyof T : never>();
+  readonly optionValue = input<OptionKey<T>>();
   readonly ariaLabel = input<string>();
   readonly ariaLabelledBy = input<string>();
   readonly readonly = input(false, { transform: booleanAttribute });
@@ -82,7 +83,7 @@ export class Select<T> {
     if (this.#internalState().multiple() && Array.isArray(value)) {
       return value.length > 0;
     }
-    return isNotNil(value);
+    return !isNil(value);
   });
 
   /**
@@ -114,7 +115,7 @@ export class Select<T> {
     if (Array.isArray(value)) {
       return value.map(option => this.mapByKey(option, key));
     }
-    if (!isNotNil(value) || typeof value !== 'object' || !key) {
+    if (isNil(value) || typeof value !== 'object' || !key) {
       return value;
     }
     return (value as Record<PropertyKey, unknown>)[key];
