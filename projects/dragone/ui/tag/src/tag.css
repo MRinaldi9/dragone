@@ -19,11 +19,7 @@
   & {
     --status-color: var(--drgn-color-interactive-secondary-default);
   }
-}
-
-/* Dark mode variant */
-:host-context(.drgn-dark) {
-  & {
+  &[data-theme='dark'] {
     --status-color: var(--drgn-color-surface-base);
     color: var(--drgn-color-interactive-secondary-default);
   }

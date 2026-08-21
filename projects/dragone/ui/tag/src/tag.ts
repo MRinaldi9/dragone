@@ -1,10 +1,9 @@
 import { Component, input } from '@angular/core';
 
-import { Status } from '@dragone/ui/utils';
+import { Status, Theme } from '@dragone/ui/utils';
 
 @Component({
   selector: 'drgn-tag',
-  imports: [],
   template: ` <ng-content /> `,
   styleUrl: './tag.css',
   host: {
@@ -12,7 +11,10 @@ import { Status } from '@dragone/ui/utils';
     role: 'status',
     '[ariaLabel]': 'ariaLabel()',
   },
-  hostDirectives: [{ directive: Status, inputs: ['drgnStatus:status'] }],
+  hostDirectives: [
+    { directive: Status, inputs: ['drgnStatus:status'] },
+    { directive: Theme, inputs: ['theme'] },
+  ],
 })
 export class Tag {
   readonly ariaLabel = input<string>();
