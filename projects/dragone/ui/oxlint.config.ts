@@ -35,7 +35,7 @@ export default defineConfig({
         'sort-keys': 'off',
         'new-cap': [
           'warn',
-          { capIsNewExceptions: ['Component', 'Pipe', 'Directive', 'Injectable'] },
+          { capIsNewExceptions: ['Component', 'Pipe', 'Directive', 'Injectable', 'Service'] },
         ],
       },
     },
