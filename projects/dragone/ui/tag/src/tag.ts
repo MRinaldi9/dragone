@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 
-export type StatusTag = 'alert' | 'info' | 'success' | 'warning' | 'neutral';
+import { Status } from '@dragone/ui/utils';
 
 @Component({
   selector: 'drgn-tag',
@@ -11,10 +11,9 @@ export type StatusTag = 'alert' | 'info' | 'success' | 'warning' | 'neutral';
     class: 'drgn-label-md-700',
     role: 'status',
     '[ariaLabel]': 'ariaLabel()',
-    '[attr.data-status]': 'statusTag()',
   },
+  hostDirectives: [{ directive: Status, inputs: ['drgnStatus:status'] }],
 })
 export class Tag {
-  ariaLabel = input<string>();
-  statusTag = input<StatusTag>('neutral');
+  readonly ariaLabel = input<string>();
 }

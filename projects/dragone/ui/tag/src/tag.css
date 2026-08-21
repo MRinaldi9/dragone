@@ -3,7 +3,7 @@
   background-color: var(--status-color);
   border-radius: 100px;
   color: var(--drgn-color-text-inverse);
-  &[data-status='alert'] {
+  &[data-status='danger'] {
     --status-color: var(--drgn-color-interactive-alert-default);
   }
   &[data-status='warning'] {
@@ -16,14 +16,14 @@
   &[data-status='info'] {
     --status-color: var(--drgn-color-interactive-primary-default);
   }
-  &[data-status='neutral'] {
+  & {
     --status-color: var(--drgn-color-interactive-secondary-default);
   }
 }
 
 /* Dark mode variant */
 :host-context(.drgn-dark) {
-  &[data-status='neutral'] {
+  & {
     --status-color: var(--drgn-color-surface-base);
     color: var(--drgn-color-interactive-secondary-default);
   }
