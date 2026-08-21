@@ -1,20 +1,25 @@
 import {
+  applicationConfig,
   argsToTemplate,
   type Meta,
   moduleMetadata,
   type StoryObj,
 } from '@analogjs/storybook-angular';
-import { RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet, withHashLocation } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
 
 import { Breadcrumb } from './breadcrumb';
 import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';
+import fakeRoutes from './test.routes';
 
 const meta: Meta<Breadcrumb> = {
   title: 'Dragone/UI/Breadcrumb',
   component: Breadcrumb,
   tags: ['autodocs'],
-  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],
+  decorators: [
+    moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] }),
+    applicationConfig({ providers: [provideRouter(fakeRoutes, withHashLocation())] }),
+  ],
   args: {
     breadcrumbs: [
       {
@@ -56,7 +61,7 @@ export const BreadcrumbDefault: Story = {
     props: args,
     template: `
       <div style="display:flex; flex-direction: column; gap: 2rem; align-items: center; padding: 2rem;">
-        <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />
+        <drgn-breadcrumb ${argsToTemplate(args)} />
         <router-outlet/>
       </div>
     `,
