@@ -84,6 +84,13 @@ _Avoid_: Harness, fixture wrapper, test bench
 
 The Test Host is one option, not a blanket requirement. It is the natural fit when the Component under test targets a native element selector (e.g. `Button` on `button[drgnButton]`) and therefore cannot be rendered on its own, or when a test needs to drive the component from a parent context, such as Angular form APIs. Components with their own element selector (e.g. `Alert` on `drgn-alert`) can be rendered directly with `render(Component, ...)`. Choose per Component, per test intent.
 
+**Controlling Time in Tests**:
+Before writing a test that involves timers, decide whether the timing is the behavior under test or just in the way (see the [Marmicode Cookbook](https://cookbook.marmicode.io/angular/testing/controlling-time-in-tests)):
+- **Manual mode** (`vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()`) when the precise delay is what you assert, e.g. "at 99ms not fired, at 100ms fired".
+- **Fast-forward mode** (`vi.useFakeTimers().setTimerTickMode('nextTimerAsync')`, Vitest ≥ 4.1.0) when the timing is just in the way: the clock advances on its own, so tests do not couple to delay values. Flush pending timers with `await vi.runAllTimersAsync()`.
+- Always restore real timers with `onTestFinished(() => vi.useRealTimers())` (colocated setup/teardown), and install fake timers before any timer-dependent code runs.
+_Avoid_: hardcoding delay values in tests that do not assert precise timing; restoring real timers in `afterEach` instead of `onTestFinished`.
+
 ## Rules
 
 - **WCAG 2.2 AA** is the accessibility standard, in both light and dark themes.
