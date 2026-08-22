@@ -10,6 +10,7 @@
 }
 
 [ngpAccordionContent] {
+  --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
   color: var(--drgn-color-text-primary);
   background-color: var(--drgn-color-surface-base);
   overflow: hidden;

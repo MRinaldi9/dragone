@@ -6,6 +6,7 @@ import { AccordionItem } from './accordion-item/accordion-item';
 
 @Component({
   imports: [Accordion, AccordionItem],
+
   template: `
     <drgn-accordion [disabled]="disabledAccordion()" [collapse]="collapseAccordion()">
       <drgn-accordion-item
@@ -16,6 +17,11 @@ import { AccordionItem } from './accordion-item/accordion-item';
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </drgn-accordion-item>
     </drgn-accordion>
+  `,
+  styles: `
+    :host {
+      --drgn-motion-duration-medium: 500ms;
+    }
   `,
 })
 class TestHostAccordion {
@@ -77,7 +83,7 @@ describe(Accordion, () => {
     await expect.element(headerBtn).toBeDisabled();
   });
 
-  it.skip('should transition content states on open and close', async () => {
+  it('should transition content states on open and close', async () => {
     const collapseAccordion = signal(true);
     const { locator } = await render(TestHostAccordion, { inputs: { collapseAccordion } });
     const trigger = locator.getByRole('button');

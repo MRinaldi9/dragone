@@ -14,10 +14,21 @@
         background-color: var(--drgn-color-surface-base);
         &:not(:disabled) {
           color: var(--drgn-color-surface-primary-strong);
-          border: 1px solid var(--drgn-color-surface-primary-muted);
+          border: none;
           &:hover,
           &[data-open] {
             background-color: var(--drgn-color-surface-primary-subtle);
+            border: none;
+            color: var(--drgn-color-surface-primary-strong);
+          }
+          &[data-focus-visible],
+          &:focus-visible {
+            background-color: var(--drgn-color-surface-primary-subtle);
+            outline: 1px solid var(--drgn-color-focus-ring-primary);
+            color: var(--drgn-color-surface-primary-strong);
+          }
+          &:active {
+            border: none;
           }
         }
         &:disabled {
@@ -29,16 +40,12 @@
         transform: rotateX(180deg);
       }
     }
-  }
-}
-
-ng-icon {
-  color: var(--drgn-color-text-default);
-  transition: transform var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard);
-}
-
-:host-context([data-theme='light']) {
-  ng-icon {
-    color: var(--drgn-color-text-primary-dark-110);
+    ng-icon {
+      color: var(--drgn-color-text-default);
+      transition: transform var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard);
+    }
+    &[data-theme='light'] ng-icon {
+      color: var(--drgn-color-text-primary-dark-110);
+    }
   }
 }
