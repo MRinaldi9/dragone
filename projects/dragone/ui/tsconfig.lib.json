@@ -17,7 +17,8 @@
     "**/*.spec.ts",
     "**/*.stories.ts",
     "oxlint.config.ts",
-    "test-setup.ts"
+    "test-setup.ts",
+    "tests/**/*.ts"
   ],
   "angularCompilerOptions": {
     "extendedDiagnostics": {

@@ -12,7 +12,8 @@
   },
   "files": [
     "./test-setup.ts",
-    "../../../vitest.shims.ts"
+    "../../../vitest.shims.ts",
+    "tests/setup-timer-mode.ts"
   ],
   "include": [
     "**/*.spec.ts",
