@@ -8,7 +8,7 @@ The [CONTEXT.md](./CONTEXT.md) defines the project's domain vocabulary. Architec
 
 ### Prerequisites
 
-- [pnpm](https://pnpm.io) >= 11.0.0 (install globally via `npm install -g pnpm`)
+- [pnpm](https://pnpm.io) >= 11.0.0 (install globally via the [standalone installer](https://pnpm.io/installation), not `npm`)
 - Node.js >= 24.15.0
 
 ### Install
@@ -18,6 +18,8 @@ git clone <repository-url>
 cd dragone
 pnpm install
 ```
+
+> **Package manager:** Always use `pnpm` for this project — never `npm` or `yarn`. The `packageManager` field in `package.json` enforces pnpm.
 
 ## 💻 Development Workflow
 
