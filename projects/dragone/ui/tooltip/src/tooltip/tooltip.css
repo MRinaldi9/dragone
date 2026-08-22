@@ -1,4 +1,5 @@
 :host {
+  --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
   background-color: var(--drgn-color-surface-secondary-strong);
   border-radius: 8px;
   position: absolute;

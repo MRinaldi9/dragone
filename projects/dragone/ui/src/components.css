@@ -75,11 +75,7 @@
   --drgn-typography-weight-semibold: var(--typography-global-font-weights-600);
   --drgn-typography-weight-bold: var(--typography-global-font-weights-700);
 
-  --drgn-runtime-select-width: var(--ngp-select-width);
-  --drgn-runtime-shadow-lg: var(--ngp-shadow-lg);
-  --drgn-runtime-select-transform-origin: var(--ngp-select-transform-origin);
-  --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
-  --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+  --drgn-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
   --drgn-motion-duration-short: 100ms;
   --drgn-motion-duration-medium: 200ms;
