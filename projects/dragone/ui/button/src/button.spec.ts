@@ -12,6 +12,7 @@ import { Button, type ButtonSize, type ButtonSemantic } from './button';
       [size]="size()"
       [icon]="isIconOnly()"
       [disabled]="isDisabled()"
+      [status]="status()"
       (click)="clickCta.emit()"
     >
       Dragone
@@ -23,6 +24,7 @@ class TestHostComponent {
   readonly size = input<ButtonSize>('large');
   readonly isIconOnly = input(false);
   readonly isDisabled = input(false);
+  readonly status = input<'neutral' | 'danger'>('neutral');
   readonly clickCta = output<void>();
 }
 
@@ -49,6 +51,7 @@ describe(Button, () => {
   const isIconOnly = signal<boolean>(false);
   const semantic = signal<ButtonSemantic>('primary');
   const isDisabled = signal<boolean>(false);
+  const status = signal<'neutral' | 'danger'>('neutral');
   const clickSpy = vi.fn<() => void>();
 
   afterEach(() => {
@@ -56,6 +59,8 @@ describe(Button, () => {
     isIconOnly.set(false);
     semantic.set('primary');
     isDisabled.set(false);
+    status.set('neutral');
+    clickSpy.mockClear();
   });
 
   it('should create with default properties', async () => {
@@ -87,13 +92,13 @@ describe(Button, () => {
     await expect.element(locator.getByRole('button')).toHaveAttribute('data-icon-only');
   });
 
-  it.skip('should change variant', async () => {
+  it('should change variant', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, semantic, isDisabled },
+      inputs: { size, isIconOnly, semantic, isDisabled, status },
     });
-    semantic.set('danger');
+    status.set('danger');
 
-    await expect.element(locator.getByRole('button')).toHaveAttribute('data-semantic', 'danger');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-status', 'danger');
   });
 
   it('should disable the button', async () => {
