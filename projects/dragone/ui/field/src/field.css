@@ -14,11 +14,14 @@
   & .description {
     order: 3;
   }
+  & .field-container {
+    flex-direction: row;
+  }
 }
 
 .field-container {
   display: flex;
-  flex-direction: var(--direction);
+  flex-direction: column;
   gap: 4px;
   inline-size: 100%;
   min-inline-size: 0;

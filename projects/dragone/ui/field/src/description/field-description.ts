@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { NgpDescription } from 'ng-primitives/form-field';
 
 @Directive({
-  selector: '[drgnDescription]',
+  selector: '[drgnFieldDescription]',
   hostDirectives: [{ directive: NgpDescription, inputs: ['id'] }],
 })
-export class Description {}
+export class FieldDescription {}

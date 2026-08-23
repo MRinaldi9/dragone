@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { NgpLabel } from 'ng-primitives/form-field';
 
 @Directive({
-  selector: '[drgnLabel]',
+  selector: '[drgnFieldLabel]',
   hostDirectives: [{ directive: NgpLabel, inputs: ['id'] }],
 })
-export class Label {}
+export class FieldLabel {}

@@ -4,15 +4,15 @@ import { form, FormField as FormSignal, required } from '@angular/forms/signals'
 
 import { Checkbox } from '@dragone/ui/checkbox';
 
-import { FormContainer } from './form-container/form-container';
+import { Field } from './field';
 
 @Component({
   selector: 'drgn-form-field-story',
-  imports: [FormContainer, Checkbox, FormSignal],
+  imports: [Field, Checkbox, FormSignal],
   template: `
-    <drgn-form-container [label]="label()" [inline]="inline()">
+    <drgn-field [label]="label()" [inline]="inline()">
       <drgn-checkbox [formField]="form.checkBox" />
-    </drgn-form-container>
+    </drgn-field>
   `,
 })
 class FormFieldStory {
@@ -55,7 +55,7 @@ export const Default: Story = {
   }),
 };
 
-// export const WithError: Story = {
+// Export const WithError: Story = {
 //   render: args => ({
 //     template: `
 //       <drgn-form-field variant="error" [size]="size">
