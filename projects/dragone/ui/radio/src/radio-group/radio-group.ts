@@ -9,12 +9,13 @@ import {
 } from '@angular/core';
 import { injectRadioGroupState, NgpRadioGroup } from 'ng-primitives/radio';
 
+import { toElement } from '@dragone/ui/utils';
+
 import { provideRadioGroupContext } from '../radio-group-context';
 import { RadioItem } from '../radio-item/radio-item';
 
 @Component({
   selector: 'drgn-radio-group',
-  imports: [],
   template: ` <ng-content /> `,
   styleUrl: './radio-group.css',
   providers: [provideRadioGroupContext(RadioGroup)],
@@ -47,17 +48,18 @@ export class RadioGroup<T> {
   });
   readonly touch = output<void>();
   readonly #radioGroupState = injectRadioGroupState<T>();
+  readonly firstRadioItem = computed(() => this.radioItems().at(0));
 
   protected direction = computed(() =>
     this.#radioGroupState().orientation() === 'horizontal' ? 'row' : 'column',
   );
 
   focus(options?: FocusOptions): void {
-    this.radioItems().at(0)?.nativeElement.focus(options);
+    toElement(this.firstRadioItem)?.focus(options);
   }
 
   reset(): void {
-    this.#radioGroupState().value.set(null);
+    this.#radioGroupState().setValue(null);
   }
 
   protected touched(event: FocusEvent): void {

@@ -8,7 +8,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 
 import { Button } from '@dragone/ui/button';
-import { Theme } from '@dragone/ui/utils';
+import { injectLayoutState, injectStatusState, Layout, Status, Theme } from '@dragone/ui/utils';
 
 export type AlertPolite = 'off' | 'polite' | 'assertive';
 
@@ -16,7 +16,7 @@ const TYPE_TO_ICON = {
   info: faSolidCircleInfo,
   success: faSolidCircleCheck,
   warning: faSolidTriangleExclamation,
-  error: faSolidCircleExclamation,
+  danger: faSolidCircleExclamation,
 } as const;
 
 @Component({
@@ -46,27 +46,23 @@ const TYPE_TO_ICON = {
     '[attr.role]': 'ariaRole()',
     '[ariaLive]': 'politeness()',
     '[ariaAtomic]': 'ariaAtomic()',
-    '[attr.data-variant]': 'aspect()',
+    '[attr.data-layout]': 'layoutState().layout()',
   },
-  hostDirectives: [{ directive: Theme, inputs: ['theme'] }],
+  hostDirectives: [
+    { directive: Theme, inputs: ['theme'] },
+    { directive: Status, inputs: ['drgnStatus:status'] },
+    { directive: Layout, inputs: ['drgnLayout:layout'] },
+  ],
 })
 export class Alert {
   readonly title = input.required<string>();
-  readonly alertType = input<string, 'info' | 'success' | 'warning' | 'error'>(TYPE_TO_ICON.info, {
-    transform: type => TYPE_TO_ICON[type],
-  });
   /**
    * Defines the politeness level for screen readers.
    *
    * @default 'assertive'
    */
   readonly politeness = input<AlertPolite>('assertive');
-  /**
-   * Defines the variant of the alert.
-   *
-   * @default 'desktop'
-   */
-  readonly aspect = input<'mobile' | 'desktop'>('desktop');
+
   /**
    * Defines whether the title should be exposed as a heading.
    *
@@ -82,7 +78,15 @@ export class Alert {
   /** Optional call to action text for the alert. */
   readonly ctaText = input<string>();
   readonly ctaClick = output<PointerEvent>();
+  readonly #statusState = injectStatusState();
+  protected readonly layoutState = injectLayoutState();
 
+  protected readonly alertType = computed((status = this.#statusState().status()) => {
+    if (status === 'neutral') {
+      return TYPE_TO_ICON.info;
+    }
+    return TYPE_TO_ICON[status];
+  });
   protected readonly ariaRole = computed<'alert' | 'status' | null>(
     (politeness = this.politeness()) => {
       if (politeness === 'off') {

@@ -1,8 +1,8 @@
-import { Component, inputBinding, signal, viewChild } from '@angular/core';
-import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, input, output, signal, viewChild } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
+import { render } from '@wismaz/vitest-browser-angular';
 import { NgpSelect } from 'ng-primitives/select';
-import { type Locator, page } from 'vitest/browser';
+import { page } from 'vitest/browser';
 
 import { Select } from './select';
 
@@ -35,7 +35,7 @@ const setupForm = (
     `,
   })
   class FormCmp {
-    readonly field = form(signal(null));
+    readonly field = form(signal(''));
     readonly stateDir = viewChild.required(NgpSelect);
     readonly options = signal(options);
     readonly optionLabel = signal(optionLabel);
@@ -44,77 +44,96 @@ const setupForm = (
     readonly compare = signal(compare);
   }
 
-  const fixture = TestBed.createComponent(FormCmp);
-  const component = fixture.componentInstance;
-  const locator = page.elementLocator(fixture.nativeElement);
-
-  return { component, locator, whenStable: (): Promise<void> => fixture.whenStable() };
+  return render(FormCmp);
 };
 
+@Component({
+  imports: [Select],
+  template: `
+    <drgn-select
+      [options]="options()"
+      [placeholder]="placeholder()"
+      [optionLabel]="optionLabel()"
+      [ariaLabel]="ariaLabel()"
+      (valueChange)="valueChange.emit($event)"
+    />
+  `,
+})
+class TestHostComponent {
+  readonly options = input<TestOption[]>([]);
+  readonly placeholder = input('');
+  readonly optionLabel = input('');
+  readonly ariaLabel = input('');
+  readonly valueChange = output<unknown>();
+}
+
 describe(Select, () => {
-  let component: Select<TestOption>;
-  let fixture: ComponentFixture<Select<TestOption>>;
-  let componentLocator: Locator;
-  const placeholder = signal<string>('');
-  const optionLabel = signal<string>('');
+  const placeholder = signal('');
+  const optionLabel = signal('');
   const options = signal<TestOption[]>([
     { label: 'Opzione A', value: 'a' },
     { label: 'Opzione B', value: 'b' },
     { label: 'Opzione C', value: 'c' },
   ]);
-  const ariaLabel = signal<string>('');
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Select],
-    }).compileComponents();
+  const ariaLabel = signal('');
 
-    fixture = TestBed.createComponent(Select<TestOption>, {
-      bindings: [
-        inputBinding('placeholder', placeholder),
-        inputBinding('optionLabel', optionLabel),
-        inputBinding('options', options),
-        inputBinding('ariaLabel', ariaLabel),
-      ],
-    });
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-    componentLocator = page.elementLocator(fixture.nativeElement);
+  afterEach(() => {
+    placeholder.set('');
+    optionLabel.set('');
+    options.set([
+      { label: 'Opzione A', value: 'a' },
+      { label: 'Opzione B', value: 'b' },
+      { label: 'Opzione C', value: 'c' },
+    ]);
+    ariaLabel.set('');
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel },
+    });
+    await expect.element(locator).toBeTruthy();
   });
 
   it('should render placeholder when no value is set', async () => {
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel },
+    });
     placeholder.set('Scegli un valore');
-    await fixture.whenStable();
-    const placeholderEl = componentLocator.getByTestId('placeholder');
+    const placeholderEl = locator.getByTestId('placeholder');
     await expect.element(placeholderEl).toBeInTheDocument();
   });
 
   it.each(options())('should render mapped label when a value is set', async ({ label }) => {
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel },
+    });
     optionLabel.set('label');
-    await fixture.whenStable();
-    await componentLocator.click();
+    await locator.getByRole('combobox').click();
     const optionEl = page.getByText(label);
     await expect.element(optionEl).toBeInTheDocument();
   });
 
   it('should set aria-label when provided', async () => {
-    expect(componentLocator.element().ariaLabel).toBe('Scegli un valore');
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel },
+    });
+    const combobox = locator.getByRole('combobox');
+    placeholder.set('Scegli un valore');
+    await expect.element(combobox).toHaveAttribute('aria-label', 'Scegli un valore');
     ariaLabel.set('Custom aria label');
-    await fixture.whenStable();
-    expect(componentLocator.element().ariaLabel).toBe('Custom aria label');
+    await expect.element(combobox).toHaveAttribute('aria-label', 'Custom aria label');
   });
 
   it('should emit valueChange once per option selection', async () => {
     const valueChangeSpy = vi.fn<(value: unknown) => void>();
-    component.valueChange.subscribe(valueChangeSpy);
-
-    await componentLocator.click();
-    const optionEl = await vi.waitUntil(() => page.getByRole('option', { name: 'Opzione A' }));
-    await optionEl.click();
-    await fixture.whenStable();
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel },
+      outputs: { valueChange: valueChangeSpy },
+    });
+    optionLabel.set('label');
+    await locator.getByRole('combobox').click();
+    await page.getByRole('option', { name: 'Opzione A' }).click();
 
     expect(valueChangeSpy).toHaveBeenNthCalledWith(1, options()[0]);
     expect(valueChangeSpy.mock.calls[1]).toBeUndefined();
@@ -122,54 +141,75 @@ describe(Select, () => {
 
   describe('form integration', () => {
     it('should update form field value on simple option select', async () => {
-      const { component, locator, whenStable } = setupForm(['foo', 'bar']);
-      await whenStable();
-      expect(component.field().value()).toBeNull();
+      const { componentClassInstance: component, locator } = await setupForm(['foo', 'bar']);
+      expect(component.field().value()).toBe('');
 
       const select = locator.getByRole('combobox');
       await select.click();
-      const option = await vi.waitUntil(() => page.getByRole('option', { name: 'foo' }));
-
-      await option.click();
-      await whenStable();
+      await page.getByRole('option', { name: 'foo' }).click();
 
       expect(component.field().value()).toBe('foo');
       expect(component.stateDir().value()).toBe('foo');
     });
 
     it('should update form field value on object option select', async () => {
-      const { component, locator, whenStable } = setupForm(options(), 'label', 'value');
-      await whenStable();
-      expect(component.field().value()).toBeNull();
+      const { componentClassInstance: component, locator } = await setupForm(
+        options(),
+        'label',
+        'value',
+      );
+      expect(component.field().value()).toBe('');
 
       const select = locator.getByRole('combobox');
       await select.click();
-      const option = await vi.waitUntil(() => page.getByRole('option', { name: 'Opzione A' }));
-
-      await option.click();
-      await whenStable();
+      await page.getByRole('option', { name: 'Opzione A' }).click();
 
       expect(component.field().value()).toBe('a');
       expect(component.stateDir().value()).toBe('a');
     });
 
     it('should map output values for multiple object selection', async () => {
-      const { component, locator, whenStable } = setupForm(options(), 'label', 'value', true);
-      await whenStable();
-      expect(component.field().value()).toBeNull();
+      const { componentClassInstance: component, locator } = await setupForm(
+        options(),
+        'label',
+        'value',
+        true,
+      );
+      expect(component.field().value()).toBe('');
 
       const select = locator.getByRole('combobox');
       await select.click();
 
-      const optionA = await vi.waitUntil(() => page.getByRole('option', { name: 'Opzione A' }));
-      await optionA.click();
-
-      const optionB = await vi.waitUntil(() => page.getByRole('option', { name: 'Opzione B' }));
-      await optionB.click();
-      await whenStable();
+      await page.getByRole('option', { name: 'Opzione A' }).click();
+      await page.getByRole('option', { name: 'Opzione B' }).click();
 
       expect(component.field().value()).toEqual(['a', 'b']);
       expect(component.stateDir().value()).toEqual(['a', 'b']);
+    });
+
+    it('should update select value when form field value is set programmatically', async () => {
+      expect.hasAssertions();
+      const { componentClassInstance: component } = await setupForm(['foo', 'bar']);
+
+      component.field().value.set('bar');
+
+      await vi.waitFor(() => expect(component.stateDir().value()).toBe('bar'));
+      expect(component.field().value()).toBe('bar');
+    });
+
+    it('should forward a direct [value] binding to NgpSelect', async () => {
+      @Component({
+        imports: [Select],
+        template: `<drgn-select [value]="value()" [options]="options()" />`,
+      })
+      class ValueCmp {
+        readonly value = signal('bar');
+        readonly options = signal(['foo', 'bar']);
+        readonly stateDir = viewChild.required(NgpSelect);
+      }
+
+      const { componentClassInstance: component } = await render(ValueCmp);
+      expect(component.stateDir().value()).toBe('bar');
     });
 
     it('should select option using custom compare function', async () => {
@@ -180,7 +220,7 @@ describe(Select, () => {
         return first.value === second.value;
       };
 
-      const { component, locator, whenStable } = setupForm(
+      const { componentClassInstance: component, locator } = await setupForm(
         options(),
         'label',
         'value',
@@ -190,9 +230,7 @@ describe(Select, () => {
 
       const select = locator.getByRole('combobox');
       await select.click();
-      const option = await vi.waitUntil(() => page.getByRole('option', { name: 'Opzione A' }));
-      await option.click();
-      await whenStable();
+      await page.getByRole('option', { name: 'Opzione A' }).click();
 
       expect(component.field().value()).toBe('a');
       expect(component.stateDir().value()).toBe('a');

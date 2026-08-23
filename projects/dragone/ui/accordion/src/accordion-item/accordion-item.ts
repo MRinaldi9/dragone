@@ -9,7 +9,7 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
   selector: 'drgn-accordion-item',
   imports: [NgpAccordionContent, AccordionHeader],
   template: `
-    <drgn-accordion-header [ariaLevel]="headingAriaLevel()" [variant]="btnVariant()">
+    <drgn-accordion-header [ariaLevel]="headingAriaLevel()" [headerSemantic]="semantic()">
       {{ heading() }}
     </drgn-accordion-header>
     <div class="drgn-p-md-01" ngpAccordionContent>
@@ -19,7 +19,6 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
     </div>
   `,
   styleUrl: './accordion-item.css',
-  providers: [],
   hostDirectives: [
     {
       directive: NgpAccordionItem,
@@ -27,7 +26,7 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
     },
     {
       directive: Theme,
-      inputs: ['theme:accordionVariant'],
+      inputs: ['theme'],
     },
   ],
 })
@@ -36,7 +35,7 @@ export class AccordionItem {
   readonly headingAriaLevel = input<AriaLevel>(3);
 
   readonly #themeState = injectThemeState();
-  readonly btnVariant = computed((theme = this.#themeState.resolvedTheme()) =>
+  readonly semantic = computed((theme = this.#themeState().resolvedTheme()) =>
     theme === 'dark' ? 'primary' : 'tertiary',
   );
 }

@@ -22,6 +22,7 @@ export default defineConfig({
         'capitalized-comments': ['warn', 'always', { ignoreConsecutiveComments: true }],
         curly: ['error', 'multi-line'],
         'for-direction': 'error',
+        'func-style': ['off'],
         'id-length': ['error', { checkGeneric: false, exceptions: ['_', 'i', 'j', 'K'] }],
         'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
         'max-params': ['error', { max: 4 }],
@@ -30,6 +31,7 @@ export default defineConfig({
         'no-case-declarations': 'error',
         'no-compare-neg-zero': 'error',
         'no-cond-assign': 'error',
+        'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-constant-binary-expression': 'error',
         'no-constant-condition': 'error',
         'no-control-regex': 'error',
@@ -80,6 +82,7 @@ export default defineConfig({
         'no-useless-catch': 'error',
         'no-useless-escape': ['error', { allowRegexCharacters: ['\\', '.'] }],
         'no-var': 'error',
+        'one-var': 'off',
         'oxc/no-async-await': 'off',
         'oxc/no-optional-chaining': 'off',
         'oxc/no-rest-spread-properties': 'off',
@@ -126,6 +129,7 @@ export default defineConfig({
     },
     {
       files: ['**/*.spec.ts', '**/*.test.ts'],
+      plugins: ['typescript', 'vitest', 'eslint', 'oxc'],
       rules: {
         'init-declarations': ['off'],
         'max-params': 'off',
@@ -163,5 +167,5 @@ export default defineConfig({
       },
     },
   ],
-  plugins: ['typescript', 'vitest', 'eslint', 'oxc'],
+  plugins: ['typescript', 'eslint', 'oxc'],
 });

@@ -2,37 +2,49 @@ import {
   afterRenderEffect,
   Component,
   computed,
+  effect,
+  ElementRef,
   input,
   linkedSignal,
-  untracked,
+  signal,
   viewChild,
-  type ElementRef,
+  viewChildren,
 } from '@angular/core';
+import { NgpBreadcrumbList, NgpBreadcrumbs } from 'ng-primitives/breadcrumbs';
 import { injectDimensions } from 'ng-primitives/internal';
 
-import { BreadcrumbItem, type BreadcrumbType } from './breadcrumb-item/breadcrumb-item';
+import { createNotifier, toElement } from '@dragone/ui/utils';
+
+import { BreadcrumbEllipsis } from './breadcrumb-ellipsis/breadcrumb-ellipsis';
+import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';
+import { BreadcrumbSeparator } from './breadcrumb-separator/breadcrumb-separator';
+import type { BreadcrumbItemConfig } from './breadcrumb.model';
+import { validateBreadcrumbTrail } from './utils/validation-breadcrumb';
 
 @Component({
   selector: 'drgn-breadcrumb',
-  imports: [BreadcrumbItem],
+  imports: [BreadcrumbItem, NgpBreadcrumbList, BreadcrumbSeparator, BreadcrumbEllipsis],
   template: `
-    <ol #breadcrumbList>
+    <ol ngpBreadcrumbList>
       @if (showEllipsis()) {
         @let firstBread = firstItem();
         @let lastBread = lastItem();
         @if (firstBread && lastBread) {
           <drgn-breadcrumb-item [breadcrumbConfiguration]="firstBread" />
-          <drgn-breadcrumb-item
-            [breadcrumbConfiguration]="{ label: '...' }"
-            (openBreadcrumb)="showEllipsis.set(false)"
+          <drgn-breadcrumb-separator />
+          <drgn-breadcrumb-ellipsis
+            [ariaLabel]="ariaLabelEllipsis()"
+            (openBreadcrumb)="userExpanded.set(true)"
           />
-          <drgn-breadcrumb-item [breadcrumbConfiguration]="lastBread" />
+          <drgn-breadcrumb-separator />
+          <drgn-breadcrumb-item [breadcrumbConfiguration]="lastBread" [isLastBreadcrumb]="true" />
         }
       } @else {
         @for (item of breadcrumbs(); track $index) {
-          <drgn-breadcrumb-item [breadcrumbConfiguration]="item" />
-        } @empty {
-          <drgn-breadcrumb-item [breadcrumbConfiguration]="{ label: 'No breadcrumbs available' }" />
+          <drgn-breadcrumb-item [breadcrumbConfiguration]="item" [isLastBreadcrumb]="$last" />
+          @if (!$last) {
+            <drgn-breadcrumb-separator />
+          }
         }
       }
     </ol>
@@ -40,35 +52,69 @@ import { BreadcrumbItem, type BreadcrumbType } from './breadcrumb-item/breadcrum
   styleUrl: './breadcrumb.css',
   host: {
     role: 'navigation',
-    'aria-label': 'Breadcrumb',
+    '[ariaLabel]': 'ariaLabel()',
+    '[class.expanded]': 'userExpanded()',
   },
+  hostDirectives: [NgpBreadcrumbs],
 })
 export class Breadcrumb {
-  readonly breadcrumbs = input.required<BreadcrumbType[]>();
-  protected readonly showEllipsis = linkedSignal(() => this.breadcrumbs().length >= 6);
+  readonly breadcrumbs = input.required<BreadcrumbItemConfig[]>();
+  readonly ariaLabel = input('Breadcrumb');
+  readonly ariaLabelEllipsis = input('Expand breadcrumbs');
+
+  readonly #breadcrumbsNotifier = createNotifier({ deps: [this.breadcrumbs] });
+  readonly #overflowing = signal(false);
+  readonly #hostDimensions = injectDimensions();
+
+  protected readonly userExpanded = linkedSignal({
+    source: this.#breadcrumbsNotifier.listen,
+    computation: () => false,
+  });
+  protected readonly showEllipsis = computed(() => {
+    const userExpanded = this.userExpanded();
+    const overflowing = this.#overflowing();
+    const breadcrumbs = this.breadcrumbs();
+    return !userExpanded && (breadcrumbs.length >= 6 || overflowing);
+  });
+
   protected readonly firstItem = computed(() => this.breadcrumbs().at(0));
   protected readonly lastItem = computed(() => this.breadcrumbs().at(-1));
-  private readonly hostDimensions = injectDimensions();
-  private readonly breadcrumbListElement =
-    viewChild<ElementRef<HTMLOListElement>>('breadcrumbList');
+  private readonly breadcrumbListElement = viewChild<
+    NgpBreadcrumbList,
+    ElementRef<HTMLOListElement>
+  >(NgpBreadcrumbList, { read: ElementRef });
+  private readonly breadcrumbItems = viewChildren<BreadcrumbItem, ElementRef<HTMLElement>>(
+    BreadcrumbItem,
+    {
+      read: ElementRef,
+    },
+  );
 
   constructor() {
+    const OVERFLOW_TOLERANCE_PX = 16;
     afterRenderEffect(() => {
-      const { isCollapsed, list } = untracked(() => ({
-        isCollapsed: this.showEllipsis(),
-        list: this.breadcrumbListElement()?.nativeElement,
-      }));
-      const { width: hostWidth } = this.hostDimensions();
+      const listElement = toElement.untracked(this.breadcrumbListElement);
+      const { width: hostWidth } = this.#hostDimensions();
 
-      if (isCollapsed || !list || !hostWidth) {
-        return;
-      }
-      const listWidth = list.scrollWidth;
+      if (!listElement || !hostWidth) return;
 
-      const OVERFLOW_TOLERANCE_PX = 16;
-      const isOverflowing = Math.floor(listWidth) > Math.floor(hostWidth + OVERFLOW_TOLERANCE_PX);
-
-      this.showEllipsis.set(isOverflowing);
+      this.#overflowing.set(
+        Math.floor(listElement.scrollWidth) > Math.floor(hostWidth + OVERFLOW_TOLERANCE_PX),
+      );
     });
+    effect(() => {
+      const userExpanded = this.userExpanded();
+      const breadcrumbItems = this.breadcrumbItems();
+      if (!userExpanded || !breadcrumbItems.length) return;
+
+      toElement(breadcrumbItems.at(1))?.querySelector('a')?.focus();
+    });
+    if (ngDevMode) {
+      effect(() => {
+        for (const warning of validateBreadcrumbTrail(this.breadcrumbs())) {
+          console.warn(warning);
+        }
+      });
+    }
   }
 }

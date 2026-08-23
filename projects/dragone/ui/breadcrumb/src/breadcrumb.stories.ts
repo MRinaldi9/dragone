@@ -1,20 +1,25 @@
 import {
+  applicationConfig,
   argsToTemplate,
   type Meta,
   moduleMetadata,
   type StoryObj,
 } from '@analogjs/storybook-angular';
-import { RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet, withHashLocation } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
 
 import { Breadcrumb } from './breadcrumb';
 import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';
+import fakeRoutes from './test.routes';
 
 const meta: Meta<Breadcrumb> = {
   title: 'Dragone/UI/Breadcrumb',
   component: Breadcrumb,
   tags: ['autodocs'],
-  decorators: [moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] })],
+  decorators: [
+    moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] }),
+    applicationConfig({ providers: [provideRouter(fakeRoutes, withHashLocation())] }),
+  ],
   args: {
     breadcrumbs: [
       {
@@ -40,7 +45,6 @@ const meta: Meta<Breadcrumb> = {
       },
       {
         label: 'voluptatem ipsum',
-        href: '/category/subcategory/current-page',
       },
     ],
   },
@@ -52,32 +56,14 @@ const meta: Meta<Breadcrumb> = {
 export default meta;
 type Story = StoryObj<Breadcrumb>;
 
-export const BreadcrumbSingle: Story = {
+export const BreadcrumbDefault: Story = {
   render: args => ({
     props: args,
     template: `
       <div style="display:flex; flex-direction: column; gap: 2rem; align-items: center; padding: 2rem;">
-        <drgn-breadcrumb ${argsToTemplate(args, { exclude: ['darkMode'] })} />
+        <drgn-breadcrumb ${argsToTemplate(args)} />
         <router-outlet/>
       </div>
     `,
   }),
 };
-
-// Export const LongPath: Story = {
-//   Render: args => ({
-//     Props: args,
-//     Template: `
-//       <drgn-breadcrumb>
-//         <drgn-breadcrumb-item href="#">Home</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item href="#">Primo Livello Molto Lungo</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item href="#">Secondo Livello</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item href="#">Terzo Livello Ancora Più Lungo del Precedente</drgn-breadcrumb-item>
-//         <drgn-breadcrumb-item>Pagina Corrente</drgn-breadcrumb-item>
-//       </drgn-breadcrumb>
-//     `,
-//     ModuleMetadata: {
-//       Imports: [DrgnBreadcrumbComponent, DrgnBreadcrumbItemComponent],
-//     },
-//   }),
-// };

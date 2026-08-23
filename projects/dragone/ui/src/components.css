@@ -52,6 +52,7 @@
 
   --drgn-color-focus-ring-outline: var(--color-global-primary-000);
   --drgn-color-focus-ring-primary: var(--color-alias-interactive-primary-default);
+  --drgn-color-focus-ring-interactive: var(--color-alias-interactive-border-focus);
 
   --drgn-typography-font-family-base: var(--typography-global-font-family-01);
   --drgn-typography-font-family-number: var(--typography-global-font-family-03);
@@ -75,14 +76,26 @@
   --drgn-typography-weight-semibold: var(--typography-global-font-weights-600);
   --drgn-typography-weight-bold: var(--typography-global-font-weights-700);
 
-  --drgn-runtime-select-width: var(--ngp-select-width);
-  --drgn-runtime-shadow-lg: var(--ngp-shadow-lg);
-  --drgn-runtime-select-transform-origin: var(--ngp-select-transform-origin);
-  --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
-  --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+  --drgn-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  --drgn-motion-duration-short: 100ms;
+  --drgn-motion-duration-medium: 200ms;
+  --drgn-motion-duration-long: 400ms;
+
+  --drgn-motion-easing-standard: ease;
+  --drgn-motion-easing-enter: ease-out;
+  --drgn-motion-easing-exit: ease-in;
 
   --drgn-shadow-blur-sm: var(--elevation-elevation-01);
   --drgn-shadow-blur-md: var(--elevation-elevation-02);
   --drgn-shadow-blur-lg: var(--elevation-elevation-03);
   --drgn-shadow-blur-xl: var(--elevation-elevation-04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --drgn-motion-duration-short: 0.001ms;
+    --drgn-motion-duration-medium: 0.001ms;
+    --drgn-motion-duration-long: 0.001ms;
+  }
 }

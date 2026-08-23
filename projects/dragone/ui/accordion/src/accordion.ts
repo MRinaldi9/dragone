@@ -3,7 +3,6 @@ import { NgpAccordion } from 'ng-primitives/accordion';
 
 @Component({
   selector: 'drgn-accordion',
-  imports: [],
   template: ` <ng-content /> `,
   styleUrl: './accordion.css',
   hostDirectives: [

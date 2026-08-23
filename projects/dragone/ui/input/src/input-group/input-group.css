@@ -7,7 +7,7 @@
   border-radius: 4px;
   padding: 1rem;
   background-color: var(--drgn-color-surface-base);
-  transition: border-color 0.2s;
+  transition: border-color var(--drgn-motion-duration-medium);
 
   /* Input nel gruppo */
   input {

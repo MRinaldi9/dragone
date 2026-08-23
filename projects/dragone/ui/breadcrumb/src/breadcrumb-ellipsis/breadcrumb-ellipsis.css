@@ -1,0 +1,15 @@
+:host {
+  & button {
+    all: unset;
+    cursor: pointer;
+    padding: 3px;
+    color: var(--drgn-color-interactive-primary-default);
+    &[data-focus-visible],
+    &:focus-visible {
+      outline: 1px solid var(--drgn-color-focus-ring-interactive);
+      filter: drop-shadow(0px 0px 3px #007db3b3);
+      border-radius: 4px;
+      background-color: white;
+    }
+  }
+}

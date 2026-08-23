@@ -1,6 +1,6 @@
-import { Component, input, inputBinding, signal } from '@angular/core';
-import { TestBed, type ComponentFixture } from '@angular/core/testing';
-import { page, userEvent, type Locator } from 'vitest/browser';
+import { Component, input, signal } from '@angular/core';
+import { render } from '@wismaz/vitest-browser-angular';
+import { userEvent } from 'vitest/browser';
 
 import { RadioItem } from '../radio-item/radio-item';
 import { RadioGroup } from './radio-group';
@@ -21,63 +21,50 @@ class RadioGroupTest {
 }
 
 describe(RadioGroup, () => {
-  let fixture: ComponentFixture<RadioGroupTest>;
-  let locator: Locator;
   const disabled = signal(false);
   const readonly = signal(false);
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [RadioGroupTest],
-    });
 
-    fixture = TestBed.createComponent(RadioGroupTest, {
-      bindings: [inputBinding('disabled', disabled), inputBinding('readonly', readonly)],
-    });
-    await fixture.whenStable();
-    locator = page.elementLocator(fixture.nativeElement);
-  });
   afterEach(() => {
     disabled.set(false);
     readonly.set(false);
   });
 
   it('should focus and select the first radio item on keyboard navigation', async () => {
-    const radioItems = locator.getByRole('radio').all();
-    const firstRadioItem = radioItems.at(0);
-    assert(firstRadioItem, 'Expected at least one radio item');
+    const { locator } = await render(RadioGroupTest);
+    const radioItem = locator.getByRole('radio').first();
+
     await userEvent.tab();
-    await expect.element(firstRadioItem).toHaveAttribute('aria-checked', 'true');
-    await expect.element(firstRadioItem).toHaveFocus();
+    await expect.element(radioItem).toHaveAttribute('aria-checked', 'true');
+    await expect.element(radioItem).toHaveFocus();
   });
 
   it('should focus and select the radio item based on the keyboard navigation', async () => {
-    const radioItems = locator.getByRole('radio').all();
-    const secondRadioItem = radioItems.at(1);
-    assert(secondRadioItem, 'Expected at least two radio items');
+    const { locator } = await render(RadioGroupTest);
+    const radioItem = locator.getByRole('radio').nth(1);
+
+    assert(radioItem, 'Expected at least two radio items');
     await userEvent.tab();
 
     await userEvent.keyboard('[ArrowDown]');
-    await expect.element(secondRadioItem).toHaveAttribute('aria-checked', 'true');
-    await expect.element(secondRadioItem).toHaveFocus();
+    await expect.element(radioItem).toHaveAttribute('aria-checked', 'true');
+    await expect.element(radioItem).toHaveFocus();
   });
 
   it('should not change selection when disabled', async () => {
+    const { locator } = await render(RadioGroupTest, { inputs: { disabled } });
     disabled.set(true);
-    await fixture.whenStable();
-    const radioItems = locator.getByRole('radio').all();
-    const firstRadioItem = radioItems.at(0);
-    assert(firstRadioItem, 'Expected at least one radio item');
+    const radioItem = locator.getByRole('radio').first();
+
     await userEvent.tab();
-    await expect.element(firstRadioItem).toHaveAttribute('aria-checked', 'false');
+    await expect.element(radioItem).toHaveAttribute('aria-checked', 'false');
   });
 
   it('should not change selection when readonly', async () => {
+    const { locator } = await render(RadioGroupTest, { inputs: { readonly } });
     readonly.set(true);
-    await fixture.whenStable();
-    const radioItems = locator.getByRole('radio').all();
-    const firstRadioItem = radioItems.at(0);
-    assert(firstRadioItem, 'Expected at least one radio item');
+
+    const radioItem = locator.getByRole('radio').first();
     await userEvent.tab();
-    await expect.element(firstRadioItem).toHaveAttribute('aria-checked', 'false');
+    await expect.element(radioItem).toHaveAttribute('aria-checked', 'false');
   });
 });

@@ -10,8 +10,7 @@ import { Accordion } from './accordion';
 import { AccordionItem } from './accordion-item/accordion-item';
 
 interface AccordionMeta {
-  darkMode: boolean;
-  accordionVariant: 'dark' | 'light';
+  theme: 'dark' | 'light';
   heading: string;
   collapse: boolean;
   type: 'single' | 'multiple';
@@ -31,7 +30,6 @@ const meta: Meta<AccordionMeta> = {
     orientation: 'vertical',
     heading: 'Dragone',
     accordionChange: fn(),
-    accordionVariant: 'dark',
   },
   argTypes: {
     collapse: {
@@ -46,7 +44,7 @@ const meta: Meta<AccordionMeta> = {
       options: ['single', 'multiple'],
       table: { defaultValue: { summary: 'single' } },
     },
-    accordionVariant: {
+    theme: {
       type: 'string',
       control: 'select',
       options: ['dark', 'light'],
@@ -69,32 +67,38 @@ export default meta;
 type Story = StoryObj<AccordionMeta>;
 
 export const AccordionSingle: Story = {
-  render: args => ({
-    props: args,
-    template: `
-      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
-        <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
+  render: (args, { globals: { darkMode } }) => {
+    const theme = darkMode === 'light' ? 'dark' : 'light';
+    return {
+      props: { ...args, theme },
+      template: `
+      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'theme'] })}>
+        <drgn-accordion-item ${argsToTemplate({ ...args, theme }, { exclude: ['collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
       </drgn-accordion>
       `,
-  }),
+    };
+  },
 };
 export const AccordionMultiple: Story = {
   args: {
     type: 'multiple',
   },
-  render: args => ({
-    props: args,
-    template: `
-      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'darkMode', 'accordionVariant'] })}>
-        <drgn-accordion-item ${argsToTemplate({ ...args, heading: args.heading }, { exclude: ['darkMode', 'collapse', 'type', 'orientation'] })}>
+  render: (args, { globals: { darkMode } }) => {
+    const theme = darkMode === 'light' ? 'dark' : 'light';
+    return {
+      props: { ...args, theme },
+      template: `
+      <drgn-accordion style="max-width: 24rem;" ${argsToTemplate(args, { exclude: ['heading', 'theme'] })}>
+        <drgn-accordion-item ${argsToTemplate({ ...args, theme }, { exclude: ['collapse', 'type', 'orientation'] })}>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
-        <drgn-accordion-item heading="Dragone#2" ${argsToTemplate({ ...args }, { exclude: ['darkMode', 'collapse', 'type', 'orientation', 'heading'] })}>
+        <drgn-accordion-item heading="Dragone#2" ${argsToTemplate({ ...args }, { exclude: ['collapse', 'type', 'orientation', 'heading'] })}>
           <p>Sed et laborum.</p>
         </drgn-accordion-item>
       </drgn-accordion>
       `,
-  }),
+    };
+  },
 };

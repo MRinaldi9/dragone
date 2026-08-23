@@ -1,11 +1,14 @@
 import '../projects/dragone/ui/src/main.css';
 
-import { applicationConfig, type Preview } from '@analogjs/storybook-angular';
-import { provideRouter } from '@angular/router';
+import {
+  componentWrapperDecorator,
+  moduleMetadata,
+  type Preview,
+} from '@analogjs/storybook-angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 
 import docJson from '../documentation.json';
-import fakeRoutes from '../projects/dragone/ui/breadcrumb/src/test.routes';
+import { ThemeWrapper } from './theme-wrapper';
 setCompodocJson(docJson);
 
 const preview: Preview = {
@@ -20,48 +23,39 @@ const preview: Preview = {
       },
     },
   },
-  args: {
-    darkMode: false,
-  },
-  argTypes: {
+  globalTypes: {
     darkMode: {
+      name: 'Dark Mode',
       description: 'Global control for enabling dark mode',
-      control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
+      defaultValue: 'light',
+      toolbar: {
+        icon: 'sun',
+        items: ['light', 'dark'],
+        dynamicTitle: true,
+        title: 'Dark Mode',
+      },
     },
+    ngDevMode: {
+      name: 'Angular Dev Mode',
+      description: 'Global control for enabling Angular dev mode',
+      defaultValue: 'true',
+      toolbar: {
+        icon: 'power',
+        items: ['true', 'false'],
+        dynamicTitle: true,
+        title: 'Angular Dev Mode',
+      },
+    },
+  },
+  initialGlobals: {
+    darkMode: 'light',
   },
   decorators: [
-    applicationConfig({ providers: [provideRouter(fakeRoutes)] }),
-    (storyFn, { args }) => {
-      const story = storyFn();
-
-      // 2. Estraiamo il valore di 'darkMode' dal contesto
-      const darkMode = args['darkMode'] as boolean;
-
-      // 3. Determiniamo i colori e la classe del tema
-      const backgroundColor = darkMode ? '#002460' : '#FFFFFF';
-      const themeClass = darkMode ? 'drgn-dark' : '';
-
-      // 4. Modifichiamo il template della storia per avvolgerlo nel nostro div dinamico
-      story.template = `
-        <div
-          class="${themeClass}"
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: ${backgroundColor};
-            padding: 2rem;
-            transition: background-color 0.3s;
-          "
-        >
-          ${story.template}
-        </div>
-      `;
-
-      // 5. Restituiamo l'oggetto storia modificato
-      return story;
-    },
+    moduleMetadata({ imports: [ThemeWrapper] }),
+    componentWrapperDecorator(ThemeWrapper, ({ globals: { darkMode, ngDevMode } }) => ({
+      darkMode,
+      ngDevMode,
+    })),
   ],
 };
 

@@ -7,7 +7,7 @@
     padding: 1rem;
     background-color: var(--drgn-color-surface-base);
     color: var(--drgn-color-text-data-entry-default);
-    transition: border-color 0.2s;
+    transition: border-color var(--drgn-motion-duration-medium);
 
     &::placeholder {
       color: var(--drgn-color-text-placeholder-default);

@@ -29,7 +29,7 @@
     }
   }
   /* Variant-based padding */
-  &[data-variant='desktop'] {
+  &[data-layout='desktop'] {
     padding: 1.5rem 3.5rem;
     & .alert-action {
       grid-column: 3;
@@ -38,7 +38,7 @@
     }
   }
 
-  &[data-variant='mobile'] {
+  &[data-layout='mobile'] {
     padding: 1rem;
     & .alert-action {
       grid-column: 2;
@@ -53,7 +53,7 @@
 
 .alert-icon {
   grid-column: 1;
-  grid-row: 1 / -1; /* Span tutte le righe */
+  grid-row: 1 / -1;
 }
 
 .alert-title {

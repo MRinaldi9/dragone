@@ -1,32 +1,32 @@
-import {
-  assertInInjectionContext,
-  computed,
-  Directive,
-  inject,
-  InjectionToken,
-  input,
-  type Signal,
-} from '@angular/core';
+import { computed, Directive, input, type Signal } from '@angular/core';
+import { createPrimitive } from 'ng-primitives/state';
 
-export const DRGN_THEME_CONTEXT = new InjectionToken<Theme>('DRGN_THEME_CONTEXT');
+export type ThemeType = 'light' | 'dark';
 
-export const injectThemeState = (): Theme => {
-  assertInInjectionContext(injectThemeState);
-  return inject(DRGN_THEME_CONTEXT);
-};
+export interface ThemeState {
+  theme: Signal<ThemeType | undefined>;
+  resolvedTheme: Signal<ThemeType | null>;
+}
+
+export const [, themeFactory, injectThemeState, provideThemeState] = createPrimitive(
+  'Theme',
+  ({ theme }: { theme: Signal<ThemeType | undefined> }): ThemeState => {
+    const parent = injectThemeState({ optional: true, skipSelf: true });
+    const resolvedTheme = computed<ThemeType | null>(
+      () => theme() ?? parent()?.resolvedTheme() ?? null,
+    );
+    return { theme, resolvedTheme };
+  },
+);
 
 @Directive({
   selector: '[drgnTheme]',
-  providers: [{ provide: DRGN_THEME_CONTEXT, useExisting: Theme }],
+  providers: [provideThemeState({ inherit: false })],
   host: {
-    '[attr.data-theme]': 'resolvedTheme()',
+    '[attr.data-theme]': 'state.resolvedTheme() ? state.resolvedTheme() : null',
   },
 })
 export class Theme {
-  readonly theme = input<'light' | 'dark' | undefined>(undefined);
-  readonly #parent = inject(DRGN_THEME_CONTEXT, { optional: true, skipSelf: true });
-
-  readonly resolvedTheme: Signal<'light' | 'dark' | null> = computed<'light' | 'dark' | null>(
-    () => this.theme() ?? this.#parent?.resolvedTheme() ?? null,
-  );
+  readonly theme = input<'light' | 'dark' | undefined>();
+  readonly state = themeFactory({ theme: this.theme });
 }

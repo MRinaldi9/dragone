@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 
 import { FileUpload } from './file-upload';
 
-type FileUploadStory = FileUpload & { darkMode: boolean };
+type FileUploadStory = FileUpload;
 
 const meta: Meta<FileUploadStory> = {
   title: 'Dragone/UI/File Upload',
@@ -13,7 +13,7 @@ const meta: Meta<FileUploadStory> = {
     name: 'allegati',
     disabled: false,
     multiple: false,
-    dragpDrop: true,
+    dragDrop: true,
     fileTypes: [],
     hidden: false,
     touch: fn(),
@@ -28,7 +28,7 @@ const meta: Meta<FileUploadStory> = {
     multiple: {
       control: { type: 'boolean' },
     },
-    dragpDrop: {
+    dragDrop: {
       control: { type: 'boolean' },
     },
     hidden: {
@@ -58,7 +58,9 @@ export const Default: Story = {
     props: args,
     template: `
       <div style="max-width: 520px; width: 100%;">
-        <drgn-file-upload ${argsToTemplate(args, { exclude: ['darkMode'] })}/>
+        <drgn-file-upload ${argsToTemplate(args)}>
+          Carica file
+        </drgn-file-upload>
       </div>
     `,
   }),

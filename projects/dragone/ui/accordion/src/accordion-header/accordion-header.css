@@ -1,27 +1,51 @@
-[ngpAccordionTrigger] {
-  display: flex;
-  padding: 20px 16px;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 0;
-  align-items: center;
-}
-
-[ngpAccordionTrigger][data-open] ng-icon {
-  transform: rotateX(180deg);
-}
-
-ng-icon {
-  color: var(--drgn-color-text-default);
-  transition: transform 0.2s ease-in-out;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
-:host-context([data-theme='light']) {
-  ng-icon {
-    color: var(--drgn-color-text-primary-dark-110);
+:host {
+  & button {
+    &[data-focus-visible] {
+      text-decoration: underline;
+    }
+    &[ngpAccordionTrigger] {
+      display: flex;
+      padding: 20px 16px;
+      justify-content: space-between;
+      width: 100%;
+      border-radius: 0;
+      align-items: center;
+      &[data-semantic='tertiary'] {
+        background-color: var(--drgn-color-surface-base);
+        &:not(:disabled) {
+          color: var(--drgn-color-surface-primary-strong);
+          border: none;
+          &:hover,
+          &[data-open] {
+            background-color: var(--drgn-color-surface-primary-subtle);
+            border: none;
+            color: var(--drgn-color-surface-primary-strong);
+          }
+          &[data-focus-visible],
+          &:focus-visible {
+            background-color: var(--drgn-color-surface-primary-subtle);
+            outline: 1px solid var(--drgn-color-focus-ring-primary);
+            color: var(--drgn-color-surface-primary-strong);
+          }
+          &:active {
+            border: none;
+          }
+        }
+        &:disabled {
+          color: var(--drgn-color-text-disabled);
+          border: 1px solid var(--drgn-color-surface-disabled);
+        }
+      }
+      &[data-open] ng-icon {
+        transform: rotateX(180deg);
+      }
+    }
+    ng-icon {
+      color: var(--drgn-color-text-default);
+      transition: transform var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard);
+    }
+    &[data-theme='light'] ng-icon {
+      color: var(--drgn-color-text-primary-dark-110);
+    }
   }
 }

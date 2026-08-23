@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+:host([data-control-layout='horizontal']) {
+  & .control {
+    order: 1;
+  }
+  & .label {
+    order: 2;
+  }
+  & .description {
+    order: 3;
+  }
+  & .field-container {
+    flex-direction: row;
+  }
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-bottom: 4px;
+}
+
+.error-message {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: var(--drgn-color-interactive-alert-default);
+}
+
+.error-enter {
+  animation: error-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter) both;
+}
+
+.error-leave {
+  animation: error-out var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit) both;
+}
+
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}

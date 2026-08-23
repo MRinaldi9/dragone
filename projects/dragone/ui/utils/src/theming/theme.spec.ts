@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { page } from 'vitest/browser';
+import { render } from '@wismaz/vitest-browser-angular';
 
 import { Theme } from './theme';
 
@@ -16,15 +15,8 @@ class HostComponent {}
 
 describe(Theme, () => {
   it('should inherit theme from the nearest parent context', async () => {
-    TestBed.configureTestingModule({
-      imports: [HostComponent],
-    });
+    const { getByTestId } = await render(HostComponent);
 
-    const fixture = TestBed.createComponent(HostComponent);
-    await fixture.whenStable();
-
-    const childLoc = page.getByTestId('child');
-
-    await expect.element(childLoc).toHaveAttribute('data-theme', 'dark');
+    await expect.element(getByTestId('child')).toHaveAttribute('data-theme', 'dark');
   });
 });

@@ -7,17 +7,19 @@
   font-weight: var(--drgn-typography-weight-semibold);
   font-size: var(--drgn-typography-size-p-md);
   flex: none;
-  &:not(:has(.active-route)):hover {
+  &:not(:has([aria-current='page'])):hover {
     color: var(--drgn-color-interactive-primary-hover);
   }
   & a {
     padding: 3px;
     color: inherit;
     text-decoration: none;
+    background-color: #ffffff;
     &[data-focus-visible],
     &:focus-visible {
-      outline: 1px solid var(--drgn-color-focus-ring-primary);
-      border-radius: 3px;
+      outline: 1px solid var(--drgn-color-focus-ring-interactive);
+      filter: drop-shadow(0px 0px 3px #007db3b3);
+      border-radius: 4px;
     }
     &:not([href]):not([routerLink]) {
       cursor: pointer;
@@ -29,25 +31,17 @@
     padding: 3px;
     color: inherit;
     cursor: pointer;
-  }
-  &:has(.active-route) {
-    ng-icon {
-      color: var(--drgn-color-interactive-secondary-default);
+    &[data-focus-visible],
+    &:focus-visible {
+      outline: 1px solid var(--drgn-color-focus-ring-interactive);
+      filter: drop-shadow(0px 0px 3px #007db3b3);
+      border-radius: 4px;
     }
   }
   & ng-icon {
     margin-right: 3px;
   }
-  &:not(:last-child)::after {
-    display: inline-block;
-    margin: 0 6px;
-    transform: rotate(20deg);
-    border-right: 2px solid currentcolor;
-    height: 1em;
-    content: '';
+  & [aria-current='page'] {
+    color: var(--drgn-color-interactive-secondary-default);
   }
-}
-
-.active-route {
-  color: var(--drgn-color-interactive-secondary-default);
 }

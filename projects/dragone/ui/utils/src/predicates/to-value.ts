@@ -1,6 +1,6 @@
 import { isSignal, untracked as untr } from '@angular/core';
 
-import type { MaybeSignal } from '../types/branding';
+import type { MaybeSignal } from '../types/utils';
 
 export interface ToValueFn {
   <T>(val: MaybeSignal<T>): T;
@@ -14,8 +14,8 @@ const toValueFn = <T>(maybeSignal: MaybeSignal<T>, untracked = false): T => {
   return maybeSignal;
 };
 
-export const toValue = (() => {
+export const toValue = ((): ToValueFn => {
   const fn = toValueFn as ToValueFn;
-  fn.untracked = val => toValueFn(val, true);
+  fn.untracked = <T>(val: MaybeSignal<T>): T => toValueFn(val, true);
   return fn;
 })();

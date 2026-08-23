@@ -37,11 +37,11 @@ li {
 }
 
 .file-item-enter {
-  animation: file-chip-in 180ms ease-out both;
+  animation: file-chip-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter) both;
 }
 
 .file-item-leave {
-  animation: file-chip-out 140ms ease-in both;
+  animation: file-chip-out var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit) both;
 }
 
 @keyframes file-chip-in {
@@ -65,12 +65,5 @@ li {
   to {
     opacity: 0;
     transform: translateY(-4px) scale(0.98);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .file-item-enter,
-  .file-item-leave {
-    animation: none;
   }
 }

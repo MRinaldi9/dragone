@@ -8,11 +8,9 @@
   border: 2px solid var(--drgn-color-interactive-primary-default);
   background-color: var(--drgn-color-surface-base);
   color: var(--drgn-color-text-primary);
-  transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: var(--drgn-motion-duration-medium);
+  transition-timing-function: var(--drgn-motion-easing-standard);
   &[data-hover] {
     border-color: var(--drgn-color-interactive-primary-hover);
     color: var(--drgn-color-interactive-primary-hover);
@@ -36,10 +34,9 @@
     opacity: 0;
     transform: translateX(-6px);
     overflow: hidden;
-    transition:
-      inline-size 180ms ease,
-      opacity 160ms ease,
-      transform 180ms ease;
+    transition-property: inline-size, opacity, transform;
+    transition-duration: var(--drgn-motion-duration-medium);
+    transition-timing-function: var(--drgn-motion-easing-standard);
   }
 
   &[data-selected] {
@@ -66,5 +63,8 @@
       color: var(--drgn-color-text-disabled);
       background-color: var(--drgn-color-surface-disabled);
     }
+  }
+  &[data-hidden] {
+    display: none;
   }
 }

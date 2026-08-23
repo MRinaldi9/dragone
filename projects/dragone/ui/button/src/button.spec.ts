@@ -1,112 +1,146 @@
-import { Component, input, signal, viewChild } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { render } from '@wismaz/vitest-browser-angular';
 
-import { Button, type ButtonSize, type ButtonVariant } from './button';
+import { Button, type ButtonSize, type ButtonSemantic } from './button';
 
 @Component({
   imports: [Button],
   template: `
     <button
       drgnButton
-      [variant]="variant()"
+      [semantic]="semantic()"
       [size]="size()"
       [icon]="isIconOnly()"
       [disabled]="isDisabled()"
-      (click)="clickSpy()"
+      [status]="status()"
+      (click)="clickCta.emit()"
     >
       Dragone
     </button>
   `,
 })
 class TestHostComponent {
-  readonly variant = input<ButtonVariant>('primary');
+  readonly semantic = input<ButtonSemantic>('primary');
   readonly size = input<ButtonSize>('large');
   readonly isIconOnly = input(false);
   readonly isDisabled = input(false);
-  readonly clickSpy = vi.fn<() => void>();
-  readonly btnComp = viewChild.required(Button);
+  readonly status = input<'neutral' | 'danger'>('neutral');
+  readonly clickCta = output<void>();
 }
+
+@Component({
+  imports: [Button],
+  template: `
+    <button drgnButton>
+      <span slot="leading" class="test-icon">*</span>
+      Dragone
+      <span slot="trailing" class="test-icon">*</span>
+    </button>
+  `,
+})
+class TestHostWithIcons {}
+
+@Component({
+  imports: [Button],
+  template: ` <button drgnButton labelClass="drgn-label-md-600">Dragone</button> `,
+})
+class TestHostCustomLabel {}
 
 describe(Button, () => {
   const size = signal<ButtonSize>('large');
   const isIconOnly = signal<boolean>(false);
-  const variant = signal<ButtonVariant>('primary');
+  const semantic = signal<ButtonSemantic>('primary');
   const isDisabled = signal<boolean>(false);
+  const status = signal<'neutral' | 'danger'>('neutral');
+  const clickSpy = vi.fn<() => void>();
 
   afterEach(() => {
     size.set('large');
     isIconOnly.set(false);
-    variant.set('primary');
+    semantic.set('primary');
     isDisabled.set(false);
+    status.set('neutral');
+    clickSpy.mockClear();
   });
 
   it('should create with default properties', async () => {
-    const { componentClassInstance: component } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { size, isIconOnly, semantic, isDisabled },
     });
-    expect(component.btnComp()).toBeTruthy();
-    expect(component.btnComp().size()).toBe('large');
-    expect(component.btnComp().isIconOnly()).toBeFalsy();
-    expect(component.btnComp().variant()).toBe('primary');
+    const button = locator.getByRole('button');
+    await expect.element(button).toBeTruthy();
+    await expect.element(button).toHaveAttribute('data-size', 'large');
+    await expect.element(button).not.toHaveAttribute('data-icon-only');
+    await expect.element(button).toHaveAttribute('data-semantic', 'primary');
   });
 
   it('should change size', async () => {
-    const { fixture, getByRole } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { size },
     });
     size.set('medium');
-    await fixture.whenStable();
 
-    await expect.element(getByRole('button')).toHaveAttribute('data-size', 'medium');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-size', 'medium');
   });
 
   it('should change isIconOnly', async () => {
-    const {
-      fixture,
-      componentClassInstance: component,
-      getByRole,
-    } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { isIconOnly },
     });
     isIconOnly.set(true);
-    await fixture.whenStable();
 
-    expect(component.isIconOnly()).toBeTruthy();
-    await expect.element(getByRole('button')).toHaveAttribute('data-icon-only', 'true');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-icon-only');
   });
 
   it('should change variant', async () => {
-    const {
-      fixture,
-      componentClassInstance: component,
-      getByRole,
-    } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { size, isIconOnly, semantic, isDisabled, status },
     });
-    variant.set('danger');
-    await fixture.whenStable();
+    status.set('danger');
 
-    expect(component.variant()).toBe('danger');
-    await expect.element(getByRole('button')).toHaveAttribute('data-variant', 'danger');
+    await expect.element(locator.getByRole('button')).toHaveAttribute('data-status', 'danger');
   });
 
   it('should disable the button', async () => {
-    const { fixture, getByRole } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { size, isIconOnly, semantic, isDisabled },
     });
     isDisabled.set(true);
-    await fixture.whenStable();
+    const btnLocator = locator.getByRole('button');
 
-    await expect.element(getByRole('button')).toBeDisabled();
-    await expect.element(getByRole('button')).toHaveAttribute('data-disabled');
+    await expect.element(btnLocator).toBeDisabled();
+    await expect.element(btnLocator).toHaveAttribute('data-disabled');
   });
 
   it('should emit native click event', async () => {
-    const { componentClassInstance: component, getByRole } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, variant, isDisabled },
+    const { locator } = await render(TestHostComponent, {
+      inputs: { size, isIconOnly, semantic, isDisabled },
+      outputs: { clickCta: clickSpy },
     });
-    await getByRole('button').click();
+    await locator.getByRole('button').click();
 
-    expect(component.clickSpy).toHaveBeenCalledWith();
+    expect(clickSpy).toHaveBeenCalledOnce();
+  });
+
+  it('should apply the label class only to the text, not to slot icons', async () => {
+    const { locator } = await render(TestHostWithIcons);
+    const button = locator.getByRole('button');
+
+    // The text is wrapped in a span carrying the typography class
+    const label = button.locator('span.drgn-label-md-700');
+    await expect.element(label).toHaveTextContent('Dragone');
+
+    // Slot icons are not wrapped and do not carry the typography class
+    const leadingIcon = button.locator('[slot="leading"]');
+    const trailingIcon = button.locator('[slot="trailing"]');
+    await expect.element(leadingIcon).not.toHaveClass('drgn-label-md-700');
+    await expect.element(trailingIcon).not.toHaveClass('drgn-label-md-700');
+  });
+
+  it('should allow overriding the label typography class', async () => {
+    const { locator } = await render(TestHostCustomLabel);
+
+    const label = locator.getByRole('button').locator('span.drgn-label-md-600');
+    await expect.element(label).toHaveTextContent('Dragone');
   });
 });
