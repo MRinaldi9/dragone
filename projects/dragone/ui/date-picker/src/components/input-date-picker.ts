@@ -1,10 +1,10 @@
-import { computed, debounced, Directive, effect, linkedSignal, untracked } from '@angular/core';
+import { computed, debounced, Directive, effect, linkedSignal } from '@angular/core';
 import { injectDatePickerState } from 'ng-primitives/date-picker';
 
 import { toValue } from '@dragone/ui/utils';
 
-import { injectDatePickerApi } from '../providers/date-picker-api';
 import { injectInputDebounceTimer } from '../providers/debounce-input-timer';
+import { injectDatePickerDragoneState } from '../state/date-picker-state';
 
 @Directive({
   selector: 'input[date-picker]',
@@ -21,7 +21,7 @@ import { injectInputDebounceTimer } from '../providers/debounce-input-timer';
 })
 export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
   readonly #datePickerState = injectDatePickerState<T>();
-  readonly #stateComp = injectDatePickerApi<T>();
+  readonly #stateComp = injectDatePickerDragoneState();
   readonly #debounceTimer = injectInputDebounceTimer();
   /**
    * The formatted date string displayed in the input.
@@ -33,7 +33,7 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
    */
   protected inputDate = linkedSignal({
     source: this.#datePickerState().date,
-    computation: curr => this.#stateComp.format(curr),
+    computation: curr => this.#stateComp().format(curr),
   });
 
   /**
@@ -48,8 +48,8 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
    */
   isValidDate = computed(
     (raw = this.debouncedInputDate.value()) =>
-      raw === this.#stateComp.format(this.#datePickerState().date()) ||
-      this.#stateComp.parseDate(raw) !== undefined,
+      raw === this.#stateComp().format(this.#datePickerState().date()) ||
+      this.#stateComp().parseDate(raw) !== undefined,
   );
 
   constructor() {
@@ -58,19 +58,19 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
     effect(() => {
       const raw = this.debouncedInputDate.value();
       // No-op if the text hasn't diverged from the current picker value
-      if (raw === this.#stateComp.format(toValue.untracked(this.#datePickerState().date))) {
+      if (raw === this.#stateComp().format(toValue.untracked(this.#datePickerState().date))) {
         return;
       }
-      const parsed = this.#stateComp.parseDate(raw);
+      const parsed = this.#stateComp().parseDate(raw);
       // If `parsed` is null the string is invalid — the effect does nothing
       // And lets the UI keep showing the invalid text so the user can correct it.
-      if (!toValue.untracked(this.#stateComp.keepInvalid) && !parsed) {
+      if (!toValue.untracked(this.#stateComp().keepInvalid) && !parsed) {
         this.inputDate.set('');
       }
-      untracked(() => {
-        this.#datePickerState().date.set(parsed);
-        this.#datePickerState().dateChange.emit(parsed);
-      });
+      // Untracked(() => {
+      //   this.#datePickerState().setDefaultDate(parsed) date.set(parsed);
+      //   this.#datePickerState().dateChange.emit(parsed);
+      // });
     });
   }
 

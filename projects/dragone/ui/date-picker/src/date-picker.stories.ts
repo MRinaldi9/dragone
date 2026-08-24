@@ -1,9 +1,9 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { provideDateAdapter } from 'ng-primitives/date-time';
 
 import { TemporalAdapter } from '@dragone/ui/temporal-adapter';
 
 import { DatePicker } from './date-picker';
+import { provideDragoneDatePickerConfig } from './providers/date-picker-config';
 
 type MetaDatePicker = DatePicker<Temporal.PlainDateTime> & {
   value: Temporal.PlainDateTime;
@@ -54,7 +54,7 @@ const meta: Meta<MetaDatePicker> = {
   },
   decorators: [
     moduleMetadata({
-      providers: [provideDateAdapter(TemporalAdapter)],
+      providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })],
     }),
   ],
   tags: ['autodocs'],

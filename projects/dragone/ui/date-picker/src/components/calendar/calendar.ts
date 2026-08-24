@@ -1,9 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import {
-  faSolidAngleLeft,
-  faSolidAngleRight,
-} from '@ng-icons/font-awesome/solid';
+import { faSolidAngleLeft, faSolidAngleRight } from '@ng-icons/font-awesome/solid';
 import {
   injectDatePickerState,
   NgpDatePickerCell,
@@ -16,8 +13,7 @@ import {
 } from 'ng-primitives/date-picker';
 import { injectDateAdapter } from 'ng-primitives/date-time';
 
-import { injectDatePickerApi } from '../../providers/date-picker-api';
-import { getLocaleWeekDays } from '../../utils/week-day';
+import { injectDatePickerDragoneState } from '../../state/date-picker-state';
 import { DrgnCalendarCellRender } from './calendar-cell-render';
 
 @Component({
@@ -43,17 +39,13 @@ import { DrgnCalendarCellRender } from './calendar-cell-render';
   ],
 })
 export class Calendar<T extends Temporal.PlainDateTime | Date> {
-  readonly #state = injectDatePickerState<T>();
+  readonly #internalState = injectDatePickerState<T>();
   readonly #adapter = injectDateAdapter<T>();
-  readonly #datePickerApi = injectDatePickerApi<T>();
+  readonly #datePickerDragoneState = injectDatePickerDragoneState();
 
-  readonly #dayLabels = computed(() =>
-    getLocaleWeekDays('short', this.#datePickerApi.locale()),
-  );
+  readonly #dayLabels = computed(() => this.#datePickerDragoneState().dayLabels());
 
-  readonly #dayAbbrs = computed(() =>
-    getLocaleWeekDays('long', this.#datePickerApi.locale()),
-  );
+  readonly #dayAbbrs = computed(() => this.#datePickerDragoneState().dayAbbrs());
 
   /**
    * Ordered day-of-week headers based on {@link firstDayOfWeek}.
@@ -63,14 +55,14 @@ export class Calendar<T extends Temporal.PlainDateTime | Date> {
    * - 1` maps directly to the correct start index.
    */
   readonly dayHeaders = computed(() => {
-    const firstDay = this.#state().firstDayOfWeek();
+    const firstDay = this.#internalState().firstDayOfWeek();
     // Monday-indexed array: 1 (Monday) → 0, 7 (Sunday) → 6
     const startIndex = firstDay - 1;
     const labels = this.#dayLabels();
     const abbrs = this.#dayAbbrs();
     const result: { label: string; abbr: string }[] = [];
 
-    for (let i = 0; i < labels.length; i++) {
+    for (let i = 0; i < labels.length; i += 1) {
       const idx = (startIndex + i) % 7;
       result.push({ label: labels[idx], abbr: abbrs[idx] });
     }
@@ -78,8 +70,8 @@ export class Calendar<T extends Temporal.PlainDateTime | Date> {
   });
 
   readonly label = computed(
-    (focusedData = this.#state().focusedDate()) =>
-      `${focusedData.toLocaleString(this.#datePickerApi.locale(), { month: 'long' })} ${focusedData.toLocaleString(this.#datePickerApi.locale(), { year: 'numeric' })}`,
+    (focusedData = this.#internalState().focusedDate()) =>
+      `${focusedData.toLocaleString(this.#datePickerDragoneState().locale(), { month: 'long' })} ${focusedData.toLocaleString(this.#datePickerDragoneState().locale(), { year: 'numeric' })}`,
   );
 
   /**

@@ -1,11 +1,7 @@
 // oxlint-disable id-length
 import { Platform } from '@angular/cdk/platform';
 import { inject, Injectable } from '@angular/core';
-import type {
-  NgpDateAdapter,
-  NgpDateUnits,
-  NgpDuration,
-} from 'ng-primitives/date-time';
+import type { NgpDateAdapter, NgpDateUnits, NgpDuration } from 'ng-primitives/date-time';
 /**
  * Date adapter backed by the ECMAScript Temporal API (`Temporal.PlainDateTime`).
  *
@@ -22,7 +18,7 @@ import type {
  *   - Chrome 133+ / Edge 133+
  *   - Firefox 137+
  *   - Safari 18.4+ No polyfill is bundled. If your target browsers do not support Temporal, use
- *     `NgpNativeDateAdapter` (the default) or an adapter for Luxon / date-fns.
+ *     `NgpNativeDateAdapter` (the default).
  *
  *   ### Wiring in the application
  *
@@ -75,10 +71,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
    * Return a new `Temporal.PlainDateTime` with the specified fields replaced. The original is never
    * mutated.
    */
-  set(
-    date: Temporal.PlainDateTime,
-    values: NgpDateUnits,
-  ): Temporal.PlainDateTime {
+  set(date: Temporal.PlainDateTime, values: NgpDateUnits): Temporal.PlainDateTime {
     return date.with({
       ...(values.year !== undefined && { year: values.year }),
       ...(values.month !== undefined && { month: values.month }),
@@ -96,18 +89,12 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
    * Return a new `Temporal.PlainDateTime` with the given duration added. The field names of
    * `NgpDuration` match `DurationLikeObject` directly, so no mapping is required.
    */
-  add(
-    date: Temporal.PlainDateTime,
-    duration: NgpDuration,
-  ): Temporal.PlainDateTime {
+  add(date: Temporal.PlainDateTime, duration: NgpDuration): Temporal.PlainDateTime {
     return date.add(duration);
   }
 
   /** Return a new `Temporal.PlainDateTime` with the given duration subtracted. */
-  subtract(
-    date: Temporal.PlainDateTime,
-    duration: NgpDuration,
-  ): Temporal.PlainDateTime {
+  subtract(date: Temporal.PlainDateTime, duration: NgpDuration): Temporal.PlainDateTime {
     return date.subtract(duration);
   }
 
