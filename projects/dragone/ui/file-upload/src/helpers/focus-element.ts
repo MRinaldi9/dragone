@@ -1,11 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  inject,
-  input,
-  type OnDestroy,
-  type OnInit,
-} from '@angular/core';
+import { Directive, ElementRef, inject, input, type OnDestroy, type OnInit } from '@angular/core';
 
 import { toElement } from '@dragone/ui/utils';
 

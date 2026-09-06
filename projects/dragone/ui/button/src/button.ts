@@ -25,7 +25,7 @@ const SUPPORTED_STATUSES: Record<ButtonSemantic, readonly StatusType[]> = {
   selector: 'button[drgnButton],button[drgn-button]',
   template: `
     <ng-content select="[slot='leading']" />
-    <span [class]="labelClass()">
+    <span [class]="isIconOnly() ? '' : labelClass()">
       <ng-content />
     </span>
     <ng-content select="[slot='trailing']" />

@@ -35,8 +35,7 @@ export class FocusManager {
   focusNext(filename: string): void {
     const tmpArr = [...this.#focusMap.entries()];
     const currIndex = tmpArr.findIndex(([key]) => key === filename);
-    const nextIndex =
-      currIndex + 1 < tmpArr.length ? currIndex + 1 : currIndex - 1;
+    const nextIndex = currIndex + 1 < tmpArr.length ? currIndex + 1 : currIndex - 1;
     const btnToFocus = tmpArr[nextIndex]?.[1];
     if (btnToFocus && !btnToFocus.disabled) {
       btnToFocus.focus();
