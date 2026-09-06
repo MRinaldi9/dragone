@@ -25,7 +25,7 @@ const SUPPORTED_STATUSES: Record<ButtonSemantic, readonly StatusType[]> = {
   selector: 'button[drgnButton],button[drgn-button]',
   template: `
     <ng-content select="[slot='leading']" />
-    <span [class]="labelClass()">
+    <span [class]="isIconOnly() ? '' : labelClass()">
       <ng-content />
     </span>
     <ng-content select="[slot='trailing']" />
@@ -64,6 +64,7 @@ export class Button {
   readonly isIconOnly = input(false, { transform: booleanAttribute, alias: 'icon' });
   /**
    * Class applied to the button label.
+   *
    * @default 'drgn-label-md-700'
    */
   readonly labelClass = input('drgn-label-md-700');

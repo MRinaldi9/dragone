@@ -64,9 +64,7 @@ const meta: Meta<CheckboxArgs> = {
 export default meta;
 type Story = StoryObj<CheckboxArgs>;
 
-/**
- * Checkbox di default in stato non selezionato.
- */
+/** Checkbox di default in stato non selezionato. */
 export const Default: Story = {
   args: {
     checked: false,
@@ -75,9 +73,7 @@ export const Default: Story = {
   },
 };
 
-/**
- * Checkbox in stato checked (selezionato).
- */
+/** Checkbox in stato checked (selezionato). */
 export const Checked: Story = {
   args: {
     ...Default.args,
@@ -85,9 +81,7 @@ export const Checked: Story = {
   },
 };
 
-/**
- * Checkbox in stato disabilitato, non interagibile.
- */
+/** Checkbox in stato disabilitato, non interagibile. */
 export const Disabled: Story = {
   args: {
     ...Default.args,
@@ -103,9 +97,7 @@ export const Disabled: Story = {
   },
 };
 
-/**
- * Checkbox disabilitato in stato checked.
- */
+/** Checkbox disabilitato in stato checked. */
 export const DisabledChecked: Story = {
   args: {
     ...Default.args,
@@ -114,9 +106,7 @@ export const DisabledChecked: Story = {
   },
 };
 
-/**
- * Test di interazione: verifica che il checkbox cambi stato al click.
- */
+/** Test di interazione: verifica che il checkbox cambi stato al click. */
 export const InteractionTest: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -142,9 +132,7 @@ export const InteractionTest: Story = {
   },
 };
 
-/**
- * Test di accessibilità: verifica la navigazione da tastiera.
- */
+/** Test di accessibilità: verifica la navigazione da tastiera. */
 export const KeyboardNavigation: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

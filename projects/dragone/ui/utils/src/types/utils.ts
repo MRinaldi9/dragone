@@ -9,3 +9,6 @@ export type LiteralUnion<LiteralType, BaseType extends Primitive> =
 export type Nil = Extract<Primitive, null | undefined>;
 export type SvgIcon = Branded<string, 'SvgIcon'>;
 export type KeyOf<T> = T extends object ? keyof T : never;
+export type PublicMembers<T> = {
+  [K in keyof T]: T[K];
+};

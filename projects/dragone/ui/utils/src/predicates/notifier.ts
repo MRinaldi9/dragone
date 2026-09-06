@@ -1,6 +1,7 @@
 /**
- * Implementation of a notifier that can be used to notify effects or other consumers.
- * Is based on the implementation of Ngxtension (https://github.com/ngxtension/ngxtension-platform/blob/main/libs/ngxtension/create-notifier/src/create-notifier.ts)
+ * Implementation of a notifier that can be used to notify effects or other consumers. Is based on
+ * the implementation of Ngxtension
+ * (https://github.com/ngxtension/ngxtension-platform/blob/main/libs/ngxtension/create-notifier/src/create-notifier.ts)
  */
 import { linkedSignal, signal, type Signal } from '@angular/core';
 

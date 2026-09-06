@@ -43,15 +43,17 @@ export class FileUpload implements FormValueControl<FileUploadValue | null> {
   readonly value = model<FileUploadValue | null>(null);
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly multiple = input(false, { transform: booleanAttribute });
-  /** Enable drag & drop support for file upload.
+  /**
+   * Enable drag & drop support for file upload.
+   *
    * @default true
    */
   readonly dragDrop = input(true, { transform: booleanAttribute });
   readonly name = input('');
   /**
-   * The accepted file types.
-   * Accepted types can either be file extensions (e.g. `.jpg`) or MIME types (e.g. `image/jpeg`).
-   * */
+   * The accepted file types. Accepted types can either be file extensions (e.g. `.jpg`) or MIME
+   * types (e.g. `image/jpeg`).
+   */
   readonly fileTypes = input<string[]>([]);
   readonly hidden = input(false, { transform: booleanAttribute });
   /** Text to announce for when a file is added. */

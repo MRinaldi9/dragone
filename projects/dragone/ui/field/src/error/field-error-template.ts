@@ -6,10 +6,9 @@ export interface FieldErrorContext {
 }
 
 /**
- * Marks an `ng-template` inside a `drgn-field` as the custom renderer for
- * validation errors. When present, it replaces the default error message for
- * every rendered error; the template is instantiated once per error with a
- * {@link FieldErrorContext}.
+ * Marks an `ng-template` inside a `drgn-field` as the custom renderer for validation errors. When
+ * present, it replaces the default error message for every rendered error; the template is
+ * instantiated once per error with a {@link FieldErrorContext}.
  */
 @Directive({
   selector: 'ng-template[drgnTemplate="fieldError"]',

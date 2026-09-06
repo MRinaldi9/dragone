@@ -70,9 +70,7 @@ const meta: Meta<SwitchArgs> = {
 export default meta;
 type Story = StoryObj<SwitchArgs>;
 
-/**
- * Switch di default in stato non selezionato.
- */
+/** Switch di default in stato non selezionato. */
 export const Default: Story = {
   args: {
     checked: false,
@@ -81,9 +79,7 @@ export const Default: Story = {
   },
 };
 
-/**
- * Switch in stato checked (attivo).
- */
+/** Switch in stato checked (attivo). */
 export const Checked: Story = {
   args: {
     ...Default.args,
@@ -91,9 +87,7 @@ export const Checked: Story = {
   },
 };
 
-/**
- * Switch in stato disabilitato, non interagibile.
- */
+/** Switch in stato disabilitato, non interagibile. */
 export const Disabled: Story = {
   args: {
     ...Default.args,
@@ -109,9 +103,7 @@ export const Disabled: Story = {
   },
 };
 
-/**
- * Switch disabilitato in stato checked.
- */
+/** Switch disabilitato in stato checked. */
 export const DisabledChecked: Story = {
   args: {
     ...Default.args,
@@ -120,9 +112,7 @@ export const DisabledChecked: Story = {
   },
 };
 
-/**
- * Test di interazione: verifica che lo switch cambi stato al click.
- */
+/** Test di interazione: verifica che lo switch cambi stato al click. */
 export const InteractionTest: Story = {
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
@@ -148,9 +138,7 @@ export const InteractionTest: Story = {
   },
 };
 
-/**
- * Test di accessibilità: verifica la navigazione da tastiera.
- */
+/** Test di accessibilità: verifica la navigazione da tastiera. */
 export const KeyboardNavigation: Story = {
   play: async ({ canvasElement, userEvent, step }) => {
     const canvas = within(canvasElement);
@@ -185,8 +173,8 @@ export const KeyboardNavigation: Story = {
 };
 
 /**
- * Variante con label personalizzata.
- * Mostra come usare lo switch insieme a una label per migliorare l'accessibilità.
+ * Variante con label personalizzata. Mostra come usare lo switch insieme a una label per migliorare
+ * l'accessibilità.
  */
 export const WithLabel: Story = {
   render: args => ({

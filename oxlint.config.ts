@@ -23,7 +23,7 @@ export default defineConfig({
         curly: ['error', 'multi-line'],
         'for-direction': 'error',
         'func-style': ['off'],
-        'id-length': ['error', { checkGeneric: false, exceptions: ['_'] }],
+        'id-length': ['error', { checkGeneric: false, exceptions: ['_', 'i', 'j', 'K'] }],
         'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
         'max-params': ['error', { max: 4 }],
         'no-array-constructor': 'error',
@@ -94,6 +94,10 @@ export default defineConfig({
         // TypeScript
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/ban-ts-comment': 'error',
+        'typescript/explicit-function-return-type': [
+          'error',
+          { allowExpressions: true, allowIIFEs: true },
+        ],
         'typescript/explicit-member-accessibility': [
           'error',
           { accessibility: 'no-public', overrides: { constructors: 'off', methods: 'no-public' } },

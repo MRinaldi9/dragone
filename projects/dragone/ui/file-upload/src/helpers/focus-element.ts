@@ -7,8 +7,8 @@ import { FocusManager } from './focus-manager';
 /**
  * Direttiva ponte tra un chip renderizzato e `FocusManager`.
  *
- * Registra/unregistra il bottone interno del chip usando un identificatore stabile
- * (in questo caso il filename passato via input).
+ * Registra/unregistra il bottone interno del chip usando un identificatore stabile (in questo caso
+ * il filename passato via input).
  */
 @Directive({
   selector: '[drgnFocusElement]',

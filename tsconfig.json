@@ -16,8 +16,9 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2023",
-    "module": "preserve",
+    "target": "es2025",
+    "module": "esnext",
+    "lib": ["ESNext", "DOM"],
     "inlineSourceMap": true
   },
   "angularCompilerOptions": {

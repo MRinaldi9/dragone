@@ -5,16 +5,16 @@ import { createPrimitive } from 'ng-primitives/state';
 import { sleep } from '../predicates/sleep';
 
 /**
- * Default delay between consecutive announcements in a sequence.
- * `LiveAnnouncer` clears the live region on every `announce()` call, so rapid
- * successive calls would override each other and only the last message would
- * be read. This delay gives screen readers time to finish the previous message.
+ * Default delay between consecutive announcements in a sequence. `LiveAnnouncer` clears the live
+ * region on every `announce()` call, so rapid successive calls would override each other and only
+ * the last message would be read. This delay gives screen readers time to finish the previous
+ * message.
  */
 export const ANNOUNCEMENT_DELAY_MS = 500;
 
 /**
- * Injection token to override the default delay between consecutive
- * announcements. Provide it via {@link provideAnnouncementDelay}.
+ * Injection token to override the default delay between consecutive announcements. Provide it via
+ * {@link provideAnnouncementDelay}.
  */
 export const ANNOUNCEMENT_DELAY = new InjectionToken<number>('ANNOUNCEMENT_DELAY', {
   providedIn: 'root',
@@ -68,10 +68,9 @@ export class Announcer {
   };
 
   /**
-   * Announces each message in order, waiting `delayMs` between messages so the
-   * screen reader can finish reading the previous one. A newer `announce`,
-   * `announceSequence` or `clear` call, or component destruction, cancels the
-   * sequence.
+   * Announces each message in order, waiting `delayMs` between messages so the screen reader can
+   * finish reading the previous one. A newer `announce`, `announceSequence` or `clear` call, or
+   * component destruction, cancels the sequence.
    */
   announceSequence = (messages: string[], delayMs = this.#announcementDelayMs): void => {
     this.#announcementId += 1;

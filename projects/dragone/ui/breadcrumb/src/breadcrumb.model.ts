@@ -17,6 +17,7 @@ export interface BreadcrumbHrefItem {
   href: string;
   /**
    * Specifies where to open the linked document.
+   *
    * @default '_self'
    */
   target?: '_self' | '_blank';

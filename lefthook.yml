@@ -3,6 +3,7 @@
 #   Refer for explanation to following link:
 #   https://lefthook.dev/configuration/
 #
+assert_lefthook_installed: true
 colors: true
 commit-msg:
   commands:
@@ -25,3 +26,11 @@ pre-commit:
       run: pnpm run format {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
+post-commit:
+  commands:
+    'tokensave sync':
+      run: tokensave sync
+post-checkout:
+  commands:
+    'tokensave init':
+      run: '[ "$1" = "0000000000000000000000000000000000000000" ] && tokensave init || true'

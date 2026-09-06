@@ -51,16 +51,20 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
 export class Select<T> {
   readonly options = input<Option<T>[]>();
   /**
-   * The selected value. Declared as an input so that `FormField` recognizes
-   * `Select` as a custom form control (paired with the `valueChange` output).
+   * The selected value. Declared as an input so that `FormField` recognizes `Select` as a custom
+   * form control (paired with the `valueChange` output).
    */
   readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
   /**
-   * A string that maps an option to its display label. If not provided, the option itself will be used as the label.
+   * A string that maps an option to its display label. If not provided, the option itself will be
+   * used as the label.
    */
   readonly optionLabel = input<OptionKey<T>>();
-  /** A string that maps an option to its value. If not provided, the option itself will be used as the value. */
+  /**
+   * A string that maps an option to its value. If not provided, the option itself will be used as
+   * the value.
+   */
   readonly optionValue = input<OptionKey<T>>();
   readonly ariaLabel = input<string>();
   readonly ariaLabelledBy = input<string>();
@@ -87,16 +91,16 @@ export class Select<T> {
   });
 
   /**
-   * Value shown inside the trigger when at least one option is selected.
-   * It applies `optionLabel` mapping when provided.
+   * Value shown inside the trigger when at least one option is selected. It applies `optionLabel`
+   * mapping when provided.
    */
   protected readonly mappedValue = computed(() =>
     this.mapByKey(this.internalValue(), this.optionLabel()),
   );
 
   /**
-   * View model used by the dropdown template.
-   * It precomputes label and selected state for each option.
+   * View model used by the dropdown template. It precomputes label and selected state for each
+   * option.
    */
   protected readonly optionItems = computed(() => {
     const selectedValue = this.internalValue();
@@ -108,8 +112,8 @@ export class Select<T> {
   });
 
   /**
-   * Maps a value (or a list of values) to its display/emitted form.
-   * When `key` is set, extracts that property from object values; otherwise returns the value as-is.
+   * Maps a value (or a list of values) to its display/emitted form. When `key` is set, extracts
+   * that property from object values; otherwise returns the value as-is.
    */
   private mapByKey(value: SelectValue<T>, key?: PropertyKey): unknown {
     if (Array.isArray(value)) {
@@ -122,8 +126,8 @@ export class Select<T> {
   }
 
   /**
-   * Returns whether the current option is selected.
-   * Selection is delegated to `compareWith` from `ng-primitives` state.
+   * Returns whether the current option is selected. Selection is delegated to `compareWith` from
+   * `ng-primitives` state.
    */
   private isOptionSelected(currOption: Option<T>, selectedValue: SelectValue<T>): boolean {
     const compareWith = this.#internalState().compareWith();

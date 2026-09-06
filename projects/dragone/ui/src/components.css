@@ -55,6 +55,7 @@
   --drgn-color-focus-ring-interactive: var(--color-alias-interactive-border-focus);
 
   --drgn-typography-font-family-base: var(--typography-global-font-family-01);
+  --drgn-typography-font-family-number: var(--typography-global-font-family-03);
   --drgn-typography-font-style-normal: normal;
   --drgn-typography-letter-spacing-default: 0;
 
@@ -84,6 +85,11 @@
   --drgn-motion-easing-standard: ease;
   --drgn-motion-easing-enter: ease-out;
   --drgn-motion-easing-exit: ease-in;
+
+  --drgn-shadow-blur-sm: var(--elevation-elevation-01);
+  --drgn-shadow-blur-md: var(--elevation-elevation-02);
+  --drgn-shadow-blur-lg: var(--elevation-elevation-03);
+  --drgn-shadow-blur-xl: var(--elevation-elevation-04);
 }
 
 @media (prefers-reduced-motion: reduce) {
