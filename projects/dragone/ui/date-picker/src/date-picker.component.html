@@ -5,15 +5,15 @@
     slot="trailing"
     drgnButton
     icon
-    variant="ghost"
-    style="padding: 0.1rem"
+    semantic="ghost"
+    style="padding: 0"
     ngpPopoverTriggerPlacement="bottom-start"
     [ngpPopoverTriggerOffset]="{ mainAxis: 32, crossAxis: -16 }"
     [ngpPopoverTrigger]="calendarPopover"
     [ngpPopoverTriggerAnchor]="inputCalendar"
     [ariaLabel]="ariaLabelCalendar()"
   >
-    <ng-icon slot="trailing" name="faSolidCalendarDay" />
+    <ng-icon name="faSolidCalendarDay" />
   </button>
 </drgn-input-group>
 <ng-template #calendarPopover>

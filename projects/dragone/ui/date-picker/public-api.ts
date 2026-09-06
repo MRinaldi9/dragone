@@ -1,2 +1,2 @@
 export * from './src/date-picker';
-export { parseLocaleDateString } from './src/utils/parse-date';
+export { provideDragoneDatePickerConfig } from './src/providers/date-picker-config';

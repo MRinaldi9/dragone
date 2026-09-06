@@ -14,20 +14,42 @@ import { provideDateAdapter, type NgpDateAdapter } from 'ng-primitives/date-time
 
 import type { IETFLanguageTag } from '../utils/guards';
 
-export interface DatePickerConfig<
-  T extends Temporal.PlainDateTime | Date = Temporal.PlainDateTime | Date,
-> {
+export interface DatePickerConfigOptions<T> {
+  /**
+   * The first day of the week
+   *
+   * @default 1
+   */
   firstDayOfWeek?: NgpDatePickerFirstDayOfWeekNumber;
+  /**
+   * The locale for the date picker
+   *
+   * @default 'it-IT'
+   */
   locale?: IETFLanguageTag;
+  /**
+   * The options for formatting dates in the date picker
+   *
+   * @default { day: '2-digit', month: '2-digit', year: 'numeric' }
+   */
   options?: Intl.DateTimeFormatOptions;
+  /**
+   * The date adapter for the date picker, if not provided the default `Date` will be used.
+   *
+   * @default undefined
+   */
   adapter?: Type<NgpDateAdapter<T>>;
 }
 
-export const CONFIG_TOKEN = new InjectionToken<Omit<DatePickerConfig, 'firstDayOfWeek'>>(
-  'DatePickerConfig',
-);
+export type DatePickerConfig<T> = Omit<Required<DatePickerConfigOptions<T>>, 'adapter'>;
 
-export const provideDragoneDatePickerConfig = (config?: DatePickerConfig): Provider[] => {
+export const CONFIG_TOKEN = new InjectionToken<
+  Pick<DatePickerConfig<unknown>, 'locale' | 'options'>
+>('DatePickerConfig');
+
+export const provideDragoneDatePickerConfig = <T>(
+  config?: DatePickerConfigOptions<T>,
+): Provider[] => {
   const {
     firstDayOfWeek = 1,
     locale = 'it-IT',
@@ -41,7 +63,7 @@ export const provideDragoneDatePickerConfig = (config?: DatePickerConfig): Provi
   ];
 };
 
-export const injectDragoneDatePickerConfig = (): DatePickerConfig => {
+export const injectDragoneDatePickerConfig = <T>(): DatePickerConfig<T> => {
   assertInInjectionContext(injectDragoneDatePickerConfig);
   const { locale, options } = inject(CONFIG_TOKEN);
   const internalConfig = injectInternalConfig();

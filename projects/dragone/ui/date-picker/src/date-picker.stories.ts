@@ -1,4 +1,9 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import {
+  argsToTemplate,
+  moduleMetadata,
+  type Meta,
+  type StoryObj,
+} from '@analogjs/storybook-angular';
 
 import { TemporalAdapter } from '@dragone/ui/temporal-adapter';
 
@@ -8,6 +13,9 @@ import { provideDragoneDatePickerConfig } from './providers/date-picker-config';
 type MetaDatePicker = DatePicker<Temporal.PlainDateTime> & {
   value: Temporal.PlainDateTime;
   valueChange: (value: Temporal.PlainDateTime) => void;
+  min: Temporal.PlainDateTime;
+  max: Temporal.PlainDateTime;
+  dateDisabled: (value: Temporal.PlainDateTime) => boolean;
 };
 
 const meta: Meta<MetaDatePicker> = {
@@ -15,9 +23,20 @@ const meta: Meta<MetaDatePicker> = {
   component: DatePicker,
   argTypes: {
     value: {
-      table: {
-        disable: true,
-      },
+      control: { type: 'date' },
+      description: 'The current date value of the date picker.',
+    },
+    min: {
+      control: { type: 'date' },
+      description: 'The minimum selectable date of the date picker.',
+    },
+    max: {
+      control: { type: 'date' },
+      description: 'The maximum selectable date of the date picker.',
+    },
+    dateDisabled: {
+      type: 'function',
+      description: 'Function to determine if a date should be disabled.',
     },
     keepInvalid: {
       control: 'boolean',
@@ -61,8 +80,8 @@ const meta: Meta<MetaDatePicker> = {
   render: args => ({
     props: args,
     template: `
-      <drgn-date-picker [(value)]="value" [keepInvalid]="keepInvalid"/>
-    `,
+        <drgn-date-picker [(value)]="value" ${argsToTemplate(args, { exclude: ['value'] })} />
+      `,
   }),
 };
 
@@ -71,7 +90,28 @@ type Story = StoryObj<MetaDatePicker>;
 
 export const Default: Story = {
   args: {
-    // Value: Temporal.PlainDateTime.from({ year: 2024, month: 6, day: 1 }),
+    // Value: Temporal.PlainDateTime.from({ year: 2024, month: 1, day: 1 }),
     keepInvalid: true,
   },
+};
+
+export const WithMinMax: Story = {
+  args: {
+    min: Temporal.PlainDateTime.from({ year: 2024, month: 1, day: 1 }),
+    max: Temporal.PlainDateTime.from({ year: 2024, month: 12, day: 31 }),
+  },
+};
+
+export const WithDisableDate: Story = {
+  // Function inputs cannot travel through Storybook args: the Angular
+  // `cleanArgsDecorator` strips every arg without a `control`/`action` in its
+  // argType, and `inferControls` never infers a control for `type: 'function'`.
+  // Bind the function directly in the render props instead.
+  render: () => ({
+    props: {
+      disableWeekends: (date: Temporal.PlainDateTime) =>
+        date.dayOfWeek === 6 || date.dayOfWeek === 7,
+    },
+    template: `<drgn-date-picker [dateDisabled]="disableWeekends" />`,
+  }),
 };

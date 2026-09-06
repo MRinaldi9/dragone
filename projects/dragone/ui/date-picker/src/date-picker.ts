@@ -3,7 +3,7 @@ import { Component, effect, input } from '@angular/core';
 import type { ValidationError } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCalendarDay } from '@ng-icons/font-awesome/solid';
-import { injectDatePickerState, NgpDatePicker } from 'ng-primitives/date-picker';
+import { NgpDatePicker } from 'ng-primitives/date-picker';
 import { NgpPopover, NgpPopoverTrigger } from 'ng-primitives/popover';
 
 import { Button } from '@dragone/ui/button';
@@ -11,9 +11,10 @@ import { InputGroup } from '@dragone/ui/input';
 import { toValue } from '@dragone/ui/utils';
 
 import { Calendar } from './components/calendar/calendar';
-import { InputDatePicker } from './components/input-date-picker';
+import { InputDatePicker } from './components/input-date-picker/input-date-picker';
 import {
   datePickerDragoneStateFactory,
+  injectDatePickerDragoneState,
   provideDatePickerDragoneState,
 } from './state/date-picker-state';
 import { isETFLanguageTag, type IETFLanguageTag } from './utils/guards';
@@ -43,7 +44,7 @@ import { isETFLanguageTag, type IETFLanguageTag } from './utils/guards';
     },
   ],
 })
-export class DatePicker<T extends Temporal.PlainDateTime | Date> {
+export class DatePicker<T> {
   errors?:
     | InputSignal<readonly ValidationError.WithOptionalFieldTree[]>
     | InputSignalWithTransform<readonly ValidationError.WithOptionalFieldTree[], unknown>
@@ -67,7 +68,8 @@ export class DatePicker<T extends Temporal.PlainDateTime | Date> {
   readonly options = input<Partial<Intl.DateTimeFormatOptions>>();
   readonly ariaLabelCalendar = input('Scegli Data');
   readonly ariaDescribedByInput = input<string>();
-  readonly #datePickerState = injectDatePickerState<T>();
+  readonly showToday = input(true);
+  readonly #datePickerDragoneState = injectDatePickerDragoneState<T>();
 
   focus?(_options?: FocusOptions): void {
     throw new Error('Method not implemented.');
@@ -81,11 +83,14 @@ export class DatePicker<T extends Temporal.PlainDateTime | Date> {
       locale: this.locale,
       options: this.options,
       keepInvalid: this.keepInvalid,
+      showToday: this.showToday,
     });
     const refEffect = effect(() => {
-      const date = toValue(this.#datePickerState().date);
-      if (date) {
-        toValue.untracked(this.#datePickerState().setFocusedDate(date, 'program', 'backward'));
+      const state = this.#datePickerDragoneState();
+      const date = toValue(state.date) || toValue(state.max);
+      const focused = date ?? toValue(state.focusedDate);
+      if (focused) {
+        toValue.untracked(state.setResolveFocusedDate(focused));
       }
       refEffect.destroy();
     });

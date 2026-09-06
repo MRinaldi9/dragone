@@ -1,5 +1,7 @@
 import type { NgpDateAdapter } from 'ng-primitives/date-time';
 
+import { normalizeToDate } from './normalize-to-date';
+
 // ---------------------------------------------------------------------------
 // Date‑entry formats and regex helpers
 // ---------------------------------------------------------------------------
@@ -18,12 +20,12 @@ const DATE_ENTRY_FORMATS = [
 ] as const;
 
 /** Escape special regex characters in a string. */
-const escapeRegex = (str: string): string => str.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
+const _escapeRegex = (str: string): string => str.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 
 /** Derive the date‑separator (e.g. `/`, `.`, `-`) from a locale’s DateTimeFormat. */
-const deriveDateSeparator = (fmt: Intl.DateTimeFormat): string => {
+const _deriveDateSeparator = (fmt: Intl.DateTimeFormat): string => {
   const parts = fmt.formatToParts(REFERENCE_DATE);
-  return escapeRegex(parts.find(({ type }) => type === 'literal')?.value ?? '/');
+  return _escapeRegex(parts.find(({ type }) => type === 'literal')?.value ?? '/');
 };
 
 /**
@@ -32,8 +34,8 @@ const deriveDateSeparator = (fmt: Intl.DateTimeFormat): string => {
  *
  * Patterns are built fresh each call — the cost is negligible (3 small regex).
  */
-const buildDateParsePatterns = (fmt: Intl.DateTimeFormat): RegExp[] => {
-  const separator = deriveDateSeparator(fmt);
+const _buildDateParsePatterns = (fmt: Intl.DateTimeFormat): RegExp[] => {
+  const separator = _deriveDateSeparator(fmt);
   const dayPattern = String.raw`(\d{1,2})`;
   const monthPattern = String.raw`(\d{1,2})`;
   const yearPattern = String.raw`(\d{1,4})`;
@@ -52,7 +54,7 @@ const buildDateParsePatterns = (fmt: Intl.DateTimeFormat): RegExp[] => {
  * Try to match `input` against `regex` and, if successful, build a date object from the captured
  * groups using the field mapping in `formatEntry`.
  */
-const tryParseDateEntry = <T>(
+const _tryParseDateEntry = <T>(
   input: string,
   regex: RegExp,
   adapter: NgpDateAdapter<T>,
@@ -78,10 +80,6 @@ const tryParseDateEntry = <T>(
   }
 };
 
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-
 /**
  * Parse a locale‑formatted date string into a typed date object.
  *
@@ -97,7 +95,7 @@ const tryParseDateEntry = <T>(
  * @param formatter An `Intl.DateTimeFormat` matching the expected locale/options.
  * @returns The parsed date, or `undefined` if the string is not parseable.
  */
-export const parseLocaleDateString = <T extends Temporal.PlainDateTime | Date>(
+export const parseLocaleDateString = <T>(
   value: string,
   adapter: NgpDateAdapter<T>,
   formatter: Intl.DateTimeFormat,
@@ -105,14 +103,17 @@ export const parseLocaleDateString = <T extends Temporal.PlainDateTime | Date>(
   const input = value.trim();
   if (!input) return undefined;
 
-  const patterns = buildDateParsePatterns(formatter);
+  const patterns = _buildDateParsePatterns(formatter);
 
   for (let i = 0; i < 3; i += 1) {
-    const result = tryParseDateEntry(input, patterns[i], adapter, DATE_ENTRY_FORMATS[i]);
+    const result = _tryParseDateEntry(input, patterns[i], adapter, DATE_ENTRY_FORMATS[i]);
+
     if (result !== null) {
       // For the full day/month/year format, reject inputs that don't round‑trip
       // (e.g. because the locale expects a two‑digit day but the user typed three).
-      return i === 0 && formatter.format(result) !== input ? undefined : result;
+      return i === 0 && formatter.format(normalizeToDate(result, adapter)) !== input
+        ? undefined
+        : result;
     }
   }
 

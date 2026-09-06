@@ -2,9 +2,14 @@
   <button ngpDatePickerPreviousMonth aria-label="previous month">
     <ng-icon name="faSolidAngleLeft" />
   </button>
-  <button ngpDatePickerLabel class="drgn-label-md-600">
-    {{ label() }}
-  </button>
+  <drgn-calendar-period-select
+    unit="month"
+    ngpDatePickerLabel
+    class="drgn-label-md-600"
+    style="flex-grow: 1"
+  />
+  <drgn-calendar-period-select unit="year" ngpDatePickerLabel class="drgn-label-md-600" />
+
   <button ngpDatePickerNextMonth aria-label="next month">
     <ng-icon name="faSolidAngleRight" />
   </button>
@@ -12,15 +17,15 @@
 <table ngpDatePickerGrid>
   <thead>
     <tr class="date-picker-day-headers">
-      @for (day of dayHeaders(); track day.abbr) {
-        <th class="drgn-label-md-number-400" scope="col" [attr.abbr]="day.abbr">{{ day.label }}</th>
+      @for (day of datePickerDragoneState().dayAbbrs(); track $index) {
+        <th class="drgn-label-md-number-400" scope="col" [attr.abbr]="day">{{ day }}</th>
       }
     </tr>
   </thead>
   <tbody>
     <tr *ngpDatePickerRowRender>
-      <td *drgnCalendarCellRender="let date" class="drgn-label-md-number-400" ngpDatePickerCell>
-        <button ngpDatePickerDateButton>{{ dayOfMonth(date) }}</button>
+      <td *ngpDatePickerCellRender="let date" class="drgn-label-md-number-400" ngpDatePickerCell>
+        <button ngpDatePickerDateButton>{{ adapter.getDate(date) }}</button>
       </td>
     </tr>
   </tbody>

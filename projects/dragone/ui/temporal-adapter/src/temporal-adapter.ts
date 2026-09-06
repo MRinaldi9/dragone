@@ -70,11 +70,15 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
   /**
    * Return a new `Temporal.PlainDateTime` with the specified fields replaced. The original is never
    * mutated.
+   *
+   * @note `NgpDateUnits.month` is **zero-based** (0-11) here, matching `getMonth` so
+   * `set(date, { month: getMonth(other) })` round-trips. `Temporal.PlainDateTime.with` expects a
+   * one-based month (1-12), hence the `+ 1`.
    */
   set(date: Temporal.PlainDateTime, values: NgpDateUnits): Temporal.PlainDateTime {
     return date.with({
       ...(values.year !== undefined && { year: values.year }),
-      ...(values.month !== undefined && { month: values.month }),
+      ...(values.month !== undefined && { month: values.month + 1 }),
       ...(values.day !== undefined && { day: values.day }),
       ...(values.hour !== undefined && { hour: values.hour }),
       ...(values.minute !== undefined && { minute: values.minute }),
@@ -145,13 +149,13 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
   }
 
   /**
-   * Get the month (1-12).
+   * Get the month as a zero-based number (0-11, January = 0), matching the `NgpDateAdapter`
+   * contract so `set(date, { month: getMonth(other) })` round-trips.
    *
-   * @note `Temporal.PlainDateTime.month` is 1-indexed, matching the
-   * `NgpDateAdapter` contract directly — no conversion needed.
+   * @note `Temporal.PlainDateTime.month` is 1-indexed, hence the `- 1`.
    */
   getMonth(date: Temporal.PlainDateTime): number {
-    return date.month;
+    return date.month - 1;
   }
 
   /** Get the day of the month (1-31). */

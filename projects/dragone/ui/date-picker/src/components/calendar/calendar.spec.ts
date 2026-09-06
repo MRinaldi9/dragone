@@ -1,22 +1,44 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, signal } from '@angular/core';
+import { render } from '@wismaz/vitest-browser-angular';
+import { ngpDatePicker, provideDatePickerState } from 'ng-primitives/date-picker';
 
+import { provideDragoneDatePickerConfig } from '../../providers/date-picker-config';
+import {
+  datePickerDragoneStateFactory,
+  provideDatePickerDragoneState,
+} from '../../state/date-picker-state';
+import type { IETFLanguageTag } from '../../utils/guards';
 import { Calendar } from './calendar';
 
-describe('Calendar', () => {
-  let component: Calendar;
-  let fixture: ComponentFixture<Calendar>;
+/**
+ * Test Host: provides the date picker state and the Dragone state consumed by `Calendar`, and
+ * instantiates both primitive factories so the shared state signals are populated.
+ */
+@Component({
+  imports: [Calendar],
+  template: `<drgn-calendar />`,
+  providers: [
+    provideDatePickerState(),
+    provideDragoneDatePickerConfig(),
+    provideDatePickerDragoneState({ inherit: false }),
+  ],
+})
+class CalendarTestHost {
+  readonly state = ngpDatePicker({});
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Calendar],
-    }).compileComponents();
+  constructor() {
+    datePickerDragoneStateFactory({
+      locale: signal<IETFLanguageTag | undefined>(undefined),
+      options: signal<Intl.DateTimeFormatOptions | undefined>(undefined),
+      keepInvalid: signal(true),
+      showToday: signal(true),
+    });
+  }
+}
 
-    fixture = TestBed.createComponent(Calendar);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+describe(Calendar, () => {
+  it('should create', async () => {
+    const { container } = await render(CalendarTestHost);
+    expect(container.querySelector('drgn-calendar')).toBeTruthy();
   });
 });

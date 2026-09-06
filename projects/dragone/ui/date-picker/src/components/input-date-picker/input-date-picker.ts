@@ -1,10 +1,9 @@
-import { computed, debounced, Directive, effect, linkedSignal } from '@angular/core';
-import { injectDatePickerState } from 'ng-primitives/date-picker';
+import { computed, debounced, Directive, effect, linkedSignal, untracked } from '@angular/core';
 
 import { toValue } from '@dragone/ui/utils';
 
-import { injectInputDebounceTimer } from '../providers/debounce-input-timer';
-import { injectDatePickerDragoneState } from '../state/date-picker-state';
+import { injectInputDebounceTimer } from '../../providers/debounce-input-timer';
+import { injectDatePickerDragoneState } from '../../state/date-picker-state';
 
 @Directive({
   selector: 'input[date-picker]',
@@ -19,9 +18,8 @@ import { injectDatePickerDragoneState } from '../state/date-picker-state';
     '[attr.aria-invalid]': '!isValidDate() || undefined',
   },
 })
-export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
-  readonly #datePickerState = injectDatePickerState<T>();
-  readonly #stateComp = injectDatePickerDragoneState();
+export class InputDatePicker<T> {
+  readonly #dragoneDatePickerState = injectDatePickerDragoneState<T>();
   readonly #debounceTimer = injectInputDebounceTimer();
   /**
    * The formatted date string displayed in the input.
@@ -32,8 +30,8 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
    *   keeping the typed text visible until it is parsed.
    */
   protected inputDate = linkedSignal({
-    source: this.#datePickerState().date,
-    computation: curr => this.#stateComp().format(curr),
+    source: this.#dragoneDatePickerState().date,
+    computation: curr => this.#dragoneDatePickerState().format(curr),
   });
 
   /**
@@ -48,8 +46,8 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
    */
   isValidDate = computed(
     (raw = this.debouncedInputDate.value()) =>
-      raw === this.#stateComp().format(this.#datePickerState().date()) ||
-      this.#stateComp().parseDate(raw) !== undefined,
+      raw === this.#dragoneDatePickerState().format(this.#dragoneDatePickerState().date()) ||
+      this.#dragoneDatePickerState().parseDate(raw) !== undefined,
   );
 
   constructor() {
@@ -58,19 +56,30 @@ export class InputDatePicker<T extends Temporal.PlainDateTime | Date> {
     effect(() => {
       const raw = this.debouncedInputDate.value();
       // No-op if the text hasn't diverged from the current picker value
-      if (raw === this.#stateComp().format(toValue.untracked(this.#datePickerState().date))) {
+      if (
+        raw ===
+        this.#dragoneDatePickerState().format(
+          toValue.untracked(this.#dragoneDatePickerState().date),
+        )
+      ) {
         return;
       }
-      const parsed = this.#stateComp().parseDate(raw);
+      const parsed = this.#dragoneDatePickerState().parseDate(raw);
       // If `parsed` is null the string is invalid — the effect does nothing
       // And lets the UI keep showing the invalid text so the user can correct it.
-      if (!toValue.untracked(this.#stateComp().keepInvalid) && !parsed) {
+      if (!toValue.untracked(this.#dragoneDatePickerState().keepInvalid) && !parsed) {
         this.inputDate.set('');
+        return;
       }
-      // Untracked(() => {
-      //   this.#datePickerState().setDefaultDate(parsed) date.set(parsed);
-      //   this.#datePickerState().dateChange.emit(parsed);
-      // });
+      if (!parsed) {
+        return;
+      }
+      untracked(() => {
+        // Select the parsed date so the calendar shows it as selected, and move the
+        // focus so the calendar view (month/year) follows the typed date.
+        this.#dragoneDatePickerState().select(parsed);
+        this.#dragoneDatePickerState().setFocusedDate(parsed, 'program', 'forward');
+      });
     });
   }
 
