@@ -6,10 +6,4 @@ allowBuilds:
   lmdb: true
   msgpackr-extract: true
 minimumReleaseAge: 720
-minimumReleaseAgeExclude:
-  - '@wismaz/vitest-browser-angular@0.8.2'
 minimumReleaseAgeStrict: true
-ovverides:
-  '@analogjs/vite-plugin-angular@2.5.2>@angular/build': '$@angular/build'
-  '@analogjs/vite-plugin-angular@2.5.2>@angular-devkit/build-angular': '-'
-  '@storybook/angular@10.4.1>typescript': '$typescript'
