@@ -21,7 +21,7 @@
     "~/.copilot/instructions": true,
     "~/.claude/rules": true
   },
-  "js/ts.tsdk.path": "node_modules\\typescript\\lib",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "json.schemaDownload.trustedDomains": {
     "https://schemastore.azurewebsites.net/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,

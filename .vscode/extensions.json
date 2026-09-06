@@ -4,6 +4,7 @@
     "angular.ng-template",
     "vitest.explorer",
     "oxc.oxc-vscode",
-    "kravets.vscode-publint"
+    "kravets.vscode-publint",
+    "vunguyentuan.vscode-css-variables"
   ]
 }
