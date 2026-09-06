@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { page } from '@vitest/browser/context';
 import { render } from '@wismaz/vitest-browser-angular';
 import { ngpDatePicker, provideDatePickerState } from 'ng-primitives/date-picker';
+import { page } from 'vitest/browser';
 
 import { provideDragoneDatePickerConfig } from '../../providers/date-picker-config';
 import {
@@ -43,6 +43,7 @@ class TestHost {
       locale: signal<IETFLanguageTag | undefined>(undefined),
       options: signal<Intl.DateTimeFormatOptions | undefined>(undefined),
       keepInvalid: signal(true),
+      showToday: signal(true),
     });
   }
 }
@@ -79,6 +80,12 @@ describe(CalendarPeriodSelect, () => {
       await locator.getByRole('combobox').click();
 
       const currentYear = new Date().getFullYear();
+      // Wait for the dropdown to render before reading its options, so the assertion
+      // never races the portal mount (flaky under slow CI machines).
+      await expect
+        .element(page.getByRole('option', { name: String(currentYear) }).first())
+        .toBeVisible();
+
       const years = renderedOptions().map(Number);
       expect(years).toContain(currentYear);
       expect(years[0]).toBe(currentYear); // Descending: max (current) year first
@@ -97,6 +104,12 @@ describe(CalendarPeriodSelect, () => {
       await locator.getByRole('combobox').click();
 
       const currentYear = new Date().getFullYear();
+      // Wait for the reopened dropdown to render before reading its options, so the
+      // assertion never races the portal mount (flaky under slow CI machines).
+      await expect
+        .element(page.getByRole('option', { name: String(currentYear) }).first())
+        .toBeVisible();
+
       const years = renderedOptions().map(Number);
       expect(years[0]).toBe(currentYear);
       expect(years.at(-1)).toBe(currentYear - DEFAULT_YEAR_RANGE);
@@ -137,7 +150,7 @@ describe(CalendarPeriodSelect, () => {
       await locator.getByRole('combobox').click();
 
       const years = renderedOptions().map(Number);
-      expect(years.every(year => year >= 2020 && year <= 2030)).toBe(true);
+      expect(years.every(year => year >= 2020 && year <= 2030)).toBeTruthy();
     });
   });
 
@@ -151,7 +164,7 @@ describe(CalendarPeriodSelect, () => {
 
       const months = renderedOptions();
       expect(months).toHaveLength(12);
-      expect(months[7].toLowerCase()).toContain('agosto'); // it-IT August
+      expect(months[7].toLowerCase()).toContain('agosto'); // It-IT August
     });
 
     it('moves focusedDate to the selected month and emits periodSelected', async () => {

@@ -71,6 +71,12 @@ describe(DatePicker, () => {
 
     await expect.element(getByRole('button', { name: /^\d+$/ }).first()).toBeVisible();
 
+    // The focus trap applies the initial focus in `afterNextRender`, so poll until the
+    // focused date button (tabindex="0") exists before asserting on it.
+    await expect
+      .poll(() => document.querySelector('[ngpDatePickerDateButton][tabindex="0"]') !== null)
+      .toBeTruthy();
+
     const focusedButton = document.querySelector('[ngpDatePickerDateButton][tabindex="0"]');
     expect(focusedButton, 'a focused date button must exist').toBeTruthy();
     expect(focusedButton?.hasAttribute('disabled')).toBeFalsy();
