@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  color: var(--drgn-color-text-card-title);
+  margin: 0;
+}
+
+:host([href]) {
+  color: var(--drgn-color-card-link);
+  text-decoration: underline;
+
+  &:visited {
+    color: var(--drgn-color-card-link);
+  }
+
+  &:hover {
+    color: var(--drgn-color-card-link-hover);
+  }
+
+  &:active {
+    color: var(--drgn-color-card-link-pressed);
+  }
+}

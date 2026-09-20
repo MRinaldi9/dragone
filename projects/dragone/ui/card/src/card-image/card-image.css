@@ -1,0 +1,24 @@
+:host {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  min-height: 220px;
+  border-radius: var(--drgn-radius-card) var(--drgn-radius-card) 0 0;
+  width: 100%;
+
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &[data-position='left'] {
+    border-radius: var(--drgn-radius-card) 0 0 var(--drgn-radius-card);
+  }
+
+  &[data-position='right'] {
+    border-radius: 0 var(--drgn-radius-card) var(--drgn-radius-card) 0;
+  }
+}

@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+
+  &[data-type='landscape'],
+  &[data-type='portrait'] {
+    justify-content: flex-end;
+  }
+
+  &[data-type='process'] {
+    justify-content: flex-start;
+    gap: 12px;
+    padding-top: var(--drgn-space-card-gap);
+  }
+}

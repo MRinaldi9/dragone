@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  color: var(--drgn-color-text-card-signature);
+  font-family: var(--drgn-typography-font-family-number);
+  font-style: italic;
+  font-weight: bold;
+  margin: 0;
+}

@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var(--drgn-color-surface-card);
+  background-clip: border-box;
+  border-radius: var(--drgn-radius-card);
+  box-shadow: var(--drgn-shadow-card);
+  color: var(--drgn-color-text-card-body);
+  overflow: clip;
+
+  &:hover {
+    box-shadow: var(--drgn-shadow-card-hover);
+  }
+
+  &[data-theme='dark'] {
+    background-color: var(--drgn-color-surface-card-dark);
+    color: var(--drgn-color-text-inverse);
+  }
+
+  /* Landscape: image on the left, content on the right */
+  &[data-type='landscape'] {
+    flex-direction: row;
+  }
+}

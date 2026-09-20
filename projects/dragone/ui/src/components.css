@@ -90,6 +90,25 @@
   --drgn-shadow-blur-md: var(--elevation-elevation-02);
   --drgn-shadow-blur-lg: var(--elevation-elevation-03);
   --drgn-shadow-blur-xl: var(--elevation-elevation-04);
+
+  /* Card */
+  --drgn-color-surface-card: var(--color-alias-background-color-primary-light-0);
+  --drgn-color-surface-card-dark: var(--color-global-dark-primary-120);
+  --drgn-color-text-card-title: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-card-subtitle: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-card-body: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-card-signature: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-card-tag-bg: var(--color-global-secondary-100);
+  --drgn-color-card-tag-text: var(--color-alias-text-color-primary-light-0);
+  --drgn-color-card-link: var(--color-alias-interactive-primary-default);
+  --drgn-color-card-link-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-color-card-link-pressed: var(--color-alias-interactive-primary-pressed);
+  --drgn-color-card-overlay: var(--color-specific-card-overlay-gradient-img);
+  --drgn-radius-card: 4px;
+  --drgn-shadow-card: var(--elevation-elevation-01);
+  --drgn-shadow-card-hover: var(--elevation-elevation-02);
+  --drgn-space-card-padding: 32px;
+  --drgn-space-card-gap: 24px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  overflow: clip;
+
+  &[data-type='landscape'],
+  &[data-type='portrait'] {
+    justify-content: space-between;
+  }
+
+  &[data-type='process'] {
+    justify-content: flex-start;
+  }
+}

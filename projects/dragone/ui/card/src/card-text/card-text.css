@@ -1,0 +1,5 @@
+:host {
+  display: block;
+  color: var(--drgn-color-text-card-body);
+  margin: 0;
+}
