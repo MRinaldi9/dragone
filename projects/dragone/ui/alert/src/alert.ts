@@ -36,7 +36,7 @@ const TYPE_TO_ICON = {
       <ng-content />
     </div>
     @if (ctaText()) {
-      <button drgnButton variant="tertiary" class="alert-action" (click)="ctaClick.emit($event)">
+      <button drgnButton semantic="tertiary" class="alert-action" (click)="ctaClick.emit($event)">
         {{ ctaText() }}
       </button>
     }
