@@ -24,14 +24,14 @@ To build the library, run from the repository root:
 pnpm build @dragone/ui
 ```
 
-The build artifacts are written to `dist/projects/dragone/ui`.
+The build artifacts are written to `dist/dragone/ui`.
 
 ### Publishing the Library
 
 Once the project is built, you can publish the library from the output directory:
 
 ```bash
-cd dist/projects/dragone/ui
+cd dist/dragone/ui
 pnpm publish
 ```
 

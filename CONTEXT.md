@@ -54,12 +54,12 @@ _Avoid_: Form element, control value accessor, field
 
 ### Visual Variables
 
-**Variant**:
-The visual style of a Component (e.g. `primary`, `secondary`, `tertiary`, `ghost`). Button variants follow Sirio specs 1:1, including `danger` as a variant. For other Components, use `status` for semantic meaning.
-_Avoid_: Style, appearance, theme (conflicts with Theme)
+**Semantic**:
+The visual style of a Component, exposed via the `semantic` input (Button: `primary`, `secondary`, `tertiary`, `ghost`). Button semantics follow Sirio specs 1:1. Not every Component has a Semantic.
+_Avoid_: Variant, style, appearance, theme (conflicts with Theme)
 
 **Status**:
-The semantic meaning of a Component: `info`, `success`, `warning`, `danger`, `neutral`. Exposed via the `status` input.
+The semantic meaning of a Component: `info`, `success`, `warning`, `danger`, `neutral`. Exposed via the `Status` directive's `drgnStatus` input and rendered as `data-status`; `neutral` is the default and is not rendered.
 _Avoid_: Alert, error, type, severity
 
 **Layout**:
@@ -86,9 +86,11 @@ The Test Host is one option, not a blanket requirement. It is the natural fit wh
 
 **Controlling Time in Tests**:
 Before writing a test that involves timers, decide whether the timing is the behavior under test or just in the way (see the [Marmicode Cookbook](https://cookbook.marmicode.io/angular/testing/controlling-time-in-tests)):
+
 - **Manual mode** (`vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()`) when the precise delay is what you assert, e.g. "at 99ms not fired, at 100ms fired".
 - **Fast-forward mode** (`vi.useFakeTimers().setTimerTickMode('nextTimerAsync')`, Vitest ≥ 4.1.0) when the timing is just in the way: the clock advances on its own, so tests do not couple to delay values. Flush pending timers with `await vi.runAllTimersAsync()`.
 - Always restore real timers with `onTestFinished(() => vi.useRealTimers())` (colocated setup/teardown), and install fake timers before any timer-dependent code runs.
+
 _Avoid_: hardcoding delay values in tests that do not assert precise timing; restoring real timers in `afterEach` instead of `onTestFinished`.
 
 ## Rules

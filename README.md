@@ -39,7 +39,7 @@ Opens Storybook in your browser with all `@dragone/ui` components, autodocs, and
 pnpm build @dragone/ui
 ```
 
-Output is written to `dist/projects/dragone/ui`.
+Output is written to `dist/dragone/ui`.
 
 ### Run Tests
 
@@ -53,8 +53,8 @@ Unit tests run via [Vitest](https://vitest.dev) in browser mode (Playwright).
 
 ### Linting & Formatting
 
-- Lint: `pnpm lint`
-- Format: `pnpm format`
+- Lint: `pnpm lint:oxlint` and `pnpm lint:eslint`
+- Format: `pnpm format` (verify with `pnpm format:check`)
 
 Both run automatically on staged files before every commit via [lefthook](https://github.com/evilmartians/lefthook).
 
