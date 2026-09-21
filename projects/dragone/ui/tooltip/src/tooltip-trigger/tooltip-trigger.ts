@@ -17,10 +17,10 @@ import { Tooltip } from '../tooltip/tooltip';
         'ngpTooltipTriggerFlip:tooltipFlip',
         'ngpTooltipTriggerContainer:tooltipContainer',
         'ngpTooltipTriggerShowOnOverflow:tooltipShowOnOverflow',
-        'ngpTooltipTriggerContext:tooltipContent',
-      ],
-    },
-  ],
+        'ngpTooltipTriggerContext:tooltipContent'
+      ]
+    }
+  ]
 })
 export class TooltipTrigger {
   private stateTooltip = injectTooltipTriggerState();

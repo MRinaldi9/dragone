@@ -19,10 +19,10 @@ describe(AriaLabelPipe, () => {
     const secondDuplicate = { name: 'image.png' } as File;
 
     expect(pipe.transform(firstDuplicate, [firstDuplicate, secondDuplicate])).toBe(
-      'Remove file image.png (1 of 2)',
+      'Remove file image.png (1 of 2)'
     );
     expect(pipe.transform(secondDuplicate, [firstDuplicate, secondDuplicate])).toBe(
-      'Remove file image.png (2 of 2)',
+      'Remove file image.png (2 of 2)'
     );
   });
 

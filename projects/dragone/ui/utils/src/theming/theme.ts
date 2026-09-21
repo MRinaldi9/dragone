@@ -13,18 +13,18 @@ export const [, themeFactory, injectThemeState, provideThemeState] = createPrimi
   ({ theme }: { theme: Signal<ThemeType | undefined> }): ThemeState => {
     const parent = injectThemeState({ optional: true, skipSelf: true });
     const resolvedTheme = computed<ThemeType | null>(
-      () => theme() ?? parent()?.resolvedTheme() ?? null,
+      () => theme() ?? parent()?.resolvedTheme() ?? null
     );
     return { theme, resolvedTheme };
-  },
+  }
 );
 
 @Directive({
   selector: '[drgnTheme]',
   providers: [provideThemeState({ inherit: false })],
   host: {
-    '[attr.data-theme]': 'state.resolvedTheme() ? state.resolvedTheme() : null',
-  },
+    '[attr.data-theme]': 'state.resolvedTheme() ? state.resolvedTheme() : null'
+  }
 })
 export class Theme {
   readonly theme = input<'light' | 'dark' | undefined>();

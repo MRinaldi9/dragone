@@ -15,7 +15,7 @@ import { InputDatePicker } from './components/input-date-picker/input-date-picke
 import {
   datePickerDragoneStateFactory,
   injectDatePickerDragoneState,
-  provideDatePickerDragoneState,
+  provideDatePickerDragoneState
 } from './state/date-picker-state';
 import { isETFLanguageTag, type IETFLanguageTag } from './utils/guards';
 
@@ -26,7 +26,7 @@ import { isETFLanguageTag, type IETFLanguageTag } from './utils/guards';
   styleUrl: './date-picker.css',
   providers: [
     provideIcons({ faSolidCalendarDay }),
-    provideDatePickerDragoneState({ inherit: false }),
+    provideDatePickerDragoneState({ inherit: false })
   ],
   hostDirectives: [
     {
@@ -38,11 +38,11 @@ import { isETFLanguageTag, type IETFLanguageTag } from './utils/guards';
         'ngpDatePickerDisabled: disabled',
         'ngpDatePickerFirstDayOfWeek: firstDayOfWeek',
         'ngpDatePickerDateDisabled: dateDisabled',
-        'ngpDatePickerFocusedDate: focusedDate',
+        'ngpDatePickerFocusedDate: focusedDate'
       ],
-      outputs: ['ngpDatePickerDateChange: valueChange'],
-    },
-  ],
+      outputs: ['ngpDatePickerDateChange: valueChange']
+    }
+  ]
 })
 export class DatePicker<T> {
   errors?:
@@ -63,7 +63,7 @@ export class DatePicker<T> {
     transform: val => {
       isETFLanguageTag(val);
       return val;
-    },
+    }
   });
   readonly options = input<Partial<Intl.DateTimeFormatOptions>>();
   readonly ariaLabelCalendar = input('Scegli Data');
@@ -83,7 +83,7 @@ export class DatePicker<T> {
       locale: this.locale,
       options: this.options,
       keepInvalid: this.keepInvalid,
-      showToday: this.showToday,
+      showToday: this.showToday
     });
     const refEffect = effect(() => {
       const state = this.#datePickerDragoneState();

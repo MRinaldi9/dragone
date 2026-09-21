@@ -13,7 +13,7 @@ import { type TooltipContext, Tooltip } from './tooltip/tooltip';
     <button drgnTooltip [tooltipContent]="tooltipContent()" [tooltipDisabled]="tooltipDisabled()">
       Hover me
     </button>
-  `,
+  `
 })
 class TestHostComponent {
   tooltipContent = signal<TooltipContext>('This is a helpful tooltip');
@@ -27,7 +27,7 @@ describe(Tooltip, () => {
   let tooltipTriggerDirective: TooltipTrigger;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestHostComponent],
+      imports: [TestHostComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -69,7 +69,7 @@ describe(Tooltip, () => {
     expect(tooltip).toHaveTextContent('Tooltip Body');
     expect(tooltipTriggerDirective['stateTooltip']().context()).toEqual({
       title: 'Tooltip Title',
-      body: 'Tooltip Body',
+      body: 'Tooltip Body'
     });
   });
 
@@ -78,7 +78,7 @@ describe(Tooltip, () => {
       title: 'Full Tooltip',
       body: 'This is the body of the full tooltip',
       action: vi.fn<() => void>(),
-      actionLabel: 'Click Me',
+      actionLabel: 'Click Me'
     });
     await fixture.whenStable();
     await userEvent.hover(btnToHover);
@@ -91,7 +91,7 @@ describe(Tooltip, () => {
       title: 'Full Tooltip',
       body: 'This is the body of the full tooltip',
       action: expect.any(Function),
-      actionLabel: 'Click Me',
+      actionLabel: 'Click Me'
     });
     await userEvent.click(await page.getByRole('button', { name: 'Click Me' }));
     expect((component.tooltipContent() as { action: Mock }).action).toHaveBeenCalledWith();

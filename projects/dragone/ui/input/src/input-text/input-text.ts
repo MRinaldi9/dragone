@@ -13,9 +13,9 @@ export type InputValidity = 'valid' | 'invalid' | 'warning';
     class: 'drgn-label-md-400',
     '[id]': 'id()',
     '[attr.aria-invalid]': 'isInvalid()',
-    '[attr.data-validation]': 'validationState()',
+    '[attr.data-validation]': 'validationState()'
   },
-  hostDirectives: [NgpFocusVisible],
+  hostDirectives: [NgpFocusVisible]
 })
 export class InputText {
   readonly id = input(uniqueId('drgn-input'));

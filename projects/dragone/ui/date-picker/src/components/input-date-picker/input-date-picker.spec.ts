@@ -6,7 +6,7 @@ import { userEvent } from 'vitest/browser';
 import { provideDragoneDatePickerConfig } from '../../providers/date-picker-config';
 import {
   datePickerDragoneStateFactory,
-  provideDatePickerDragoneState,
+  provideDatePickerDragoneState
 } from '../../state/date-picker-state';
 import type { IETFLanguageTag } from '../../utils/guards';
 import { InputDatePicker } from './input-date-picker';
@@ -21,8 +21,8 @@ import { InputDatePicker } from './input-date-picker';
   providers: [
     provideDatePickerState(),
     provideDragoneDatePickerConfig(),
-    provideDatePickerDragoneState({ inherit: false }),
-  ],
+    provideDatePickerDragoneState({ inherit: false })
+  ]
 })
 class InputDatePickerTestHost {
   readonly state = ngpDatePicker({});
@@ -32,7 +32,7 @@ class InputDatePickerTestHost {
       locale: signal<IETFLanguageTag | undefined>(undefined),
       options: signal<Intl.DateTimeFormatOptions | undefined>(undefined),
       keepInvalid: signal(true),
-      showToday: signal(true),
+      showToday: signal(true)
     });
   }
 }

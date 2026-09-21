@@ -2,7 +2,7 @@ import {
   argsToTemplate,
   moduleMetadata,
   type Meta,
-  type StoryObj,
+  type StoryObj
 } from '@analogjs/storybook-angular';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -10,7 +10,7 @@ import {
   faSolidMagnifyingGlass,
   faSolidTriangleExclamation,
   faSolidUser,
-  faSolidXmark,
+  faSolidXmark
 } from '@ng-icons/font-awesome/solid';
 
 import { InputText } from '../input-text/input-text';
@@ -35,23 +35,23 @@ const meta: Meta<InputGroupStory> = {
           faSolidMagnifyingGlass,
           faSolidTriangleExclamation,
           faSolidUser,
-          faSolidXmark,
-        }),
-      ],
-    }),
+          faSolidXmark
+        })
+      ]
+    })
   ],
   args: {
     placeholder: 'Enter text...',
-    value: '',
+    value: ''
   },
   argTypes: {
     placeholder: { control: 'text' },
     value: { control: 'text' },
     validationState: {
       control: { type: 'select' },
-      options: ['valid', 'invalid', 'warning', null],
-    },
-  },
+      options: ['valid', 'invalid', 'warning', null]
+    }
+  }
 };
 
 export default meta;
@@ -65,8 +65,8 @@ export const WithLeadingIcon: Story = {
         <ng-icon slot="leading" name="faSolidUser" />
         <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />
       </drgn-input-group>
-    `,
-  }),
+    `
+  })
 };
 
 export const WithTrailingIcon: Story = {
@@ -77,8 +77,8 @@ export const WithTrailingIcon: Story = {
         <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />
         <ng-icon slot="trailing" name="faSolidMagnifyingGlass" />
       </drgn-input-group>
-    `,
-  }),
+    `
+  })
 };
 
 export const WithBothIcons: Story = {
@@ -90,14 +90,14 @@ export const WithBothIcons: Story = {
         <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />
         <ng-icon slot="trailing" name="faSolidXmark" />
       </drgn-input-group>
-    `,
-  }),
+    `
+  })
 };
 
 export const ErrorState: Story = {
   args: {
     validationState: 'invalid',
-    placeholder: 'Invalid input',
+    placeholder: 'Invalid input'
   },
   render: args => ({
     props: args,
@@ -106,14 +106,14 @@ export const ErrorState: Story = {
         <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />
         <ng-icon slot="trailing" name="faSolidTriangleExclamation" />
       </drgn-input-group>
-    `,
-  }),
+    `
+  })
 };
 
 export const Disabled: Story = {
   args: {
     placeholder: 'Disabled input',
-    disabled: true,
+    disabled: true
   },
   render: args => ({
     props: args,
@@ -122,6 +122,6 @@ export const Disabled: Story = {
         <ng-icon slot="leading" name="faSolidUser" />
         <input drgn-input-text ${argsToTemplate(args, { exclude: ['darkMode'] })} />
       </drgn-input-group>
-    `,
-  }),
+    `
+  })
 };

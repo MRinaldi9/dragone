@@ -7,7 +7,7 @@ import {
   NgpSelect,
   NgpSelectDropdown,
   NgpSelectOption,
-  NgpSelectPortal,
+  NgpSelectPortal
 } from 'ng-primitives/select';
 import { map } from 'rxjs';
 
@@ -32,7 +32,7 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
     '[attr.name]': 'name()',
     '[attr.readonly]': 'readonly() ? "" : undefined',
     '[attr.hidden]': 'hidden() ? "" : undefined',
-    '(blur)': 'touch.emit()',
+    '(blur)': 'touch.emit()'
   },
   hostDirectives: [
     {
@@ -42,11 +42,11 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
         'ngpSelectDisabled: disabled',
         'ngpSelectValue: value',
         'ngpSelectMultiple: multiple',
-        'ngpSelectCompareWith: compare',
+        'ngpSelectCompareWith: compare'
       ],
-      outputs: ['ngpSelectOpenChange: openChange'],
-    },
-  ],
+      outputs: ['ngpSelectOpenChange: openChange']
+    }
+  ]
 })
 export class Select<T> {
   readonly options = input<Option<T>[]>();
@@ -76,8 +76,8 @@ export class Select<T> {
 
   readonly valueChange = outputFromObservable(
     outputToObservable(this.#internalState().valueChange).pipe(
-      map(value => this.mapByKey(value, this.optionValue())),
-    ),
+      map(value => this.mapByKey(value, this.optionValue()))
+    )
   );
 
   protected readonly internalValue = linkedSignal(this.#internalState().value);
@@ -95,7 +95,7 @@ export class Select<T> {
    * mapping when provided.
    */
   protected readonly mappedValue = computed(() =>
-    this.mapByKey(this.internalValue(), this.optionLabel()),
+    this.mapByKey(this.internalValue(), this.optionLabel())
   );
 
   /**
@@ -107,7 +107,7 @@ export class Select<T> {
     return (this.options() ?? []).map(option => ({
       value: option,
       label: this.mapByKey(option, this.optionLabel()),
-      selected: this.isOptionSelected(option, selectedValue),
+      selected: this.isOptionSelected(option, selectedValue)
     }));
   });
 

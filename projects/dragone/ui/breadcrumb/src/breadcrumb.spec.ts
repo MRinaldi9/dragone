@@ -15,7 +15,7 @@ describe(Breadcrumb, () => {
     { label: 'products', routerLink: '/category/subcategory/products' },
     { label: 'items', routerLink: '/category/subcategory/products/items' },
     { label: 'item1', routerLink: '/category/subcategory/products/items/item1' },
-    { label: 'details' },
+    { label: 'details' }
   ];
 
   afterEach(() => {
@@ -25,7 +25,7 @@ describe(Breadcrumb, () => {
   it('should render nothing when breadcrumbs is empty', async () => {
     const { locator } = await render(Breadcrumb, {
       inputs: { breadcrumbs },
-      providers: [provideRouter([])],
+      providers: [provideRouter([])]
     });
 
     await expect.element(locator.getByRole('listitem')).not.toBeInTheDocument();
@@ -34,12 +34,12 @@ describe(Breadcrumb, () => {
   it('should render ancestors as links and the current page as text', async () => {
     const { locator } = await render(Breadcrumb, {
       inputs: { breadcrumbs },
-      providers: [provideRouter([])],
+      providers: [provideRouter([])]
     });
     breadcrumbs.set([
       { label: 'home', routerLink: '/' },
       { label: 'products', routerLink: '/products' },
-      { label: 'item' },
+      { label: 'item' }
     ]);
 
     const links = locator.getByRole('link');
@@ -53,7 +53,7 @@ describe(Breadcrumb, () => {
   it('should collapse to first, ellipsis and last item when more than 6 items', async () => {
     const { locator } = await render(Breadcrumb, {
       inputs: { breadcrumbs },
-      providers: [provideRouter([])],
+      providers: [provideRouter([])]
     });
     breadcrumbs.set(trail);
 
@@ -68,7 +68,7 @@ describe(Breadcrumb, () => {
   it('should expand breadcrumbs when ellipsis is clicked', async () => {
     const { locator } = await render(Breadcrumb, {
       inputs: { breadcrumbs },
-      providers: [provideRouter([])],
+      providers: [provideRouter([])]
     });
     breadcrumbs.set(trail);
 

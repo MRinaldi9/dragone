@@ -4,8 +4,8 @@ const config: StorybookConfig = {
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
   framework: {
     name: '@analogjs/storybook-angular',
-    options: {},
+    options: {}
   },
-  stories: ['../projects/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../projects/**/*.stories.@(js|jsx|mjs|ts|tsx)']
 };
 export default config;

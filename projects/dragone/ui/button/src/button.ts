@@ -8,7 +8,7 @@ import {
   provideLogger,
   Status,
   Theme,
-  type StatusType,
+  type StatusType
 } from '@dragone/ui/utils';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -18,7 +18,7 @@ const SUPPORTED_STATUSES: Record<ButtonSemantic, readonly StatusType[]> = {
   primary: ['neutral', 'danger'],
   secondary: ['neutral'],
   tertiary: ['neutral', 'danger'],
-  ghost: ['neutral', 'danger'],
+  ghost: ['neutral', 'danger']
 };
 
 @Component({
@@ -35,25 +35,25 @@ const SUPPORTED_STATUSES: Record<ButtonSemantic, readonly StatusType[]> = {
   host: {
     '[attr.data-size]': 'size()',
     '[attr.data-semantic]': 'semantic()',
-    '[attr.data-icon-only]': 'isIconOnly() ? "" : null',
+    '[attr.data-icon-only]': 'isIconOnly() ? "" : null'
   },
   hostDirectives: [
     { directive: NgpButton, inputs: ['disabled'] },
     {
       directive: NgpFocusVisible,
       inputs: ['ngpFocusVisibleDisabled:focusVisibleDisabled'],
-      outputs: ['ngpFocusVisible:focusVisible'],
+      outputs: ['ngpFocusVisible:focusVisible']
     },
     {
       directive: Theme,
-      inputs: ['theme'],
+      inputs: ['theme']
     },
     {
       directive: Status,
-      inputs: ['drgnStatus:status'],
+      inputs: ['drgnStatus:status']
     },
-    NgpFocus,
-  ],
+    NgpFocus
+  ]
 })
 export class Button {
   /** The size of the button */

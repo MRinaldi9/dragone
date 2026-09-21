@@ -2,7 +2,7 @@ import {
   type Meta,
   type StoryObj,
   argsToTemplate,
-  moduleMetadata,
+  moduleMetadata
 } from '@analogjs/storybook-angular';
 import { provideTooltipConfig } from 'ng-primitives/tooltip';
 import { expect, fn } from 'storybook/test';
@@ -25,8 +25,8 @@ const meta: Meta<TooltipStory> = {
   decorators: [
     moduleMetadata({
       imports: [TooltipTrigger],
-      providers: [provideTooltipConfig({ container: '.tooltip-container' })],
-    }),
+      providers: [provideTooltipConfig({ container: '.tooltip-container' })]
+    })
   ],
   argTypes: {
     tooltipContent: {
@@ -36,11 +36,11 @@ const meta: Meta<TooltipStory> = {
       table: {
         type: {
           summary:
-            'string | { title?: string; body?: string; action?: () => void; actionLabel?: string }',
-        },
-      },
+            'string | { title?: string; body?: string; action?: () => void; actionLabel?: string }'
+        }
+      }
     },
-    tooltipDisabled: { control: 'boolean' },
+    tooltipDisabled: { control: 'boolean' }
   },
   render: args => ({
     props: args,
@@ -49,8 +49,8 @@ const meta: Meta<TooltipStory> = {
         Hover me
       </button>
       <div class="tooltip-container"></div>
-    `,
-  }),
+    `
+  })
 };
 
 export default meta;
@@ -58,7 +58,7 @@ type Story = StoryObj<TooltipStory>;
 
 export const Default: Story = {
   args: {
-    tooltipContent: 'This is a helpful tooltip',
+    tooltipContent: 'This is a helpful tooltip'
   },
   play: async ({ canvas, userEvent }) => {
     const button = await canvas.getByRole('button', { name: 'Hover me' });
@@ -66,15 +66,15 @@ export const Default: Story = {
     const tooltip = await canvas.getByRole('tooltip');
     await expect(tooltip).toBeInTheDocument();
     await expect(tooltip).toHaveTextContent('This is a helpful tooltip');
-  },
+  }
 };
 
 export const WithTitleAndBody: Story = {
   args: {
     tooltipContent: {
       title: 'Important Information',
-      body: 'This tooltip provides additional context about the element.',
-    },
+      body: 'This tooltip provides additional context about the element.'
+    }
   },
   play: async ({ canvas, userEvent }) => {
     const button = await canvas.getByRole('button', { name: 'Hover me' });
@@ -85,9 +85,9 @@ export const WithTitleAndBody: Story = {
     const tooltipBody = tooltip.querySelector('p');
     await expect(tooltipTitle).toHaveTextContent('Important Information');
     await expect(tooltipBody).toHaveTextContent(
-      'This tooltip provides additional context about the element.',
+      'This tooltip provides additional context about the element.'
     );
-  },
+  }
 };
 
 export const WithAction: Story = {
@@ -96,8 +96,8 @@ export const WithAction: Story = {
       title: 'Delete Item',
       body: 'This action cannot be undone. All data will be permanently deleted.',
       action: fn(() => console.log('Delete action triggered')),
-      actionLabel: 'Delete',
-    },
+      actionLabel: 'Delete'
+    }
   },
   play: async ({ canvas, userEvent, args }) => {
     const button = await canvas.getByRole('button', { name: 'Hover me' });
@@ -108,10 +108,10 @@ export const WithAction: Story = {
     const tooltipBody = tooltip.querySelector('p');
     await expect(tooltipTitle).toHaveTextContent('Delete Item');
     await expect(tooltipBody).toHaveTextContent(
-      'This action cannot be undone. All data will be permanently deleted.',
+      'This action cannot be undone. All data will be permanently deleted.'
     );
     const actionButton = await canvas.getByRole('button', { name: 'Delete' });
     await userEvent.click(actionButton);
     await expect((args.tooltipContent as { action: () => void }).action).toHaveBeenCalled();
-  },
+  }
 };

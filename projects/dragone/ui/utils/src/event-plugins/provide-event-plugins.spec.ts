@@ -16,7 +16,7 @@ class MockPlugin extends EventManagerPlugin {
 describe(provideEventsPlugin, () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideEventsPlugin(MockPlugin)],
+      providers: [provideEventsPlugin(MockPlugin)]
     });
   });
 

@@ -18,13 +18,13 @@ export const ANNOUNCEMENT_DELAY_MS = 500;
  */
 export const ANNOUNCEMENT_DELAY = new InjectionToken<number>('ANNOUNCEMENT_DELAY', {
   providedIn: 'root',
-  factory: (): number => ANNOUNCEMENT_DELAY_MS,
+  factory: (): number => ANNOUNCEMENT_DELAY_MS
 });
 
 /** Provides a custom delay between consecutive announcements. */
 export const provideAnnouncementDelay = (delayMs: number): Provider => ({
   provide: ANNOUNCEMENT_DELAY,
-  useValue: delayMs,
+  useValue: delayMs
 });
 
 export interface AnnouncerState {
@@ -38,13 +38,13 @@ export const [, announcerFactory, injectAnnouncerState, provideAnnouncerState] =
   ({ announce, announceSequence, clear }: AnnouncerState) => ({
     announce,
     announceSequence,
-    clear,
-  }),
+    clear
+  })
 );
 
 @Directive({
   selector: '[drgnAnnouncer]',
-  providers: [provideAnnouncerState({ inherit: false })],
+  providers: [provideAnnouncerState({ inherit: false })]
 })
 export class Announcer {
   readonly #liveAnnouncer = inject(LiveAnnouncer);
@@ -57,7 +57,7 @@ export class Announcer {
     announcerFactory({
       announce: this.announce,
       announceSequence: this.announceSequence,
-      clear: this.clear,
+      clear: this.clear
     });
   }
 
@@ -87,7 +87,7 @@ export class Announcer {
     messages: string[],
     index: number,
     delayMs: number,
-    announcementId: number,
+    announcementId: number
   ): Promise<void> {
     // A newer announcement or component destruction supersedes this sequence.
     if (announcementId !== this.#announcementId || this.#destroyRef.destroyed) return;

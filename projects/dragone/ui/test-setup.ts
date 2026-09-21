@@ -6,7 +6,7 @@ import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
 import { cdp } from 'vitest/browser';
 
 setupTestBed({
-  browserMode: true,
+  browserMode: true
 });
 
 /*
@@ -17,12 +17,12 @@ setupTestBed({
  */
 beforeAll(async () => {
   await cdp().send('Emulation.setEmulatedMedia', {
-    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }],
+    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }]
   });
 });
 
 afterAll(async () => {
   await cdp().send('Emulation.setEmulatedMedia', {
-    features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }],
+    features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }]
   });
 });

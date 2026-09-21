@@ -2,7 +2,7 @@ import {
   argsToTemplate,
   moduleMetadata,
   type Meta,
-  type StoryObj,
+  type StoryObj
 } from '@analogjs/storybook-angular';
 
 import { TemporalAdapter } from '@dragone/ui/temporal-adapter';
@@ -24,34 +24,34 @@ const meta: Meta<MetaDatePicker> = {
   argTypes: {
     value: {
       control: { type: 'date' },
-      description: 'The current date value of the date picker.',
+      description: 'The current date value of the date picker.'
     },
     min: {
       control: { type: 'date' },
-      description: 'The minimum selectable date of the date picker.',
+      description: 'The minimum selectable date of the date picker.'
     },
     max: {
       control: { type: 'date' },
-      description: 'The maximum selectable date of the date picker.',
+      description: 'The maximum selectable date of the date picker.'
     },
     dateDisabled: {
       type: 'function',
-      description: 'Function to determine if a date should be disabled.',
+      description: 'Function to determine if a date should be disabled.'
     },
     keepInvalid: {
       control: 'boolean',
       description:
         'If true, the input will keep the invalid value instead of reverting to the last valid value.',
       table: {
-        defaultValue: { summary: 'true' },
-      },
+        defaultValue: { summary: 'true' }
+      }
     },
     locale: {
       control: 'text',
       description: 'The locale used to determine the date format and separators.',
       table: {
-        defaultValue: { summary: 'it-IT' },
-      },
+        defaultValue: { summary: 'it-IT' }
+      }
     },
     options: {
       control: 'object',
@@ -61,28 +61,28 @@ const meta: Meta<MetaDatePicker> = {
           summary: JSON.stringify({
             day: '2-digit',
             month: '2-digit',
-            year: 'numeric',
-          }),
-        },
-      },
+            year: 'numeric'
+          })
+        }
+      }
     },
     valueChange: {
       description: 'Event emitted when the date value changes.',
-      type: 'function',
-    },
+      type: 'function'
+    }
   },
   decorators: [
     moduleMetadata({
-      providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })],
-    }),
+      providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })]
+    })
   ],
   tags: ['autodocs'],
   render: args => ({
     props: args,
     template: `
         <drgn-date-picker [(value)]="value" ${argsToTemplate(args, { exclude: ['value'] })} />
-      `,
-  }),
+      `
+  })
 };
 
 export default meta;
@@ -91,15 +91,15 @@ type Story = StoryObj<MetaDatePicker>;
 export const Default: Story = {
   args: {
     // Value: Temporal.PlainDateTime.from({ year: 2024, month: 1, day: 1 }),
-    keepInvalid: true,
-  },
+    keepInvalid: true
+  }
 };
 
 export const WithMinMax: Story = {
   args: {
     min: Temporal.PlainDateTime.from({ year: 2024, month: 1, day: 1 }),
-    max: Temporal.PlainDateTime.from({ year: 2024, month: 12, day: 31 }),
-  },
+    max: Temporal.PlainDateTime.from({ year: 2024, month: 12, day: 31 })
+  }
 };
 
 export const WithDisableDate: Story = {
@@ -110,8 +110,8 @@ export const WithDisableDate: Story = {
   render: () => ({
     props: {
       disableWeekends: (date: Temporal.PlainDateTime) =>
-        date.dayOfWeek === 6 || date.dayOfWeek === 7,
+        date.dayOfWeek === 6 || date.dayOfWeek === 7
     },
-    template: `<drgn-date-picker [dateDisabled]="disableWeekends" />`,
-  }),
+    template: `<drgn-date-picker [dateDisabled]="disableWeekends" />`
+  })
 };

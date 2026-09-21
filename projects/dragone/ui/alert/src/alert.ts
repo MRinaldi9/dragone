@@ -4,7 +4,7 @@ import {
   faSolidCircleCheck,
   faSolidCircleExclamation,
   faSolidCircleInfo,
-  faSolidTriangleExclamation,
+  faSolidTriangleExclamation
 } from '@ng-icons/font-awesome/solid';
 
 import { Button } from '@dragone/ui/button';
@@ -16,7 +16,7 @@ const TYPE_TO_ICON = {
   info: faSolidCircleInfo,
   success: faSolidCircleCheck,
   warning: faSolidTriangleExclamation,
-  danger: faSolidCircleExclamation,
+  danger: faSolidCircleExclamation
 } as const;
 
 @Component({
@@ -46,13 +46,13 @@ const TYPE_TO_ICON = {
     '[attr.role]': 'ariaRole()',
     '[ariaLive]': 'politeness()',
     '[ariaAtomic]': 'ariaAtomic()',
-    '[attr.data-layout]': 'layoutState().layout()',
+    '[attr.data-layout]': 'layoutState().layout()'
   },
   hostDirectives: [
     { directive: Theme, inputs: ['theme'] },
     { directive: Status, inputs: ['drgnStatus:status'] },
-    { directive: Layout, inputs: ['drgnLayout:layout'] },
-  ],
+    { directive: Layout, inputs: ['drgnLayout:layout'] }
+  ]
 })
 export class Alert {
   readonly title = input.required<string>();
@@ -94,10 +94,10 @@ export class Alert {
       }
 
       return politeness === 'assertive' ? 'alert' : 'status';
-    },
+    }
   );
 
   protected readonly ariaAtomic = computed<'true' | null>(() =>
-    this.politeness() === 'off' ? null : 'true',
+    this.politeness() === 'off' ? null : 'true'
   );
 }

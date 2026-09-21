@@ -21,50 +21,50 @@ const meta: Meta<SwitchArgs> = {
       description: 'Controlla se lo switch è attivo o meno',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     disabled: {
       control: 'boolean',
       description: 'Disabilita lo switch impedendo interazioni',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     checkedChange: {
       action: 'checkedChange',
       description: 'Evento emesso quando lo stato checked cambia',
       table: {
-        type: { summary: 'EventEmitter<boolean>' },
-      },
+        type: { summary: 'EventEmitter<boolean>' }
+      }
     },
     hidden: {
       control: 'boolean',
       description: 'Nasconde lo switch quando impostato a true',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     readonly: {
       control: 'boolean',
       description: 'Rende lo switch di sola lettura, non interagibile',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
+        defaultValue: { summary: 'false' }
+      }
+    }
   },
   args: {
-    ariaLabel: 'switch',
+    ariaLabel: 'switch'
   },
   render: args => ({
     props: args,
     template: `
       <drgn-switch aria-label="Switch" ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>
-    `,
-  }),
+    `
+  })
 };
 
 export default meta;
@@ -75,23 +75,23 @@ export const Default: Story = {
   args: {
     checked: false,
     disabled: false,
-    checkedChange: fn(),
-  },
+    checkedChange: fn()
+  }
 };
 
 /** Switch in stato checked (attivo). */
 export const Checked: Story = {
   args: {
     ...Default.args,
-    checked: true,
-  },
+    checked: true
+  }
 };
 
 /** Switch in stato disabilitato, non interagibile. */
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    disabled: true,
+    disabled: true
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -100,7 +100,7 @@ export const Disabled: Story = {
     // Verifica che lo switch sia disabilitato
     await expect(switchElement).toHaveAttribute('aria-disabled', 'true');
     await expect(switchElement).toHaveAttribute('data-disabled');
-  },
+  }
 };
 
 /** Switch disabilitato in stato checked. */
@@ -108,8 +108,8 @@ export const DisabledChecked: Story = {
   args: {
     ...Default.args,
     checked: true,
-    disabled: true,
-  },
+    disabled: true
+  }
 };
 
 /** Test di interazione: verifica che lo switch cambi stato al click. */
@@ -135,7 +135,7 @@ export const InteractionTest: Story = {
     // Verifica stato non checked
     await expect(switchElement).toHaveAttribute('aria-checked', 'false');
     await expect(switchElement).not.toHaveAttribute('data-checked');
-  },
+  }
 };
 
 /** Test di accessibilità: verifica la navigazione da tastiera. */
@@ -169,7 +169,7 @@ export const KeyboardNavigation: Story = {
       await userEvent.keyboard('{Enter}');
       await expect(switchElement).toHaveAttribute('aria-checked', 'false');
     });
-  },
+  }
 };
 
 /**
@@ -188,6 +188,6 @@ export const WithLabel: Story = {
           </span>
         </label>
       </div>
-    `,
-  }),
+    `
+  })
 };

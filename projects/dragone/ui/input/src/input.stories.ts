@@ -14,29 +14,29 @@ const meta: Meta<InputProps> = {
     type: {
       control: 'select',
       options: ['text', 'email', 'password', 'tel', 'url', 'number'],
-      description: 'Tipo di input HTML',
+      description: 'Tipo di input HTML'
     },
     placeholder: {
       control: 'text',
-      description: 'Testo placeholder',
+      description: 'Testo placeholder'
     },
     disabled: {
       control: 'boolean',
-      description: 'Stato disabilitato',
+      description: 'Stato disabilitato'
     },
     readOnly: {
       control: 'boolean',
-      description: 'Stato readonly',
+      description: 'Stato readonly'
     },
     required: {
       control: 'boolean',
-      description: 'Campo obbligatorio',
+      description: 'Campo obbligatorio'
     },
     value: {
       control: 'text',
-      description: "Valore dell'input",
-    },
-  },
+      description: "Valore dell'input"
+    }
+  }
 };
 
 export default meta;
@@ -44,12 +44,12 @@ type Story = StoryObj<InputProps>;
 
 export const Default: Story = {
   args: {
-    placeholder: 'Inserisci il testo...',
+    placeholder: 'Inserisci il testo...'
   },
   render: args => ({
     props: args,
     template: `
       <input drgnInputText ${argsToTemplate(args)}/>
-    `,
-  }),
+    `
+  })
 };

@@ -8,7 +8,7 @@ import {
   NgpSelect,
   NgpSelectDropdown,
   NgpSelectOption,
-  NgpSelectPortal,
+  NgpSelectPortal
 } from 'ng-primitives/select';
 
 import { isNil } from '@dragone/ui/utils';
@@ -32,16 +32,16 @@ export const DEFAULT_YEAR_RANGE = 100;
   styleUrl: './period-select.css',
   providers: [
     provideIcons({
-      faSolidChevronDown,
-    }),
+      faSolidChevronDown
+    })
   ],
   hostDirectives: [
     {
       directive: NgpSelect,
       inputs: ['ngpSelectValue:value', 'ngpSelectDisabled:disabled', 'ngpSelectOptions:options'],
-      outputs: ['ngpSelectValueChange:valueChange'],
-    },
-  ],
+      outputs: ['ngpSelectValueChange:valueChange']
+    }
+  ]
 })
 export class CalendarPeriodSelect<T> {
   /** The calendar period this select edits on the focused date. */

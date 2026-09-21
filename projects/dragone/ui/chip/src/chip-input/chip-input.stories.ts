@@ -10,32 +10,32 @@ const meta: Meta<ChipInput> = {
   tags: ['autodocs'],
   args: {
     label: 'Chips',
-    remove: fn(),
+    remove: fn()
   },
   argTypes: {
     label: {
       control: 'text',
-      description: 'Testo visualizzato nella chip.',
+      description: 'Testo visualizzato nella chip.'
     },
     icon: {
       control: 'text',
       description: 'Mostra un esempio di icona SVG inline prima della label.',
-      table: { type: { summary: 'string' }, defaultValue: { summary: 'undefined' } },
+      table: { type: { summary: 'string' }, defaultValue: { summary: 'undefined' } }
     },
     remove: {
       action: 'remove',
       description: 'Evento emesso quando si clicca il pulsante di rimozione.',
-      table: { type: { summary: 'EventEmitter<void>' } },
+      table: { type: { summary: 'EventEmitter<void>' } }
     },
     disabled: {
       control: 'boolean',
       description: 'Disabilita la chip, rendendola non interattiva.',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-    },
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } }
+    }
   },
   render: args => ({
     props: {
-      ...args,
+      ...args
     },
     template: `
       <drgn-chip-input
@@ -44,8 +44,8 @@ const meta: Meta<ChipInput> = {
         ${args.icon ? '[icon]="icon"' : ''}
         (remove)="remove()"
       ></drgn-chip-input>
-    `,
-  }),
+    `
+  })
 };
 
 export default meta;
@@ -55,12 +55,12 @@ export const Default: Story = {};
 
 export const WithIcon: Story = {
   args: {
-    icon: faSolidUser,
-  },
+    icon: faSolidUser
+  }
 };
 
 export const LongLabel: Story = {
   args: {
-    label: 'Richiesta assistenza previdenziale',
-  },
+    label: 'Richiesta assistenza previdenziale'
+  }
 };

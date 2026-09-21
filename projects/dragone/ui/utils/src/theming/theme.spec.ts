@@ -9,7 +9,7 @@ import { Theme } from './theme';
     <section drgnTheme theme="dark">
       <div drgnTheme data-testid="child"></div>
     </section>
-  `,
+  `
 })
 class HostComponent {}
 

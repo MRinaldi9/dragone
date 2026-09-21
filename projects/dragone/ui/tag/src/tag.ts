@@ -9,12 +9,12 @@ import { Status, Theme } from '@dragone/ui/utils';
   host: {
     class: 'drgn-label-md-700',
     role: 'status',
-    '[ariaLabel]': 'ariaLabel()',
+    '[ariaLabel]': 'ariaLabel()'
   },
   hostDirectives: [
     { directive: Status, inputs: ['drgnStatus:status'] },
-    { directive: Theme, inputs: ['theme'] },
-  ],
+    { directive: Theme, inputs: ['theme'] }
+  ]
 })
 export class Tag {
   readonly ariaLabel = input<string>();

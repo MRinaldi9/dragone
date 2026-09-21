@@ -5,7 +5,7 @@ import { ngpDatePicker, provideDatePickerState } from 'ng-primitives/date-picker
 import { provideDragoneDatePickerConfig } from '../../providers/date-picker-config';
 import {
   datePickerDragoneStateFactory,
-  provideDatePickerDragoneState,
+  provideDatePickerDragoneState
 } from '../../state/date-picker-state';
 import type { IETFLanguageTag } from '../../utils/guards';
 import { Calendar } from './calendar';
@@ -20,8 +20,8 @@ import { Calendar } from './calendar';
   providers: [
     provideDatePickerState(),
     provideDragoneDatePickerConfig(),
-    provideDatePickerDragoneState({ inherit: false }),
-  ],
+    provideDatePickerDragoneState({ inherit: false })
+  ]
 })
 class CalendarTestHost {
   readonly state = ngpDatePicker({});
@@ -31,7 +31,7 @@ class CalendarTestHost {
       locale: signal<IETFLanguageTag | undefined>(undefined),
       options: signal<Intl.DateTimeFormatOptions | undefined>(undefined),
       keepInvalid: signal(true),
-      showToday: signal(true),
+      showToday: signal(true)
     });
   }
 }

@@ -22,56 +22,56 @@ const meta: Meta<AlertStory> = {
     status: 'info',
     titleAsHeading: false,
     headingLevel: 4,
-    ctaClick: fn(),
+    ctaClick: fn()
   },
   argTypes: {
     title: {
-      control: 'text',
+      control: 'text'
     },
     layout: {
       options: ['mobile', 'desktop'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'desktop' },
-      },
+        defaultValue: { summary: 'desktop' }
+      }
     },
     theme: {
       options: ['light', 'dark'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'light' },
-      },
+        defaultValue: { summary: 'light' }
+      }
     },
     status: {
       options: ['info', 'success', 'warning', 'danger'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'info' },
-      },
+        defaultValue: { summary: 'info' }
+      }
     },
     titleAsHeading: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     headingLevel: {
       options: [1, 2, 3, 4, 5, 6],
       control: { type: 'select' },
       if: { arg: 'titleAsHeading', truthy: true },
       table: {
-        defaultValue: { summary: '4' },
-      },
+        defaultValue: { summary: '4' }
+      }
     },
     ctaText: {
-      control: 'text',
+      control: 'text'
     },
     ctaClick: {
       if: { arg: 'ctaText', truthy: true },
       type: 'function',
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 };
 
 export default meta;
@@ -80,7 +80,7 @@ type Story = StoryObj<AlertStory>;
 export const Info: Story = {
   args: {
     title: 'This is an alert title',
-    ctaText: 'CTA',
+    ctaText: 'CTA'
   },
   render: args => ({
     props: args,
@@ -89,6 +89,6 @@ export const Info: Story = {
           Labore doloribus ea consequatur quam sequi similique unde.
           Et ad laudantium sint aliquid dolores. Aut est rerum illum nulla corrupti reiciendis eum.
         </drgn-alert>
-    `,
-  }),
+    `
+  })
 };

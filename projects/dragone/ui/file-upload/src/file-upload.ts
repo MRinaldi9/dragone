@@ -6,7 +6,7 @@ import {
   input,
   model,
   output,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -35,9 +35,9 @@ const defaultFileRemoved = (file: File): string => `File removed: ${file.name}`;
   host: {
     '[attr.name]': 'name() ? name() : null',
     '[attr.hidden]': 'hidden() ? "" : null',
-    '[attr.aria-disabled]': 'disabled() ? "true" : null',
+    '[attr.aria-disabled]': 'disabled() ? "true" : null'
   },
-  hostDirectives: [Announcer],
+  hostDirectives: [Announcer]
 })
 export class FileUpload implements FormValueControl<FileUploadValue | null> {
   readonly value = model<FileUploadValue | null>(null);
@@ -87,7 +87,7 @@ export class FileUpload implements FormValueControl<FileUploadValue | null> {
       const selectedFiles = Array.from(files);
       this.value.set(selectedFiles);
       this.#announcer().announceSequence(
-        selectedFiles.map(file => this.fileAddedAnnouncer()(file)),
+        selectedFiles.map(file => this.fileAddedAnnouncer()(file))
       );
     }
   }

@@ -22,7 +22,7 @@ import { AccordionItem } from './accordion-item/accordion-item';
     :host {
       --drgn-motion-duration-medium: 500ms;
     }
-  `,
+  `
 })
 class TestHostAccordion {
   variantColor = input<'light' | 'dark'>('dark');

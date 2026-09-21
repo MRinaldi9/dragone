@@ -13,7 +13,7 @@ const isWeekend = (date: Temporal.PlainDateTime) => date.dayOfWeek === 6 || date
 /** Day-of-month of the nearest date to `date` that is not disabled. */
 function nearestEnabledDay(
   date: Temporal.PlainDateTime,
-  isDisabled: (date: Temporal.PlainDateTime) => boolean,
+  isDisabled: (date: Temporal.PlainDateTime) => boolean
 ): number {
   if (!isDisabled(date)) {
     return date.day;
@@ -33,7 +33,7 @@ function nearestEnabledDay(
 @Component({
   imports: [DatePicker],
   template: `<drgn-date-picker [dateDisabled]="dateDisabled" />`,
-  providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })],
+  providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })]
 })
 class DatePickerTest {
   dateDisabled = vi.fn<(date: Temporal.PlainDateTime) => boolean>(isWeekend);
@@ -43,7 +43,7 @@ describe(DatePicker, () => {
   it('should create', async () => {
     await TestBed.configureTestingModule({
       imports: [DatePicker],
-      providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })],
+      providers: [provideDragoneDatePickerConfig({ adapter: TemporalAdapter })]
     }).compileComponents();
 
     const fixture = TestBed.createComponent(DatePicker);
@@ -60,7 +60,7 @@ describe(DatePicker, () => {
     await expect.element(getByRole('button', { name: /^\d+$/ }).first()).toBeVisible();
 
     expect(componentClassInstance.dateDisabled).toHaveBeenCalledWith(
-      expect.any(Temporal.PlainDateTime),
+      expect.any(Temporal.PlainDateTime)
     );
   });
 

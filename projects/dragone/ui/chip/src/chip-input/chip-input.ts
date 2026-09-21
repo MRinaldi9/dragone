@@ -28,9 +28,9 @@ import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
   host: {
     class: 'drgn-label-md-700',
     tabindex: '-1',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    '[attr.data-disabled]': 'disabled() ? "" : null'
   },
-  hostDirectives: [NgpFocusVisible],
+  hostDirectives: [NgpFocusVisible]
 })
 export class ChipInput {
   readonly disabled = input<boolean>(false);
@@ -40,6 +40,6 @@ export class ChipInput {
   readonly remove = output<void>();
 
   protected readonly ariaLabelBtn = computed(
-    () => this.removeAriaLabel() ?? `Remove ${this.label()}`,
+    () => this.removeAriaLabel() ?? `Remove ${this.label()}`
   );
 }

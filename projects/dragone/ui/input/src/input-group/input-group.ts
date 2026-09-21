@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
     <ng-content select="input" />
     <ng-content select="[slot='trailing']" />
   `,
-  styleUrl: './input-group.css',
+  styleUrl: './input-group.css'
 })
 export class InputGroup {}

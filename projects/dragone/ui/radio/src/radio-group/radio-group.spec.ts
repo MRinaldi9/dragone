@@ -13,7 +13,7 @@ import { RadioGroup } from './radio-group';
       <drgn-radio-item value="option2">Opzione 2</drgn-radio-item>
       <drgn-radio-item value="option3">Opzione 3</drgn-radio-item>
     </drgn-radio-group>
-  `,
+  `
 })
 class RadioGroupTest {
   disabled = input(false);

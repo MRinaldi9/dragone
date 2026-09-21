@@ -24,7 +24,7 @@ type FileAnnouncer = (file: File) => string;
 
 describe(FileUpload, () => {
   const liveAnnouncer = {
-    announce: vi.fn<(message: string) => Promise<void>>(),
+    announce: vi.fn<(message: string) => Promise<void>>()
   };
 
   const multiple = signal(false);
@@ -34,11 +34,11 @@ describe(FileUpload, () => {
     inputs: {
       fileAddedAnnouncer?: FileAnnouncer | Signal<FileAnnouncer>;
       fileRemovedAnnouncer?: FileAnnouncer | Signal<FileAnnouncer>;
-    } = {},
+    } = {}
   ) =>
     render(FileUpload, {
       inputs: { multiple, disabled, ...inputs },
-      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }],
+      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }]
     });
 
   afterEach(() => {
@@ -147,7 +147,7 @@ describe(FileUpload, () => {
     setUpFastForward();
     const fileAddedAnnouncer = vi.fn<FileAnnouncer>(file => `Aggiunto: ${file.name}`);
     const { fixture, componentClassInstance: component } = await renderFileUpload({
-      fileAddedAnnouncer,
+      fileAddedAnnouncer
     });
     const first = createFile('first.pdf');
     const second = createFile('second.pdf');
@@ -193,7 +193,7 @@ describe(FileUpload, () => {
   it('should react to a changed file added announcer', async () => {
     const fileAddedAnnouncer = signal<FileAnnouncer>(file => `Primo: ${file.name}`);
     const { fixture, componentClassInstance: component } = await renderFileUpload({
-      fileAddedAnnouncer,
+      fileAddedAnnouncer
     });
     const report = createFile('report.pdf');
 
@@ -281,7 +281,7 @@ describe(FileUpload, () => {
       baseElement,
       fixture,
       locator,
-      componentClassInstance: component,
+      componentClassInstance: component
     } = await renderFileUpload();
     const touchSpy = vi.fn<() => void>();
     component.touch.subscribe(touchSpy);

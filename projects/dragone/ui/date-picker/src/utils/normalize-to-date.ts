@@ -25,5 +25,5 @@ export const normalizeToDate = <T>(date: T, adapter: NgpDateAdapter<T>): Date =>
     adapter.getHours(date),
     adapter.getMinutes(date),
     adapter.getSeconds(date),
-    adapter.getMilliseconds(date),
+    adapter.getMilliseconds(date)
   );

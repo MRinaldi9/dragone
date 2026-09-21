@@ -14,12 +14,12 @@ interface TestOption {
 const setupForm = (
   options: (TestOption | string)[] = [
     { label: 'Opzione A', value: 'a' },
-    { label: 'Opzione B', value: 'b' },
+    { label: 'Opzione B', value: 'b' }
   ],
   optionLabel?: string,
   optionValue?: string,
   multiple = false,
-  compare = Object.is,
+  compare = Object.is
 ) => {
   @Component({
     imports: [FormField, Select],
@@ -32,7 +32,7 @@ const setupForm = (
         [multiple]="multiple()"
         [compare]="compare()"
       />
-    `,
+    `
   })
   class FormCmp {
     readonly field = form(signal(''));
@@ -57,7 +57,7 @@ const setupForm = (
       [ariaLabel]="ariaLabel()"
       (valueChange)="valueChange.emit($event)"
     />
-  `,
+  `
 })
 class TestHostComponent {
   readonly options = input<TestOption[]>([]);
@@ -73,7 +73,7 @@ describe(Select, () => {
   const options = signal<TestOption[]>([
     { label: 'Opzione A', value: 'a' },
     { label: 'Opzione B', value: 'b' },
-    { label: 'Opzione C', value: 'c' },
+    { label: 'Opzione C', value: 'c' }
   ]);
   const ariaLabel = signal('');
 
@@ -83,21 +83,21 @@ describe(Select, () => {
     options.set([
       { label: 'Opzione A', value: 'a' },
       { label: 'Opzione B', value: 'b' },
-      { label: 'Opzione C', value: 'c' },
+      { label: 'Opzione C', value: 'c' }
     ]);
     ariaLabel.set('');
   });
 
   it('should create', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { options, placeholder, optionLabel, ariaLabel },
+      inputs: { options, placeholder, optionLabel, ariaLabel }
     });
     await expect.element(locator).toBeTruthy();
   });
 
   it('should render placeholder when no value is set', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { options, placeholder, optionLabel, ariaLabel },
+      inputs: { options, placeholder, optionLabel, ariaLabel }
     });
     placeholder.set('Scegli un valore');
     const placeholderEl = locator.getByTestId('placeholder');
@@ -106,7 +106,7 @@ describe(Select, () => {
 
   it.each(options())('should render mapped label when a value is set', async ({ label }) => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { options, placeholder, optionLabel, ariaLabel },
+      inputs: { options, placeholder, optionLabel, ariaLabel }
     });
     optionLabel.set('label');
     await locator.getByRole('combobox').click();
@@ -116,7 +116,7 @@ describe(Select, () => {
 
   it('should set aria-label when provided', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { options, placeholder, optionLabel, ariaLabel },
+      inputs: { options, placeholder, optionLabel, ariaLabel }
     });
     const combobox = locator.getByRole('combobox');
     placeholder.set('Scegli un valore');
@@ -129,7 +129,7 @@ describe(Select, () => {
     const valueChangeSpy = vi.fn<(value: unknown) => void>();
     const { locator } = await render(TestHostComponent, {
       inputs: { options, placeholder, optionLabel, ariaLabel },
-      outputs: { valueChange: valueChangeSpy },
+      outputs: { valueChange: valueChangeSpy }
     });
     optionLabel.set('label');
     await locator.getByRole('combobox').click();
@@ -156,7 +156,7 @@ describe(Select, () => {
       const { componentClassInstance: component, locator } = await setupForm(
         options(),
         'label',
-        'value',
+        'value'
       );
       expect(component.field().value()).toBe('');
 
@@ -173,7 +173,7 @@ describe(Select, () => {
         options(),
         'label',
         'value',
-        true,
+        true
       );
       expect(component.field().value()).toBe('');
 
@@ -200,7 +200,7 @@ describe(Select, () => {
     it('should forward a direct [value] binding to NgpSelect', async () => {
       @Component({
         imports: [Select],
-        template: `<drgn-select [value]="value()" [options]="options()" />`,
+        template: `<drgn-select [value]="value()" [options]="options()" />`
       })
       class ValueCmp {
         readonly value = signal('bar');
@@ -225,7 +225,7 @@ describe(Select, () => {
         'label',
         'value',
         false,
-        compareByValue,
+        compareByValue
       );
 
       const select = locator.getByRole('combobox');

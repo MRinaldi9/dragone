@@ -11,7 +11,7 @@ import { Switch } from './switch';
 const setupForm = () => {
   @Component({
     imports: [FormField, Switch],
-    template: `<drgn-switch [formField]="field" />`,
+    template: `<drgn-switch [formField]="field" />`
   })
   class FormCmp {
     isDisabled = signal(false);
@@ -82,7 +82,7 @@ describe(Switch, () => {
     it('should update form value on toggle', async () => {
       const {
         componentClassInstance: { field },
-        locator,
+        locator
       } = await setupForm();
       const switchElement = await locator.getByRole('switch');
       await expect.element(switchElement).toHaveAttribute('aria-checked', 'false');
@@ -95,7 +95,7 @@ describe(Switch, () => {
     it('should disable component trough form api', async () => {
       const {
         componentClassInstance: { field, isDisabled },
-        locator,
+        locator
       } = await setupForm();
       const switchElement = await locator.getByRole('switch');
       await expect.element(switchElement).toHaveAttribute('aria-disabled', 'false');
@@ -108,7 +108,7 @@ describe(Switch, () => {
     it('should readonly component trough form api', async () => {
       const {
         componentClassInstance: { field, isReadonly },
-        locator,
+        locator
       } = await setupForm();
       const switchElement = await locator.getByRole('switch');
       await expect.element(switchElement).not.toHaveAttribute('data-readonly');
@@ -121,7 +121,7 @@ describe(Switch, () => {
     it('should hidden component trough form api', async () => {
       const {
         componentClassInstance: { field, isHidden },
-        locator,
+        locator
       } = await setupForm();
       const switchElement = await locator.getByRole('switch');
       await expect.element(switchElement).not.toHaveAttribute('data-hidden');

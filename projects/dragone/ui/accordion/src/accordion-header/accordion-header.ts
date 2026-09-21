@@ -4,7 +4,7 @@ import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
   injectAccordionItemState,
   injectAccordionState,
-  NgpAccordionTrigger,
+  NgpAccordionTrigger
 } from 'ng-primitives/accordion';
 
 import { Button, type ButtonSemantic } from '@dragone/ui/button';
@@ -30,8 +30,8 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
   providers: [provideIcons({ faSolidChevronDown })],
   host: {
     role: 'heading',
-    '[ariaLevel]': 'ariaLevel()',
-  },
+    '[ariaLevel]': 'ariaLevel()'
+  }
 })
 export class AccordionHeader {
   readonly ariaLevel = input.required<AriaLevel>();
@@ -40,6 +40,6 @@ export class AccordionHeader {
   private readonly accordionState = injectAccordionState();
 
   protected readonly isDisabled = computed(
-    () => this.internalState().disabled() || this.accordionState().disabled(),
+    () => this.internalState().disabled() || this.accordionState().disabled()
   );
 }

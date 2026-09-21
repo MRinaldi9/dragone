@@ -33,7 +33,7 @@ export type TooltipContext =
     }
   `,
   styleUrl: './tooltip.css',
-  hostDirectives: [NgpTooltip],
+  hostDirectives: [NgpTooltip]
 })
 export class Tooltip {
   protected content = injectTooltipContext<TooltipContext>();

@@ -10,7 +10,7 @@ import { toElement } from '@dragone/ui/utils';
  */
 @Directive({
   selector: 'ul[drgnFocusManager]',
-  exportAs: 'focusManager',
+  exportAs: 'focusManager'
 })
 export class FocusManager {
   readonly fallbackElement = input<ElementRef<HTMLElement> | null>(null);

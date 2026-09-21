@@ -9,7 +9,7 @@ describe(BreadcrumbItem, () => {
   const breadcrumb = signal<BreadcrumbItemConfig>({
     label: 'Home',
     routerLink: '/',
-    icon: faSolidHouse,
+    icon: faSolidHouse
   });
 
   afterEach(() => {
@@ -19,7 +19,7 @@ describe(BreadcrumbItem, () => {
   it('show breadcrumb item with icon', async () => {
     const { locator } = await render(BreadcrumbItem, {
       inputs: { breadcrumbConfiguration: breadcrumb },
-      providers: [provideRouter([])],
+      providers: [provideRouter([])]
     });
 
     await expect.element(locator.getByRole('link')).toHaveTextContent('Home');
@@ -29,7 +29,7 @@ describe(BreadcrumbItem, () => {
   it('show current page item as text with aria-current', async () => {
     const { locator } = await render(BreadcrumbItem, {
       inputs: { breadcrumbConfiguration: breadcrumb },
-      providers: [provideRouter([])],
+      providers: [provideRouter([])]
     });
     breadcrumb.set({ label: 'Current page' });
 

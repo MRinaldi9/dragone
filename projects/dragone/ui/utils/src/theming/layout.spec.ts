@@ -5,7 +5,7 @@ import { Layout, type LayoutType } from './layout';
 
 @Component({
   imports: [Layout],
-  template: ` <div data-testid="layout" [drgnLayout]="layout()"></div> `,
+  template: ` <div data-testid="layout" [drgnLayout]="layout()"></div> `
 })
 class TestHostComponent {
   layout = input<LayoutType>('desktop');

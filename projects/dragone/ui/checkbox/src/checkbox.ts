@@ -18,16 +18,16 @@ import { NgpFocusVisible } from 'ng-primitives/interactions';
     '[hidden]': 'hidden()',
     '[attr.name]': 'name() ? name() : null',
     '[attr.readonly]': 'readonly() ? "" : null',
-    '(blur)': 'touch.emit()',
+    '(blur)': 'touch.emit()'
   },
   hostDirectives: [
     NgpFocusVisible,
     {
       directive: NgpCheckbox,
       inputs: ['ngpCheckboxChecked:checked', 'ngpCheckboxDisabled:disabled', 'id'],
-      outputs: ['ngpCheckboxCheckedChange:checkedChange'],
-    },
-  ],
+      outputs: ['ngpCheckboxCheckedChange:checkedChange']
+    }
+  ]
 })
 export class Checkbox {
   readonly readonly = input(false, { transform: booleanAttribute });

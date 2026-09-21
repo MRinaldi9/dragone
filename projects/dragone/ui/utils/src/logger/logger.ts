@@ -18,5 +18,5 @@ export class Logger {
 
 export const provideLogger = (componentName: string): Provider => ({
   provide: Logger,
-  useFactory: () => new Logger(componentName),
+  useFactory: () => new Logger(componentName)
 });

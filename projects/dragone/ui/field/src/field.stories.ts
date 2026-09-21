@@ -13,7 +13,7 @@ import { Field } from './field';
     <drgn-field [label]="label()" [inline]="inline()">
       <drgn-checkbox [formField]="form.checkBox" />
     </drgn-field>
-  `,
+  `
 })
 class FormFieldStory {
   readonly label = input<string>('Label');
@@ -33,14 +33,14 @@ const meta: Meta<FormFieldStory & { darkMode: boolean }> = {
     required: { control: 'boolean', description: 'Whether the form field is required.' },
     inline: {
       control: 'boolean',
-      description: 'Whether the label and input are displayed inline.',
-    },
+      description: 'Whether the label and input are displayed inline.'
+    }
   },
   args: {
     label: 'Label',
     required: true,
-    inline: true,
-  },
+    inline: true
+  }
 };
 
 export default meta;
@@ -51,8 +51,8 @@ export const Default: Story = {
     props: args,
     template: `
       <drgn-form-field-story  ${argsToTemplate(args, { exclude: ['darkMode'] })} />
-    `,
-  }),
+    `
+  })
 };
 
 // Export const WithError: Story = {

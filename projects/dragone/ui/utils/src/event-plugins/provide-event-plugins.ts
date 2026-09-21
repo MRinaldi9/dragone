@@ -5,5 +5,5 @@ export const provideEventsPlugin = (...managers: Type<EventManagerPlugin>[]): Pr
   managers.map(manager => ({
     provide: EVENT_MANAGER_PLUGINS,
     multi: true,
-    useClass: manager,
+    useClass: manager
   }));

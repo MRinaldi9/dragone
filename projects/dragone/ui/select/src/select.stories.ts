@@ -19,12 +19,12 @@ const meta: Meta<SelectStory> = {
     options: [
       { label: 'Option 1', value: 'option1' },
       { label: 'Option 2', value: 'option2' },
-      { label: 'Option 3', value: 'option3' },
+      { label: 'Option 3', value: 'option3' }
     ],
     placeholder: 'Select an option',
     multiple: false,
     valueChange: fn(),
-    openChange: fn(),
+    openChange: fn()
   },
   argTypes: {
     disabled: {
@@ -32,74 +32,74 @@ const meta: Meta<SelectStory> = {
       type: 'boolean',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     options: {
       description: 'Options rendered in the select',
-      control: { type: 'object' },
+      control: { type: 'object' }
     },
     placeholder: {
       description: 'Placeholder text for the select',
       type: 'string',
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     id: {
       type: 'string',
       description: 'The id of the select element',
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     multiple: {
       type: 'boolean',
       description: 'Whether the select allows multiple selections',
       control: { type: 'boolean' },
-      table: { defaultValue: { summary: 'false' } },
+      table: { defaultValue: { summary: 'false' } }
     },
     optionLabel: {
       type: 'string',
       description:
         'A string that maps an option to its display label. If not provided, the option itself will be used as the label.',
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     optionValue: {
       type: 'string',
       description:
         'A string that maps an option to its value. If not provided, the option itself will be used as the value.',
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     valueChange: {
       description: 'Event emitted when the selected value changes',
       action: 'valueChange',
-      control: false,
+      control: false
     },
     openChange: {
       description: 'Event emitted when the select dropdown opens or closes',
       action: 'openChange',
-      control: false,
+      control: false
     },
     hidden: {
       type: 'boolean',
       description: 'Whether the select is hidden',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     readonly: {
       type: 'boolean',
       description: 'Whether the select is read-only',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
+        defaultValue: { summary: 'false' }
+      }
+    }
   },
   render: args => ({
     props: args,
     template: `
         <drgn-select ${argsToTemplate(args, { exclude: ['darkMode'] })}/>
-      `,
-  }),
+      `
+  })
 };
 
 export default meta;

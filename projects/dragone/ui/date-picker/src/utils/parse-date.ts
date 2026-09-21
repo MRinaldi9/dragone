@@ -16,7 +16,7 @@ const REFERENCE_DATE = new Date(2000, 0, 15);
 const DATE_ENTRY_FORMATS = [
   { parts: ['day', 'month', 'year'], defaults: {} },
   { parts: ['month', 'year'], defaults: { day: 1 } },
-  { parts: ['year'], defaults: { day: 1, month: 1 } },
+  { parts: ['year'], defaults: { day: 1, month: 1 } }
 ] as const;
 
 /** Escape special regex characters in a string. */
@@ -42,7 +42,7 @@ const _buildDateParsePatterns = (fmt: Intl.DateTimeFormat): RegExp[] => {
   return [
     new RegExp(`^${dayPattern}${separator}${monthPattern}${separator}${yearPattern}$`),
     new RegExp(`^${monthPattern}${separator}${yearPattern}$`),
-    new RegExp(`^${yearPattern}$`),
+    new RegExp(`^${yearPattern}$`)
   ];
 };
 
@@ -58,7 +58,7 @@ const _tryParseDateEntry = <T>(
   input: string,
   regex: RegExp,
   adapter: NgpDateAdapter<T>,
-  { defaults, parts }: (typeof DATE_ENTRY_FORMATS)[number],
+  { defaults, parts }: (typeof DATE_ENTRY_FORMATS)[number]
 ): T | null => {
   const match = input.match(regex);
   if (!match) return null;
@@ -98,7 +98,7 @@ const _tryParseDateEntry = <T>(
 export const parseLocaleDateString = <T>(
   value: string,
   adapter: NgpDateAdapter<T>,
-  formatter: Intl.DateTimeFormat,
+  formatter: Intl.DateTimeFormat
 ): T | undefined => {
   const input = value.trim();
   if (!input) return undefined;

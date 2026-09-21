@@ -3,12 +3,12 @@ import {
   inject,
   InjectionToken,
   type Provider,
-  type Type,
+  type Type
 } from '@angular/core';
 import {
   injectDatePickerConfig as injectInternalConfig,
   provideDatePickerConfig as provideInternalConfig,
-  type NgpDatePickerFirstDayOfWeekNumber,
+  type NgpDatePickerFirstDayOfWeekNumber
 } from 'ng-primitives/date-picker';
 import { provideDateAdapter, type NgpDateAdapter } from 'ng-primitives/date-time';
 
@@ -48,18 +48,18 @@ export const CONFIG_TOKEN = new InjectionToken<
 >('DatePickerConfig');
 
 export const provideDragoneDatePickerConfig = <T>(
-  config?: DatePickerConfigOptions<T>,
+  config?: DatePickerConfigOptions<T>
 ): Provider[] => {
   const {
     firstDayOfWeek = 1,
     locale = 'it-IT',
     options = { day: '2-digit', month: '2-digit', year: 'numeric' },
-    adapter,
+    adapter
   } = config ?? {};
   return [
     provideInternalConfig({ firstDayOfWeek }),
     { provide: CONFIG_TOKEN, useValue: { locale, options } },
-    ...(adapter ? [provideDateAdapter(adapter)] : ([] as Provider[])),
+    ...(adapter ? [provideDateAdapter(adapter)] : ([] as Provider[]))
   ];
 };
 

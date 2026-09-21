@@ -1,7 +1,7 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'ariaLabel',
+  name: 'ariaLabel'
 })
 export class AriaLabelPipe implements PipeTransform {
   transform(currFile: File, files: File[]): string {

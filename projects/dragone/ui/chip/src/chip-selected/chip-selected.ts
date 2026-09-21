@@ -20,16 +20,16 @@ import { toElement } from '@dragone/ui/utils';
     class: 'drgn-label-md-700',
     '[attr.data-hidden]': 'hidden() ? "" : null',
     '[attr.name]': 'name()',
-    '(blur)': 'touch.emit()',
+    '(blur)': 'touch.emit()'
   },
   hostDirectives: [
     {
       directive: NgpToggle,
       inputs: ['ngpToggleSelected: checked', 'ngpToggleDisabled: disabled'],
-      outputs: ['ngpToggleSelectedChange: checkedChange'],
+      outputs: ['ngpToggleSelectedChange: checkedChange']
     },
-    NgpFocusVisible,
-  ],
+    NgpFocusVisible
+  ]
 })
 export class ChipSelected {
   readonly hidden = input(false, { transform: booleanAttribute });

@@ -2,7 +2,7 @@ import {
   argsToTemplate,
   moduleMetadata,
   type Meta,
-  type StoryObj,
+  type StoryObj
 } from '@analogjs/storybook-angular';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowRight } from '@ng-icons/font-awesome/solid';
@@ -33,7 +33,7 @@ const meta: Meta<ButtonStory> = {
     showLeadingIcon: false,
     showTrailingIcon: false,
     size: 'large',
-    semantic: 'primary',
+    semantic: 'primary'
   },
   argTypes: {
     focusVisible: { type: 'function', control: false },
@@ -46,8 +46,8 @@ const meta: Meta<ButtonStory> = {
       options: ['small', 'medium', 'large'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'large' },
-      },
+        defaultValue: { summary: 'large' }
+      }
     },
     semantic: {
       description: 'The variant of the button',
@@ -55,26 +55,26 @@ const meta: Meta<ButtonStory> = {
       options: ['primary', 'secondary', 'tertiary', 'ghost'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'primary' },
-      },
+        defaultValue: { summary: 'primary' }
+      }
     },
     disabled: {
       description: 'Whether the button is disabled',
       type: 'boolean',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     status: {
       description: 'The status of the button',
       type: 'string',
       options: ['neutral', 'danger'],
-      control: { type: 'select' },
-    },
+      control: { type: 'select' }
+    }
   },
   decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
+    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] })
   ],
   render: args => ({
     props: args,
@@ -84,8 +84,8 @@ const meta: Meta<ButtonStory> = {
         ${args.label}
         ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right" size="1rem"></ng-icon>' : ''}
       </button>
-      `,
-  }),
+      `
+  })
 };
 
 export default meta;
@@ -106,35 +106,35 @@ const Template: Story = {
       await expect(button).toHaveFocus();
       await expect(args.focusVisible).toHaveBeenCalled();
     });
-  },
+  }
 };
 
 export const Primary: Story = {
   ...Template,
   args: {
-    semantic: 'primary',
-  },
+    semantic: 'primary'
+  }
 };
 
 export const Secondary: Story = {
   ...Template,
   args: {
-    semantic: 'secondary',
-  },
+    semantic: 'secondary'
+  }
 };
 
 export const Tertiary: Story = {
   ...Template,
   args: {
-    semantic: 'tertiary',
-  },
+    semantic: 'tertiary'
+  }
 };
 
 export const WithTrailingIcon: Story = {
   ...Template,
   args: {
-    showTrailingIcon: true,
-  },
+    showTrailingIcon: true
+  }
 };
 
 export const IconOnly: Story = {
@@ -142,6 +142,6 @@ export const IconOnly: Story = {
   args: {
     label: '',
     showLeadingIcon: true,
-    icon: true,
-  },
+    icon: true
+  }
 };

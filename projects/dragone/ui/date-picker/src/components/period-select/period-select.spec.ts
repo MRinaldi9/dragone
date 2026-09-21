@@ -6,7 +6,7 @@ import { page } from 'vitest/browser';
 import { provideDragoneDatePickerConfig } from '../../providers/date-picker-config';
 import {
   datePickerDragoneStateFactory,
-  provideDatePickerDragoneState,
+  provideDatePickerDragoneState
 } from '../../state/date-picker-state';
 import type { IETFLanguageTag } from '../../utils/guards';
 import { CalendarPeriodSelect, DEFAULT_YEAR_RANGE, type CalendarPeriodUnit } from './period-select';
@@ -29,8 +29,8 @@ import { CalendarPeriodSelect, DEFAULT_YEAR_RANGE, type CalendarPeriodUnit } fro
   providers: [
     provideDatePickerState(),
     provideDragoneDatePickerConfig(),
-    provideDatePickerDragoneState({ inherit: false }),
-  ],
+    provideDatePickerDragoneState({ inherit: false })
+  ]
 })
 class TestHost {
   readonly state = ngpDatePicker({});
@@ -43,7 +43,7 @@ class TestHost {
       locale: signal<IETFLanguageTag | undefined>(undefined),
       options: signal<Intl.DateTimeFormatOptions | undefined>(undefined),
       keepInvalid: signal(true),
-      showToday: signal(true),
+      showToday: signal(true)
     });
   }
 }
@@ -61,7 +61,7 @@ function renderedOptions(): string[] {
     return [];
   }
   return [...current.querySelectorAll<HTMLElement>('[ngpSelectOption]')].map(
-    option => option.textContent?.trim() ?? '',
+    option => option.textContent?.trim() ?? ''
   );
 }
 

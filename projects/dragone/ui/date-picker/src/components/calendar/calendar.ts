@@ -9,7 +9,7 @@ import {
   NgpDatePickerLabel,
   NgpDatePickerNextMonth,
   NgpDatePickerPreviousMonth,
-  NgpDatePickerRowRender,
+  NgpDatePickerRowRender
 } from 'ng-primitives/date-picker';
 import { injectDateAdapter } from 'ng-primitives/date-time';
 
@@ -28,16 +28,16 @@ import { CalendarPeriodSelect } from '../period-select/period-select';
     NgpDatePickerRowRender,
     NgpDatePickerDateButton,
     NgpDatePickerCellRender,
-    CalendarPeriodSelect,
+    CalendarPeriodSelect
   ],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.css',
   providers: [
     provideIcons({
       faSolidAngleLeft,
-      faSolidAngleRight,
-    }),
-  ],
+      faSolidAngleRight
+    })
+  ]
 })
 export class Calendar<T> {
   protected readonly adapter = injectDateAdapter<T>();

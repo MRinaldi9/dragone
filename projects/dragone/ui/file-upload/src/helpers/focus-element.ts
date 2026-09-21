@@ -12,7 +12,7 @@ import { FocusManager } from './focus-manager';
  */
 @Directive({
   selector: '[drgnFocusElement]',
-  exportAs: 'focusElement',
+  exportAs: 'focusElement'
 })
 export class FocusElement implements OnInit, OnDestroy {
   readonly filename = input.required<string>({ alias: 'drgnFocusElement' });

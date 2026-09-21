@@ -28,14 +28,14 @@ export const [
   ,
   datePickerDragoneStateFactory,
   _injectDatePickerDragoneState,
-  provideDatePickerDragoneState,
+  provideDatePickerDragoneState
 ] = createPrimitive(
   'DatePickerStateDragone',
   <T>({
     locale: _locale,
     options,
     keepInvalid,
-    showToday,
+    showToday
   }: {
     locale: Signal<IETFLanguageTag | undefined>;
     options: Signal<Intl.DateTimeFormatOptions | undefined>;
@@ -65,14 +65,14 @@ export const [
 
     function _getLocaleWeekDays(weekday: Intl.DateTimeFormatOptions['weekday']): string[] {
       const { format } = new Intl.DateTimeFormat(locale(), {
-        weekday,
+        weekday
       });
       return Array.from({ length: 7 }, (_, i) => format(new Date(2020, 5, i + 1)));
     }
 
     function _getLocaleMonths(month: Intl.DateTimeFormatOptions['month']): string[] {
       const { format } = new Intl.DateTimeFormat(locale(), {
-        month,
+        month
       });
       return Array.from({ length: 12 }, (_, i) => format(new Date(2020, i, 1)));
     }
@@ -85,10 +85,10 @@ export const [
       state.setFocusedDate(
         findNearestEnabledDate(_dateAdapter, date, candidate => state.dateDisabled()(candidate), {
           min: state.min(),
-          max: state.max(),
+          max: state.max()
         }),
         'program',
-        'forward',
+        'forward'
       );
     }
 
@@ -101,17 +101,17 @@ export const [
       locale,
       monthsLocale,
       showToday,
-      setResolveFocusedDate,
+      setResolveFocusedDate
     };
-  },
+  }
 );
 
 export function injectDatePickerDragoneState<T>(): Signal<DatePickerState<T>>;
 export function injectDatePickerDragoneState<T>(
-  options: StateInjectionOptions,
+  options: StateInjectionOptions
 ): Signal<NgpDatePickerState<T> | null>;
 export function injectDatePickerDragoneState<T>(
-  options?: StateInjectionOptions,
+  options?: StateInjectionOptions
 ): Signal<NgpDatePickerState<T> | null> {
   return _injectDatePickerDragoneState(options) as Signal<DatePickerState<T> | null>;
 }

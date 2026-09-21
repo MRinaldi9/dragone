@@ -32,7 +32,7 @@ describe(Tag, () => {
 
   it('should update status attribute when statusTag input changes', async () => {
     const { locator } = await render(Tag, {
-      inputs: { status },
+      inputs: { status }
     });
     await expect.element(locator).not.toHaveAttribute('data-status');
     status.set('success');
@@ -42,7 +42,7 @@ describe(Tag, () => {
 
   it('should update aria-label attribute when ariaLabel input changes', async () => {
     const { locator } = await render(Tag, {
-      inputs: { ariaLabel },
+      inputs: { ariaLabel }
     });
     await expect.element(locator).not.toHaveAttribute('aria-label');
     ariaLabel.set('New Aria Label');

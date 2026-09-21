@@ -22,13 +22,13 @@ import { AccordionHeader, type AriaLevel } from '../accordion-header/accordion-h
   hostDirectives: [
     {
       directive: NgpAccordionItem,
-      inputs: ['ngpAccordionItemValue: value', 'ngpAccordionItemDisabled: disabled'],
+      inputs: ['ngpAccordionItemValue: value', 'ngpAccordionItemDisabled: disabled']
     },
     {
       directive: Theme,
-      inputs: ['theme'],
-    },
-  ],
+      inputs: ['theme']
+    }
+  ]
 })
 export class AccordionItem {
   readonly heading = input.required<string>();
@@ -36,6 +36,6 @@ export class AccordionItem {
 
   readonly #themeState = injectThemeState();
   readonly semantic = computed((theme = this.#themeState().resolvedTheme()) =>
-    theme === 'dark' ? 'primary' : 'tertiary',
+    theme === 'dark' ? 'primary' : 'tertiary'
   );
 }

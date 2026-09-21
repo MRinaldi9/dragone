@@ -36,7 +36,7 @@ describe(ChipInput, () => {
   it('should emit remove when the close button is clicked', async () => {
     const { locator } = await render(ChipInput, {
       inputs: { label },
-      outputs: { remove: removeSpy },
+      outputs: { remove: removeSpy }
     });
 
     await locator.getByRole('button').click();
@@ -57,7 +57,7 @@ describe(ChipInput, () => {
 
   it('should prioritize removeAriaLabel over the default', async () => {
     const { locator } = await render(ChipInput, {
-      inputs: { label, removeAriaLabel },
+      inputs: { label, removeAriaLabel }
     });
 
     removeAriaLabel.set('Elimina chip');
@@ -67,7 +67,7 @@ describe(ChipInput, () => {
 
   it('should disable the close button and mark the host as disabled', async () => {
     const { locator } = await render(ChipInput, {
-      inputs: { label, disabled },
+      inputs: { label, disabled }
     });
 
     disabled.set(true);
@@ -79,7 +79,7 @@ describe(ChipInput, () => {
   it('should not emit remove when the close button is disabled', async () => {
     const { locator } = await render(ChipInput, {
       inputs: { label, disabled },
-      outputs: { remove: removeSpy },
+      outputs: { remove: removeSpy }
     });
 
     disabled.set(true);
@@ -90,7 +90,7 @@ describe(ChipInput, () => {
 
   it('should render the leading icon hidden from the accessibility tree', async () => {
     const { locator } = await render(ChipInput, {
-      inputs: { label, icon: signal(validSvgIcon) },
+      inputs: { label, icon: signal(validSvgIcon) }
     });
     const leadingIcon = locator.getByTestId('leading-icon');
     await expect.element(leadingIcon).toHaveAttribute('aria-hidden', 'true');

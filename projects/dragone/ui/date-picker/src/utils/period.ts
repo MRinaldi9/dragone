@@ -49,7 +49,7 @@ export function findNearestEnabledDate<T>(
   adapter: NgpDateAdapter<T>,
   date: T,
   isDisabled: (date: T) => boolean,
-  bounds?: { min?: T; max?: T },
+  bounds?: { min?: T; max?: T }
 ): T {
   if (!isDisabled(date)) {
     return date;

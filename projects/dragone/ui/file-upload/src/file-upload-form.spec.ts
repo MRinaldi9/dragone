@@ -21,12 +21,12 @@ const createFileList = (...files: File[]): FileList => {
 
 describe('file upload with signal forms', () => {
   const liveAnnouncer = {
-    announce: vi.fn<(message: string) => Promise<void>>(),
+    announce: vi.fn<(message: string) => Promise<void>>()
   };
 
   @Component({
     imports: [FileUpload, FormField],
-    template: `<drgn-file-upload [formField]="form.attachments" />`,
+    template: `<drgn-file-upload [formField]="form.attachments" />`
   })
   class SignalFormHost {
     readonly isDisabled = signal(false);
@@ -39,7 +39,7 @@ describe('file upload with signal forms', () => {
 
   const renderHost = () =>
     render(SignalFormHost, {
-      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }],
+      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }]
     });
 
   afterEach(() => {
@@ -92,7 +92,7 @@ describe('file upload with signal forms', () => {
 
 describe('file upload with reactive forms', () => {
   const liveAnnouncer = {
-    announce: vi.fn<(message: string) => Promise<void>>(),
+    announce: vi.fn<(message: string) => Promise<void>>()
   };
 
   @Component({
@@ -101,18 +101,18 @@ describe('file upload with reactive forms', () => {
       <form [formGroup]="formGroup">
         <drgn-file-upload formControlName="attachments" />
       </form>
-    `,
+    `
   })
   class ReactiveFormHost {
     readonly formGroup = new FormGroup({
-      attachments: new FormControl<File | File[] | null>(null),
+      attachments: new FormControl<File | File[] | null>(null)
     });
     readonly fileUpload = viewChild.required(FileUpload);
   }
 
   const renderHost = () =>
     render(ReactiveFormHost, {
-      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }],
+      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }]
     });
 
   afterEach(() => {

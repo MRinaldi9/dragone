@@ -6,7 +6,7 @@ import { FocusManager } from './focus-manager';
 
 @Component({
   imports: [FocusManager],
-  template: `<ul drgnFocusManager [fallbackElement]="fallbackElement"></ul>`,
+  template: `<ul drgnFocusManager [fallbackElement]="fallbackElement"></ul>`
 })
 class HostManagerComponent {
   readonly fallbackNative = document.createElement('button');
@@ -28,7 +28,7 @@ describe(FocusManager, () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HostManagerComponent],
+      imports: [HostManagerComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HostManagerComponent);

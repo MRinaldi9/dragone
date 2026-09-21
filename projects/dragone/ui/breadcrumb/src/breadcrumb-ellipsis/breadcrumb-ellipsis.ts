@@ -16,7 +16,7 @@ const ELLIPSIS_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24
     </button>
   `,
   styleUrl: './breadcrumb-ellipsis.css',
-  hostDirectives: [NgpBreadcrumbItem],
+  hostDirectives: [NgpBreadcrumbItem]
 })
 export class BreadcrumbEllipsis {
   readonly ariaLabel = input('Expand breadcrumbs');

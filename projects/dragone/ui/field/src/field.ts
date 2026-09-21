@@ -57,9 +57,9 @@ import { FieldLabel } from './label/field-label';
   `,
   styleUrl: './field.css',
   host: {
-    '[attr.data-control-layout]': 'inline() ? "horizontal" : "vertical"',
+    '[attr.data-control-layout]': 'inline() ? "horizontal" : "vertical"'
   },
-  hostDirectives: [NgpFormField],
+  hostDirectives: [NgpFormField]
 })
 export class Field {
   readonly label = input<string>();
@@ -71,7 +71,7 @@ export class Field {
 
   protected errors = computed(
     (errors = this.formField().errors(), isTouched = this.#fieldState().touched()) =>
-      isTouched ? errors : [],
+      isTouched ? errors : []
   );
   protected isRequired = computed(() => this.#fieldState().required());
 }

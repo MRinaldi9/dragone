@@ -14,7 +14,7 @@ import { FocusManager } from './focus-manager';
         </li>
       }
     </ul>
-  `,
+  `
 })
 class HostWithButtonComponent {
   readonly items = signal<string[]>(['first', 'second']);
@@ -32,7 +32,7 @@ class HostWithButtonComponent {
         </li>
       }
     </ul>
-  `,
+  `
 })
 class HostWithoutButtonComponent {
   readonly items = signal<string[]>(['first']);
@@ -43,7 +43,7 @@ class HostWithoutButtonComponent {
 describe('focus helpers integration', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HostWithButtonComponent, HostWithoutButtonComponent],
+      imports: [HostWithButtonComponent, HostWithoutButtonComponent]
     }).compileComponents();
   });
 

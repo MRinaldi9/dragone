@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet, type Routes } from '@angular/router';
 
 @Component({
-  template: ` <h1>Home</h1> `,
+  template: ` <h1>Home</h1> `
 })
 class Home {}
 
@@ -11,19 +11,19 @@ class Home {}
   template: `
     <h1>Category Page</h1>
     <router-outlet />
-  `,
+  `
 })
 class Category {}
 
 @Component({
-  template: ` <h1>Subcategory Page</h1> `,
+  template: ` <h1>Subcategory Page</h1> `
 })
 class Subcategory {}
 
 export default [
   {
     path: '',
-    component: Home,
+    component: Home
   },
   {
     path: 'category',
@@ -31,8 +31,8 @@ export default [
     children: [
       {
         path: 'subcategory',
-        component: Subcategory,
-      },
-    ],
-  },
+        component: Subcategory
+      }
+    ]
+  }
 ] satisfies Routes;

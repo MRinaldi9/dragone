@@ -15,8 +15,8 @@ import { injectDatePickerDragoneState } from '../../state/date-picker-state';
     '[value]': 'inputDate()',
     '(input)': 'changeDate($event)',
     '[attr.data-invalid]': 'isValidDate() ? null : ""',
-    '[attr.aria-invalid]': '!isValidDate() || undefined',
-  },
+    '[attr.aria-invalid]': '!isValidDate() || undefined'
+  }
 })
 export class InputDatePicker<T> {
   readonly #dragoneDatePickerState = injectDatePickerDragoneState<T>();
@@ -31,7 +31,7 @@ export class InputDatePicker<T> {
    */
   protected inputDate = linkedSignal({
     source: this.#dragoneDatePickerState().date,
-    computation: curr => this.#dragoneDatePickerState().format(curr),
+    computation: curr => this.#dragoneDatePickerState().format(curr)
   });
 
   /**
@@ -47,7 +47,7 @@ export class InputDatePicker<T> {
   isValidDate = computed(
     (raw = this.debouncedInputDate.value()) =>
       raw === this.#dragoneDatePickerState().format(this.#dragoneDatePickerState().date()) ||
-      this.#dragoneDatePickerState().parseDate(raw) !== undefined,
+      this.#dragoneDatePickerState().parseDate(raw) !== undefined
   );
 
   constructor() {
@@ -59,7 +59,7 @@ export class InputDatePicker<T> {
       if (
         raw ===
         this.#dragoneDatePickerState().format(
-          toValue.untracked(this.#dragoneDatePickerState().date),
+          toValue.untracked(this.#dragoneDatePickerState().date)
         )
       ) {
         return;

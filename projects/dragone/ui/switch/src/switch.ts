@@ -14,16 +14,16 @@ import { injectSwitchState, NgpSwitch, NgpSwitchThumb } from 'ng-primitives/swit
     '[attr.data-readonly]': 'readonly() ? "" : null',
     '[attr.name]': 'name() ? name() : null',
     '(blur)': 'touch.emit()',
-    '(keyup.enter)': 'toggle()',
+    '(keyup.enter)': 'toggle()'
   },
   hostDirectives: [
     NgpFocusVisible,
     {
       directive: NgpSwitch,
       inputs: ['ngpSwitchChecked: checked', 'ngpSwitchDisabled: disabled', 'id'],
-      outputs: ['ngpSwitchCheckedChange: checkedChange'],
-    },
-  ],
+      outputs: ['ngpSwitchCheckedChange: checkedChange']
+    }
+  ]
 })
 export class Switch {
   readonly readonly = input(false, { transform: booleanAttribute });

@@ -10,11 +10,11 @@ import { provideThemeState, themeFactory } from '../projects/dragone/ui/utils';
     '[style.display]': '"flex"',
     '[style.justify-content]': '"center"',
     '[style.padding]': '"2rem"',
-    '[style.transition]': '"background-color 0.3s"',
+    '[style.transition]': '"background-color 0.3s"'
   },
   providers: [provideThemeState({ inherit: false })],
   selector: 'theme-wrapper',
-  template: `<ng-content />`,
+  template: `<ng-content />`
 })
 export class ThemeWrapper {
   readonly darkMode = input<'light' | 'dark' | undefined>();

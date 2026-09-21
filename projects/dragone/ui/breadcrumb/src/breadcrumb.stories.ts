@@ -3,7 +3,7 @@ import {
   argsToTemplate,
   type Meta,
   moduleMetadata,
-  type StoryObj,
+  type StoryObj
 } from '@analogjs/storybook-angular';
 import { provideRouter, RouterOutlet, withHashLocation } from '@angular/router';
 import { faSolidHouse } from '@ng-icons/font-awesome/solid';
@@ -18,39 +18,39 @@ const meta: Meta<Breadcrumb> = {
   tags: ['autodocs'],
   decorators: [
     moduleMetadata({ imports: [BreadcrumbItem, RouterOutlet], providers: [] }),
-    applicationConfig({ providers: [provideRouter(fakeRoutes, withHashLocation())] }),
+    applicationConfig({ providers: [provideRouter(fakeRoutes, withHashLocation())] })
   ],
   args: {
     breadcrumbs: [
       {
         label: 'quis',
         routerLink: '/',
-        icon: faSolidHouse,
+        icon: faSolidHouse
       },
       {
         label: 'ullam',
-        routerLink: '/category',
+        routerLink: '/category'
       },
       {
         label: 'officiis',
-        routerLink: '/category/subcategory',
+        routerLink: '/category/subcategory'
       },
       {
         label: 'deleniti',
-        routerLink: '/category/subcategory/1',
+        routerLink: '/category/subcategory/1'
       },
       {
         label: 'laudantium',
-        routerLink: '/category/subcategory/2',
+        routerLink: '/category/subcategory/2'
       },
       {
-        label: 'voluptatem ipsum',
-      },
-    ],
+        label: 'voluptatem ipsum'
+      }
+    ]
   },
   argTypes: {
-    breadcrumbs: { control: { type: 'object' } },
-  },
+    breadcrumbs: { control: { type: 'object' } }
+  }
 };
 
 export default meta;
@@ -64,6 +64,6 @@ export const BreadcrumbDefault: Story = {
         <drgn-breadcrumb ${argsToTemplate(args)} />
         <router-outlet/>
       </div>
-    `,
-  }),
+    `
+  })
 };

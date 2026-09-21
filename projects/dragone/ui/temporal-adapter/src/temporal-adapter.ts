@@ -26,7 +26,7 @@ import type { NgpDateAdapter, NgpDateUnits, NgpDuration } from 'ng-primitives/da
  *   import { provideDateAdapter } from 'ng-primitives/date-time';
  *   import { TemporalAdapter } from '@dragone/ui/date-picker';
  *   export const appConfig: ApplicationConfig = {
- *     providers: [provideDateAdapter(TemporalAdapter)],
+ *     providers: [provideDateAdapter(TemporalAdapter)]
  *   };
  *   ```
  */
@@ -49,7 +49,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
           values.hour ?? now.hour,
           values.minute ?? now.minute,
           values.second ?? now.second,
-          values.millisecond ?? now.millisecond,
+          values.millisecond ?? now.millisecond
         )
       : Temporal.PlainDateTime.from({
           year: values.year ?? now.year,
@@ -58,7 +58,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
           hour: values.hour ?? now.hour,
           minute: values.minute ?? now.minute,
           second: values.second ?? now.second,
-          millisecond: values.millisecond ?? now.millisecond,
+          millisecond: values.millisecond ?? now.millisecond
         });
   }
 
@@ -84,8 +84,8 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
       ...(values.minute !== undefined && { minute: values.minute }),
       ...(values.second !== undefined && { second: values.second }),
       ...(values.millisecond !== undefined && {
-        millisecond: values.millisecond,
-      }),
+        millisecond: values.millisecond
+      })
     });
   }
 
@@ -206,7 +206,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
       hour: 23,
       minute: 59,
       second: 59,
-      millisecond: 999,
+      millisecond: 999
     });
   }
 

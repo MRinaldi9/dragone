@@ -8,7 +8,7 @@ export type StatusType = 'info' | 'success' | 'warning' | 'danger' | 'neutral';
 
 export const [, statusFactory, injectStatusState, provideStatusState] = createPrimitive(
   'Status',
-  (status: Signal<StatusType>) => ({ status }),
+  (status: Signal<StatusType>) => ({ status })
 );
 
 const isStatusType = (value: unknown): value is StatusType =>
@@ -22,13 +22,13 @@ const isStatusType = (value: unknown): value is StatusType =>
   selector: '[drgnStatus]',
   providers: [provideStatusState({ inherit: false })],
   host: {
-    '[attr.data-status]': 'status() !== "neutral" ? status() : null',
-  },
+    '[attr.data-status]': 'status() !== "neutral" ? status() : null'
+  }
 })
 export class Status {
   readonly status = input<StatusType, LiteralUnion<StatusType, string>>('neutral', {
     alias: 'drgnStatus',
-    transform: val => (val === '' ? 'neutral' : castTo(val, isStatusType)),
+    transform: val => (val === '' ? 'neutral' : castTo(val, isStatusType))
   });
 
   constructor() {

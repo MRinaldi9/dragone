@@ -10,7 +10,7 @@ export class PreventDefaultPlugin extends EventManagerPlugin {
     element: HTMLElement,
     eventName: string,
     handler: Function,
-    options?: ListenerOptions,
+    options?: ListenerOptions
   ): Function {
     const [originalEventName] = eventName.split('.');
     return this.manager.addEventListener(
@@ -20,7 +20,7 @@ export class PreventDefaultPlugin extends EventManagerPlugin {
         event.preventDefault();
         handler(event);
       },
-      options,
+      options
     );
   }
 }

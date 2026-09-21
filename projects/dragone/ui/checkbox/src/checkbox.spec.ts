@@ -9,7 +9,7 @@ import { Checkbox } from './checkbox';
 const setupForm = async () => {
   @Component({
     imports: [FormField, Checkbox],
-    template: `<drgn-checkbox [formField]="field" />`,
+    template: `<drgn-checkbox [formField]="field" />`
   })
   class FormCmp {
     readonly field = form(signal(false));
@@ -30,7 +30,7 @@ describe(Checkbox, () => {
 
   it('should not have been checked initially visually', async () => {
     const { locator, componentClassInstance: component } = await render(Checkbox, {
-      inputs: { checked } as any,
+      inputs: { checked } as any
     });
     await expect.element(locator).toHaveAttribute('aria-checked', 'false');
     expect(component['checkedValue']()).toBeFalsy();
@@ -38,7 +38,7 @@ describe(Checkbox, () => {
 
   it('should set disabled', async () => {
     const { locator } = await render(Checkbox, {
-      inputs: { disabled } as any,
+      inputs: { disabled } as any
     });
     disabled.set(true);
 

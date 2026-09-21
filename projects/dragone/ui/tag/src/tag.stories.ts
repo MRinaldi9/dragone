@@ -15,23 +15,23 @@ const meta: Meta<TagStory> = {
   tags: ['autodocs'],
   args: {
     content: 'Label Tag',
-    status: 'neutral',
+    status: 'neutral'
   },
   argTypes: {
     status: {
       control: { type: 'select' },
       options: ['danger', 'info', 'success', 'warning', 'neutral'],
-      description: 'Variante visiva del tag che indica lo stato',
+      description: 'Variante visiva del tag che indica lo stato'
     },
     ariaLabel: {
       control: { type: 'text' },
-      description: 'Etichetta accessibile personalizzata per screen reader',
+      description: 'Etichetta accessibile personalizzata per screen reader'
     },
     content: {
       control: { type: 'text' },
-      description: 'Contenuto testuale del tag (1-2 parole)',
-    },
-  },
+      description: 'Contenuto testuale del tag (1-2 parole)'
+    }
+  }
 };
 
 export default meta;
@@ -40,68 +40,68 @@ type Story = StoryObj<TagStory>;
 export const Neutral: Story = {
   args: {
     content: 'Dragone',
-    status: 'neutral',
+    status: 'neutral'
   },
   render: args => ({
     props: args,
-    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`,
-  }),
+    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`
+  })
 };
 
 export const Info: Story = {
   args: {
     content: 'Info',
-    status: 'info',
+    status: 'info'
   },
   render: args => ({
     props: args,
-    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`,
-  }),
+    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`
+  })
 };
 
 export const Success: Story = {
   args: {
     content: 'Success',
-    status: 'success',
+    status: 'success'
   },
   render: args => ({
     props: args,
-    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`,
-  }),
+    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`
+  })
 };
 
 export const Warning: Story = {
   args: {
     content: 'Warning',
-    status: 'warning',
+    status: 'warning'
   },
   render: args => ({
     props: args,
-    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`,
-  }),
+    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`
+  })
 };
 
 export const Alert: Story = {
   args: {
     content: 'Danger',
-    status: 'danger',
+    status: 'danger'
   },
   render: args => ({
     props: args,
-    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`,
-  }),
+    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`
+  })
 };
 
 export const WithAriaLabel: Story = {
   args: {
     content: 'Nuovo',
     status: 'info',
-    ariaLabel: 'Contenuto nuovo',
+    ariaLabel: 'Contenuto nuovo'
   },
   render: args => ({
     props: args,
-    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`,
-  }),
+    template: `<drgn-tag [status]="status" [ariaLabel]="ariaLabel">{{ content }}</drgn-tag>`
+  })
 };
 
 export const AllVariants: Story = {
@@ -114,6 +114,6 @@ export const AllVariants: Story = {
         <drgn-tag status="warning">Warning</drgn-tag>
         <drgn-tag status="danger">Danger</drgn-tag>
       </div>
-    `,
-  }),
+    `
+  })
 };

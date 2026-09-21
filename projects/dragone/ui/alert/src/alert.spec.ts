@@ -15,7 +15,7 @@ describe(Alert, () => {
 
   it('must show title', async () => {
     const { locator, componentClassInstance: component } = await render(Alert, {
-      inputs: { titleAsHeading, title },
+      inputs: { titleAsHeading, title }
     });
     expect(component.title()).toBe('Test Alert');
     titleAsHeading.set(true);
@@ -40,7 +40,7 @@ describe(Alert, () => {
   it('must emit ctaClick event on button click', async () => {
     const { locator } = await render(Alert, {
       inputs: { ctaText, title },
-      outputs: { ctaClick },
+      outputs: { ctaClick }
     });
     let btnLocator = locator.getByRole('button', { name: 'Click me' });
     await expect.element(btnLocator).not.toBeInTheDocument();

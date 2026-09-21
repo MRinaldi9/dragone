@@ -8,7 +8,7 @@ import {
   linkedSignal,
   signal,
   viewChild,
-  viewChildren,
+  viewChildren
 } from '@angular/core';
 import { NgpBreadcrumbList, NgpBreadcrumbs } from 'ng-primitives/breadcrumbs';
 import { injectDimensions } from 'ng-primitives/internal';
@@ -53,9 +53,9 @@ import { validateBreadcrumbTrail } from './utils/validation-breadcrumb';
   host: {
     role: 'navigation',
     '[ariaLabel]': 'ariaLabel()',
-    '[class.expanded]': 'userExpanded()',
+    '[class.expanded]': 'userExpanded()'
   },
-  hostDirectives: [NgpBreadcrumbs],
+  hostDirectives: [NgpBreadcrumbs]
 })
 export class Breadcrumb {
   readonly breadcrumbs = input.required<BreadcrumbItemConfig[]>();
@@ -68,7 +68,7 @@ export class Breadcrumb {
 
   protected readonly userExpanded = linkedSignal({
     source: this.#breadcrumbsNotifier.listen,
-    computation: () => false,
+    computation: () => false
   });
   protected readonly showEllipsis = computed(() => {
     const userExpanded = this.userExpanded();
@@ -86,8 +86,8 @@ export class Breadcrumb {
   private readonly breadcrumbItems = viewChildren<BreadcrumbItem, ElementRef<HTMLElement>>(
     BreadcrumbItem,
     {
-      read: ElementRef,
-    },
+      read: ElementRef
+    }
   );
 
   constructor() {
@@ -99,7 +99,7 @@ export class Breadcrumb {
       if (!listElement || !hostWidth) return;
 
       this.#overflowing.set(
-        Math.floor(listElement.scrollWidth) > Math.floor(hostWidth + OVERFLOW_TOLERANCE_PX),
+        Math.floor(listElement.scrollWidth) > Math.floor(hostWidth + OVERFLOW_TOLERANCE_PX)
       );
     });
     effect(() => {

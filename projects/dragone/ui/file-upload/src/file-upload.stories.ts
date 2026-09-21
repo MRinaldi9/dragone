@@ -16,38 +16,38 @@ const meta: Meta<FileUploadStory> = {
     dragDrop: true,
     fileTypes: [],
     hidden: false,
-    touch: fn(),
+    touch: fn()
   },
   argTypes: {
     name: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     disabled: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     multiple: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     dragDrop: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     hidden: {
       control: { type: 'boolean' },
       description:
         'Settaggio per nascondere il componente. Se `true`, il componente sarà nascosto ma rimarrà accessibile agli screen reader.',
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     fileTypes: {
       control: { type: 'object' },
-      description: 'Lista di MIME type o estensioni consentite, ad esempio ["image/*", ".pdf"].',
+      description: 'Lista di MIME type o estensioni consentite, ad esempio ["image/*", ".pdf"].'
     },
     touch: {
       action: 'touch',
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 };
 
 export default meta;
@@ -62,34 +62,34 @@ export const Default: Story = {
           Carica file
         </drgn-file-upload>
       </div>
-    `,
-  }),
+    `
+  })
 };
 
 export const Disabled: Story = {
   args: {
-    disabled: true,
+    disabled: true
   },
-  render: Default.render,
+  render: Default.render
 };
 
 export const MultipleFiles: Story = {
   args: {
-    multiple: true,
+    multiple: true
   },
-  render: Default.render,
+  render: Default.render
 };
 
 export const ImagesOnly: Story = {
   args: {
-    fileTypes: ['image/*'],
+    fileTypes: ['image/*']
   },
-  render: Default.render,
+  render: Default.render
 };
 
 export const PdfOnly: Story = {
   args: {
-    fileTypes: ['.pdf'],
+    fileTypes: ['.pdf']
   },
-  render: Default.render,
+  render: Default.render
 };

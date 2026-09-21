@@ -9,7 +9,7 @@ import { ChipSelected } from './chip-selected';
 const setupForm = async () => {
   @Component({
     imports: [FormField, ChipSelected],
-    template: `<button drgn-chip-selected [formField]="field">Test</button>`,
+    template: `<button drgn-chip-selected [formField]="field">Test</button>`
   })
   class FormCmp {
     isDisabled = signal(false);
@@ -24,7 +24,7 @@ const setupForm = async () => {
 const setupReactiveForm = async (isDisabled = false) => {
   @Component({
     imports: [ChipSelected, ReactiveFormsModule],
-    template: ` <button drgn-chip-selected [formControl]="fcontrol">Test</button> `,
+    template: ` <button drgn-chip-selected [formControl]="fcontrol">Test</button> `
   })
   class TestHostFormComponent {
     fcontrol = new FormControl({ value: false, disabled: isDisabled }, { nonNullable: true });
@@ -38,7 +38,7 @@ const setupReactiveForm = async (isDisabled = false) => {
     <button drgn-chip-selected [disabled]="disabled()" [(checked)]="checked">
       {{ label() }}
     </button>
-  `,
+  `
 })
 class TestHostComponent {
   checked = model(false);

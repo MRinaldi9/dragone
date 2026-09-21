@@ -3,7 +3,7 @@ import '../projects/dragone/ui/src/main.css';
 import {
   componentWrapperDecorator,
   moduleMetadata,
-  type Preview,
+  type Preview
 } from '@analogjs/storybook-angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 
@@ -14,14 +14,14 @@ setCompodocJson(docJson);
 const preview: Preview = {
   parameters: {
     docs: {
-      codePanel: true,
+      codePanel: true
     },
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
+        date: /Date$/i
+      }
+    }
   },
   globalTypes: {
     darkMode: {
@@ -32,8 +32,8 @@ const preview: Preview = {
         icon: 'sun',
         items: ['light', 'dark'],
         dynamicTitle: true,
-        title: 'Dark Mode',
-      },
+        title: 'Dark Mode'
+      }
     },
     ngDevMode: {
       name: 'Angular Dev Mode',
@@ -43,20 +43,20 @@ const preview: Preview = {
         icon: 'power',
         items: ['true', 'false'],
         dynamicTitle: true,
-        title: 'Angular Dev Mode',
-      },
-    },
+        title: 'Angular Dev Mode'
+      }
+    }
   },
   initialGlobals: {
-    darkMode: 'light',
+    darkMode: 'light'
   },
   decorators: [
     moduleMetadata({ imports: [ThemeWrapper] }),
     componentWrapperDecorator(ThemeWrapper, ({ globals: { darkMode, ngDevMode } }) => ({
       darkMode,
-      ngDevMode,
-    })),
-  ],
+      ngDevMode
+    }))
+  ]
 };
 
 export default preview;

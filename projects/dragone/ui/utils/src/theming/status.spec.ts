@@ -8,7 +8,7 @@ import { Status, type StatusType } from './status';
     <section data-testid="section" drgnStatus>
       <div data-testid="child" [drgnStatus]="childStatus()"></div>
     </section>
-  `,
+  `
 })
 class TestHostComponent {
   childStatus = input<StatusType>('neutral');

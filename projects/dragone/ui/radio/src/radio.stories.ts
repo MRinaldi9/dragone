@@ -2,7 +2,7 @@ import {
   argsToTemplate,
   moduleMetadata,
   type Meta,
-  type StoryObj,
+  type StoryObj
 } from '@analogjs/storybook-angular';
 import { fn } from 'storybook/test';
 
@@ -26,45 +26,45 @@ const meta: Meta<RadioProps> = {
     value: {
       control: 'inline-radio',
       options: ['option1', 'option2', 'option3'],
-      description: 'Valore selezionato del gruppo',
+      description: 'Valore selezionato del gruppo'
     },
     disabled: {
       control: 'boolean',
-      description: 'Disabilita tutti i radio button del gruppo',
+      description: 'Disabilita tutti i radio button del gruppo'
     },
     valueChange: {
       type: 'function',
       control: false,
-      description: 'Evento emesso quando il valore cambia',
+      description: 'Evento emesso quando il valore cambia'
     },
     orientation: {
       type: 'string',
       control: { type: 'select' },
       options: ['horizontal', 'vertical'],
-      table: { defaultValue: { summary: 'horizontal' } },
+      table: { defaultValue: { summary: 'horizontal' } }
     },
     touch: {
       type: 'function',
       control: false,
-      description: 'Evento emesso quando il gruppo perde il focus',
+      description: 'Evento emesso quando il gruppo perde il focus'
     },
     readonly: {
       control: 'boolean',
       description: 'Rende il gruppo di sola lettura, non interagibile',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     hidden: {
       control: 'boolean',
       description: 'Nasconde il gruppo quando impostato a true',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
-  },
+        defaultValue: { summary: 'false' }
+      }
+    }
+  }
 };
 
 export default meta;
@@ -79,13 +79,13 @@ export const Default: Story = {
         <drgn-radio-item value="option2">Opzione 2</drgn-radio-item>
         <drgn-radio-item value="option3">Opzione 3</drgn-radio-item>
       </drgn-radio-group>
-    `,
+    `
   }),
   args: {
     disabled: false,
     orientation: 'vertical',
-    touch: fn(),
-  },
+    touch: fn()
+  }
 };
 
 export const Preselected: Story = {
@@ -97,12 +97,12 @@ export const Preselected: Story = {
         <drgn-radio-item value="option2">Opzione 2</drgn-radio-item>
         <drgn-radio-item value="option3">Opzione 3</drgn-radio-item>
       </drgn-radio-group>
-    `,
+    `
   }),
   args: {
     value: 'option2',
-    disabled: false,
-  },
+    disabled: false
+  }
 };
 
 export const Disabled: Story = {
@@ -114,12 +114,12 @@ export const Disabled: Story = {
         <drgn-radio-item value="option2">Opzione 2</drgn-radio-item>
         <drgn-radio-item value="option3">Opzione 3</drgn-radio-item>
       </drgn-radio-group>
-    `,
+    `
   }),
   args: {
     value: 'option1',
-    disabled: true,
-  },
+    disabled: true
+  }
 };
 
 export const IndividualDisabled: Story = {
@@ -131,12 +131,12 @@ export const IndividualDisabled: Story = {
         <drgn-radio-item value="option2" [disabled]="true">Opzione 2 (disabilitata)</drgn-radio-item>
         <drgn-radio-item value="option3">Opzione 3</drgn-radio-item>
       </drgn-radio-group>
-    `,
+    `
   }),
   args: {
     value: '',
-    disabled: false,
-  },
+    disabled: false
+  }
 };
 
 export const WithLongLabels: Story = {
@@ -152,10 +152,10 @@ export const WithLongLabels: Story = {
         </drgn-radio-item>
         <drgn-radio-item value="option3">Opzione breve</drgn-radio-item>
       </drgn-radio-group>
-    `,
+    `
   }),
   args: {
     value: '',
-    disabled: false,
-  },
+    disabled: false
+  }
 };

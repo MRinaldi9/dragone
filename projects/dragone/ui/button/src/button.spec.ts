@@ -17,7 +17,7 @@ import { Button, type ButtonSize, type ButtonSemantic } from './button';
     >
       Dragone
     </button>
-  `,
+  `
 })
 class TestHostComponent {
   readonly semantic = input<ButtonSemantic>('primary');
@@ -36,13 +36,13 @@ class TestHostComponent {
       Dragone
       <span slot="trailing" class="test-icon">*</span>
     </button>
-  `,
+  `
 })
 class TestHostWithIcons {}
 
 @Component({
   imports: [Button],
-  template: ` <button drgnButton labelClass="drgn-label-md-600">Dragone</button> `,
+  template: ` <button drgnButton labelClass="drgn-label-md-600">Dragone</button> `
 })
 class TestHostCustomLabel {}
 
@@ -65,7 +65,7 @@ describe(Button, () => {
 
   it('should create with default properties', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, semantic, isDisabled },
+      inputs: { size, isIconOnly, semantic, isDisabled }
     });
     const button = locator.getByRole('button');
     await expect.element(button).toBeTruthy();
@@ -76,7 +76,7 @@ describe(Button, () => {
 
   it('should change size', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { size },
+      inputs: { size }
     });
     size.set('medium');
 
@@ -85,7 +85,7 @@ describe(Button, () => {
 
   it('should change isIconOnly', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { isIconOnly },
+      inputs: { isIconOnly }
     });
     isIconOnly.set(true);
 
@@ -94,7 +94,7 @@ describe(Button, () => {
 
   it('should change variant', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, semantic, isDisabled, status },
+      inputs: { size, isIconOnly, semantic, isDisabled, status }
     });
     status.set('danger');
 
@@ -103,7 +103,7 @@ describe(Button, () => {
 
   it('should disable the button', async () => {
     const { locator } = await render(TestHostComponent, {
-      inputs: { size, isIconOnly, semantic, isDisabled },
+      inputs: { size, isIconOnly, semantic, isDisabled }
     });
     isDisabled.set(true);
     const btnLocator = locator.getByRole('button');
@@ -115,7 +115,7 @@ describe(Button, () => {
   it('should emit native click event', async () => {
     const { locator } = await render(TestHostComponent, {
       inputs: { size, isIconOnly, semantic, isDisabled },
-      outputs: { clickCta: clickSpy },
+      outputs: { clickCta: clickSpy }
     });
     await locator.getByRole('button').click();
 

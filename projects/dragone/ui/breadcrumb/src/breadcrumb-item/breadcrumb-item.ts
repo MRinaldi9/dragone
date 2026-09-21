@@ -40,8 +40,8 @@ import type { BreadcrumbItemConfig } from '../breadcrumb.model';
   `,
   styleUrl: './breadcrumb-item.css',
   host: {
-    role: 'listitem',
-  },
+    role: 'listitem'
+  }
 })
 export class BreadcrumbItem {
   readonly breadcrumbConfiguration = input.required<BreadcrumbItemConfig>();

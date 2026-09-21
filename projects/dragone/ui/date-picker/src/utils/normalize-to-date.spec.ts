@@ -23,7 +23,7 @@ describe(normalizeToDate, () => {
 
   it('converts a Temporal.PlainDateTime to a native Date preserving the calendar fields', () => {
     TestBed.configureTestingModule({
-      providers: [TemporalAdapter],
+      providers: [TemporalAdapter]
     });
     const adapter = TestBed.inject(TemporalAdapter);
     const date = new Temporal.PlainDateTime(2026, 9, 6, 14, 30, 15, 250);
@@ -42,17 +42,17 @@ describe(normalizeToDate, () => {
 
   it('produces a Date that Intl.DateTimeFormat can format for any T', () => {
     TestBed.configureTestingModule({
-      providers: [TemporalAdapter],
+      providers: [TemporalAdapter]
     });
     const adapter = TestBed.inject(TemporalAdapter);
     const formatter = new Intl.DateTimeFormat('it-IT', {
       day: '2-digit',
       month: '2-digit',
-      year: 'numeric',
+      year: 'numeric'
     });
 
     const result = formatter.format(
-      normalizeToDate(new Temporal.PlainDateTime(2026, 9, 6), adapter),
+      normalizeToDate(new Temporal.PlainDateTime(2026, 9, 6), adapter)
     );
 
     expect(result).toBe('06/09/2026');

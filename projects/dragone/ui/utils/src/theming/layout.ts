@@ -9,15 +9,15 @@ export interface LayoutState {
 
 export const [, layoutFactory, injectLayoutState, provideLayoutState] = createPrimitive(
   'Layout',
-  ({ layout }: { layout: Signal<LayoutType> }): LayoutState => ({ layout }),
+  ({ layout }: { layout: Signal<LayoutType> }): LayoutState => ({ layout })
 );
 
 @Directive({
   selector: '[drgnLayout]',
   providers: [provideLayoutState({ inherit: false })],
   host: {
-    '[attr.data-layout]': 'layout()',
-  },
+    '[attr.data-layout]': 'layout()'
+  }
 })
 export class Layout {
   readonly layout = input<LayoutType>('desktop', { alias: 'drgnLayout' });

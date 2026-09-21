@@ -11,7 +11,7 @@ export interface FieldErrorContext {
  * instantiated once per error with a {@link FieldErrorContext}.
  */
 @Directive({
-  selector: 'ng-template[drgnTemplate="fieldError"]',
+  selector: 'ng-template[drgnTemplate="fieldError"]'
 })
 export class FieldErrorTemplate {
   readonly templateRef = inject<TemplateRef<FieldErrorContext>>(TemplateRef);
@@ -19,7 +19,7 @@ export class FieldErrorTemplate {
   static ngTemplateContextGuard(
     _: FieldErrorTemplate,
     // oxlint-disable-next-line no-unused-vars
-    context: unknown,
+    context: unknown
   ): context is FieldErrorContext {
     return true;
   }

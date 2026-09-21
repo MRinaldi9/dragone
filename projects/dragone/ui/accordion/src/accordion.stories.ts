@@ -2,7 +2,7 @@ import {
   argsToTemplate,
   moduleMetadata,
   type Meta,
-  type StoryObj,
+  type StoryObj
 } from '@analogjs/storybook-angular';
 import { fn } from 'storybook/test';
 
@@ -29,38 +29,38 @@ const meta: Meta<AccordionMeta> = {
     disabled: false,
     orientation: 'vertical',
     heading: 'Dragone',
-    accordionChange: fn(),
+    accordionChange: fn()
   },
   argTypes: {
     collapse: {
       type: 'boolean',
       control: { type: 'boolean' },
-      description: 'Allows all accordion items to be collapsed',
+      description: 'Allows all accordion items to be collapsed'
     },
     heading: { control: 'text' },
     type: {
       type: 'string',
       control: 'select',
       options: ['single', 'multiple'],
-      table: { defaultValue: { summary: 'single' } },
+      table: { defaultValue: { summary: 'single' } }
     },
     theme: {
       type: 'string',
       control: 'select',
       options: ['dark', 'light'],
-      table: { defaultValue: { summary: 'dark' } },
+      table: { defaultValue: { summary: 'dark' } }
     },
     disabled: {
       description: 'Disables the accordion if set to true',
       type: 'boolean',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
-    accordionChange: { type: 'function', control: false },
+    accordionChange: { type: 'function', control: false }
   },
-  decorators: [moduleMetadata({ imports: [AccordionItem] })],
+  decorators: [moduleMetadata({ imports: [AccordionItem] })]
 };
 
 export default meta;
@@ -77,13 +77,13 @@ export const AccordionSingle: Story = {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </drgn-accordion-item>
       </drgn-accordion>
-      `,
+      `
     };
-  },
+  }
 };
 export const AccordionMultiple: Story = {
   args: {
-    type: 'multiple',
+    type: 'multiple'
   },
   render: (args, { globals: { darkMode } }) => {
     const theme = darkMode === 'light' ? 'dark' : 'light';
@@ -98,7 +98,7 @@ export const AccordionMultiple: Story = {
           <p>Sed et laborum.</p>
         </drgn-accordion-item>
       </drgn-accordion>
-      `,
+      `
     };
-  },
+  }
 };

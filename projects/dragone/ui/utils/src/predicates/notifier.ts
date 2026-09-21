@@ -12,7 +12,7 @@ interface CreateNotifierOptions {
 
 const DEFAULT_OPTIONS: Required<CreateNotifierOptions> = {
   deps: [],
-  depsEmitInitially: true,
+  depsEmitInitially: true
 };
 
 /**
@@ -21,14 +21,14 @@ const DEFAULT_OPTIONS: Required<CreateNotifierOptions> = {
  * @returns A notifier object.
  */
 export const createNotifier = (
-  options?: CreateNotifierOptions,
+  options?: CreateNotifierOptions
 ): {
   notify: () => void;
   listen: Signal<number>;
 } => {
   const mergedOptions: Required<CreateNotifierOptions> = {
     ...DEFAULT_OPTIONS,
-    ...options,
+    ...options
   };
 
   // Without explicit deps we can simplify to a simple signal
@@ -49,11 +49,11 @@ export const createNotifier = (
         computation: (currentIncrementer, previousValue) =>
           // Increment from previous value when deps change
           previousValue !== undefined ? previousValue.value + 1 : currentIncrementer,
-        equal: () => false, // Always notify downstream consumers
+        equal: () => false // Always notify downstream consumers
       });
 
   return {
     notify: () => sourceSignal.update(bit => bit + 1),
-    listen: sourceSignal.asReadonly(),
+    listen: sourceSignal.asReadonly()
   };
 };

@@ -9,7 +9,7 @@ import { Announcer, injectAnnouncerState, provideAnnouncementDelay } from './ann
 @Component({
   selector: 'drgn-announcer-host',
   template: '',
-  hostDirectives: [Announcer],
+  hostDirectives: [Announcer]
 })
 class AnnouncerHost {
   readonly announcer = injectAnnouncerState();
@@ -18,12 +18,12 @@ class AnnouncerHost {
 describe(Announcer, () => {
   const liveAnnouncer = {
     announce: vi.fn<(message: string) => Promise<void>>(),
-    clear: vi.fn<() => void>(),
+    clear: vi.fn<() => void>()
   };
 
   const renderHost = (providers: Provider[] = []) =>
     render(AnnouncerHost, {
-      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }, ...providers],
+      providers: [{ provide: LiveAnnouncer, useValue: liveAnnouncer }, ...providers]
     });
 
   afterEach(() => {

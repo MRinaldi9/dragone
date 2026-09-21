@@ -14,7 +14,7 @@ import { Field } from './field';
     <drgn-field label="Name">
       <input data-testid="input" [formField]="form.name" />
     </drgn-field>
-  `,
+  `
 })
 class DefaultHost {
   readonly form = form(signal({ name: '' }), schema => {
@@ -33,7 +33,7 @@ class DefaultHost {
         <span class="custom-kind">{{ error.kind }}</span>
       </ng-template>
     </drgn-field>
-  `,
+  `
 })
 class CustomTemplateHost {
   readonly form = form(signal({ name: '' }), schema => {
@@ -51,7 +51,7 @@ class CustomTemplateHost {
         <span class="custom-kind">{{ error.kind }}</span>
       </ng-template>
     </drgn-field>
-  `,
+  `
 })
 class MultiErrorHost {
   readonly form = form(signal({ code: '' }), schema => {
@@ -67,7 +67,7 @@ class MultiErrorHost {
     <drgn-field label="Accept" description="Please accept">
       <drgn-checkbox [formField]="form.accepted" />
     </drgn-field>
-  `,
+  `
 })
 class CheckboxHost {
   readonly form = form(signal({ accepted: false }), schema => {

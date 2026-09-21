@@ -8,7 +8,7 @@ describe(InputGroup, () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputGroup],
+      imports: [InputGroup]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InputGroup);

@@ -18,14 +18,14 @@ import { injectRadioGroupContext } from '../radio-group-context';
   `,
   styleUrl: './radio-item.css',
   host: {
-    '[attr.readonly]': 'radioGroupReadonly() ? "" : null',
+    '[attr.readonly]': 'radioGroupReadonly() ? "" : null'
   },
   hostDirectives: [
     {
       directive: NgpRadioItem,
-      inputs: ['ngpRadioItemValue:value', 'ngpRadioItemDisabled:disabled'],
-    },
-  ],
+      inputs: ['ngpRadioItemValue:value', 'ngpRadioItemDisabled:disabled']
+    }
+  ]
 })
 export class RadioItem {
   protected readonly radioGroupReadonly = injectRadioGroupContext().readonly;

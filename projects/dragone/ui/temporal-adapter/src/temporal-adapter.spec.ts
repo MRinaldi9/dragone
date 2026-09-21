@@ -5,7 +5,7 @@ import { TemporalAdapter } from './temporal-adapter';
 describe(TemporalAdapter, () => {
   it('should get the day of the week (1-7)', () => {
     TestBed.configureTestingModule({
-      providers: [TemporalAdapter],
+      providers: [TemporalAdapter]
     });
     const adapter = TestBed.inject(TemporalAdapter);
     const lastOfAugust2025 = adapter.create({ year: 2025, month: 8, day: 31 }); // Aug 31st, 2025 is a Sunday
@@ -21,7 +21,7 @@ describe(TemporalAdapter, () => {
 
   it('should get the month as zero-based (0-11) per the NgpDateAdapter contract', () => {
     TestBed.configureTestingModule({
-      providers: [TemporalAdapter],
+      providers: [TemporalAdapter]
     });
     const adapter = TestBed.inject(TemporalAdapter);
     const january = adapter.create({ year: 2026, month: 1, day: 15 });
@@ -33,7 +33,7 @@ describe(TemporalAdapter, () => {
 
   it('should round-trip set(date, { month: getMonth(other) })', () => {
     TestBed.configureTestingModule({
-      providers: [TemporalAdapter],
+      providers: [TemporalAdapter]
     });
     const adapter = TestBed.inject(TemporalAdapter);
     const source = adapter.create({ year: 2026, month: 9, day: 6 });
