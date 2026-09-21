@@ -11,8 +11,8 @@ export default defineConfig({
       rules: {
         'sort-keys': 'off',
         'storybook/no-uninstalled-addons': 'error',
-        'vitest/require-hook': 'off',
-      },
-    },
-  ],
+        'vitest/require-hook': 'off'
+      }
+    }
+  ]
 });

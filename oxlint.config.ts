@@ -5,13 +5,13 @@ export default defineConfig({
     correctness: 'error',
     perf: 'warn',
     restriction: 'error',
-    style: 'warn',
+    style: 'warn'
   },
   env: {
     browser: true,
     es2024: true,
     node: true,
-    'shared-node-browser': true,
+    'shared-node-browser': true
   },
   ignorePatterns: ['**/dist', '**/out-tsc', '**/node_modules', '**/coverage'],
   overrides: [
@@ -75,8 +75,8 @@ export default defineConfig({
             caughtErrorsIgnorePattern: '^_',
             destructuredArrayIgnorePattern: '^_',
             ignoreRestSiblings: true,
-            varsIgnorePattern: '^_',
-          },
+            varsIgnorePattern: '^_'
+          }
         ],
         'no-useless-backreference': 'error',
         'no-useless-catch': 'error',
@@ -96,11 +96,11 @@ export default defineConfig({
         'typescript/ban-ts-comment': 'error',
         'typescript/explicit-function-return-type': [
           'error',
-          { allowExpressions: true, allowIIFEs: true },
+          { allowExpressions: true, allowIIFEs: true }
         ],
         'typescript/explicit-member-accessibility': [
           'error',
-          { accessibility: 'no-public', overrides: { constructors: 'off', methods: 'no-public' } },
+          { accessibility: 'no-public', overrides: { constructors: 'off', methods: 'no-public' } }
         ],
         'typescript/no-duplicate-enum-values': 'error',
         'typescript/no-empty-interface': 'error',
@@ -124,8 +124,8 @@ export default defineConfig({
         'unicorn/no-null': 'off',
         'unicorn/prefer-spread': 'off',
         'use-isnan': 'error',
-        'valid-typeof': 'error',
-      },
+        'valid-typeof': 'error'
+      }
     },
     {
       files: ['**/*.spec.ts', '**/*.test.ts'],
@@ -150,7 +150,7 @@ export default defineConfig({
         'vitest/prefer-describe-function-title': 'error',
         'vitest/prefer-expect-assertions': [
           'warn',
-          { onlyFunctionsWithAsyncKeyword: false, onlyFunctionsWithExpectInCallback: true },
+          { onlyFunctionsWithAsyncKeyword: false, onlyFunctionsWithExpectInCallback: true }
         ],
         'vitest/prefer-hooks-in-order': 'warn',
         'vitest/prefer-hooks-on-top': 'warn',
@@ -163,9 +163,9 @@ export default defineConfig({
         'vitest/require-test-timeout': 'off',
         'vitest/valid-describe-callback': 'off',
         'vitest/valid-expect': 'error',
-        'vitest/valid-title': 'off',
-      },
-    },
+        'vitest/valid-title': 'off'
+      }
+    }
   ],
-  plugins: ['typescript', 'eslint', 'oxc'],
+  plugins: ['typescript', 'eslint', 'oxc']
 });

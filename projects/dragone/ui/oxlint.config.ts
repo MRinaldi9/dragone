@@ -10,12 +10,12 @@ export default defineConfig({
       jsPlugins: ['@angular-eslint/eslint-plugin'],
       rules: {
         '@angular-eslint/component-selector': [
-          'warn',
+          'error',
           {
             prefix: 'drgn',
             style: 'kebab-case',
-            type: ['element', 'attribute'],
-          },
+            type: ['element', 'attribute']
+          }
         ],
         '@angular-eslint/contextual-lifecycle': 'error',
         '@angular-eslint/no-empty-lifecycle-method': 'error',
@@ -35,9 +35,11 @@ export default defineConfig({
         'sort-keys': 'off',
         'new-cap': [
           'warn',
-          { capIsNewExceptions: ['Component', 'Pipe', 'Directive', 'Injectable', 'Service'] },
-        ],
-      },
+          {
+            capIsNewExceptions: ['Component', 'Pipe', 'Directive', 'Injectable', 'Service']
+          }
+        ]
+      }
     },
     {
       files: ['**/*.stories.ts', '**/*.story.ts'],
@@ -57,8 +59,8 @@ export default defineConfig({
         'storybook/prefer-pascal-case': 'warn',
         'storybook/story-exports': 'error',
         'storybook/use-storybook-expect': 'error',
-        'storybook/use-storybook-testing-library': 'error',
-      },
-    },
-  ],
+        'storybook/use-storybook-testing-library': 'error'
+      }
+    }
+  ]
 });

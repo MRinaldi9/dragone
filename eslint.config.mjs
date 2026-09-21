@@ -28,6 +28,16 @@ export default defineConfig(
       '@angular-eslint/template/prefer-template-literal': 'error',
     },
   },
-  { ignores: ['!.storybook', 'coverage/**', 'node_modules/**', 'dist/**'] },
+  {
+    ignores: [
+      '!.storybook',
+      '.angular/**',
+      'coverage/**',
+      'dist/**',
+      'node_modules/**',
+      'out-tsc/**',
+      'storybook-static/**'
+    ]
+  },
   ...oxlint.configs['flat/recommended']
 );

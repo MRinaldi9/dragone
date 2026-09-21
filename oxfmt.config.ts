@@ -41,9 +41,7 @@ export default defineConfig({
     'angular.json',
     'projects/**/*.json',
     'tsconfig.node.json',
-    '.agents/*',
-    'CONTEXT.md',
-    'docs/**',
+    '.agents/*'
   ],
   jsdoc: true,
   printWidth: 100,
@@ -56,14 +54,15 @@ export default defineConfig({
       ['internal', 'subpath'],
       ['parent', 'sibling', 'index'],
       'style',
-      'unknown',
+      'unknown'
     ],
     internalPattern: ['@dragone/'],
     newlinesBetween: true,
     order: 'asc',
     partitionByComment: false,
     partitionByNewline: false,
-    sortSideEffects: false,
+    sortSideEffects: false
   },
   sortPackageJson: true,
+  trailingComma: 'none'
 });

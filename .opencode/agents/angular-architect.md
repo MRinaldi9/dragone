@@ -54,7 +54,6 @@ Prima di operare, carica e segui le skill di progetto (precedenza: istruzioni di
 repo > skill):
 
 - `.agents/skills/angular-developer/SKILL.md`
-- `.agents/skills/angular-testing/SKILL.md`
 - `.agents/skills/accessibility/SKILL.md` (quando rilevante)
 
 ## Vocabolario (obbligatorio)

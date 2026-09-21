@@ -6,32 +6,18 @@
       "disabled": true
     },
     "oxfmt": {
-      "command": [
-        "pnpm",
-        "format"
-      ],
-      "extensions": [
-        ".ts"
-      ]
+      "command": ["pnpm", "format"],
+      "extensions": [".ts"]
     }
   },
   "mcp": {
     "servers": {
       "angular-cli": {
-        "command": [
-          "pnpm",
-          "exec",
-          "ng",
-          "mcp"
-        ],
+        "command": ["pnpm", "exec", "ng", "mcp"],
         "type": "local"
       },
       "ngp-mcp": {
-        "command": [
-          "pnpm",
-          "exec",
-          "ngp-mcp"
-        ],
+        "command": ["pnpm", "exec", "ngp-mcp"],
         "type": "local"
       },
       "figma": {
