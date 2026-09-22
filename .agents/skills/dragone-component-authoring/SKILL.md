@@ -38,8 +38,9 @@ live in `AGENTS.md` (root) and `projects/dragone/ui/AGENTS.md`; this skill is th
 8. **Validate.** `pnpm format:check`, `pnpm lint`,
    `CI=true pnpm exec vitest run <area>`, `CI=true pnpm test`, `pnpm build @dragone/ui`;
    add `pnpm build-storybook` if stories changed.
-9. **Document.** Update `CONTEXT.md` / add an ADR when behavior or API changes; record a change
-   intent for published API changes (`pnpm change --bump <type> --summary "<text>" @dragone/ui`).
+9. **Document.** Update `CONTEXT.md` / add an ADR when behavior or API changes; mark a published
+   API change with a Conventional Commit (`feat!:` / `fix!:` / a `BREAKING CHANGE:` footer) —
+   release-please derives the version and changelog from the commit messages.
 
 ## Pitfalls
 

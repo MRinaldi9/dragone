@@ -6,6 +6,11 @@
       "input": "src",
       "glob": "**/*.css",
       "output": "./"
+    },
+    {
+      "input": ".",
+      "glob": "CHANGELOG.md",
+      "output": "."
     }
   ],
   "lib": {

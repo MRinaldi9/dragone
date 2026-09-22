@@ -1,29 +1,35 @@
 ---
 name: dragone-release
-description: Release @dragone/ui with pnpm native versioning (record change intents, apply the release plan, publish the built output) per ADR-0006. Use when preparing a release, recording change intents, or publishing.
+description: Release @dragone/ui with release-please (Conventional Commits, Release PR, gated publish of the built output) per ADR-0007. Use when preparing a release, recording change intent, or publishing.
 ---
 
 # Dragone Release
 
-Release uses pnpm's native workspace versioning (ADR-0006); no extra release tool is installed.
+Release is driven by [release-please](https://github.com/googleapis/release-please) from
+Conventional Commit messages (ADR-0007). There is no change-intent file and no `pnpm change`.
+The operational guide, including the open decisions, is
+[`docs/references/release.md`](../../../docs/references/release.md) — read it first.
 
 ## Steps
 
-1. **Confirm the workspace.** `pnpm -r ls --depth -1` must list `dragone` and `@dragone/ui`.
-2. **Review pending intents.** `pnpm change status` ("No pending changes." means none).
-3. **Record intents.** One per published package, non-interactive:
-   `pnpm change --bump <none|patch|minor|major> --summary "<changelog entry>" @dragone/ui`.
-   Use `major` for breaking public API changes (with a `!` Conventional Commit); `none` to
-   explicitly decline a release when a change needs none.
-4. **Preview the plan.** `pnpm version -r --dry-run`, then `pnpm version -r` to apply. It bumps
-   versions, propagates `workspace:` ranges, writes changelogs, and records the ledger in
-   `.changeset/ledger.yaml`.
-5. **Validate the artifact.** `pnpm lint:package` (builds `dist/dragone/ui`, then runs publint).
-6. **Publish.** `pnpm publish -r`. `@dragone/ui` declares `publishConfig.directory`, so the dist
-   output is packed, never the source. Confirm the dry run before a real publish.
+1. **Confirm the flow is wanted.** The workflow is manual today: it has no `push` trigger and
+   publishing is gated behind the `publish` input (default `false`).
+   `docs/references/release.md` lists what must be decided and configured before publishing.
+2. **Write releasable commits.** `fix:` → patch, `feat:` → minor, `!` / `BREAKING CHANGE:` →
+   major (minor while pre-1.0). Non-releasable types (`chore`, `docs`, `ci`, `test`, `style`)
+   do not open a Release PR alone.
+3. **Run the bot.** Actions ▸ `release-please` ▸ Run workflow (or wait for it once the `push`
+   trigger is added). It opens or updates the Release PR.
+4. **Review the Release PR** — version and `CHANGELOG.md`. Force a version with a
+   `Release-As: x.y.z` footer, or correct wording with a `BEGIN_COMMIT_OVERRIDE` section in the
+   PR body, before the next run.
+5. **Merge the Release PR.** release-please tags the commit and creates the GitHub Release.
+6. **Publish** (only once enabled): a run with `publish: true` builds `@dragone/ui` and publishes
+   `dist/dragone/ui`. Validate first with `pnpm lint:package`.
 
 ## Guardrails
 
-- Never hand-edit `pnpm-lock.yaml` or `.changeset/ledger.yaml`.
-- Never bypass `minimumReleaseAge` / `minimumReleaseAgeStrict` in `pnpm-workspace.yaml`.
-- Release from a clean tree; `pnpm publish` performs git checks unless told otherwise.
+- Publish `dist/dragone/ui`, never the source package.
+- Never hand-edit `.release-please-manifest.json` or the generated `CHANGELOG.md` entries.
+- Do not add a `push` trigger to `release-please.yml` until publication is agreed and
+  authenticated.

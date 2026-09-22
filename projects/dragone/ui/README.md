@@ -28,12 +28,16 @@ The build artifacts are written to `dist/dragone/ui`.
 
 ### Publishing the Library
 
-Once the project is built, you can publish the library from the output directory:
+Publishing is automated by release-please (ADR-0007) and packs the build output, never the
+source. To publish manually, build first and publish from the output directory:
 
 ```bash
+pnpm build @dragone/ui
 cd dist/dragone/ui
-pnpm publish
+pnpm publish --access public
 ```
+
+See [docs/references/release.md](../../docs/references/release.md) for the release flow.
 
 ## Testing
 

@@ -60,4 +60,4 @@ Both run automatically on staged files before every commit via [lefthook](https:
 
 ### Commit Messages
 
-All commits must follow [Conventional Commits](https://www.conventionalcommits.org/). Use `pnpm commit` to create a commit via the interactive prompt (commitizen); the `commit-msg` hook validates your message with commitlint. Versioning is managed natively by pnpm — record a change intent with `pnpm change` in each PR that changes the published API, then apply the release plan with `pnpm version -r`.
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/). Use `pnpm commit` to create a commit via the interactive prompt (commitizen); the `commit-msg` hook validates your message with commitlint. Versioning and the changelog are managed by [release-please](https://github.com/googleapis/release-please) from those commit messages; a release is cut by merging the release PR. See [docs/references/release.md](docs/references/release.md).

@@ -9,4 +9,5 @@ Read before reporting completion:
    library-specific steps.
 
 CI (`.github/workflows/pr-checks.yml`) gates format, lint, tests, and the library build /
-package lint / Storybook build job. Release steps are still manual.
+package lint / Storybook build job. Releases are cut by release-please; see
+[`release.md`](release.md).

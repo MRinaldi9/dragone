@@ -1,6 +1,6 @@
-packages:
-  - 'projects/**'
-
+# No `packages`: @dragone/ui is intentionally outside the pnpm workspace so pnpm does not manage
+# a node_modules under projects/dragone/ui or the release lifecycle (ADR-0007). These settings
+# still apply to the root install.
 allowBuilds:
   '@compodoc/compodoc': true
   '@parcel/watcher': true

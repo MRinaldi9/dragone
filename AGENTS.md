@@ -11,8 +11,7 @@ The implementation lives under `projects/dragone/ui`.
 - `.agents/skills/`: step-by-step procedures, loaded on demand — `angular-developer`,
   `accessibility`,
   [`dragone-component-authoring`](.agents/skills/dragone-component-authoring/SKILL.md), and
-  [`dragone-release`](.agents/skills/dragone-release/SKILL.md). `angular-testing` is deprecated
-  and empty — do not use it.
+  [`dragone-release`](.agents/skills/dragone-release/SKILL.md).
 - `docs/references/`: lookup material, read on demand via the triggers below.
 
 ## Repository
@@ -21,13 +20,12 @@ The implementation lives under `projects/dragone/ui`.
   It ships as secondary entry points (`@dragone/ui/button`, ...).
 - `CONTEXT.md` is the canonical glossary; `docs/adr/` records architectural decisions. Read
   both before changing behavior, public API, tokens, forms, or accessibility policy.
-- `.github/copilot-instructions.md` is legacy and stale; do not treat it as normative.
-- Package manager: `pnpm` >= 11 and Node >= 24.15.0, enforced by `devEngines` in
+- Package manager: `pnpm` >= 12 and Node >= 24.15.0, enforced by `devEngines` in
   `package.json`. Never run `npm` or `yarn`.
 - Generated files — do not edit: `pnpm-lock.yaml`, `documentation.json`, `dist/**`,
   `coverage/**`, `out-tsc/**`, `.angular/**`, `storybook-static/**`, `**/__screenshots__/**`,
-  `.husky/_/**` (stale hook shims), and `.changeset/**` (release ledger written by
-  `pnpm version -r`).
+  `.husky/_/**` (stale hook shims), and the release-please block of
+  `projects/dragone/ui/CHANGELOG.md`.
 
 ## Commands
 
@@ -63,13 +61,15 @@ before validating the implementation.
   requires explicit review. Do not hand-edit `pnpm-lock.yaml` or bypass `minimumReleaseAge` /
   `minimumReleaseAgeStrict`.
 - Keep secrets and telemetry out of the repo, tests, and stories.
-- Publishing packs the built output in `dist/dragone/ui`: `@dragone/ui` declares
-  `publishConfig.directory`, so `pnpm publish` and `pnpm publish -r` never publish source.
+- Publishing packs the build output in `dist/dragone/ui`, never the source. Releases are cut by
+  release-please; read [`docs/references/release.md`](docs/references/release.md) before
+  releasing or touching the release automation.
 
 ## Git and release
 
-Read [`docs/references/git-release.md`](docs/references/git-release.md) before committing or
-releasing.
+Read [`docs/references/git-release.md`](docs/references/git-release.md) before committing.
+Read [`docs/references/release.md`](docs/references/release.md) before a release or any change to
+the release automation (ADR-0007).
 
 ## Completion report
 

@@ -1,0 +1,61 @@
+# Release automation for @dragone/ui (ADR-0007, docs/references/release.md).
+#
+# This workflow is intentionally manual: it has no `push` trigger, so it never
+# runs on its own. Run it from the Actions tab (workflow_dispatch) once the
+# release process is agreed, and add the `push: [main]` trigger only when the
+# team is ready to publish automatically.
+name: release-please
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the built package to npm after the release is tagged
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  # Required by npm trusted publishing (OIDC). Remove if publishing with NPM_TOKEN.
+  id-token: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          # Prefer a PAT so CI (pr-checks.yml) runs on the release PR. Falls back
+          # to the built-in token when RELEASE_PLEASE_TOKEN is not configured.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      - name: Checkout
+        if: ${{ steps.release.outputs['projects/dragone/ui--release_created'] }}
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup pnpm
+        if: ${{ steps.release.outputs['projects/dragone/ui--release_created'] }}
+        uses: pnpm/setup@v2.1.0
+        with:
+          version: "^12.0.0"
+          runtime: "node@24"
+          cache: true
+          require-lockfile: true
+
+      - name: Build package
+        if: ${{ steps.release.outputs['projects/dragone/ui--release_created'] && inputs.publish }}
+        run: pnpm install --frozen-lockfile && pnpm build @dragone/ui
+
+      # Publishes the build output, never the source (ADR-0007).
+      # Auth: npm trusted publishing (OIDC) by default; to use a token instead,
+      # set NODE_AUTH_TOKEN and drop `id-token: write` / `--provenance`.
+      - name: Publish to npm
+        if: ${{ steps.release.outputs['projects/dragone/ui--release_created'] && inputs.publish }}
+        working-directory: dist/dragone/ui
+        run: pnpm publish --access public --no-git-checks --provenance

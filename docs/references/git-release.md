@@ -13,7 +13,7 @@ Read when: committing or releasing.
   not check commit messages yet.
 - lefthook fixes staged files on commit (`stage_fixed: true`): `git add` first and let the hook
   re-stage.
-- Release: record one change intent per published-API change (command in
-  [`scripts.md`](scripts.md)), then follow the
-  [release skill](../../.agents/skills/dragone-release/SKILL.md) and
-  [ADR-0006](../adr/0006-pnpm-native-versioning.md).
+- Release: releases are cut from Conventional Commit messages by release-please, not from a
+  local command. Merge releasable commits to `main`, then follow
+  [`release.md`](release.md), the [release skill](../../.agents/skills/dragone-release/SKILL.md),
+  and [ADR-0007](../adr/0007-release-please.md).

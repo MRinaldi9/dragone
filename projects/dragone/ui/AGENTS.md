@@ -81,5 +81,7 @@ Generic steps:
 
 1. `pnpm build @dragone/ui`
 2. Stories or Storybook config changed: `pnpm build-storybook`
-3. Public API changed: `pnpm change --bump <type> --summary "<text>" @dragone/ui`, then
-   `pnpm lint:package` (rebuilds and runs publint)
+3. Public API changed: mark it with a Conventional Commit (`feat!:` / `fix!:` / a
+   `BREAKING CHANGE:` footer), then `pnpm lint:package` (rebuilds and runs publint). Versioning
+   and the changelog are handled by release-please, not by hand — see
+   [`docs/references/release.md`](../../../docs/references/release.md).

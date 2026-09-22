@@ -1,5 +1,8 @@
 # Native pnpm Versioning
 
+> **Superseded by [ADR-0007](0007-release-please.md).** Kept for historical context; the
+> `pnpm change` / `pnpm version -r` flow described here is no longer in use.
+
 Dragone uses pnpm's native workspace release management for versioning (SemVer). Contributors record a change intent with `pnpm change` in each PR that modifies the published API — naming the affected packages, the bump type (`major`, `minor`, `patch`, or `none`), and a summary that becomes the changelog entry. At release time, `pnpm version -r` consumes the pending intents: it bumps versions, propagates changes to dependents via `workspace:` ranges, writes changelogs, and records what it consumed in `.changeset/ledger.yaml`. No separate release tool is installed.
 
 ## Considered Options
