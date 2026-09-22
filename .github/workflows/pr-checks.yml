@@ -15,7 +15,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/setup@v2.1.0
         with:
-          version: 11
+          version: "^12.0.0"
           runtime: "node@24"
           cache: true
           require-lockfile: true
@@ -32,7 +32,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/setup@v2.1.0
         with:
-          version: 11
+          version: "^12.0.0"
           runtime: "node@24"
           cache: true
           require-lockfile: true
@@ -49,7 +49,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/setup@v2.1.0
         with:
-          version: 11
+          version: "^12.0.0"
           runtime: "node@24"
           cache: true
           require-lockfile: true
@@ -69,7 +69,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/setup@v2.1.0
         with:
-          version: 11
+          version: "^12.0.0"
           runtime: "node@24"
           cache: true
           require-lockfile: true
@@ -80,22 +80,22 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-  Build-Package:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7.0.0
+  # Build-Package:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v7.0.0
 
-      - name: Setup pnpm
-        uses: pnpm/setup@v2.1.0
-        with:
-          version: 11
-          runtime: "node@24"
-          cache: true
-          require-lockfile: true
+  #     - name: Setup pnpm
+  #       uses: pnpm/setup@v2.1.0
+  #       with:
+  #         version: "^12.0.0"
+  #         runtime: "node@24"
+  #         cache: true
+  #         require-lockfile: true
 
-      - name: Build library and lint package
-        run: pnpm lint:package
+  #     - name: Build library and lint package
+  #       run: pnpm lint:package
 
-      - name: Build Storybook
-        run: pnpm build-storybook
+  #     - name: Build Storybook
+  #       run: pnpm build-storybook

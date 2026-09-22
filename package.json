@@ -12,7 +12,7 @@
     "lint": "pnpm lint:all",
     "lint:all": "pnpm lint:oxlint && pnpm lint:eslint && pnpm lint:docs",
     "lint:docs": "node scripts/check-links.ts",
-    "lint:eslint": "eslint",
+    "lint:eslint": "ng lint",
     "lint:oxlint": "oxlint",
     "lint:package": "pnpm build @dragone/ui && publint dist/dragone/ui",
     "format": "oxfmt",
@@ -86,7 +86,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": ">=11.0.0",
+      "version": ">=12.0.0",
       "onFail": "error"
     },
     "runtime": {
