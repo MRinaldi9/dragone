@@ -11,6 +11,6 @@ Since Angular 22.2 (compiler change "Scope nested CSS rules"), selectors nested 
 
 ## Consequences
 
-- Component CSS convention (see `projects/dragone/ui/AGENTS.md`): no `&`-nesting with root `:host` / `:host-context` / `:host(...)`. Each rewritten file carries a `/* Flat :host selectors per ADR-0008 ... */` pointer so future authors don't re-nest.
+- Component CSS convention (see `projects/dragone/ui/AGENTS.md`): no `&`-nesting with root `:host` / `:host-context` / `:host(...)`. Each rewritten file carries a `/* Flat :host selectors per ADR-0008 ... */` pointer so future authors don't re-nest. The rule is enforced by the `dragone/no-host-nesting` stylelint plugin (`scripts/stylelint-plugins/`).
 - Existing flat `:host[...]` rules (e.g. `radio-item`, `select`, `tooltip` animations, `:host-context` in `button`) were already correct and are the reference pattern.
 - No public API, Token, or template changes: this is a stylesheet-only migration with identical intended cascade and specificity.

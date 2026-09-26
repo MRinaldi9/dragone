@@ -52,7 +52,8 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
   bindings. Host-state selectors must be flat (`:host[data-*]`, never nested as
   `:host { &[data-*] { ... } }`) — since Angular 22.2 nested selectors under `:host`
   are scoped with `_ngcontent` and silently stop matching (ADR-0008). Nesting under
-  element/class selectors is fine.
+  element/class selectors is fine (enforced by the `dragone/no-host-nesting`
+  stylelint plugin).
 - Forms (ADR-0004): implement `FormValueControl` / `FormCheckboxControl` from
   `@angular/forms/signals`; a ng-primitives hostDirective `ModelSignal` may satisfy the
   contract. Never `ControlValueAccessor`.
