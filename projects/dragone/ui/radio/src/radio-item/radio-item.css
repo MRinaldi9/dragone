@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: grid;
   cursor: pointer;
@@ -34,34 +35,31 @@
   color: var(--drgn-color-text-data-entry-default);
 }
 
-:host[data-hover] {
-  & [ngpRadioIndicator] {
-    border-color: var(--drgn-color-text-data-entry-hover);
-  }
-  & .title {
-    color: var(--drgn-color-text-data-entry-hover);
-  }
+:host[data-hover] [ngpRadioIndicator] {
+  border-color: var(--drgn-color-text-data-entry-hover);
 }
 
-:host[data-checked] {
-  & .indicator-dot {
-    background-color: var(--drgn-color-text-data-entry-default);
-  }
+:host[data-hover] .title {
+  color: var(--drgn-color-text-data-entry-hover);
 }
 
-:host[data-focus-visible] {
-  & [ngpRadioIndicator] {
-    border-color: var(--drgn-color-focus-ring-primary);
-    outline: 1px solid var(--drgn-color-focus-ring-primary);
-    outline-offset: 3px;
-  }
+:host[data-checked] .indicator-dot {
+  background-color: var(--drgn-color-text-data-entry-default);
+}
+
+:host[data-focus-visible] [ngpRadioIndicator] {
+  border-color: var(--drgn-color-focus-ring-primary);
+  outline: 1px solid var(--drgn-color-focus-ring-primary);
+  outline-offset: 3px;
 }
 
 :host-context([data-disabled]),
 :host[data-disabled] {
   cursor: not-allowed;
-  & [ngpRadioIndicator] {
-    border-color: var(--drgn-color-surface-disabled);
-    background-color: var(--drgn-color-surface-disabled);
-  }
+}
+
+:host-context([data-disabled]) [ngpRadioIndicator],
+:host[data-disabled] [ngpRadioIndicator] {
+  border-color: var(--drgn-color-surface-disabled);
+  background-color: var(--drgn-color-surface-disabled);
 }

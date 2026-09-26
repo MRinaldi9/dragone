@@ -1,54 +1,67 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   gap: 0.5rem 1rem; /* row-gap column-gap */
   align-items: baseline;
-  &[data-theme='light'] {
-    background-color: var(--drgn-color-surface-primary-subtle);
-    & .alert-icon {
-      color: var(--drgn-color-text-secondary);
-    }
-    & .alert-title {
-      color: var(--drgn-color-text-secondary);
-    }
-    & .alert-body {
-      color: var(--drgn-color-text-primary);
-    }
-  }
-  &[data-theme='dark'] {
-    background-color: var(--drgn-color-surface-primary-darker);
-    & .alert-icon {
-      color: var(--drgn-color-text-inverse);
-    }
-    & .alert-title {
-      color: var(--drgn-color-text-inverse);
-    }
-    & .alert-body {
-      color: var(--drgn-color-text-inverse);
-    }
-  }
-  /* Variant-based padding */
-  &[data-layout='desktop'] {
-    padding: 1.5rem 3.5rem;
-    & .alert-action {
-      grid-column: 3;
-      grid-row: 2;
-      align-self: center;
-    }
-  }
+}
 
-  &[data-layout='mobile'] {
-    padding: 1rem;
-    & .alert-action {
-      grid-column: 2;
-      grid-row: 3;
-      justify-self: start;
-    }
-    & .alert-body {
-      max-width: 375px;
-    }
-  }
+:host[data-theme='light'] {
+  background-color: var(--drgn-color-surface-primary-subtle);
+}
+
+:host[data-theme='light'] .alert-icon {
+  color: var(--drgn-color-text-secondary);
+}
+
+:host[data-theme='light'] .alert-title {
+  color: var(--drgn-color-text-secondary);
+}
+
+:host[data-theme='light'] .alert-body {
+  color: var(--drgn-color-text-primary);
+}
+
+:host[data-theme='dark'] {
+  background-color: var(--drgn-color-surface-primary-darker);
+}
+
+:host[data-theme='dark'] .alert-icon {
+  color: var(--drgn-color-text-inverse);
+}
+
+:host[data-theme='dark'] .alert-title {
+  color: var(--drgn-color-text-inverse);
+}
+
+:host[data-theme='dark'] .alert-body {
+  color: var(--drgn-color-text-inverse);
+}
+
+/* Variant-based padding */
+:host[data-layout='desktop'] {
+  padding: 1.5rem 3.5rem;
+}
+
+:host[data-layout='desktop'] .alert-action {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: center;
+}
+
+:host[data-layout='mobile'] {
+  padding: 1rem;
+}
+
+:host[data-layout='mobile'] .alert-action {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: start;
+}
+
+:host[data-layout='mobile'] .alert-body {
+  max-width: 375px;
 }
 
 .alert-icon {

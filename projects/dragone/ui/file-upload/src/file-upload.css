@@ -1,11 +1,13 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  &[hidden] {
-    display: none;
-  }
+}
+
+:host[hidden] {
+  display: none;
 }
 
 .file-button {

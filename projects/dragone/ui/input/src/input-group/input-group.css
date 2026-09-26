@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: flex;
   align-items: center;
@@ -8,66 +9,71 @@
   padding: 1rem;
   background-color: var(--drgn-color-surface-base);
   transition: border-color var(--drgn-motion-duration-medium);
+}
 
-  /* Input nel gruppo */
-  input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 0;
-    background: transparent;
-    color: var(--drgn-color-text-data-entry-default);
-    min-width: 0; /* Previene overflow */
+/* Input nel gruppo */
+:host input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0;
+  background: transparent;
+  color: var(--drgn-color-text-data-entry-default);
+  min-width: 0; /* Previene overflow */
 
-    &::placeholder {
-      color: var(--drgn-color-text-placeholder-default);
-    }
+  &::placeholder {
+    color: var(--drgn-color-text-placeholder-default);
   }
+}
 
-  /* Stati interattivi */
-  &:hover:not(:has(input:disabled)) {
-    border-color: var(--drgn-color-text-data-entry-hover);
-  }
+/* Stati interattivi */
+:host:hover:not(:has(input:disabled)) {
+  border-color: var(--drgn-color-text-data-entry-hover);
+}
 
-  &:focus-within:not(:has(input:disabled)) {
-    border-color: var(--drgn-color-interactive-primary-default);
-    outline: none;
-    box-shadow:
-      0 0 0 3px var(--drgn-color-focus-ring-outline),
-      0 0 0 5px var(--drgn-color-focus-ring-primary);
-  }
+:host:focus-within:not(:has(input:disabled)) {
+  border-color: var(--drgn-color-interactive-primary-default);
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--drgn-color-focus-ring-outline),
+    0 0 0 5px var(--drgn-color-focus-ring-primary);
+}
 
-  /* Stato errore */
-  &:has(input[aria-invalid='true']:not(input:disabled), input.ng-invalid:not(input:disabled)) {
-    border-color: var(--drgn-color-interactive-alert-default);
-    & ng-icon {
-      color: var(--drgn-color-interactive-alert-default);
-    }
-  }
+/* Stato errore */
+:host:has(input[aria-invalid='true']:not(input:disabled), input.ng-invalid:not(input:disabled)) {
+  border-color: var(--drgn-color-interactive-alert-default);
+}
 
-  &:has(input[data-validation='valid']:not(input:disabled), input.ng-valid:not(input:disabled)) {
-    border-color: var(--drgn-color-interactive-success-default);
-    & ng-icon {
-      color: var(--drgn-color-interactive-success-default);
-    }
-  }
+:host:has(input[aria-invalid='true']:not(input:disabled), input.ng-invalid:not(input:disabled))
+  ng-icon {
+  color: var(--drgn-color-interactive-alert-default);
+}
 
-  &:has(input[data-validation='warning']:not(input:disabled)) {
-    border-color: var(--drgn-color-interactive-warning-default);
-    & ng-icon {
-      color: var(--drgn-color-interactive-warning-default);
-    }
-  }
+:host:has(input[data-validation='valid']:not(input:disabled), input.ng-valid:not(input:disabled)) {
+  border-color: var(--drgn-color-interactive-success-default);
+}
 
-  /* Stato disabled */
-  &:has(input:disabled) {
-    background-color: var(--drgn-color-surface-disabled);
-    border-color: transparent;
-    color: var(--drgn-color-text-disabled);
-    cursor: not-allowed;
+:host:has(input[data-validation='valid']:not(input:disabled), input.ng-valid:not(input:disabled))
+  ng-icon {
+  color: var(--drgn-color-interactive-success-default);
+}
 
-    & input {
-      cursor: not-allowed;
-    }
-  }
+:host:has(input[data-validation='warning']:not(input:disabled)) {
+  border-color: var(--drgn-color-interactive-warning-default);
+}
+
+:host:has(input[data-validation='warning']:not(input:disabled)) ng-icon {
+  color: var(--drgn-color-interactive-warning-default);
+}
+
+/* Stato disabled */
+:host:has(input:disabled) {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: transparent;
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
+}
+
+:host:has(input:disabled) input {
+  cursor: not-allowed;
 }

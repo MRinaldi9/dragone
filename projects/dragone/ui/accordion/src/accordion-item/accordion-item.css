@@ -1,8 +1,10 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: block;
-  &:not(:last-child) {
-    margin-bottom: 2px;
-  }
+}
+
+:host:not(:last-child) {
+  margin-bottom: 2px;
 }
 .accordion-container {
   padding: 2rem 4rem;

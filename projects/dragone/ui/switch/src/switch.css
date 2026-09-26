@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: inline-flex;
   align-items: center;
@@ -13,31 +14,38 @@
   transition-duration: var(--drgn-motion-duration-short);
   box-sizing: border-box;
   cursor: pointer;
-  &[data-focus-visible],
-  &:focus-visible {
-    outline: 1px solid var(--drgn-color-focus-ring-primary);
-    outline-offset: 2px;
-  }
-  &[data-checked] {
-    border-color: var(--drgn-color-interactive-primary-default);
-  }
-  &[data-disabled] {
-    cursor: not-allowed;
-    background-color: var(--drgn-color-surface-disabled);
-    border-color: var(--drgn-color-surface-disabled);
-  }
-  &:not([data-disabled]):hover {
-    border-color: var(--drgn-color-interactive-secondary-hover);
-    &[data-checked] {
-      border-color: var(--drgn-color-interactive-primary-hover);
-    }
-  }
-  &[data-hidden] {
-    display: none;
-  }
-  &[data-readonly] {
-    pointer-events: none;
-  }
+}
+
+:host[data-focus-visible],
+:host:focus-visible {
+  outline: 1px solid var(--drgn-color-focus-ring-primary);
+  outline-offset: 2px;
+}
+
+:host[data-checked] {
+  border-color: var(--drgn-color-interactive-primary-default);
+}
+
+:host[data-disabled] {
+  cursor: not-allowed;
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: var(--drgn-color-surface-disabled);
+}
+
+:host:not([data-disabled]):hover {
+  border-color: var(--drgn-color-interactive-secondary-hover);
+}
+
+:host:not([data-disabled]):hover[data-checked] {
+  border-color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-hidden] {
+  display: none;
+}
+
+:host[data-readonly] {
+  pointer-events: none;
 }
 
 [ngpSwitchThumb] {

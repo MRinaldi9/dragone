@@ -1,22 +1,24 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: block;
   inline-size: 100%;
   min-inline-size: 0;
 }
 
-:host([data-control-layout='horizontal']) {
-  & .control {
-    order: 1;
-  }
-  & .label {
-    order: 2;
-  }
-  & .description {
-    order: 3;
-  }
-  & .field-container {
-    flex-direction: row;
-  }
+:host([data-control-layout='horizontal']) .control {
+  order: 1;
+}
+
+:host([data-control-layout='horizontal']) .label {
+  order: 2;
+}
+
+:host([data-control-layout='horizontal']) .description {
+  order: 3;
+}
+
+:host([data-control-layout='horizontal']) .field-container {
+  flex-direction: row;
 }
 
 .field-container {

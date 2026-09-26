@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   cursor: pointer;
   border: 1px solid var(--drgn-color-text-data-entry-default);
@@ -8,23 +9,26 @@
   width: 300px;
   background-color: var(--drgn-color-surface-base);
   box-sizing: border-box;
+}
 
-  &[data-focus] {
-    outline: 2px solid var(--drgn-color-text-data-entry-focus);
-    outline-offset: 2px;
-    border-color: var(--drgn-color-text-data-entry-focus);
-  }
-  &[data-disabled] {
-    cursor: not-allowed;
-    background-color: var(--drgn-color-surface-disabled);
-    border-color: var(--drgn-color-surface-disabled);
-  }
-  &[readonly] {
-    pointer-events: none;
-  }
-  &[hidden] {
-    display: none;
-  }
+:host[data-focus] {
+  outline: 2px solid var(--drgn-color-text-data-entry-focus);
+  outline-offset: 2px;
+  border-color: var(--drgn-color-text-data-entry-focus);
+}
+
+:host[data-disabled] {
+  cursor: not-allowed;
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: var(--drgn-color-surface-disabled);
+}
+
+:host[readonly] {
+  pointer-events: none;
+}
+
+:host[hidden] {
+  display: none;
 }
 
 .select-value,
@@ -140,6 +144,6 @@ ng-icon.chevron {
   }
   100% {
     opacity: 0;
-    transform: translateY(-10px) scale(0.9);
+    transform: translateY(0) scale(1);
   }
 }

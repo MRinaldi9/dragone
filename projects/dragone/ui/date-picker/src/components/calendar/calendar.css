@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   position: absolute;
   display: inline-block;
@@ -5,12 +6,14 @@
   border-radius: 4px;
   box-shadow: var(--drgn-shadow-blur-md);
   min-width: 280px;
-  &[data-enter] {
-    animation: popover-show 200ms ease-in-out;
-  }
-  &[data-exit] {
-    animation: popover-hide 200ms ease-in-out;
-  }
+}
+
+:host[data-enter] {
+  animation: popover-show 200ms ease-in-out;
+}
+
+:host[data-exit] {
+  animation: popover-hide 200ms ease-in-out;
 }
 .date-picker-header {
   display: flex;

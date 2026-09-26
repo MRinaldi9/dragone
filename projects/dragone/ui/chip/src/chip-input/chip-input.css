@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: inline-flex;
   gap: 0.5rem;
@@ -7,37 +8,45 @@
   color: var(--drgn-color-text-inverse);
   border-radius: 100px;
   background-color: var(--drgn-color-interactive-secondary-default);
-  &:hover {
-    background-color: var(--drgn-color-interactive-secondary-hover);
-    & .close-button {
-      background-color: var(--drgn-color-interactive-primary-hover);
-    }
-  }
-  &[data-focus-visible='keyboard'],
-  &:has(.close-button:focus-visible) {
-    outline: none;
-    box-shadow:
-      0 0 0 3px var(--drgn-color-focus-ring-outline),
-      0 0 0 5px var(--drgn-color-focus-ring-primary);
-    background-color: var(--drgn-color-interactive-secondary-hover);
-    & .close-button {
-      background-color: var(--drgn-color-interactive-primary-hover);
-    }
-  }
-  &:not([data-disabled]):has(.close-button:active) {
-    background-color: var(--drgn-color-interactive-secondary-pressed);
-  }
-  &[data-disabled] {
-    background-color: var(--drgn-color-surface-disabled);
-    color: var(--drgn-color-text-disabled);
-    cursor: not-allowed;
-    & .close-button {
-      background-color: var(--drgn-color-surface-disabled);
-      border-color: transparent;
-      color: var(--drgn-color-text-disabled);
-      cursor: not-allowed;
-    }
-  }
+}
+
+:host:hover {
+  background-color: var(--drgn-color-interactive-secondary-hover);
+}
+
+:host:hover .close-button {
+  background-color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-focus-visible='keyboard'],
+:host:has(.close-button:focus-visible) {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--drgn-color-focus-ring-outline),
+    0 0 0 5px var(--drgn-color-focus-ring-primary);
+  background-color: var(--drgn-color-interactive-secondary-hover);
+}
+
+:host[data-focus-visible='keyboard'] .close-button,
+:host:has(.close-button:focus-visible) .close-button {
+  background-color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host:not([data-disabled]):has(.close-button:active) {
+  background-color: var(--drgn-color-interactive-secondary-pressed);
+}
+
+:host[data-disabled] {
+  background-color: var(--drgn-color-surface-disabled);
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
+}
+
+:host[data-disabled] .close-button {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: transparent;
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
 }
 
 .close-button {

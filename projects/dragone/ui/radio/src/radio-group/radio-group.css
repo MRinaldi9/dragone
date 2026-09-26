@@ -1,11 +1,14 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: flex;
   flex-direction: var(--direction);
   gap: 1.25rem;
-  &[readonly] {
-    pointer-events: none;
-  }
-  &[hidden] {
-    display: none;
-  }
+}
+
+:host[readonly] {
+  pointer-events: none;
+}
+
+:host[hidden] {
+  display: none;
 }

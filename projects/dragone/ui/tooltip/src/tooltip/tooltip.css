@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
   background-color: var(--drgn-color-surface-secondary-strong);
@@ -10,11 +11,12 @@
   font-weight: 500;
   color: var(--drgn-color-text-inverse);
   transform-origin: var(--drgn-runtime-tooltip-transform-origin);
-  & .container {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
+}
+
+:host .container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 :host[data-enter] {
   animation: tooltip-show var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter);

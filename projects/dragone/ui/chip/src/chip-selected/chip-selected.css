@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   cursor: pointer;
   display: inline-flex;
@@ -11,60 +12,70 @@
   transition-property: background-color, color, border-color, box-shadow;
   transition-duration: var(--drgn-motion-duration-medium);
   transition-timing-function: var(--drgn-motion-easing-standard);
-  &[data-hover] {
-    border-color: var(--drgn-color-interactive-primary-hover);
-    color: var(--drgn-color-interactive-primary-hover);
-  }
-  &[data-press] {
-    border-color: var(--drgn-color-interactive-primary-pressed);
-    color: var(--drgn-color-interactive-primary-pressed);
-  }
-  &[data-focus-visible],
-  &:focus-visible {
-    outline: var(--drgn-color-focus-ring-primary) solid 2px;
-    outline-offset: 2px;
-  }
-  &:not([data-selected])[data-disabled] {
-    cursor: not-allowed;
-    border-color: var(--drgn-color-text-disabled);
-    color: var(--drgn-color-text-disabled);
-  }
-  & .chip-icon {
-    inline-size: 0;
-    opacity: 0;
-    transform: translateX(-6px);
-    overflow: hidden;
-    transition-property: inline-size, opacity, transform;
-    transition-duration: var(--drgn-motion-duration-medium);
-    transition-timing-function: var(--drgn-motion-easing-standard);
-  }
+}
 
-  &[data-selected] {
-    background-color: var(--drgn-color-interactive-primary-default);
-    color: var(--drgn-color-text-inverse);
-    border: 2px solid var(--drgn-color-interactive-primary-default);
-    gap: 0.5rem;
-    &[data-hover] {
-      background-color: var(--drgn-color-interactive-primary-hover);
-      border-color: var(--drgn-color-interactive-primary-hover);
-    }
-    &[data-press] {
-      background-color: var(--drgn-color-interactive-primary-pressed);
-      border-color: var(--drgn-color-interactive-primary-pressed);
-    }
-    & .chip-icon {
-      inline-size: 1rem;
-      opacity: 1;
-      transform: translateX(0);
-    }
-    &[data-disabled] {
-      cursor: not-allowed;
-      border-color: var(--drgn-color-surface-disabled);
-      color: var(--drgn-color-text-disabled);
-      background-color: var(--drgn-color-surface-disabled);
-    }
-  }
-  &[data-hidden] {
-    display: none;
-  }
+:host[data-hover] {
+  border-color: var(--drgn-color-interactive-primary-hover);
+  color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-press] {
+  border-color: var(--drgn-color-interactive-primary-pressed);
+  color: var(--drgn-color-interactive-primary-pressed);
+}
+
+:host[data-focus-visible],
+:host:focus-visible {
+  outline: var(--drgn-color-focus-ring-primary) solid 2px;
+  outline-offset: 2px;
+}
+
+:host:not([data-selected])[data-disabled] {
+  cursor: not-allowed;
+  border-color: var(--drgn-color-text-disabled);
+  color: var(--drgn-color-text-disabled);
+}
+
+:host .chip-icon {
+  inline-size: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  overflow: hidden;
+  transition-property: inline-size, opacity, transform;
+  transition-duration: var(--drgn-motion-duration-medium);
+  transition-timing-function: var(--drgn-motion-easing-standard);
+}
+
+:host[data-selected] {
+  background-color: var(--drgn-color-interactive-primary-default);
+  color: var(--drgn-color-text-inverse);
+  border: 2px solid var(--drgn-color-interactive-primary-default);
+  gap: 0.5rem;
+}
+
+:host[data-selected][data-hover] {
+  background-color: var(--drgn-color-interactive-primary-hover);
+  border-color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-selected][data-press] {
+  background-color: var(--drgn-color-interactive-primary-pressed);
+  border-color: var(--drgn-color-interactive-primary-pressed);
+}
+
+:host[data-selected] .chip-icon {
+  inline-size: 1rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+:host[data-selected][data-disabled] {
+  cursor: not-allowed;
+  border-color: var(--drgn-color-surface-disabled);
+  color: var(--drgn-color-text-disabled);
+  background-color: var(--drgn-color-surface-disabled);
+}
+
+:host[data-hidden] {
+  display: none;
 }

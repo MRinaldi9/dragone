@@ -122,7 +122,7 @@ describe(Field, () => {
       await touch(locator.getByTestId('input'));
 
       const alert = locator.getByRole('alert');
-      await expect.element(alert).toHaveTextContent('!');
+      await expect.element(alert).toMatchTextContent('!');
       // The projected template replaces the default message instead of duplicating it
       expect(alert.getByText('This field is required', { exact: true }).elements()).toHaveLength(1);
       expect(alert.getByText('!', { exact: true }).elements()).toHaveLength(1);

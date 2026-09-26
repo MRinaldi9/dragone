@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: flex;
   width: 22px;
@@ -13,33 +14,38 @@
   flex: none;
   color: var(--drgn-color-text-inverse);
   font-size: 0.75rem;
+}
 
-  &[data-focus-visible],
-  &:focus-visible {
-    outline: 1px solid var(--drgn-color-text-data-entry-focus);
-    outline-offset: 2px;
-    border-color: var(--drgn-color-text-data-entry-focus);
-  }
-  &:not([data-disabled])[data-hover],
-  &:not([data-disabled]):hover {
-    border-color: var(--drgn-color-text-data-entry-hover);
-  }
-  &[data-disabled],
-  &:disabled {
-    background-color: var(--drgn-color-surface-disabled);
-    border-color: var(--drgn-color-surface-disabled);
-    color: var(--drgn-color-text-disabled);
-    pointer-events: none;
-  }
-  &[hidden] {
-    display: none;
-  }
-  &:not([data-disabled]):hover ng-icon {
-    color: var(--drgn-color-text-data-entry-hover);
-  }
-  &[readonly] {
-    pointer-events: none;
-  }
+:host[data-focus-visible],
+:host:focus-visible {
+  outline: 1px solid var(--drgn-color-text-data-entry-focus);
+  outline-offset: 2px;
+  border-color: var(--drgn-color-text-data-entry-focus);
+}
+
+:host:not([data-disabled])[data-hover],
+:host:not([data-disabled]):hover {
+  border-color: var(--drgn-color-text-data-entry-hover);
+}
+
+:host[data-disabled],
+:host:disabled {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: var(--drgn-color-surface-disabled);
+  color: var(--drgn-color-text-disabled);
+  pointer-events: none;
+}
+
+:host[hidden] {
+  display: none;
+}
+
+:host:not([data-disabled]):hover ng-icon {
+  color: var(--drgn-color-text-data-entry-hover);
+}
+
+:host[readonly] {
+  pointer-events: none;
 }
 
 ng-icon {

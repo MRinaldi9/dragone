@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: inline-flex;
   align-items: center;
@@ -7,9 +8,9 @@
   font-size: var(--drgn-typography-size-p-md);
   line-height: 1;
   margin-inline: 0.375rem;
+}
 
-  & ng-icon {
-    width: 0.583em;
-    height: 1em;
-  }
+:host ng-icon {
+  width: 0.583em;
+  height: 1em;
 }

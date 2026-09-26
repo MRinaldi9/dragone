@@ -65,8 +65,8 @@ describe(Tooltip, () => {
     await userEvent.hover(btnToHover);
     const tooltip = await page.getByRole('tooltip');
     expect(tooltip).toBeInTheDocument();
-    expect(tooltip).toHaveTextContent('Tooltip Title');
-    expect(tooltip).toHaveTextContent('Tooltip Body');
+    expect(tooltip).toMatchTextContent('Tooltip Title');
+    expect(tooltip).toMatchTextContent('Tooltip Body');
     expect(tooltipTriggerDirective['stateTooltip']().context()).toEqual({
       title: 'Tooltip Title',
       body: 'Tooltip Body'
@@ -84,9 +84,9 @@ describe(Tooltip, () => {
     await userEvent.hover(btnToHover);
     const tooltip = await page.getByRole('tooltip');
     expect(tooltip).toBeInTheDocument();
-    expect(tooltip).toHaveTextContent('Full Tooltip');
-    expect(tooltip).toHaveTextContent('This is the body of the full tooltip');
-    expect(tooltip).toHaveTextContent('Click Me');
+    expect(tooltip).toMatchTextContent('Full Tooltip');
+    expect(tooltip).toMatchTextContent('This is the body of the full tooltip');
+    expect(tooltip).toMatchTextContent('Click Me');
     expect(tooltipTriggerDirective['stateTooltip']().context()).toEqual({
       title: 'Full Tooltip',
       body: 'This is the body of the full tooltip',
