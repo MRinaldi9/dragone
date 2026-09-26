@@ -15,7 +15,11 @@ prepare-commit-msg:
       skip:
         - merge
         - rebase
-        - run: 'test -n "{2}"'
+        # Skip only when the message file already holds a non-comment message.
+        # NOTE: {n} placeholders are NOT expanded inside `skip:`, so the message
+        # source arg ({2}) can't be tested here (`test -n {2}` is always true);
+        # inspect the message file instead.
+        - run: git stripspace --strip-comments < "$(git rev-parse --git-dir)/COMMIT_EDITMSG" | grep -q '[^[:space:]]'
 commit-msg:
   commands:
     "lint commit message":

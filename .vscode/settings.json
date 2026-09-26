@@ -8,11 +8,19 @@
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "explicit"
+    "source.fixAll.oxc": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "oxc.enable.oxlint": true,
   "oxc.enable.oxfmt": true,
   "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "css.validate": false,
+  "[postcss]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "json.schemaDownload.trustedDomains": {
     "https://schemastore.azurewebsites.net/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
@@ -22,11 +30,5 @@
     "https://json-schema.org/": true,
     "https://developer.microsoft.com/json-schemas/": true,
     "https://opencode.ai/": true
-  },
-  "[postcss]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
 }

@@ -13,7 +13,7 @@ export default defineConfig({
     node: true,
     'shared-node-browser': true
   },
-  ignorePatterns: ['**/dist', '**/out-tsc', '**/node_modules', '**/coverage'],
+  ignorePatterns: ['scripts/**', '**/dist', '**/out-tsc', '**/node_modules', '**/coverage'],
   overrides: [
     {
       files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.js', '**/*.cjs', '**/*.mjs'],
@@ -100,7 +100,10 @@ export default defineConfig({
         ],
         'typescript/explicit-member-accessibility': [
           'error',
-          { accessibility: 'no-public', overrides: { constructors: 'off', methods: 'no-public' } }
+          {
+            accessibility: 'no-public',
+            overrides: { constructors: 'off', methods: 'no-public' }
+          }
         ],
         'typescript/no-duplicate-enum-values': 'error',
         'typescript/no-empty-interface': 'error',
@@ -150,7 +153,10 @@ export default defineConfig({
         'vitest/prefer-describe-function-title': 'error',
         'vitest/prefer-expect-assertions': [
           'warn',
-          { onlyFunctionsWithAsyncKeyword: false, onlyFunctionsWithExpectInCallback: true }
+          {
+            onlyFunctionsWithAsyncKeyword: false,
+            onlyFunctionsWithExpectInCallback: true
+          }
         ],
         'vitest/prefer-hooks-in-order': 'warn',
         'vitest/prefer-hooks-on-top': 'warn',

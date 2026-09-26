@@ -5,6 +5,7 @@
     "vitest.explorer",
     "oxc.oxc-vscode",
     "kravets.vscode-publint",
-    "vunguyentuan.vscode-css-variables"
+    "vunguyentuan.vscode-css-variables",
+    "stylelint.vscode-stylelint"
   ]
 }
