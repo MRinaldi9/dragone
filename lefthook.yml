@@ -12,6 +12,10 @@ prepare-commit-msg:
       run: pnpm commit --hook # Or npx cz --hook
       env:
         LEFTHOOK: "0"
+      skip:
+        - merge
+        - rebase
+        - run: 'test -n "{2}"'
 commit-msg:
   commands:
     "lint commit message":
