@@ -58,10 +58,12 @@
   transition: transform var(--drgn-motion-duration-short) var(--drgn-motion-easing-standard);
   transform: translateX(5px);
   box-sizing: border-box;
+
   &[data-checked] {
     transform: translateX(27px);
     background-color: var(--drgn-color-interactive-primary-default);
   }
+
   &[data-disabled] {
     background-color: var(--drgn-color-text-disabled);
   }

@@ -15,6 +15,7 @@
 :host[data-exit] {
   animation: popover-hide 200ms ease-in-out;
 }
+
 .date-picker-header {
   display: flex;
   align-items: center;
@@ -22,18 +23,22 @@
   gap: 8px;
   margin: 0.5rem 0;
 }
+
 .date-picker-day-headers {
   background-color: var(--drgn-color-surface-primary-muted);
 }
+
 th {
   text-transform: capitalize;
-  padding: 0px;
+  padding: 0;
   width: 50px;
   height: 40px;
 }
+
 [ngpDatePickerGrid] {
   border-collapse: collapse;
 }
+
 [ngpDatePickerLabel] {
   cursor: pointer;
   background-color: transparent;
@@ -42,9 +47,11 @@ th {
   outline: 1px solid var(--drgn-color-border-data-entry-default);
   border-radius: 4px;
   border: none;
+
   &:hover {
     outline-color: var(--drgn-color-border-data-entry-hover);
   }
+
   &:focus-visible {
     box-shadow:
       0 0 0 3px white,
@@ -63,33 +70,38 @@ th {
   font-size: 20px;
   padding: 10px 15px;
   cursor: pointer;
-
   color: var(--drgn-color-interactive-primary-default);
+
   &[data-hover] {
     color: var(--drgn-color-interactive-primary-hover);
   }
+
   &[data-focus-visible] {
     & ng-icon {
       box-shadow:
         0 0 0 2px var(--drgn-color-focus-ring-primary),
-        0 0 1px 0 rgba(0, 125, 179, 0.7);
+        0 0 1px 0 rgb(0 125 179 / 70%);
       border-radius: 8px;
     }
+
     &[data-press] ng-icon {
       box-shadow:
         0 0 0 3px var(--drgn-color-focus-ring-outline),
         0 0 0 5px var(--drgn-color-interactive-primary-pressed),
-        0 0 10px 0 rgba(0, 125, 179, 0.7);
+        0 0 10px 0 rgb(0 125 179 / 70%);
     }
   }
+
   &[data-press] {
     color: var(--drgn-color-interactive-primary-pressed);
   }
+
   &[data-disabled] {
     cursor: not-allowed;
     color: var(--drgn-color-text-disabled);
   }
 }
+
 [ngpDatePickerCell] {
   width: 50px;
   height: 44px;
@@ -105,36 +117,43 @@ th {
   justify-content: center;
   border-radius: 17px;
   cursor: pointer;
+
   &[data-hover] {
     background-color: var(--drgn-color-interactive-primary-hover);
     color: var(--drgn-color-text-inverse);
   }
-  &[data-today]:not([data-selected]):not([data-outside-month]) {
+
+  &[data-today]:not([data-selected], [data-outside-month]) {
     color: var(--drgn-color-interactive-primary-default);
     box-shadow: inset 0 0 0 1px var(--drgn-color-interactive-primary-default);
+
     &[data-hover] {
       color: var(--drgn-color-text-inverse);
     }
+
     &[data-disabled] {
       color: #e5e8ea;
       box-shadow: inset 0 0 0 1px var(--drgn-color-border-accent-subtle);
     }
   }
+
   &[data-selected]:not([data-outside-month]) {
     color: var(--drgn-color-text-inverse);
     background-color: var(--drgn-color-interactive-primary-pressed);
   }
+
   &[data-outside-month],
   &[data-disabled] {
     cursor: auto;
     color: #e5e8ea;
     pointer-events: none;
   }
+
   &[data-focus-visible] {
     background-color: var(--drgn-color-text-inverse);
     color: var(--drgn-color-interactive-primary-default);
     outline: 1px solid var(--drgn-color-focus-ring-primary);
-    filter: drop-shadow(0px 0px 3px #007db3b3);
+    filter: drop-shadow(0 0 3px #007db3b3);
   }
 }
 
@@ -143,16 +162,19 @@ th {
     opacity: 0;
     transform: scale(0.5);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
   }
 }
+
 @keyframes popover-hide {
   0% {
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.5);

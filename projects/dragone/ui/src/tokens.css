@@ -1,6 +1,6 @@
 :root {
   --color-global-primary-100: #2f6dd5;
-  --color-global-primary-000: #ffffff;
+  --color-global-primary-000: #fff;
   --color-global-secondary-100: #454d56;
   --color-global-secondary-90: #5b6772;
   --color-global-accent-100: #18cee7;
@@ -17,7 +17,7 @@
   --color-global-light-primary-40: #f2f6fc;
   --color-global-light-primary-50: #d9e4f7;
   --color-global-light-primary-60: #aec6ef;
-  --color-global-dark-secondary-130: #000000;
+  --color-global-dark-secondary-130: #000;
   --color-global-dark-secondary-125: #0b0d0e;
   --color-global-dark-secondary-120: #17191c;
   --color-global-dark-secondary-110: #2d3339;
@@ -42,25 +42,25 @@
   --color-global-semantic-alert-130: #3f0d1b;
   --color-global-gradient-01: linear-gradient(
     90deg,
-    rgba(47, 109, 213, 1) 0%,
-    rgba(24, 206, 231, 1) 100%
+    rgb(47 109 213 / 100%) 0%,
+    rgb(24 206 231 / 100%) 100%
   );
   --color-global-gradient-02: linear-gradient(
     -90deg,
-    rgba(0, 36, 96, 1) 0%,
-    rgba(47, 109, 213, 1) 50%,
-    rgba(24, 206, 231, 1) 100%
+    rgb(0 36 96 / 100%) 0%,
+    rgb(47 109 213 / 100%) 50%,
+    rgb(24 206 231 / 100%) 100%
   );
   --color-global-gradient-03: linear-gradient(
     90deg,
-    rgba(47, 109, 213, 1) 0%,
-    rgba(0, 36, 96, 1) 100%
+    rgb(47 109 213 / 100%) 0%,
+    rgb(0 36 96 / 100%) 100%
   );
   --color-alias-interactive-accent-default: #18cee7;
   --color-alias-interactive-accent-hover: #8ce7f3;
   --color-alias-interactive-accent-focus: #18cee7;
   --color-alias-interactive-accent-pressed: #0f7d8a;
-  --color-alias-interactive-primary-000-default: #ffffff;
+  --color-alias-interactive-primary-000-default: #fff;
   --color-alias-interactive-primary-default: #2f6dd5;
   --color-alias-interactive-primary-hover: #00368f;
   --color-alias-interactive-primary-focus: #2f6dd5;
@@ -83,17 +83,17 @@
   --color-alias-interactive-success-pressed: #001a15;
   --color-alias-text-color-disabled: #5b6571;
   --color-alias-text-color-primary-100: #2f6dd5;
-  --color-alias-text-color-primary-light-0: #ffffff;
+  --color-alias-text-color-primary-light-0: #fff;
   --color-alias-text-color-primary-light-40: #f2f6fc;
   --color-alias-text-color-primary-light-50: #d9e4f7;
   --color-alias-text-color-secondary-dark-100: #454d56;
-  --color-alias-text-color-secondary-dark-130: #000000;
+  --color-alias-text-color-secondary-dark-130: #000;
   --color-alias-text-color-primary-dark-110: #00368f;
   --color-alias-background-color-disabled: #e3e5e8;
   --color-alias-background-color-primary-light-40: #f2f6fc;
   --color-alias-background-color-primary-light-50: #d9e4f7;
   --color-alias-background-color-primary-light-60: #aec6ef;
-  --color-alias-background-color-primary-light-0: #ffffff;
+  --color-alias-background-color-primary-light-0: #fff;
   --color-alias-background-color-primary-dark-110: #00368f;
   --color-alias-background-color-primary-dark-115: #002460;
   --color-alias-background-color-primary-dark-120: #00173d;
@@ -103,25 +103,25 @@
   --color-alias-background-color-secondary-dark-110: #2d3339;
   --color-alias-background-color-secondary-dark-120: #17191c;
   --color-alias-background-color-secondary-dark-125: #0b0d0e;
-  --color-alias-background-color-secondary-dark-130: #000000;
+  --color-alias-background-color-secondary-dark-130: #000;
   --color-alias-interactive-border-focus: #0065d1;
   --color-alias-gradient-accent-primary-dark: linear-gradient(
     -90deg,
-    rgba(0, 36, 96, 1) 0%,
-    rgba(47, 109, 213, 1) 50%,
-    rgba(24, 206, 231, 1) 100%
+    rgb(0 36 96 / 100%) 0%,
+    rgb(47 109 213 / 100%) 50%,
+    rgb(24 206 231 / 100%) 100%
   );
   --color-alias-gradient-accent-primary: linear-gradient(
     90deg,
-    rgba(47, 109, 213, 1) 0%,
-    rgba(24, 206, 231, 1) 100%
+    rgb(47 109 213 / 100%) 0%,
+    rgb(24 206 231 / 100%) 100%
   );
-  --color-alias-overlay-90-dark-primary-120: rgba(0, 23, 61, 0.9);
-  --color-alias-overlay-15-secondary-100: rgba(69, 77, 86, 0.15);
-  --color-alias-overlay-25-primary-000: rgba(255, 255, 255, 0.25);
+  --color-alias-overlay-90-dark-primary-120: rgb(0 23 61 / 90%);
+  --color-alias-overlay-15-secondary-100: rgb(69 77 86 / 15%);
+  --color-alias-overlay-25-primary-000: rgb(255 255 255 / 25%);
   --color-alias-app-interactive-secondary-default: #5b6772;
   --color-alias-app-interactive-primary-active: #2f6dd5;
-  --color-alias-app-interactive-primary-000-default: #ffffff;
+  --color-alias-app-interactive-primary-000-default: #fff;
   --color-specific-data-entry-label-color-default: #454d56;
   --color-specific-data-entry-label-color-hover: #00368f;
   --color-specific-data-entry-label-color-focus: #2f6dd5;
@@ -149,14 +149,14 @@
   --color-specific-option-background-color-valued: #2f6dd5;
   --color-specific-progressbar-background-color: linear-gradient(
     -90deg,
-    rgba(0, 36, 96, 1) 0%,
-    rgba(47, 109, 213, 1) 50%,
-    rgba(24, 206, 231, 1) 100%
+    rgb(0 36 96 / 100%) 0%,
+    rgb(47 109 213 / 100%) 50%,
+    rgb(24 206 231 / 100%) 100%
   );
   --color-specific-card-overlay-gradient-img: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 100%
+    rgb(0 0 0 / 0%) 0%,
+    rgb(0 0 0 / 100%) 100%
   );
 
   /* ─── font-family: nomi con spazi racchiusi tra virgolette ─── */
@@ -187,6 +187,7 @@
   --typography-global-font-weights-500: 500;
   --typography-global-font-weights-600: 600;
   --typography-global-font-weights-700: 700;
+
   /* italic: il peso rimane numerico; lo stile corsivo va applicato via font-style */
   --typography-global-font-weights-700-i: 700;
   --typography-global-font-weights-600-i: 600;
@@ -291,9 +292,8 @@
   --typography-specific-app-navigation-title-xl-line-height: 36px;
   --typography-specific-app-navigation-title-md-line-height: 24px;
   --typography-specific-app-navigation-title-font-weight-600: 600;
-
-  --elevation-elevation-01: 0px 0px 16px 0px rgba(227, 229, 232, 1);
-  --elevation-elevation-02: 0px 0px 24px 0px rgba(227, 229, 232, 1);
-  --elevation-elevation-03: 0px 0px 32px 0px rgba(227, 229, 232, 1);
-  --elevation-elevation-04: 0px 0px 40px 0px rgba(227, 229, 232, 1);
+  --elevation-elevation-01: 0px 0px 16px 0px rgb(227 229 232 / 100%);
+  --elevation-elevation-02: 0px 0px 24px 0px rgb(227 229 232 / 100%);
+  --elevation-elevation-03: 0px 0px 32px 0px rgb(227 229 232 / 100%);
+  --elevation-elevation-04: 0px 0px 40px 0px rgb(227 229 232 / 100%);
 }

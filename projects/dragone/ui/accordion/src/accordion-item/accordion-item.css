@@ -6,6 +6,7 @@
 :host:not(:last-child) {
   margin-bottom: 2px;
 }
+
 .accordion-container {
   padding: 2rem 4rem;
   overflow-wrap: anywhere;
@@ -13,6 +14,7 @@
 
 [ngpAccordionContent] {
   --drgn-runtime-accordion-content-height: var(--ngp-accordion-content-height);
+
   color: var(--drgn-color-text-primary);
   background-color: var(--drgn-color-surface-base);
   overflow: hidden;
@@ -48,27 +50,29 @@
  * animationcancel, so no animation plays on initial render.
  */
 [ngpAccordionContent][data-enter] {
-  animation: slideDown var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard)
+  animation: slide-down var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard)
     forwards;
 }
 
 [ngpAccordionContent][data-exit] {
-  animation: slideUp var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard) forwards;
+  animation: slide-up var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard) forwards;
 }
 
-@keyframes slideDown {
+@keyframes slide-down {
   from {
     height: 0;
   }
+
   to {
     height: var(--drgn-runtime-accordion-content-height);
   }
 }
 
-@keyframes slideUp {
+@keyframes slide-up {
   from {
     height: var(--drgn-runtime-accordion-content-height);
   }
+
   to {
     height: 0;
   }

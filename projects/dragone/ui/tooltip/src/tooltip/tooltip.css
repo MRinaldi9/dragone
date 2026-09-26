@@ -1,6 +1,7 @@
 /* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+
   background-color: var(--drgn-color-surface-secondary-strong);
   border-radius: 8px;
   position: absolute;
@@ -18,9 +19,11 @@
   flex-direction: column;
   gap: 1em;
 }
+
 :host[data-enter] {
   animation: tooltip-show var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter);
 }
+
 :host[data-exit] {
   animation: tooltip-hide var(--drgn-motion-duration-medium) var(--drgn-motion-easing-exit);
 }
@@ -30,16 +33,19 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
   }
 }
+
 @keyframes tooltip-hide {
   0% {
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.9);

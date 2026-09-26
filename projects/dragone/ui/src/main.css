@@ -1,9 +1,8 @@
-@import './tokens.css';
-@import './components.css';
-@import './typography.css';
-@import '@angular/cdk/a11y-prebuilt.css';
+@import url('./tokens.css');
+@import url('./components.css');
+@import url('./typography.css');
+@import url('@angular/cdk/a11y-prebuilt.css');
 
 p {
-  margin-block-end: 0;
-  margin-block-start: 0;
+  margin-block: 0;
 }

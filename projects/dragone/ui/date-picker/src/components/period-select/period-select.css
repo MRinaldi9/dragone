@@ -18,6 +18,7 @@
   padding: 4px 8px;
   height: 100%;
 }
+
 ng-icon {
   display: inline-flex;
   justify-content: center;
@@ -26,6 +27,7 @@ ng-icon {
   margin-inline-end: 8px;
   font-size: 12px;
 }
+
 [ngpSelectDropdown] {
   background-color: white;
   border-radius: 4px;
@@ -40,12 +42,15 @@ ng-icon {
   overflow-y: auto;
   transform-origin: var(--ngp-select-transform-origin);
 }
+
 [ngpSelectDropdown][data-enter] {
   animation: select-show 0.1s ease-out;
 }
+
 [ngpSelectDropdown][data-exit] {
   animation: select-hide 0.1s ease-out;
 }
+
 [ngpSelectOption] {
   display: flex;
   align-items: center;
@@ -63,30 +68,36 @@ ng-icon {
     background-color: var(--drgn-color-interactive-primary-default);
     color: var(--drgn-color-text-inverse);
   }
+
   &[data-hover] {
     background-color: var(--drgn-color-interactive-primary-hover);
     color: var(--drgn-color-text-inverse);
   }
+
   &[data-press] {
     background-color: var(--drgn-color-interactive-primary-pressed);
     color: var(--drgn-color-text-inverse);
   }
 }
+
 @keyframes select-show {
   0% {
     opacity: 0;
     transform: translateY(-10px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
+
 @keyframes select-hide {
   0% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translateY(-10px) scale(0.9);

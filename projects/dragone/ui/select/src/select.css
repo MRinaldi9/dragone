@@ -66,6 +66,7 @@ ng-icon.chevron {
 [ngpSelectDropdown] {
   --drgn-runtime-select-width: var(--ngp-select-width);
   --drgn-runtime-select-transform-origin: var(--ngp-select-transform-origin);
+
   background-color: var(--drgn-color-surface-base);
   border: 1px solid var(--drgn-color-text-data-entry-default);
   border-radius: 4px;
@@ -80,12 +81,15 @@ ng-icon.chevron {
   overflow-y: auto;
   transform-origin: var(--drgn-runtime-select-transform-origin);
 }
+
 [ngpSelectDropdown][data-enter] {
   animation: select-show var(--drgn-motion-duration-short) var(--drgn-motion-easing-enter);
 }
+
 [ngpSelectDropdown][data-exit] {
   animation: select-hide var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit);
 }
+
 [ngpSelectOption] {
   display: flex;
   align-items: center;
@@ -96,6 +100,7 @@ ng-icon.chevron {
   color: var(--drgn-color-text-data-entry-default);
   box-sizing: border-box;
   justify-content: space-between;
+
   &:not(:last-child) {
     border-bottom: 1px solid var(--drgn-color-text-data-entry-default);
   }
@@ -104,14 +109,17 @@ ng-icon.chevron {
     outline: 1.5px solid var(--drgn-color-text-data-entry-focus);
     outline-offset: -1px;
   }
+
   &[data-selected] {
     background-color: var(--drgn-color-option-background-focus);
     color: var(--drgn-color-text-inverse);
   }
+
   &[data-hover] {
     background-color: var(--drgn-color-option-background-hover);
     color: var(--drgn-color-text-inverse);
   }
+
   &[data-press] {
     background-color: var(--drgn-color-option-background-pressed);
   }
@@ -127,21 +135,25 @@ ng-icon.chevron {
   font-weight: 500;
   text-align: center;
 }
+
 @keyframes select-show {
   0% {
     opacity: 0;
     transform: translateY(-10px) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
+
 @keyframes select-hide {
   0% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translateY(0) scale(1);
