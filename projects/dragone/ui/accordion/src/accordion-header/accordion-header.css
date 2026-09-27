@@ -21,6 +21,11 @@
   border: none;
 }
 
+:host button[ngpAccordionTrigger][data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 1px solid var(--drgn-color-surface-disabled);
+}
+
 :host button[ngpAccordionTrigger][data-semantic='tertiary']:not(:disabled):hover,
 :host button[ngpAccordionTrigger][data-semantic='tertiary']:not(:disabled)[data-open] {
   background-color: var(--drgn-color-surface-primary-subtle);
@@ -39,15 +44,6 @@
   border: none;
 }
 
-:host button[ngpAccordionTrigger][data-semantic='tertiary']:disabled {
-  color: var(--drgn-color-text-disabled);
-  border: 1px solid var(--drgn-color-surface-disabled);
-}
-
-:host button[ngpAccordionTrigger][data-open] ng-icon {
-  transform: rotateX(180deg);
-}
-
 :host button ng-icon {
   color: var(--drgn-color-text-default);
   transition: transform var(--drgn-motion-duration-medium) var(--drgn-motion-easing-standard);
@@ -55,4 +51,8 @@
 
 :host button[data-theme='light'] ng-icon {
   color: var(--drgn-color-text-primary-dark-110);
+}
+
+:host button[ngpAccordionTrigger][data-open] ng-icon {
+  transform: rotateX(180deg);
 }

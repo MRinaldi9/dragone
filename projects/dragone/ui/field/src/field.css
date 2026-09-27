@@ -17,10 +17,6 @@
   order: 3;
 }
 
-:host([data-control-layout='horizontal']) .field-container {
-  flex-direction: row;
-}
-
 .field-container {
   display: flex;
   flex-direction: column;
@@ -30,12 +26,15 @@
   margin-bottom: 4px;
 }
 
+:host([data-control-layout='horizontal']) .field-container {
+  flex-direction: row;
+}
+
 .error-message {
   display: block;
   inline-size: 100%;
   min-inline-size: 0;
   overflow-wrap: anywhere;
-  word-break: break-word;
   color: var(--drgn-color-interactive-alert-default);
 }
 

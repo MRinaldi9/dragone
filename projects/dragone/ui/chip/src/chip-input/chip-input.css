@@ -14,6 +14,28 @@
   background-color: var(--drgn-color-interactive-secondary-hover);
 }
 
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding-inline: 0;
+  line-height: 0;
+  background-color: var(--drgn-color-interactive-primary-default);
+  color: var(--drgn-color-text-inverse);
+  border: 1px solid var(--drgn-color-border-accent-subtle);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:not(:disabled):active {
+    background-color: var(--drgn-color-interactive-primary-pressed);
+  }
+}
+
 :host:hover .close-button {
   background-color: var(--drgn-color-interactive-primary-hover);
 }
@@ -25,6 +47,13 @@
     0 0 0 3px var(--drgn-color-focus-ring-outline),
     0 0 0 5px var(--drgn-color-focus-ring-primary);
   background-color: var(--drgn-color-interactive-secondary-hover);
+}
+
+:host[data-disabled] .close-button {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: transparent;
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
 }
 
 :host[data-focus-visible='keyboard'] .close-button,
@@ -40,31 +69,4 @@
   background-color: var(--drgn-color-surface-disabled);
   color: var(--drgn-color-text-disabled);
   cursor: not-allowed;
-}
-
-:host[data-disabled] .close-button {
-  background-color: var(--drgn-color-surface-disabled);
-  border-color: transparent;
-  color: var(--drgn-color-text-disabled);
-  cursor: not-allowed;
-}
-
-.close-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  padding-inline: 0;
-  line-height: 0;
-  background-color: var(--drgn-color-interactive-primary-default);
-  color: var(--drgn-color-text-inverse);
-  border: 1px solid var(--drgn-color-border-accent-subtle);
-  cursor: pointer;
-  &:focus-visible {
-    outline: none;
-    box-shadow: none;
-  }
-  &:not(:disabled):active {
-    background-color: var(--drgn-color-interactive-primary-pressed);
-  }
 }

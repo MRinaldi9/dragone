@@ -40,14 +40,14 @@
   display: none;
 }
 
+ng-icon {
+  color: var(--drgn-color-text-data-entry-default);
+}
+
 :host:not([data-disabled]):hover ng-icon {
   color: var(--drgn-color-text-data-entry-hover);
 }
 
 :host[readonly] {
   pointer-events: none;
-}
-
-ng-icon {
-  color: var(--drgn-color-text-data-entry-default);
 }

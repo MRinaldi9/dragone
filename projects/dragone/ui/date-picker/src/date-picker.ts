@@ -23,7 +23,7 @@ import { isETFLanguageTag, type IETFLanguageTag } from './utils/guards';
   selector: 'drgn-date-picker',
   imports: [NgIcon, InputGroup, InputDatePicker, Calendar, Button, NgpPopoverTrigger, NgpPopover],
   templateUrl: './date-picker.component.html',
-  styleUrl: './date-picker.css',
+  styles: '',
   providers: [
     provideIcons({ faSolidCalendarDay }),
     provideDatePickerDragoneState({ inherit: false })

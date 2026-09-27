@@ -16,8 +16,7 @@
 
 ul {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -26,16 +25,6 @@ ul {
 
 li {
   display: inline-flex;
-}
-
-.sr-only:not(:focus):not(:active) {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .file-item-enter {
