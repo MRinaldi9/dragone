@@ -33,6 +33,14 @@
   padding: 6px;
 }
 
+/* Icon-only projects the icon through the default slot, inside the label
+   wrapper span. Without this the span keeps an inline formatting context
+   (inherited line-height strut) taller than the 16px icon. display: contents
+   removes the wrapper box so the icon sizes the button directly. */
+:host[data-icon-only] > span {
+  display: contents;
+}
+
 :host[data-focus-visible],
 :host[data-focus].cdk-program-focused {
   outline: none;
@@ -102,6 +110,15 @@
   border: 2px solid var(--drgn-color-interactive-primary-default);
 }
 
+:host[data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 2px solid var(--drgn-color-surface-disabled);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary'] {
+  background-color: transparent;
+}
+
 :host[data-semantic='tertiary']:not(:disabled):hover {
   color: var(--drgn-color-interactive-primary-hover);
   border: 2px solid var(--drgn-color-interactive-primary-hover);
@@ -127,17 +144,16 @@
   border: 2px solid var(--drgn-color-interactive-alert-pressed);
 }
 
-:host[data-semantic='tertiary']:disabled {
-  color: var(--drgn-color-text-disabled);
-  border: 2px solid var(--drgn-color-surface-disabled);
-}
-
 :host[data-semantic='ghost'] {
   background-color: transparent;
 }
 
 :host[data-semantic='ghost']:not(:disabled) {
   color: var(--drgn-color-interactive-primary-default);
+}
+
+:host[data-semantic='ghost']:disabled {
+  color: var(--drgn-color-text-disabled);
 }
 
 :host[data-semantic='ghost']:not(:disabled):hover {
@@ -162,10 +178,6 @@
   background-color: var(--drgn-color-interactive-alert-pressed);
 }
 
-:host[data-semantic='ghost']:disabled {
-  color: var(--drgn-color-text-disabled);
-}
-
 :host[data-theme='dark'][data-semantic='tertiary'] {
   background-color: transparent;
 }
@@ -173,6 +185,11 @@
 :host[data-theme='dark'][data-semantic='tertiary']:not(:disabled) {
   color: var(--drgn-color-interactive-accent-default);
   border: 2px solid var(--drgn-color-interactive-accent-default);
+}
+
+:host[data-theme='dark'][data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 2px solid var(--drgn-color-surface-disabled);
 }
 
 :host[data-theme='dark'][data-semantic='tertiary']:not(:disabled):hover {
@@ -185,18 +202,14 @@
   border: 2px solid var(--drgn-color-interactive-accent-pressed);
 }
 
-:host[data-theme='dark'][data-semantic='tertiary']:disabled {
-  color: var(--drgn-color-text-disabled);
-  border: 2px solid var(--drgn-color-surface-disabled);
-}
-
-:host-context([data-theme='dark'])[data-semantic='tertiary'] {
-  background-color: transparent;
-}
-
 :host-context([data-theme='dark'])[data-semantic='tertiary']:not(:disabled) {
   color: var(--drgn-color-interactive-accent-default);
   border: 2px solid var(--drgn-color-interactive-accent-default);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 2px solid var(--drgn-color-surface-disabled);
 }
 
 :host-context([data-theme='dark'])[data-semantic='tertiary']:not(:disabled):hover {
@@ -207,9 +220,4 @@
 :host-context([data-theme='dark'])[data-semantic='tertiary']:not(:disabled):active {
   color: var(--drgn-color-interactive-accent-pressed);
   border: 2px solid var(--drgn-color-interactive-accent-pressed);
-}
-
-:host-context([data-theme='dark'])[data-semantic='tertiary']:disabled {
-  color: var(--drgn-color-text-disabled);
-  border: 2px solid var(--drgn-color-surface-disabled);
 }

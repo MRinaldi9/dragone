@@ -25,7 +25,7 @@ const SUPPORTED_STATUSES: Record<ButtonSemantic, readonly StatusType[]> = {
   selector: 'button[drgnButton],button[drgn-button]',
   template: `
     <ng-content select="[slot='leading']" />
-    <span [class]="isIconOnly() ? '' : labelClass()">
+    <span [class]="iconOnly() ? '' : labelClass()">
       <ng-content />
     </span>
     <ng-content select="[slot='trailing']" />
@@ -35,7 +35,7 @@ const SUPPORTED_STATUSES: Record<ButtonSemantic, readonly StatusType[]> = {
   host: {
     '[attr.data-size]': 'size()',
     '[attr.data-semantic]': 'semantic()',
-    '[attr.data-icon-only]': 'isIconOnly() ? "" : null'
+    '[attr.data-icon-only]': 'iconOnly() ? "" : null'
   },
   hostDirectives: [
     { directive: NgpButton, inputs: ['disabled'] },
@@ -61,7 +61,7 @@ export class Button {
   /** The semantic of the button */
   readonly semantic = input<ButtonSemantic>('primary');
   /** Whether the button is an icon-only button */
-  readonly isIconOnly = input(false, { transform: booleanAttribute, alias: 'icon' });
+  readonly iconOnly = input(false, { transform: booleanAttribute });
   /**
    * Class applied to the button label.
    *

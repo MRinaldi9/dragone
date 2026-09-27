@@ -13,7 +13,6 @@ import { Button } from './button';
 type ButtonStory = Button & {
   darkMode: boolean;
   disabled: boolean;
-  icon: boolean;
   focusVisible: () => boolean;
   label: string;
   showLeadingIcon: boolean;
@@ -29,7 +28,7 @@ const meta: Meta<ButtonStory> = {
     focusVisible: fn(),
     label: 'Dragone',
     disabled: false,
-    icon: false,
+    iconOnly: false,
     showLeadingIcon: false,
     showTrailingIcon: false,
     size: 'large',
@@ -38,8 +37,14 @@ const meta: Meta<ButtonStory> = {
   argTypes: {
     focusVisible: { type: 'function', control: false },
     label: { control: 'text' },
-    showLeadingIcon: { control: 'boolean' },
-    showTrailingIcon: { control: 'boolean' },
+    showLeadingIcon: {
+      control: 'boolean',
+      if: { arg: 'iconOnly', truthy: false }
+    },
+    showTrailingIcon: {
+      control: 'boolean',
+      if: { arg: 'iconOnly', truthy: false }
+    },
     size: {
       description: 'The size of the button',
       type: 'string',
@@ -74,7 +79,10 @@ const meta: Meta<ButtonStory> = {
     }
   },
   decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] })
+    moduleMetadata({
+      providers: [provideIcons({ faSolidArrowRight })],
+      imports: [NgIcon]
+    })
   ],
   render: args => ({
     props: args,
@@ -139,9 +147,16 @@ export const WithTrailingIcon: Story = {
 
 export const IconOnly: Story = {
   ...Template,
+  render: args => ({
+    props: args,
+    template: `
+      <button drgnButton ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>
+        <ng-icon name="fa-solid-arrow-right" size="1rem"/>
+      </button>
+      `
+  }),
   args: {
     label: '',
-    showLeadingIcon: true,
-    icon: true
+    iconOnly: true
   }
 };

@@ -10,7 +10,7 @@ import { Button, type ButtonSize, type ButtonSemantic } from './button';
       drgnButton
       [semantic]="semantic()"
       [size]="size()"
-      [icon]="isIconOnly()"
+      [iconOnly]="isIconOnly()"
       [disabled]="isDisabled()"
       [status]="status()"
       (click)="clickCta.emit()"
@@ -45,6 +45,12 @@ class TestHostWithIcons {}
   template: ` <button drgnButton labelClass="drgn-label-md-600">Dragone</button> `
 })
 class TestHostCustomLabel {}
+
+@Component({
+  imports: [Button],
+  template: ` <button drgnButton iconOnly><span class="test-icon">*</span></button> `
+})
+class TestHostIconOnly {}
 
 describe(Button, () => {
   const size = signal<ButtonSize>('large');
@@ -142,5 +148,19 @@ describe(Button, () => {
 
     const label = locator.getByRole('button').locator('span.drgn-label-md-600');
     await expect.element(label).toHaveTextContent('Dragone');
+  });
+
+  it('should not let the label wrapper add height in icon-only mode', async () => {
+    const { fixture, locator } = await render(TestHostIconOnly);
+    const button = locator.getByRole('button');
+
+    await expect.element(button).toHaveAttribute('data-icon-only');
+    await fixture.whenStable();
+
+    const wrapper = fixture.nativeElement.querySelector(
+      'button[data-icon-only] > span'
+    ) as HTMLElement | null;
+    expect(wrapper).not.toBeNull();
+    expect(getComputedStyle(wrapper as HTMLElement).display).toBe('contents');
   });
 });
