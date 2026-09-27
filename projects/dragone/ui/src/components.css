@@ -72,6 +72,27 @@
   --drgn-shadow-blur-md: var(--elevation-elevation-02);
   --drgn-shadow-blur-lg: var(--elevation-elevation-03);
   --drgn-shadow-blur-xl: var(--elevation-elevation-04);
+
+  /* Loader: 64px matches the Penpot "Loader" main component and the exported
+     Loader.svg. The ring is a conic fade (transparent blue to solid blue) with
+     a solid head tick; the exported SVG shows no static gray track, so the
+     gray construction layer from Penpot is intentionally omitted. */
+  --drgn-loader-size-small: 32px;
+  --drgn-loader-size-medium: 64px;
+  --drgn-loader-size-large: 96px;
+  --drgn-loader-gradient-color: var(--color-global-primary-100);
+  --drgn-loader-indicator-color: var(--drgn-color-interactive-primary-default);
+  --drgn-loader-animation-duration: 1s;
+
+  /* Blocking is functional (scroll-lock + consumer-side inert); the veil only
+     dims the page and stays consumer-overridable. 95% alpha keeps the page
+     barely perceivable behind the spinner. */
+  --drgn-loader-overlay-background: color-mix(
+    in srgb,
+    var(--color-global-primary-000) 95%,
+    transparent
+  );
+  --drgn-loader-overlay-z-index: 1000;
 }
 
 @media (prefers-reduced-motion: reduce) {

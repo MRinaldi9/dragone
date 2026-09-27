@@ -1,0 +1,91 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--drgn-loader-size-medium);
+  height: var(--drgn-loader-size-medium);
+}
+
+:host[data-size='small'] {
+  width: var(--drgn-loader-size-small);
+  height: var(--drgn-loader-size-small);
+}
+
+:host[data-size='large'] {
+  width: var(--drgn-loader-size-large);
+  height: var(--drgn-loader-size-large);
+}
+
+.spinner-rotor {
+  position: absolute;
+  inset: 0;
+  animation: drgn-spinner-rotate var(--drgn-loader-animation-duration) linear infinite;
+}
+
+/* Conic fade matching Loader.svg: transparent blue up to 72deg, ramping to
+   solid blue at 360deg, starting at 3 o'clock. color-mix keeps the transparent
+   stops in the token hue (plain `transparent` would fringe toward gray). The
+   mask cuts the 5.33px ring (inner radius 26.67px of 32px = 83.3%). */
+.spinner-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 90deg,
+    color-mix(in srgb, var(--drgn-loader-gradient-color) 0%, transparent) 0deg,
+    color-mix(in srgb, var(--drgn-loader-gradient-color) 0%, transparent) 72deg,
+    var(--drgn-loader-gradient-color) 360deg
+  );
+  mask: radial-gradient(circle closest-side, transparent 83.2%, #000 83.4%);
+}
+
+/* Solid head tick at the opaque end of the fade (3 o'clock). Scales with the
+   size: thickness is 1/12 of the spinner, height ~1.7x the thickness. */
+.spinner-head {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 5.33px;
+  height: 9px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background-color: var(--drgn-loader-indicator-color);
+}
+
+:host[data-size='small'] .spinner-head {
+  width: 2.67px;
+  height: 4.5px;
+}
+
+:host[data-size='large'] .spinner-head {
+  width: 8px;
+  height: 13.5px;
+}
+
+@keyframes drgn-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* WCAG 2.2 — 2.3.3 Animation from Interactions: freeze the rotation and keep
+   a static arc plus the accessible label instead of motion. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-rotor {
+    animation: none;
+  }
+}
+
+/* Keep the spinner perceivable in Windows High Contrast / forced-colors mode,
+   where the conic gradient cannot render. */
+@media (forced-colors: active) {
+  .spinner-ring {
+    background: CanvasText;
+  }
+
+  .spinner-head {
+    background-color: CanvasText;
+  }
+}

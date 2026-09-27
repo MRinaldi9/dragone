@@ -69,6 +69,11 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
 - Render with `render()` from `@wismaz/vitest-browser-angular`. Use a Test Host when the
   Component targets a native element selector or a test must drive it from a parent context
   (see `button/src/button.spec.ts`); otherwise render the Component directly.
+- Query with the specialized locators only (`getByRole`, `getByTestId`, `getByText`, …).
+  Never `locator.locator(<selector>)`: in `@vitest/browser` v5 it is `protected` on the
+  `Locator` type (TS2551) even though it resolves at runtime, so it breaks `tsc` and the IDE.
+  Add `data-testid` to template internals you must reach instead (see `alert/src/alert.ts`
+  and `alert.spec.ts`).
 - Timers: use `setUpFastForward()` / `setUpManualForward()` from
   `tests/setup-timer-mode.ts` and follow the "Controlling Time in Tests" rules in `CONTEXT.md`.
 - `test-setup.ts` forces `prefers-reduced-motion: reduce`; do not re-enable animations in
