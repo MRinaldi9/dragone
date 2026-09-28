@@ -31,7 +31,11 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
 - Primitive first: consult the ng-primitives MCP (`ngp-mcp` in `opencode.jsonc`, or
   `.vscode/mcp.json`), compose the Primitive via `hostDirectives`, and read its state with
   `inject*State()`. If ng-primitives does not cover something, implement it locally, prefer
-  upstreaming it, and leave a note saying why.
+  upstreaming it, and leave a one-line note saying why (no ADR citations, no decision narrative).
+- Comments explain what the code alone does not say: non-obvious behavior, gotchas (SSR,
+  browser quirks, a11y constraints), usage contracts, and "do not do X" with its reason.
+  Public API JSDoc documents what it does, inputs/defaults, and gotchas. Decision history
+  belongs in `docs/adr/`, not in code.
 - Selector (`angular.json` prefix `drgn`): attribute selector on the native element when the
   Component needs no template; element selector otherwise. Both alias forms exist today —
   `button[drgnButton],button[drgn-button]` and `input[drgnInputText],input[drgn-input-text]` —
