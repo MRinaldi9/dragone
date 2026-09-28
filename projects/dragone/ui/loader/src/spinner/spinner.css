@@ -42,7 +42,10 @@
 }
 
 /* Solid head tick at the opaque end of the fade (3 o'clock). Scales with the
-   size: thickness is 1/12 of the spinner, height ~1.7x the thickness. */
+   size: thickness is 1/12 of the spinner, height ~1.7x the thickness.
+   Known limitation (Sirio-owned sizing, escalated to the Sirio design owners):
+   the small thickness (2.67px) hurts low-vision readability — do not change here;
+   consumers may override the --drgn-loader-size-* Component Tokens. */
 .spinner-head {
   position: absolute;
   top: 50%;

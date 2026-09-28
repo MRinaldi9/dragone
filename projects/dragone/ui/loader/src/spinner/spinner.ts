@@ -1,18 +1,18 @@
 import { Component, input } from '@angular/core';
 
 export type SpinnerSize = 'small' | 'medium' | 'large';
-// No ng-primitives Primitive covers an indeterminate loading spinner:
-// ng-primitives/progress only models determinate progressbars (value/max) and
-// ng-primitives/dialog is a modal dialog with focus trap, which is wrong for a
-// loader. This spinner is therefore implemented locally per ADR-0001 and is a
-// candidate for upstreaming to ng-primitives.
-//
-// Visuals match the exported Loader.svg: a 64px ring with a conic fade
-// (transparent blue to solid blue) plus a solid head tick at the opaque end,
-// rotating as a single group. The exported SVG renders the gradient through a
-// foreignObject hack; here it is rebuilt with a token-driven CSS
-// conic-gradient plus a mask ring instead. The exported SVG shows no static
-// gray track, so the gray construction layer from Penpot is omitted.
+
+/** Fallback accessible name used when an empty or blank label is bound. */
+export const SPINNER_DEFAULT_LABEL = 'Caricamento in corso';
+
+/**
+ * Falls back to {@link SPINNER_DEFAULT_LABEL} when an empty or blank label is bound, so the status
+ * always keeps an accessible name (WCAG 4.1.2 Name, Role, Value).
+ */
+export function coerceSpinnerLabel(value: string | undefined): string {
+  return value?.trim() ? value : SPINNER_DEFAULT_LABEL;
+}
+
 @Component({
   selector: 'drgn-spinner',
   template: `
@@ -33,10 +33,12 @@ export class Spinner {
   readonly size = input<SpinnerSize>('medium');
   /**
    * Accessible name announced when loading starts. role="status" only takes its name from the
-   * author (aria-label), never from contents — hence the binding instead of a text node. Do not
-   * pass an empty string: the status would be left without an accessible name.
+   * author (aria-label), never from contents — hence the binding instead of a text node. Empty or
+   * blank values fall back to the default via {@link coerceSpinnerLabel}.
    *
    * @default 'Caricamento in corso'
    */
-  readonly label = input('Caricamento in corso');
+  readonly label = input(SPINNER_DEFAULT_LABEL, {
+    transform: coerceSpinnerLabel
+  });
 }

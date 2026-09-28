@@ -36,6 +36,20 @@ describe(Spinner, () => {
     await expect.element(locator.getByRole('status', { name: 'Salvataggio bozza' })).toBeVisible();
   });
 
+  it('must fall back to the default name when the label is empty or blank', async () => {
+    const { locator } = await render(TestHostComponent, { inputs: { label } });
+
+    label.set('');
+    await expect
+      .element(locator.getByRole('status', { name: 'Caricamento in corso' }))
+      .toBeVisible();
+
+    label.set('   ');
+    await expect
+      .element(locator.getByRole('status', { name: 'Caricamento in corso' }))
+      .toBeVisible();
+  });
+
   it('must expose the default medium size', async () => {
     const { locator } = await render(TestHostComponent, { inputs: { label, size } });
 

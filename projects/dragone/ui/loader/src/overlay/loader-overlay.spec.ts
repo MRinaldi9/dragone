@@ -19,6 +19,15 @@ describe(LoaderOverlay, () => {
       .toBeVisible();
   });
 
+  it('must fall back to the default name when the forwarded label is empty', async () => {
+    const { locator } = await render(LoaderOverlay, { inputs: { label } });
+    label.set('');
+
+    await expect
+      .element(locator.getByRole('status', { name: 'Caricamento in corso' }))
+      .toBeVisible();
+  });
+
   it('must lock the page scroll while mounted and restore it on destroy', async () => {
     const { fixture, locator } = await render(LoaderOverlay, { inputs: { label } });
 
