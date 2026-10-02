@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm format*)",
+      "Bash(pnpm test*)",
+      "Bash(CI=true pnpm test*)",
+      "Bash(pnpm build*)",
+      "Bash(pnpm storybook*)",
+      "Bash(pnpm exec vitest*)",
+      "Bash(CI=true pnpm exec vitest*)",
+      "Bash(pnpm exec oxfmt*)",
+      "Bash(pnpm exec oxlint*)",
+      "Bash(pnpm exec stylelint*)",
+      "Bash(pnpm exec eslint*)",
+      "Bash(pnpm exec publint*)",
+      "Bash(pnpm exec ng*)",
+      "Bash(pnpm exec playwright install*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git ls-files*)",
+      "Bash(git blame*)"
+    ],
+    "deny": [
+      "Edit(dist/**)",
+      "Write(dist/**)",
+      "Edit(coverage/**)",
+      "Write(coverage/**)",
+      "Edit(out-tsc/**)",
+      "Write(out-tsc/**)",
+      "Edit(.angular/**)",
+      "Write(.angular/**)",
+      "Edit(storybook-static/**)",
+      "Write(storybook-static/**)",
+      "Edit(**/__screenshots__/**)",
+      "Write(**/__screenshots__/**)",
+      "Edit(documentation.json)",
+      "Write(documentation.json)",
+      "Edit(pnpm-lock.yaml)",
+      "Write(pnpm-lock.yaml)",
+      "Edit(.husky/_/**)",
+      "Write(.husky/_/**)",
+      "Read(.env)",
+      "Read(.claude/settings.local.json)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/format-edited.mjs\"",
+            "shell": "bash",
+            "timeout": 60,
+            "statusMessage": "Formatting with oxfmt..."
+          }
+        ]
+      }
+    ]
+  }
+}

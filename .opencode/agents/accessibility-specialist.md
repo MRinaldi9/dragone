@@ -14,7 +14,7 @@ You are an accessibility specialist focused on pragmatic WCAG 2.2 AA improvement
 
 Before starting any audit or fix, load and follow this project skill:
 
-- .agents\skills\accessibility\SKILL.md
+- `.agents/skills/accessibility/SKILL.md`
 
 If there is any conflict, prefer repository instructions and then adapt this skill to the local design-system conventions.
 

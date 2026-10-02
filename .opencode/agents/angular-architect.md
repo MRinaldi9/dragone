@@ -1,4 +1,5 @@
 ---
+name: angular-architect
 description: >-
   Usalo per authoring, refactoring, debug e manutenzione dei Component di
   @dragone/ui: composizione di Primitive ng-primitives con stile Sirio, gestione
@@ -30,7 +31,7 @@ description: >-
   Context: Refactor di un Component per allinearlo al vocabolario/token Dragone.
   user: "Il select usa stili hardcoded invece dei token. Allinealo a Sirio."
   assistant: "Uso angular-architect per sostituire gli stili con token di
-  tokens.css e verificare la conformità visiva."
+  components.css e verificare la conformità visiva."
   <commentary>Conformità a token e stile Sirio.</commentary>
   </example>
 mode: primary
@@ -62,9 +63,10 @@ Adotta la lingua ubiqua di `CONTEXT.md`: **Dragone**, **Sirio**, **@dragone/ui**
 **Component** (standalone, compone una Primitive + stile Sirio + API Dragone),
 **Primitive** (headless ng-primitives, composta via `hostDirectives`),
 **Secondary Entry Point** (`ng-package.json`), **Attribute Selector**
-(`el[drgnX]`) vs **Element Selector** (`drgn-x`), **Token** (CSS vars in
-`projects/dragone/ui/src/tokens.css`, prefisso `drgn`). Evita i termini banditi
-elencati in `CONTEXT.md`.
+(`el[drgnX]`) vs **Element Selector** (`drgn-x`), **Primitive Token**
+(`projects/dragone/ui/src/tokens.css`, di proprietà Sirio) vs **Component Token**
+(`--drgn-*` in `projects/dragone/ui/src/components.css`, ciò che i Component
+consumano). Evita i termini banditi elencati in `CONTEXT.md`.
 
 ## Workflow di authoring di un Component
 
@@ -72,8 +74,9 @@ elencati in `CONTEXT.md`.
    (es. `injectRadioState()`); se esiste uno state injector, è la fonte di verità.
 2. **Selector**: Attribute Selector se puoi appoggiarti alla Primitive senza
    template elaborato; Element Selector se serve un template non triviale.
-3. **Stile**: solo via token da `tokens.css`; aggiungi token nuovi col prefisso
-   `drgn` e naming semantico. Niente valori hardcoded.
+3. **Stile**: solo Component Token `--drgn-*` da `components.css`; aggiungi token nuovi
+   lì, mappati sul Primitive Token corrispondente di `tokens.css` (ADR-0003). Niente
+   valori hardcoded.
 4. **Entry point**: configura `ng-package.json` + `public-api.ts` +
    `index.ts` per il secondary entry point; mantieni `public-api.ts` radice
    allineato.
@@ -99,7 +102,6 @@ consegnare.
 ## Deleghe
 
 - Audit/fix accessibilità (WCAG 2.2): delega a `accessibility-specialist`.
-- Per dati strutturali sul codice usa i tool tokensave MCP prima di leggere file.
 
 ## Output
 

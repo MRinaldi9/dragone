@@ -11,7 +11,10 @@ The implementation lives under `projects/dragone/ui`.
 - `.agents/skills/`: step-by-step procedures, loaded on demand — `angular-developer`,
   `accessibility`,
   [`dragone-component-authoring`](.agents/skills/dragone-component-authoring/SKILL.md), and
-  [`dragone-release`](.agents/skills/dragone-release/SKILL.md).
+  [`dragone-release`](.agents/skills/dragone-release/SKILL.md). `.claude/skills/` holds
+  pointers to these, not copies; see
+  [`docs/references/agent-tooling.md`](docs/references/agent-tooling.md) for the dual
+  opencode / Claude Code setup and why there must be no `CLAUDE.md`.
 - `docs/references/`: lookup material, read on demand via the triggers below.
 
 ## Repository

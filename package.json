@@ -14,7 +14,7 @@
     "lint:eslint": "ng lint",
     "lint:oxlint": "oxlint",
     "lint:package": "pnpm build @dragone/ui && publint dist/dragone/ui",
-    "lint:css": "stylelint 'projects/**/*.css'",
+    "lint:css": "stylelint projects/**/*.css",
     "lint:all": "pnpm lint:oxlint && pnpm lint:eslint && pnpm lint:css && pnpm lint:docs",
     "format": "oxfmt",
     "format:check": "oxfmt --check",

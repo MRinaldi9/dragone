@@ -19,10 +19,38 @@ const IGNORED_DIRS = new Set([
   'storybook-static'
 ]);
 
+/**
+ * Skills vendored from upstream repos, as recorded in skills-lock.json. Their contents are replaced
+ * wholesale on re-sync and editing them invalidates the lockfile hash, so their links are
+ * upstream's problem (they may point at sibling skills we did not vendor).
+ */
+const vendoredSkillDirs = ((): Set<string> => {
+  const lockfile = join(ROOT, 'skills-lock.json');
+  if (!existsSync(lockfile)) {
+    return new Set();
+  }
+  const { skills } = JSON.parse(readFileSync(lockfile, 'utf8')) as {
+    skills?: Record<string, unknown>;
+  };
+  return new Set(Object.keys(skills ?? {}).map(name => `.agents/skills/${name}/`));
+})();
+
 /** Docs that must keep their relative links valid. */
 const isCheckedDoc = (filePath: string): boolean => {
   const rel = relative(ROOT, filePath).split(sep).join('/');
-  return rel === 'AGENTS.md' || rel.endsWith('/AGENTS.md') || rel.startsWith('docs/');
+  if ([...vendoredSkillDirs].some(dir => rel.startsWith(dir))) {
+    return false;
+  }
+  return (
+    rel === 'AGENTS.md' ||
+    rel.endsWith('/AGENTS.md') ||
+    rel.startsWith('docs/') ||
+    // Skills live in .agents/skills; .claude/skills holds pointers into them. Both sides
+    // of that indirection must keep resolving.
+    rel.startsWith('.agents/') ||
+    rel.startsWith('.claude/') ||
+    rel.startsWith('.opencode/')
+  );
 };
 
 const collectMarkdown = (dir: string): string[] => {
