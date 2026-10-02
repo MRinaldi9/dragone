@@ -28,10 +28,11 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
 
 ## Authoring rules
 
-- Primitive first: consult the ng-primitives MCP (`ngp-mcp` in `opencode.jsonc`, or
-  `.vscode/mcp.json`), compose the Primitive via `hostDirectives`, and read its state with
-  `inject*State()`. If ng-primitives does not cover something, implement it locally, prefer
-  upstreaming it, and leave a one-line note saying why (no ADR citations, no decision narrative).
+- Primitive first: consult the ng-primitives MCP (`ngp-mcp`, declared in `.mcp.json`,
+  `opencode.jsonc` and `.vscode/mcp.json`), compose the Primitive via `hostDirectives`,
+  and read its state with `inject*State()`. If ng-primitives does not cover something,
+  implement it locally, prefer upstreaming it, and leave a one-line note saying why (no
+  ADR citations, no decision narrative).
 - Comments explain what the code alone does not say: non-obvious behavior, gotchas (SSR,
   browser quirks, a11y constraints), usage contracts, and "do not do X" with its reason.
   Public API JSDoc documents what it does, inputs/defaults, and gotchas. Decision history
