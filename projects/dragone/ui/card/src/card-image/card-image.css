@@ -15,10 +15,20 @@
   object-fit: cover;
 }
 
-:host[data-position='left'] {
+/* Side image (landscape): fixed-width column stretching the full card height.
+   370px matches the Sirio landscape image width. */
+:host([data-position='left']),
+:host([data-position='right']) {
+  align-self: stretch;
+  width: 370px;
+  max-width: 45%;
+  min-height: auto;
+}
+
+:host([data-position='left']) {
   border-radius: var(--drgn-radius-card) 0 0 var(--drgn-radius-card);
 }
 
-:host[data-position='right'] {
+:host([data-position='right']) {
   border-radius: 0 var(--drgn-radius-card) var(--drgn-radius-card) 0;
 }

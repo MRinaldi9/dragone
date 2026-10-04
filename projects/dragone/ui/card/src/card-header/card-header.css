@@ -6,11 +6,27 @@
   overflow: clip;
 }
 
-:host[data-type='landscape'],
-:host[data-type='portrait'] {
+:host([data-type='landscape']),
+:host([data-type='portrait']) {
   justify-content: space-between;
 }
 
-:host[data-type='process'] {
+:host([data-type='process']) {
   justify-content: flex-start;
+}
+
+/* The trailing slot carries the Sirio card date: keep it a short date string. */
+::slotted([slot='trailing']) {
+  margin: 0;
+  font-family: var(--drgn-typography-font-family-number);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+  font-weight: var(--drgn-typography-weight-regular);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
+  color: var(--drgn-color-text-card-body);
+  white-space: nowrap;
+}
+
+:host-context([data-theme='dark']) ::slotted([slot='trailing']) {
+  color: var(--drgn-color-text-inverse);
 }

@@ -1,5 +1,14 @@
 :host {
   display: block;
-  color: var(--drgn-color-text-card-body);
   margin: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-p-lg);
+  line-height: var(--drgn-typography-line-height-p-lg);
+  font-weight: var(--drgn-typography-weight-regular);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
+  color: var(--drgn-color-text-card-body);
+}
+
+:host-context([data-theme='dark']) {
+  color: var(--drgn-color-text-inverse);
 }

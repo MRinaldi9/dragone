@@ -2,10 +2,12 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+  cursor: pointer;
+  border-radius: var(--drgn-radius-card);
 }
 
-.card-link-anchor {
-  position: absolute;
-  inset: 0;
-  cursor: pointer;
+/* Full-card anchor: the parent Card clips overflow, so the focus ring renders inset. */
+:host:focus-visible {
+  outline: 3px solid var(--drgn-color-focus-ring-interactive);
+  outline-offset: -3px;
 }
