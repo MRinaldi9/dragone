@@ -21,6 +21,23 @@
   "[jsonc]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
+  // Per-language defaults: a user-level [typescript]/[html] default (e.g. Prettier)
+  // beats the unscoped workspace default above, so pin oxc explicitly per language.
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "json.schemaDownload.trustedDomains": {
     "https://schemastore.azurewebsites.net/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,

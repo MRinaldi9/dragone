@@ -2,10 +2,9 @@ import { booleanAttribute, Component, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck } from '@ng-icons/font-awesome/solid';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
-import { injectElementRef } from 'ng-primitives/internal';
 import { injectToggleState, NgpToggle } from 'ng-primitives/toggle';
 
-import { toElement } from '@dragone/ui/utils';
+import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
 @Component({
   selector: 'button[drgn-chip-selected], button[drgnChipSelected]',
@@ -37,7 +36,7 @@ export class ChipSelected {
   readonly touch = output();
 
   protected readonly state = injectToggleState();
-  readonly #element = toElement(injectElementRef());
+  readonly #element = toNativeElement(injectElementRef());
 
   focus(options?: FocusOptions): void {
     this.#element?.focus(options);
