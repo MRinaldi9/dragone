@@ -16,9 +16,11 @@ class TestHostCardTitle {
 
 @Component({
   imports: [CardTitle],
-  template: ` <a drgn-card-title href="/target">Title</a> `
+  template: ` <h3><a drgn-card-title href="/target" [asHeading]="asHeading()">Title</a></h3> `
 })
-class TestHostCardTitleLink {}
+class TestHostCardTitleLink {
+  asHeading = input(false);
+}
 
 describe(CardTitle, () => {
   const asHeading = signal(false);
@@ -47,5 +49,14 @@ describe(CardTitle, () => {
     const link = locator.getByRole('link', { name: 'Title' });
     await expect.element(link).toBeVisible();
     await expect.element(link).toHaveAttribute('href', '/target');
+  });
+
+  it('must keep link semantics on anchors even when asHeading is true', async () => {
+    const { locator } = await render(TestHostCardTitleLink, { inputs: { asHeading } });
+    asHeading.set(true);
+    const link = locator.getByRole('link', { name: 'Title' });
+    await expect.element(link).toBeVisible();
+    await expect.element(link).not.toHaveAttribute('role');
+    await expect.element(link).not.toHaveAttribute('aria-level');
   });
 });

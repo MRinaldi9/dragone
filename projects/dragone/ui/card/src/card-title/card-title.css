@@ -1,7 +1,22 @@
 :host {
   display: block;
-  color: var(--drgn-color-text-card-title);
   margin: 0;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-h4-md);
+  line-height: var(--drgn-typography-line-height-h4-md);
+  font-weight: var(--drgn-typography-weight-bold);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
+  color: var(--drgn-color-text-card-title);
+}
+
+/* Landscape titles render larger. */
+:host-context(drgn-card[data-type='landscape']) {
+  font-size: var(--drgn-typography-size-h3-md);
+  line-height: var(--drgn-typography-line-height-h3-md);
+}
+
+:host-context([data-theme='dark']) {
+  color: var(--drgn-color-text-inverse);
 }
 
 :host([href]) {
@@ -20,3 +35,6 @@
 :host([href]):active {
   color: var(--drgn-color-card-link-pressed);
 }
+
+/* No Sirio dark spec covers link titles (dark cards are `process` with plain titles),
+   so the link color is kept faithfully in dark theme. Known limitation, escalated to Sirio. */

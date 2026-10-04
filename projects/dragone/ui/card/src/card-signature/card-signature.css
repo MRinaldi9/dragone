@@ -1,8 +1,15 @@
 :host {
   display: block;
-  color: var(--drgn-color-text-card-signature);
-  font-family: var(--drgn-typography-font-family-number);
-  font-style: italic;
-  font-weight: bold;
   margin: 0;
+  font-family: var(--drgn-typography-font-family-serif);
+  font-size: var(--drgn-typography-size-p-lg);
+  line-height: var(--drgn-typography-line-height-p-lg);
+  font-style: italic;
+  font-weight: var(--drgn-typography-weight-bold);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
+  color: var(--drgn-color-text-card-signature);
+}
+
+:host-context([data-theme='dark']) {
+  color: var(--drgn-color-text-inverse);
 }

@@ -3,6 +3,11 @@
   align-items: center;
   justify-content: center;
   padding: 0 16px;
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+  font-weight: var(--drgn-typography-weight-bold);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
   background-color: var(--drgn-color-card-tag-bg);
   border-radius: 100px;
   color: var(--drgn-color-card-tag-text);

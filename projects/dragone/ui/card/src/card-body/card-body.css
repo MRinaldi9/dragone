@@ -5,5 +5,20 @@
   gap: var(--drgn-space-card-gap);
   align-items: flex-start;
   min-height: 1px;
-  padding: 32px 48px;
+  padding: var(--drgn-space-card-padding);
+}
+
+:host([data-layout='mobile']) {
+  gap: var(--drgn-space-card-gap-mobile);
+  padding: var(--drgn-space-card-padding-mobile);
+}
+
+/* Portrait mobile keeps a roomier top padding. */
+:host([data-type='portrait'][data-layout='mobile']) {
+  padding-top: var(--drgn-space-card-padding-mobile-top);
+}
+
+/* Landscape content is wider. */
+:host([data-type='landscape']) {
+  padding-inline: var(--drgn-space-card-padding-inline-landscape);
 }

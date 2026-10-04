@@ -16,7 +16,5 @@ export interface CardState {
 
 export const [, drgnCardFactory, injectDrgnCardState, provideDrgnCardState] = createPrimitive(
   'DragoneCardState',
-  ({ type }: { type: Signal<CardType> }): CardState => ({
-    type
-  })
+  ({ type }: { type: Signal<CardType> }): CardState => ({ type })
 );

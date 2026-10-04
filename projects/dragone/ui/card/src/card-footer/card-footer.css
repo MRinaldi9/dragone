@@ -1,17 +1,19 @@
 :host {
+  /* Footer actions must stay clickable above a `CardLink` stretched link. */
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 10px;
   width: 100%;
 }
 
-:host[data-type='landscape'],
-:host[data-type='portrait'] {
+:host([data-type='landscape']),
+:host([data-type='portrait']) {
   justify-content: flex-end;
 }
 
-:host[data-type='process'] {
+:host([data-type='process']) {
   justify-content: flex-start;
   gap: 12px;
-  padding-top: var(--drgn-space-card-gap);
 }

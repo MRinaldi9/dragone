@@ -44,10 +44,15 @@
   --drgn-color-focus-ring-interactive: var(--color-alias-interactive-border-focus);
   --drgn-typography-font-family-base: var(--typography-global-font-family-01);
   --drgn-typography-font-family-number: var(--typography-global-font-family-03);
+  --drgn-typography-font-family-serif: var(--typography-alias-font-family-text-02);
   --drgn-typography-font-style-normal: normal;
   --drgn-typography-letter-spacing-default: 0;
   --drgn-typography-size-h1-xl: var(--typography-alias-h1-xl-size-15);
   --drgn-typography-line-height-h1-xl: var(--typography-alias-h1-xl-line-height-15);
+  --drgn-typography-size-h3-md: var(--typography-alias-h3-md-size-09);
+  --drgn-typography-line-height-h3-md: var(--typography-alias-h3-md-line-height-09);
+  --drgn-typography-size-h4-md: var(--typography-alias-h4-md-size-07);
+  --drgn-typography-line-height-h4-md: var(--typography-alias-h4-md-line-height-07);
   --drgn-typography-size-h4-lg: var(--typography-alias-h4-lg-size-08);
   --drgn-typography-line-height-h4-lg: var(--typography-alias-h4-lg-line-height-08);
   --drgn-typography-size-label-md: var(--typography-alias-label-md-size-04);
@@ -96,7 +101,7 @@
 
   /* Card */
   --drgn-color-surface-card: var(--color-alias-background-color-primary-light-0);
-  --drgn-color-surface-card-dark: var(--color-global-dark-primary-120);
+  --drgn-color-surface-card-dark: var(--color-global-dark-primary-115);
   --drgn-color-text-card-title: var(--color-alias-text-color-secondary-dark-100);
   --drgn-color-text-card-subtitle: var(--color-alias-text-color-secondary-dark-100);
   --drgn-color-text-card-body: var(--color-alias-text-color-secondary-dark-100);
@@ -112,6 +117,10 @@
   --drgn-shadow-card-hover: var(--elevation-elevation-02);
   --drgn-space-card-padding: 32px;
   --drgn-space-card-gap: 24px;
+  --drgn-space-card-padding-mobile: 16px;
+  --drgn-space-card-padding-mobile-top: 24px;
+  --drgn-space-card-padding-inline-landscape: 48px;
+  --drgn-space-card-gap-mobile: 16px;
 }
 
 @media (prefers-reduced-motion: reduce) {
