@@ -6,7 +6,7 @@ Entry point `@dragone/ui/utils`. Root rules: [`AGENTS.md`](../../../../AGENTS.md
 ## Public surface
 
 Everything exported through `public-api.ts`: event plugins (`provideEventsPlugin`, debounce and
-prevent-default plugins), type utilities (`toValue`, `toElement`, `notifier`, `sleep`, guards),
+prevent-default plugins), type utilities (`toValue`, `toNativeElement`, `notifier`, `sleep`, guards),
 accessibility (`Announcer`, `ANNOUNCEMENT_DELAY`), theming (`Theme`, `Status`, `Layout` and
 their factories/injectors), and `Logger` / `provideLogger`.
 

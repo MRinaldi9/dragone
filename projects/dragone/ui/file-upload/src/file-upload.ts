@@ -15,7 +15,7 @@ import { NgpFileUpload } from 'ng-primitives/file-upload';
 
 import { Button } from '@dragone/ui/button';
 import { ChipInput } from '@dragone/ui/chip';
-import { Announcer, injectAnnouncerState, toElement } from '@dragone/ui/utils';
+import { Announcer, injectAnnouncerState, toNativeElement } from '@dragone/ui/utils';
 
 import { AriaLabelPipe } from './helpers/aria-label-pipe';
 import { FocusElement } from './helpers/focus-element';
@@ -70,7 +70,7 @@ export class FileUpload implements FormValueControl<FileUploadValue | null> {
   });
 
   focus(options?: FocusOptions): void {
-    toElement<HTMLButtonElement>(this.fileUploader)?.focus(options);
+    toNativeElement<HTMLButtonElement>(this.fileUploader)?.focus(options);
   }
 
   protected filesSelected(files: FileList | null): void {

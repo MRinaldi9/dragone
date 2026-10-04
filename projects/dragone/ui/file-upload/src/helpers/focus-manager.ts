@@ -1,6 +1,6 @@
 import { Directive, input, type ElementRef } from '@angular/core';
 
-import { toElement } from '@dragone/ui/utils';
+import { toNativeElement } from '@dragone/ui/utils';
 
 /**
  * Coordina il focus dei pulsanti di rimozione chip dopo mutate della lista.
@@ -42,6 +42,6 @@ export class FocusManager {
       return;
     }
 
-    toElement(this.fallbackElement)?.focus();
+    toNativeElement(this.fallbackElement)?.focus();
   }
 }

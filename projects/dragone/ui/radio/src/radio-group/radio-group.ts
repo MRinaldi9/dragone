@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { injectRadioGroupState, NgpRadioGroup } from 'ng-primitives/radio';
 
-import { toElement } from '@dragone/ui/utils';
+import { toNativeElement } from '@dragone/ui/utils';
 
 import { provideRadioGroupContext } from '../radio-group-context';
 import { RadioItem } from '../radio-item/radio-item';
@@ -55,7 +55,7 @@ export class RadioGroup<T> {
   );
 
   focus(options?: FocusOptions): void {
-    toElement(this.firstRadioItem)?.focus(options);
+    toNativeElement(this.firstRadioItem)?.focus(options);
   }
 
   reset(): void {

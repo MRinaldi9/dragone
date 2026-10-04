@@ -1,6 +1,6 @@
 import { Directive, ElementRef, inject, input, type OnDestroy, type OnInit } from '@angular/core';
 
-import { toElement } from '@dragone/ui/utils';
+import { toNativeElement } from '@dragone/ui/utils';
 
 import { FocusManager } from './focus-manager';
 
@@ -21,7 +21,7 @@ export class FocusElement implements OnInit, OnDestroy {
 
   /** Registra il bottone del chip nel manager al mount. */
   ngOnInit(): void {
-    const button = toElement(this.#hostElement)?.querySelector('button');
+    const button = toNativeElement(this.#hostElement)?.querySelector('button');
 
     if (button) {
       this.#focusManager.register(this.filename(), button);
