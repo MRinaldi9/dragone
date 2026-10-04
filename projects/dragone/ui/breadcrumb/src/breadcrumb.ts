@@ -13,7 +13,7 @@ import {
 import { NgpBreadcrumbList, NgpBreadcrumbs } from 'ng-primitives/breadcrumbs';
 import { injectDimensions } from 'ng-primitives/internal';
 
-import { createNotifier, toElement } from '@dragone/ui/utils';
+import { createNotifier, toNativeElement } from '@dragone/ui/utils';
 
 import { BreadcrumbEllipsis } from './breadcrumb-ellipsis/breadcrumb-ellipsis';
 import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';
@@ -93,7 +93,7 @@ export class Breadcrumb {
   constructor() {
     const OVERFLOW_TOLERANCE_PX = 16;
     afterRenderEffect(() => {
-      const listElement = toElement.untracked(this.breadcrumbListElement);
+      const listElement = toNativeElement.untracked(this.breadcrumbListElement);
       const { width: hostWidth } = this.#hostDimensions();
 
       if (!listElement || !hostWidth) return;
@@ -107,7 +107,7 @@ export class Breadcrumb {
       const breadcrumbItems = this.breadcrumbItems();
       if (!userExpanded || !breadcrumbItems.length) return;
 
-      toElement(breadcrumbItems.at(1))?.querySelector('a')?.focus();
+      toNativeElement(breadcrumbItems.at(1))?.querySelector('a')?.focus();
     });
     if (ngDevMode) {
       effect(() => {
