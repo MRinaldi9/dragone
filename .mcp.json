@@ -13,6 +13,10 @@
     "penpot": {
       "type": "http",
       "url": "https://design.penpot.app/mcp/stream?userToken=eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2R0NNIn0.b6u3HSIdTMhrJldXMfeH-beRAPu5bjPUvy-RQ_bkw8Pu-xGuzspDMw.4cUsut7-HQ1m8_gB.zvO3eLXHcLT339Ng73YDeNqxAAwpWIbgl9lWbrZO_597Rzy7I5GHuWsEyuL07iSw15_11KIiC76McW_kmdEP8KUa0qfG6yWolRCWJs2-8WXYl230_q7znnS19ULPjmhGVGn_Od7yYfJczovzcq6Rc2guJdohNQiEitcCjtslO5lcOWZQ1_iJpDTEaLf83ODWIuOdk-oDyyzpsfztO_tmaoE.BYzNxxQSrdFXO14gWWXKZA"
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }
