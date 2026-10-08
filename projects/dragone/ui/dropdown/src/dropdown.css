@@ -1,0 +1,23 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  /* Runtime alias of the trigger width written inline by NgpSelectDropdown (ADR-0003). */
+  --drgn-runtime-dropdown-trigger-width: var(--ngp-select-width);
+
+  /* The overlay writes left/top but never the positioning scheme. */
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: var(--drgn-runtime-dropdown-trigger-width);
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--drgn-color-border-data-entry-default);
+  border-radius: 4px;
+  background-color: var(--drgn-color-surface-base);
+  outline: none;
+}
+
+.empty {
+  padding: 16px;
+  color: var(--drgn-color-text-placeholder-default);
+}
