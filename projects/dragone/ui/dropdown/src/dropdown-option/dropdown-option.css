@@ -1,0 +1,50 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  color: var(--drgn-color-text-data-entry-default);
+  background-color: var(--drgn-color-surface-base);
+  cursor: pointer;
+  outline: none;
+}
+
+:host:not(:last-child) {
+  border-bottom: 1px solid var(--drgn-color-border-data-entry-default);
+}
+
+:host[data-hover] {
+  background-color: var(--drgn-color-option-background-hover);
+  color: var(--drgn-color-text-inverse);
+}
+
+:host[data-active]:not([data-hover]) {
+  outline: 2px solid var(--drgn-color-interactive-primary-default);
+  outline-offset: -2px;
+}
+
+:host[data-press] {
+  background-color: var(--drgn-color-option-background-pressed);
+  color: var(--drgn-color-text-inverse);
+}
+
+:host[data-selected] {
+  background-color: var(--drgn-color-option-background-selected);
+  color: var(--drgn-color-text-inverse);
+}
+
+:host[data-disabled] {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: var(--drgn-color-text-disabled);
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
+}
+
+ng-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+}

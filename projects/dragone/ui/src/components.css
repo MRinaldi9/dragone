@@ -39,6 +39,9 @@
   --drgn-color-option-background-focus: var(--color-specific-option-background-color-focus);
   --drgn-color-option-background-hover: var(--color-specific-option-background-color-hover);
   --drgn-color-option-background-pressed: var(--color-specific-option-background-color-pressed);
+  --drgn-color-option-background-selected: var(--color-specific-option-background-color-valued);
+  --drgn-color-surface-search-header: var(--color-global-light-secondary-40);
+  --drgn-color-border-search-field-default: var(--color-global-light-secondary-50);
   --drgn-color-focus-ring-outline: var(--color-global-primary-000);
   --drgn-color-focus-ring-primary: var(--color-alias-interactive-primary-default);
   --drgn-color-focus-ring-interactive: var(--color-alias-interactive-border-focus);
