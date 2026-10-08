@@ -75,7 +75,7 @@ jobs:
           require-lockfile: true
 
       - name: Install Playwright browsers
-        run: pnpx playwright install --with-deps --only-shell
+        run: pnpm exec playwright install --with-deps --only-shell
 
       - name: Run tests
         run: pnpm test
