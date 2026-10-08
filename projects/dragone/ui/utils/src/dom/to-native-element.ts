@@ -3,10 +3,12 @@ import { isSignal, untracked, type ElementRef } from '@angular/core';
 import type { MaybeSignal } from '../types/utils';
 
 export interface toNativeElementFn {
+  <T extends Element>(elementRef: MaybeSignal<ElementRef<T>>): T;
   <T extends Element>(elementRef: MaybeSignal<ElementRef<T> | null | undefined>): T | undefined;
-  untracked: <T extends Element>(
-    elementRef: MaybeSignal<ElementRef<T> | null | undefined>
-  ) => T | undefined;
+  untracked: {
+    <T extends Element>(elementRef: MaybeSignal<ElementRef<T>>): T;
+    <T extends Element>(elementRef: MaybeSignal<ElementRef<T> | null | undefined>): T | undefined;
+  };
 }
 
 const toNativeElementFn = <T extends Element>(
