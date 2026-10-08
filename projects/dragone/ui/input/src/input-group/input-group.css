@@ -34,6 +34,12 @@
 :host:focus-within:not(:has(input:disabled)) {
   border-color: var(--drgn-color-interactive-primary-default);
   outline: none;
+}
+
+/* Ring only for keyboard focus, as in `input-text.css`: focus moved programmatically — a dropdown
+   opening onto its search field, for instance — must not render the keyboard indicator. Native
+   `:focus-visible` is not usable here because browsers also match it on a pointer-focused input. */
+:host:has(input[data-focus-visible='keyboard']):not(:has(input:disabled)) {
   box-shadow:
     0 0 0 3px var(--drgn-color-focus-ring-outline),
     0 0 0 5px var(--drgn-color-focus-ring-primary);

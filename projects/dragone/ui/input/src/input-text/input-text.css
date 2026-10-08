@@ -14,6 +14,23 @@
   color: var(--drgn-color-text-placeholder-default);
 }
 
+/* In a group the frame belongs to the group and the input just fills the row. These rules live
+   here because `input-group.css` cannot reach a projected input: its `:host input` is shimmed to
+   `input[_ngcontent-<group>]`, which a consumer-declared input never carries. */
+:host:where(drgn-input-group *) {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 0;
+  background: transparent;
+  color: var(--drgn-color-text-data-entry-default);
+}
+
+:host:where(drgn-input-group *)::placeholder {
+  color: var(--drgn-color-text-placeholder-default);
+}
+
 :host:not(:where(drgn-input-group *)):hover:not(:disabled) {
   border-color: var(--drgn-color-text-data-entry-hover);
 }

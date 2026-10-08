@@ -1,4 +1,5 @@
 import { computed, debounced, Directive, effect, linkedSignal, untracked } from '@angular/core';
+import { NgpFocusVisible } from 'ng-primitives/interactions';
 
 import { toValue } from '@dragone/ui/utils';
 
@@ -16,7 +17,9 @@ import { injectDatePickerDragoneState } from '../../state/date-picker-state';
     '(input)': 'changeDate($event)',
     '[attr.data-invalid]': 'isValidDate() ? null : ""',
     '[attr.aria-invalid]': '!isValidDate() || undefined'
-  }
+  },
+  // Supplies data-focus-visible, which is what InputGroup gates its keyboard focus ring on.
+  hostDirectives: [NgpFocusVisible]
 })
 export class InputDatePicker<T> {
   readonly #dragoneDatePickerState = injectDatePickerDragoneState<T>();
