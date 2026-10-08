@@ -107,7 +107,7 @@ These are unresolved. Record the outcome here or in an ADR when each is decided.
    protection is not wanted.
 6. **Bootstrap** — release-please needs a baseline tag. `0.0.1` is the starting version and there
    are no tags yet, so tag the commit that reflects `0.0.1` (`git tag v0.0.1 <sha> &&
-git push origin v0.0.1`) before the first run, or set `bootstrap-sha` in the config.
+   git push origin v0.0.1`) before the first run, or set `bootstrap-sha` in the config.
 7. **Provenance / access** — scoped public package, so `--access public` is required. Confirm
    provenance attestations are acceptable on the runner.
 
