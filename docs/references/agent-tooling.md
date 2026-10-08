@@ -52,6 +52,11 @@ Three servers, declared in three places that must stay in sync: `.mcp.json` (Cla
 Launch `ngp-mcp` as `pnpm exec ngp-mcp` everywhere. A remote server **must** declare
 `"type": "http"` alongside `url`, or it is parsed as stdio and fails.
 
+If an MCP server does not respond, use the documentation fallbacks:
+
+- `ngp-mcp` → <https://angularprimitives.com/assets/llms/llms-full.txt>
+- `angular-cli` → <https://angular.dev/llms.txt>
+
 ## Do not create a `CLAUDE.md`
 
 Claude Code loads `AGENTS.md` **only when no `CLAUDE.md` (or `CLAUDE.local.md`) exists** in
