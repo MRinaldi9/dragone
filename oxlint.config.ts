@@ -105,6 +105,7 @@ export default defineConfig({
             overrides: { constructors: 'off', methods: 'no-public' }
           }
         ],
+        'typescript/method-signature-style': 'off',
         'typescript/no-duplicate-enum-values': 'error',
         'typescript/no-empty-interface': 'error',
         'typescript/no-empty-object-type': 'error',
