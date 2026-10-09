@@ -1,0 +1,208 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.searchbar__label {
+  display: block;
+  color: var(--data-entry-label-default);
+  margin-bottom: 0;
+}
+
+.searchbar__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.searchbar__field-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--data-entry-border-default);
+  border-radius: 5px;
+  background-color: var(--color-global-primary-000);
+  overflow: hidden;
+}
+
+.searchbar__field-wrapper:focus-within {
+  border-color: var(--interactive-primary-default);
+  box-shadow: 0 0 0 1px var(--interactive-primary-default);
+}
+
+.searchbar__field-wrapper[data-disabled] {
+  background-color: var(--bg-disabled);
+  border-color: var(--bg-disabled);
+}
+
+.searchbar__field {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-global-primary-000);
+  padding: 8px 16px;
+}
+
+.searchbar__input-row {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.searchbar__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  outline: none;
+  color: var(--data-entry-placeholder-default);
+  background-color: transparent;
+}
+
+.searchbar__input::placeholder {
+  color: var(--data-entry-placeholder-default);
+}
+
+.searchbar__input:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.searchbar__clear-input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--interactive-primary-default);
+  padding: 0;
+  cursor: pointer;
+}
+
+.searchbar__clear-input:focus-visible {
+  outline: 2px solid var(--interactive-primary-default);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.searchbar__clear-input:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.searchbar__chips-row {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.searchbar__chips-list {
+  min-width: 0;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.searchbar__chips-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.searchbar__chips-input {
+  flex: 1 0 128px;
+  min-width: 128px;
+  border: none;
+  outline: none;
+  color: var(--data-entry-placeholder-default);
+  background-color: transparent;
+}
+
+.searchbar__chips-input::placeholder {
+  color: var(--data-entry-placeholder-default);
+}
+
+.searchbar__chips-input:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.searchbar__clear-all {
+  margin-left: auto;
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  color: var(--interactive-primary-default);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  padding: 0;
+}
+
+.searchbar__clear-all:focus-visible {
+  outline: 2px solid var(--interactive-primary-default);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.searchbar__clear-all:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+button[drgnbutton],
+button[drgnButton],
+button[drgn-button] {
+  border-radius: 0 4px 4px 0;
+  min-height: 48px;
+}
+
+.searchbar__helper {
+  color: var(--data-entry-label-default);
+}
+
+@media (max-width: 640px) {
+  .searchbar__field-wrapper {
+    flex-wrap: wrap;
+  }
+
+  button[drgnbutton],
+  button[drgnButton],
+  button[drgn-button] {
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    justify-content: center;
+  }
+}
+
+@media (forced-colors: active) {
+  .searchbar__field-wrapper {
+    border-color: ButtonBorder;
+    background-color: Canvas;
+  }
+
+  .searchbar__input,
+  .searchbar__chips-input {
+    color: CanvasText;
+  }
+
+  .searchbar__clear-input,
+  .searchbar__clear-all {
+    color: LinkText;
+  }
+}
