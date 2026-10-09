@@ -32,6 +32,7 @@ import { DropdownTrigger } from './dropdown-trigger/dropdown-trigger';
 class TestHostComponent {
   readonly value = signal<string | undefined>(undefined);
   readonly withSearch = signal(false);
+  readonly manyOptions = signal(false);
   readonly multiple = signal(false);
   readonly query = signal('');
 
@@ -41,8 +42,18 @@ class TestHostComponent {
     { value: 'c', label: 'Opzione C', disabled: true }
   ];
 
+  // A list far taller than the panel's max height, to exercise the option-list scrolling.
+  readonly #manyOptions = Array.from({ length: 40 }, (_, index) => ({
+    value: `opt-${index}`,
+    label: `Opzione ${index + 1}`,
+    disabled: false
+  }));
+
   // Filtering is the consumer's job: DropdownSearch only emits the query.
   readonly visibleOptions = computed(() => {
+    if (this.manyOptions()) {
+      return this.#manyOptions;
+    }
     const query = this.query().trim().toLowerCase();
     return this.#options.filter(option => option.label.toLowerCase().includes(query));
   });
@@ -99,6 +110,36 @@ describe(Dropdown, () => {
     await expect.element(page.getByRole('option', { name: 'Opzione A' })).toBeInTheDocument();
     await expect.element(page.getByRole('option', { name: 'Opzione B' })).toBeInTheDocument();
     await expect.element(page.getByRole('option', { name: 'Opzione C' })).toBeInTheDocument();
+  });
+
+  it('should cap the option list height and scroll the overflow', async () => {
+    const { locator, componentClassInstance: component } = await render(TestHostComponent);
+    component.manyOptions.set(true);
+    await locator.getByRole('combobox').click();
+
+    const listbox = page.getByRole('listbox');
+    expect(listbox.element().clientHeight).toBeLessThanOrEqual(240);
+    expect(listbox.element().scrollHeight).toBeGreaterThan(listbox.element().clientHeight);
+  });
+
+  it('should scroll the keyboard-active option into view', async () => {
+    expect.hasAssertions();
+    const { locator, componentClassInstance: component } = await render(TestHostComponent);
+    component.manyOptions.set(true);
+    const trigger = locator.getByRole('combobox');
+    await trigger.click();
+
+    // The last option sits well below the fold until End activates it.
+    await userEvent.keyboard('{End}');
+
+    const listbox = page.getByRole('listbox');
+    const lastOption = page.getByRole('option', { name: 'Opzione 40' });
+    await vi.waitFor(() => {
+      const optionRect = lastOption.element().getBoundingClientRect();
+      const listboxRect = listbox.element().getBoundingClientRect();
+      expect(optionRect.bottom).toBeLessThanOrEqual(listboxRect.bottom + 1);
+      expect(optionRect.top).toBeGreaterThanOrEqual(listboxRect.top - 1);
+    });
   });
 
   it('should select an option on click', async () => {

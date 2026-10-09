@@ -3,6 +3,9 @@
   /* Runtime alias of the trigger width written inline by NgpSelectDropdown (ADR-0003). */
   --drgn-runtime-dropdown-trigger-width: var(--ngp-select-width);
 
+  /* Runtime alias of the overlay transform origin written inline by NgpSelectDropdown. */
+  --drgn-runtime-dropdown-transform-origin: var(--ngp-select-transform-origin);
+
   /* The overlay writes left/top but never the positioning scheme. */
   position: absolute;
   display: flex;
@@ -15,6 +18,46 @@
   border-radius: 4px;
   background-color: var(--drgn-color-surface-base);
   outline: none;
+  transform-origin: var(--drgn-runtime-dropdown-transform-origin);
+}
+
+/* Only the option list scrolls, so the search row and the status stay pinned while scrolling. */
+.listbox {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+/* The portal marks the attached node with data-enter/data-exit while it enters and leaves. */
+:host[data-enter] {
+  animation: dropdown-show var(--drgn-motion-duration-short) var(--drgn-motion-easing-enter);
+}
+
+:host[data-exit] {
+  animation: dropdown-hide var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit);
+}
+
+@keyframes dropdown-show {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dropdown-hide {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .empty {

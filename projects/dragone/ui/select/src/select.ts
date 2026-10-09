@@ -1,16 +1,11 @@
 import { booleanAttribute, Component, computed, input, linkedSignal, output } from '@angular/core';
 import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidCheck, faSolidChevronDown } from '@ng-icons/font-awesome/solid';
-import {
-  injectSelectState,
-  NgpSelect,
-  NgpSelectDropdown,
-  NgpSelectOption,
-  NgpSelectPortal
-} from 'ng-primitives/select';
+import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
+import { injectSelectState, NgpSelect, provideSelectConfig } from 'ng-primitives/select';
 import { map } from 'rxjs';
 
+import { Dropdown, DropdownOption, DropdownPortal } from '@dragone/ui/dropdown';
 import { isNil, type KeyOf, type LiteralUnion } from '@dragone/ui/utils';
 
 type OptionPrimitive = string | number | boolean;
@@ -19,12 +14,21 @@ type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
 type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
 type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
 
+/**
+ * A single-choice or multiple-choice form field. The host is the combobox trigger (composed with
+ * `NgpSelect`); the floating panel is a `Dropdown` rendered through `DropdownPortal`, whose
+ * behavior — placement, flip, listbox ARIA wiring, empty announcement — is owned by the `Dropdown`
+ * family from `@dragone/ui/dropdown`.
+ */
 @Component({
   selector: 'drgn-select',
-  imports: [NgpSelectDropdown, NgpSelectOption, NgpSelectPortal, NgIcon],
+  imports: [Dropdown, DropdownOption, DropdownPortal, NgIcon],
   templateUrl: './select.component.html',
   styleUrl: './select.css',
-  providers: [provideIcons({ faSolidChevronDown, faSolidCheck })],
+  // Sirio spec: the panel floats 8px below the field. `provideSelectConfig` sets the default of
+  // the host directive's `ngpSelectDropdownOffset` input — the placement-aware gap, so it holds
+  // when the panel flips above the field too; consumers override it with `[offset]`.
+  providers: [provideIcons({ faSolidChevronDown }), provideSelectConfig({ offset: 8 })],
   host: {
     class: 'drgn-label-md-400',
     '[ariaLabel]': 'ariaLabelledBy() ? undefined : (ariaLabel() || placeholder())',
@@ -42,7 +46,8 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
         'ngpSelectDisabled: disabled',
         'ngpSelectValue: value',
         'ngpSelectMultiple: multiple',
-        'ngpSelectCompareWith: compare'
+        'ngpSelectCompareWith: compare',
+        'ngpSelectDropdownOffset: offset'
       ],
       outputs: ['ngpSelectOpenChange: openChange']
     }
@@ -56,6 +61,8 @@ export class Select<T> {
    */
   readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
+  /** Message shown, and announced, when the panel has no option to offer. */
+  readonly emptyLabel = input('Non ci sono elementi da visualizzare');
   /**
    * A string that maps an option to its display label. If not provided, the option itself will be
    * used as the label.
@@ -99,17 +106,15 @@ export class Select<T> {
   );
 
   /**
-   * View model used by the dropdown template. It precomputes label and selected state for each
-   * option.
+   * View model used by the dropdown template. It precomputes the display label of each option; the
+   * selected look comes from the `DropdownOption` state.
    */
-  protected readonly optionItems = computed(() => {
-    const selectedValue = this.internalValue();
-    return (this.options() ?? []).map(option => ({
+  protected readonly optionItems = computed(() =>
+    (this.options() ?? []).map(option => ({
       value: option,
-      label: this.mapByKey(option, this.optionLabel()),
-      selected: this.isOptionSelected(option, selectedValue)
-    }));
-  });
+      label: this.mapByKey(option, this.optionLabel())
+    }))
+  );
 
   /**
    * Maps a value (or a list of values) to its display/emitted form. When `key` is set, extracts
@@ -123,17 +128,5 @@ export class Select<T> {
       return value;
     }
     return (value as Record<PropertyKey, unknown>)[key];
-  }
-
-  /**
-   * Returns whether the current option is selected. Selection is delegated to `compareWith` from
-   * `ng-primitives` state.
-   */
-  private isOptionSelected(currOption: Option<T>, selectedValue: SelectValue<T>): boolean {
-    const compareWith = this.#internalState().compareWith();
-    if (Array.isArray(selectedValue)) {
-      return selectedValue.some(value => compareWith(value, currOption));
-    }
-    return compareWith(selectedValue, currOption);
   }
 }
