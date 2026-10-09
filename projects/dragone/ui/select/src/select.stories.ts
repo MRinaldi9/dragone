@@ -1,5 +1,5 @@
 import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 import { Select } from './select';
 
@@ -23,6 +23,7 @@ const meta: Meta<SelectStory> = {
     ],
     placeholder: 'Select an option',
     multiple: false,
+    optionLabel: 'label',
     valueChange: fn(),
     openChange: fn()
   },
@@ -67,6 +68,20 @@ const meta: Meta<SelectStory> = {
         'A string that maps an option to its value. If not provided, the option itself will be used as the value.',
       control: { type: 'text' }
     },
+    emptyLabel: {
+      type: 'string',
+      description: 'Message shown, and announced, when the panel has no option to offer.',
+      control: { type: 'text' }
+    },
+    offset: {
+      type: 'number',
+      description:
+        'The gap in px between the trigger and the panel. Defaults to 8 per the Sirio spec.',
+      control: { type: 'number' },
+      table: {
+        defaultValue: { summary: '8' }
+      }
+    },
     valueChange: {
       description: 'Event emitted when the selected value changes',
       action: 'valueChange',
@@ -106,4 +121,16 @@ export default meta;
 
 type Story = StoryObj<SelectStory>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('combobox'));
+
+    const body = within(canvasElement.ownerDocument.body);
+    await userEvent.click(body.getByRole('option', { name: 'Option 2' }));
+
+    // Selecting closes the panel and surfaces the mapped label on the trigger.
+    await expect(args.valueChange).toHaveBeenCalledWith({ label: 'Option 2', value: 'option2' });
+    await expect(canvas.getByText('Option 2')).toBeInTheDocument();
+  }
+};

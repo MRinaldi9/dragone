@@ -139,6 +139,56 @@ describe(Select, () => {
     expect(valueChangeSpy.mock.calls[1]).toBeUndefined();
   });
 
+  it('should announce the empty message when there are no options', async () => {
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel }
+    });
+    options.set([]);
+    await locator.getByRole('combobox').click();
+
+    await expect
+      .element(page.getByRole('status'))
+      .toHaveTextContent('Non ci sono elementi da visualizzare');
+    await expect.element(page.getByRole('listbox')).not.toBeInTheDocument();
+  });
+
+  it('should float the panel 8px below the trigger per the Sirio spec', async () => {
+    const { locator } = await render(TestHostComponent, {
+      inputs: { options, placeholder, optionLabel, ariaLabel }
+    });
+    const combobox = locator.getByRole('combobox');
+    await combobox.click();
+
+    const panel = page.getByRole('listbox').element().closest('drgn-dropdown') as HTMLElement;
+    // The enter animation translates the panel while it plays, so wait for it to settle.
+    await vi.waitFor(() => {
+      const panelTop = panel.getBoundingClientRect().top;
+      const triggerBottom = combobox.element().getBoundingClientRect().bottom;
+      expect(panelTop - triggerBottom).toBeGreaterThanOrEqual(8);
+    });
+  });
+
+  it('should let the consumer override the panel offset', async () => {
+    @Component({
+      imports: [Select],
+      template: `<drgn-select [offset]="20" [options]="options()" />`
+    })
+    class OffsetCmp {
+      readonly options = signal(['foo', 'bar']);
+    }
+
+    const { locator } = await render(OffsetCmp);
+    const combobox = locator.getByRole('combobox');
+    await combobox.click();
+
+    const panel = page.getByRole('listbox').element().closest('drgn-dropdown') as HTMLElement;
+    await vi.waitFor(() => {
+      const panelTop = panel.getBoundingClientRect().top;
+      const triggerBottom = combobox.element().getBoundingClientRect().bottom;
+      expect(panelTop - triggerBottom).toBeGreaterThanOrEqual(20);
+    });
+  });
+
   describe('form integration', () => {
     it('should update form field value on simple option select', async () => {
       const { componentClassInstance: component, locator } = await setupForm(['foo', 'bar']);

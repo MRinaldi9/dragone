@@ -55,6 +55,35 @@ export const Default: Story = {
   }
 };
 
+export const Scrollable: Story = {
+  render: () => ({
+    props: {
+      selected: undefined as string | undefined,
+      options: Array.from({ length: 40 }, (_, index) => ({
+        value: `opt-${index}`,
+        label: `Opzione ${index + 1}`
+      }))
+    },
+    template: `
+      <button
+        drgnDropdownTrigger
+        style="padding: 16px; min-width: 190px;"
+        (valueChange)="selected = $event"
+      >
+        Apri dropdown
+        @if (selected) {
+          · <span data-testid="trigger-value">{{ selected }}</span>
+        }
+        <drgn-dropdown *drgnDropdownPortal>
+          @for (option of options; track option.value) {
+            <drgn-dropdown-option [value]="option.value">{{ option.label }}</drgn-dropdown-option>
+          }
+        </drgn-dropdown>
+      </button>
+    `
+  })
+};
+
 export const WithSearch: Story = {
   render: () => ({
     props: {
