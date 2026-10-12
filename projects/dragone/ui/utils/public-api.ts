@@ -1,3 +1,4 @@
+export * from './src/document/reactive-document';
 export * from './src/event-plugins/debounce-event.plugin';
 export * from './src/event-plugins/prevent-default-event.plugin';
 export * from './src/event-plugins/provide-event-plugins';
