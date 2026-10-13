@@ -108,12 +108,7 @@ export const DIALOG_SHELL_CONTEXT = new InjectionToken<DialogShellContext>(
   styleUrl: './dialog-shell.css',
   providers: [provideIcons({ faSolidXmark })],
   host: {
-    // The scrim only exists for modal dialogs: non-modal dialogs keep the page pointer-interactive
-    // (transparent, pointer-events: none — see the stylesheet) while `aria-modal` is false. This
-    // removes the scrim and the pointer block only: focus stays trapped (upstream NgpDialog always
-    // applies NgpFocusTrap) — see `DialogConfig.modal`.
     '[attr.data-modal]': 'modal ? "true" : "false"',
-    // Test hook: the scrim is only reachable by coordinates, never by role or text.
     'data-testid': 'dialog-overlay'
   },
   hostDirectives: [NgpDialogOverlay]

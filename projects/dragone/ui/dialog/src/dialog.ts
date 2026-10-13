@@ -74,14 +74,8 @@ export interface DialogConfig {
    * Whether the dialog is modal. Modal dialogs show the scrim and set `aria-modal="true"`;
    * non-modal dialogs keep the page pointer-interactive and set `aria-modal="false"`.
    *
-   * Known limitations, both upstream in `NgpDialog`/`NgpDialogManager` and not fixable through the
-   * public API:
-   *
-   * - Focus stays trapped inside the panel even when non-modal: `NgpDialog` always applies
-   *   `NgpFocusTrap` and does not derive it from `modal` (the trap arms unconditionally; its
-   *   `disabled` input only skips the initial focus and is not exposed). Keyboard users therefore
-   *   cannot leave a "non-modal" dialog.
-   * - Page scroll is blocked while any dialog is open, including non-modal ones.
+   * Even when non-modal, focus stays trapped inside the panel and page scroll stays blocked: two
+   * upstream limitations in `NgpDialog`/`NgpDialogManager` that the public API cannot work around.
    *
    * @default true
    */
