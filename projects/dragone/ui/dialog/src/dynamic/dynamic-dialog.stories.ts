@@ -11,7 +11,8 @@ import { expect, screen, userEvent, waitFor } from 'storybook/test';
 import { Button } from '@dragone/ui/button';
 import type { StatusType } from '@dragone/ui/utils';
 
-import { Dialog, injectDialogRef, type DialogSize } from './dialog';
+import type { DialogSize } from './dialog.model';
+import { DynamicDialog, injectDynamicDialogRef } from './dynamic-dialog';
 
 /**
  * Dialog Body Component example: free content plus the actions area. The design's "Action" variant
@@ -19,10 +20,10 @@ import { Dialog, injectDialogRef, type DialogSize } from './dialog';
  * layout, not the skeleton.
  */
 @Component({
-  selector: 'drgn-dialog-demo-body',
+  selector: 'drgn-dynamic-dialog-demo-body',
   imports: [Button],
   template: `
-    <p class="drgn-p-md-01 demo-body-text">
+    <p class="drgn-p-md-01">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
       labore et dolore magna aliqua.
     </p>
@@ -39,7 +40,7 @@ import { Dialog, injectDialogRef, type DialogSize } from './dialog';
   `
 })
 class DemoBody {
-  readonly #dialog = injectDialogRef();
+  readonly #dialog = injectDynamicDialogRef();
 
   close(result: boolean): void {
     this.#dialog.close(result);
@@ -51,7 +52,7 @@ class DemoBody {
  * sync with the host signal while the dialog is open, and the output writing back into it.
  */
 @Component({
-  selector: 'drgn-dialog-demo-counter-body',
+  selector: 'drgn-dynamic-dialog-counter-body',
   imports: [Button],
   template: `
     <p class="drgn-p-md-01" data-testid="dialog-counter">Body: {{ count() }}</p>
@@ -64,7 +65,7 @@ class DemoCounterBody {
 }
 
 @Component({
-  selector: 'drgn-dialog-demo',
+  selector: 'drgn-dynamic-dialog-demo',
   imports: [Button],
   template: `
     <button drgnButton type="button" (click)="open()">Apri finestra di dialogo</button>
@@ -73,14 +74,14 @@ class DemoCounterBody {
     }
   `
 })
-class DialogDemo {
+class DynamicDialogDemo {
   readonly title = input('Titolo finestra di dialogo');
   readonly description = input<string | undefined>(undefined);
   readonly size = input<DialogSize>('small');
   readonly status = input<StatusType>('neutral');
   readonly modal = input(true);
 
-  readonly #dialog = inject(Dialog);
+  readonly #dialog = inject(DynamicDialog);
   protected readonly resultText = signal<string | null>(null);
 
   open(): void {
@@ -99,7 +100,7 @@ class DialogDemo {
 }
 
 @Component({
-  selector: 'drgn-dialog-reactive-demo',
+  selector: 'drgn-dynamic-dialog-reactive-demo',
   imports: [Button],
   template: `
     <button drgnButton type="button" (click)="open()">Apri finestra di dialogo reattiva</button>
@@ -120,7 +121,7 @@ class DialogDemo {
 class ReactiveDemo {
   protected readonly count = signal(0);
 
-  readonly #dialog = inject(Dialog);
+  readonly #dialog = inject(DynamicDialog);
   readonly #destroyRef = inject(DestroyRef);
   #timer: ReturnType<typeof setInterval> | null = null;
 
@@ -157,10 +158,24 @@ class ReactiveDemo {
   }
 }
 
-const meta: Meta<Dialog> = {
-  title: 'Dragone/UI/Dialog',
-  component: Dialog,
+const meta: Meta<DynamicDialog> = {
+  title: 'Dragone/UI/Dialog/Service',
+  component: DynamicDialog,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Programmatic dialog: `DynamicDialog.open(BodyComponent, config)` creates the body ' +
+          'component at runtime, applies `config.inputs`/`config.outputs` as declarative bindings ' +
+          '(signal values stay reactive while the dialog is open) and returns a `DynamicDialogRef` ' +
+          'typed on the close result — the body closes itself with `injectDynamicDialogRef()`. ' +
+          'Both dialog types share the same private panel, so the visuals are identical; use this ' +
+          'one when the body type is only known at runtime, otherwise prefer the declarative ' +
+          '`Dragone/UI/Dialog/Component`.'
+      }
+    }
+  },
   args: {
     title: 'Titolo finestra di dialogo',
     description: 'Descrizione facoltativa della finestra di dialogo.',
@@ -187,17 +202,19 @@ const meta: Meta<Dialog> = {
     }
   },
   decorators: [
-    moduleMetadata({ imports: [Button, DemoBody, DemoCounterBody, DialogDemo, ReactiveDemo] })
+    moduleMetadata({
+      imports: [Button, DemoBody, DemoCounterBody, DynamicDialogDemo, ReactiveDemo]
+    })
   ]
 };
 
 export default meta;
-type Story = StoryObj<DialogDemo>;
+type Story = StoryObj<DynamicDialogDemo>;
 
 export const Default: Story = {
   render: args => ({
     props: args,
-    template: `<drgn-dialog-demo ${argsToTemplate(args)} />`
+    template: `<drgn-dynamic-dialog-demo ${argsToTemplate(args)} />`
   }),
   play: async ({ canvas, step }) => {
     await step('opens the dialog from the service', async () => {
@@ -221,7 +238,7 @@ export const Large: Story = {
   args: { size: 'large' },
   render: args => ({
     props: args,
-    template: `<drgn-dialog-demo ${argsToTemplate(args)} />`
+    template: `<drgn-dynamic-dialog-demo ${argsToTemplate(args)} />`
   })
 };
 
@@ -229,7 +246,7 @@ export const Warning: Story = {
   args: { status: 'warning' },
   render: args => ({
     props: args,
-    template: `<drgn-dialog-demo ${argsToTemplate(args)} />`
+    template: `<drgn-dynamic-dialog-demo ${argsToTemplate(args)} />`
   })
 };
 
@@ -237,14 +254,14 @@ export const NonModal: Story = {
   args: { modal: false },
   render: args => ({
     props: args,
-    template: `<drgn-dialog-demo ${argsToTemplate(args)} />`
+    template: `<drgn-dynamic-dialog-demo ${argsToTemplate(args)} />`
   })
 };
 
 export const WithResult: Story = {
   render: args => ({
     props: args,
-    template: `<drgn-dialog-demo ${argsToTemplate({ ...args, description: undefined })} />`
+    template: `<drgn-dynamic-dialog-demo ${argsToTemplate({ ...args, description: undefined })} />`
   }),
   play: async ({ canvas, step }) => {
     await userEvent.click(canvas.getByRole('button', { name: 'Apri finestra di dialogo' }));
@@ -269,7 +286,7 @@ export const WithResult: Story = {
  */
 export const ReactiveInputs: Story = {
   render: () => ({
-    template: `<drgn-dialog-reactive-demo />`
+    template: `<drgn-dynamic-dialog-reactive-demo />`
   }),
   play: async ({ canvas, step }) => {
     await userEvent.click(

@@ -13,11 +13,12 @@ import { page, userEvent } from 'vitest/browser';
 
 import { Button } from '@dragone/ui/button';
 
-import { Dialog, injectDialogRef, type DialogRef } from './dialog';
+import type { DynamicDialogRef } from '../models/dialog.model';
+import { DynamicDialog, injectDynamicDialogRef } from './dynamic-dialog';
 
 // Captured by the last Dialog Body Component created, so a test can compare the ref it injected
-// with the one returned by `Dialog.open()`.
-let capturedDialogRef: DialogRef<boolean> | null = null;
+// with the one returned by `DynamicDialog.open()`.
+let capturedDialogRef: DynamicDialogRef<boolean> | null = null;
 
 // Top-left corner of the fullscreen scrim: the panel is centered, so a click there lands on
 // the overlay itself, not on the dialog. `x`/`y` are the locator API's key names.
@@ -40,7 +41,7 @@ const scrimCorner = { x: 2, y: 2 };
 class TestBody {
   readonly message = input('initial');
   readonly selected = output<string>();
-  readonly dialogRef = injectDialogRef<boolean>();
+  readonly dialogRef = injectDynamicDialogRef<boolean>();
 
   constructor() {
     capturedDialogRef = this.dialogRef;
@@ -64,13 +65,13 @@ class TestHost {
   readonly injector = inject(Injector);
 }
 
-describe(Dialog, () => {
-  let dialog: Dialog;
+describe(DynamicDialog, () => {
+  let dialog: DynamicDialog;
   let hostInjector: Injector;
 
   const renderDialog = async (): Promise<void> => {
     const { inject: injectFromFixture, componentClassInstance: host } = await render(TestHost);
-    dialog = injectFromFixture(Dialog);
+    dialog = injectFromFixture(DynamicDialog);
     hostInjector = host.injector;
   };
 
