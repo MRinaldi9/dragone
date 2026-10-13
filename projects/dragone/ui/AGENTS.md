@@ -86,9 +86,11 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
 - `test-setup.ts` forces `prefers-reduced-motion: reduce`; do not re-enable animations in
   tests.
 - There is no e2e runner: interaction coverage lives in `play` functions.
-- Every visual Component has `<name>.stories.ts` with `tags: ['autodocs']` and title
-  `Dragone/UI/<Name>`. Add `play` functions for the interactive behavior you touch. Preview
-  with `pnpm storybook`; verify with `pnpm build-storybook`.
+- Every visual Component has `<name>.stories.ts` with `tags: ['autodocs']`. Title: `Dragone/UI/<Name>`
+  when the entry point documents a single unit; when it exposes several units that read better apart
+  (e.g. a component and the service over the same skeleton), nest them as `Dragone/UI/<Name>/<Unit>`
+  — `Dragone/UI/Dialog/Component` and `Dragone/UI/Dialog/Service`. Add `play` functions for the
+  interactive behavior you touch. Preview with `pnpm storybook`; verify with `pnpm build-storybook`.
 
 ## Component validation
 

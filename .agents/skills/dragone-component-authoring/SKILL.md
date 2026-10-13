@@ -33,8 +33,10 @@ live in `AGENTS.md` (root) and `projects/dragone/ui/AGENTS.md`; this skill is th
 6. **Tests.** Use `render()` from `@wismaz/vitest-browser-angular`; add a Test Host for native
    element selectors or parent-driven tests. Timers: `setUpFastForward()` /
    `setUpManualForward()` from `tests/setup-timer-mode.ts`.
-7. **Stories.** Add `<name>.stories.ts` with `tags: ['autodocs']`, title `Dragone/UI/<Name>`,
-   and `play` functions for interactive behavior.
+7. **Stories.** Add `<name>.stories.ts` with `tags: ['autodocs']`, `play` functions for interactive
+   behavior, and title `Dragone/UI/<Name>` — or a nested `Dragone/UI/<Name>/<Unit>` when the entry
+   point exposes several units that read better apart (e.g. `Dragone/UI/Dialog/Component` and
+   `Dragone/UI/Dialog/Service`).
 8. **Validate.** `pnpm format:check`, `pnpm lint`,
    `CI=true pnpm exec vitest run <area>`, `CI=true pnpm test`, `pnpm build @dragone/ui`;
    add `pnpm build-storybook` if stories changed.
