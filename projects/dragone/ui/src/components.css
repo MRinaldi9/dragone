@@ -124,6 +124,35 @@
   --drgn-space-card-padding-mobile-top: 24px;
   --drgn-space-card-padding-inline-landscape: 48px;
   --drgn-space-card-gap-mobile: 16px;
+
+  /* Dialog — geometry from the Penpot "Dialog" page (Small 360px / Large 600px
+     panels, 16px radius, white surface; Large pads 24px top / 32px inline and
+     bottom; content gap 16px Small / 24px Large; 48px ghost close button
+     pinned 24px from the panel's top-right corner, 32px inline on Large).
+     Shadows: several Penpot variants carry an untokenized #aab2bb/50% value;
+     the token-linked elevation values the other variants use are mapped here
+     (recorded as a Sirio inconsistency). The scrim is not specified in the
+     Penpot Dialog page: the Sirio overlay alias (dark primary at 90%) is used,
+     with no blur. */
+  --drgn-dialog-overlay-background: var(--color-alias-overlay-90-dark-primary-120);
+  --drgn-dialog-overlay-z-index: 1000;
+  --drgn-space-dialog-overlay-padding: 24px;
+  --drgn-dialog-width-small: 360px;
+  --drgn-dialog-width-large: 600px;
+  --drgn-radius-dialog: 16px;
+  --drgn-space-dialog-padding-small: 24px;
+  --drgn-space-dialog-padding-large-top: 24px;
+  --drgn-space-dialog-padding-large-inline: 32px;
+  --drgn-space-dialog-padding-large-bottom: 32px;
+  --drgn-space-dialog-gap-small: 16px;
+  --drgn-space-dialog-gap-large: 24px;
+  --drgn-space-dialog-close-inset: 24px;
+  --drgn-space-dialog-close-inset-large: 32px;
+  --drgn-color-surface-dialog: var(--color-alias-background-color-primary-light-0);
+  --drgn-color-text-dialog-title: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-dialog-body: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-shadow-dialog-small: var(--elevation-elevation-03);
+  --drgn-shadow-dialog-large: var(--elevation-elevation-04);
 }
 
 @media (prefers-reduced-motion: reduce) {

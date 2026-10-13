@@ -1,0 +1,6 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+
+/* The shell is a pass-through adapter: the visual scrim/panel live on the shared DialogPanel. */
+:host {
+  display: contents;
+}

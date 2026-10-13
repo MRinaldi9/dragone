@@ -1,0 +1,150 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+
+/* Scrim: the Penpot "Dialog" page does not specify it; the value is the Sirio
+   overlay alias token (dark primary at 90% opacity, no blur). */
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: var(--drgn-dialog-overlay-z-index);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--drgn-dialog-overlay-background);
+  padding: var(--drgn-space-dialog-overlay-padding);
+  animation: drgn-dialog-fade-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter);
+}
+
+:host[data-exit] {
+  animation: drgn-dialog-fade-out var(--drgn-motion-duration-medium) var(--drgn-motion-easing-exit);
+}
+
+/* Non-modal dialogs have no scrim: the page below stays visible and interactive. */
+:host[data-modal='false'] {
+  background-color: transparent;
+  pointer-events: none;
+}
+
+/* Panel geometry from the Penpot "Dialog" page: Small 360px / Large 600px wide,
+   16px radius, white surface, 24px padding (Large: 24px top, 32px inline and
+   bottom), content gap 16px (Small) / 24px (Large). */
+.dialog-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--drgn-space-dialog-gap-small);
+  width: var(--drgn-dialog-width-small);
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: var(--drgn-space-dialog-padding-small);
+  background-color: var(--drgn-color-surface-dialog);
+  border-radius: var(--drgn-radius-dialog);
+  box-shadow: var(--drgn-shadow-dialog-small);
+  animation: drgn-dialog-slide-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter);
+}
+
+/* The panel re-enables pointer events so non-modal content stays reachable. */
+:host[data-modal='false'] .dialog-panel {
+  pointer-events: auto;
+}
+
+.dialog-panel[data-size='large'] {
+  gap: var(--drgn-space-dialog-gap-large);
+  width: var(--drgn-dialog-width-large);
+  padding: var(--drgn-space-dialog-padding-large-top) var(--drgn-space-dialog-padding-large-inline)
+    var(--drgn-space-dialog-padding-large-bottom);
+  box-shadow: var(--drgn-shadow-dialog-large);
+}
+
+.dialog-panel[data-exit] {
+  animation: drgn-dialog-slide-out var(--drgn-motion-duration-medium) var(--drgn-motion-easing-exit);
+}
+
+/* Close action: 48px ghost icon-only button pinned to the panel's top-right
+   corner (Penpot "Ghost / Icon Only", inset 24px on Small / 32px inline on
+   Large). It sits outside the content flow so long titles wrap under it. */
+.dialog-close {
+  position: absolute;
+  top: var(--drgn-space-dialog-close-inset);
+  right: var(--drgn-space-dialog-close-inset);
+}
+
+.dialog-panel[data-size='large'] .dialog-close {
+  right: var(--drgn-space-dialog-close-inset-large);
+}
+
+.dialog-icon {
+  color: var(--drgn-color-interactive-primary-default);
+}
+
+/* Penpot "Dialog / Semantic": the header icon takes the interactive color of
+   its status (info default, alert, warning, success). */
+.dialog-panel[data-status='info'] .dialog-icon,
+.dialog-panel[data-status='neutral'] .dialog-icon {
+  color: var(--drgn-color-interactive-primary-default);
+}
+
+.dialog-panel[data-status='success'] .dialog-icon {
+  color: var(--drgn-color-interactive-success-default);
+}
+
+.dialog-panel[data-status='warning'] .dialog-icon {
+  color: var(--drgn-color-interactive-warning-default);
+}
+
+.dialog-panel[data-status='danger'] .dialog-icon {
+  color: var(--drgn-color-interactive-alert-default);
+}
+
+.dialog-title {
+  margin: 0;
+  color: var(--drgn-color-text-dialog-title);
+}
+
+.dialog-description {
+  margin: 0;
+  color: var(--drgn-color-text-dialog-body);
+}
+
+@keyframes drgn-dialog-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes drgn-dialog-fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes drgn-dialog-slide-in {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes drgn-dialog-slide-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
