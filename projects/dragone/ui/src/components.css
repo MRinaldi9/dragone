@@ -153,6 +153,38 @@
   --drgn-color-text-dialog-body: var(--color-alias-text-color-secondary-dark-100);
   --drgn-shadow-dialog-small: var(--elevation-elevation-03);
   --drgn-shadow-dialog-large: var(--elevation-elevation-04);
+
+  /* Pagination — geometry and states from the Penpot "Pagination" page. A page tile fills
+     #00368F on hover and #00173D while pressed or as the current page; its focus state is the
+     spec's 1px interactive border plus a 3px glow. The complex bar sits on the light-blue surface
+     (#D9E4F7) with an #84A9E6 divider between its groups. The page-size and page-jumper selects
+     reuse the Select Component, narrowed to the 82px the spec draws. */
+  --drgn-pagination-radius: 4px;
+  --drgn-pagination-item-inline-size: 38px;
+  --drgn-pagination-item-block-size: 44px;
+  --drgn-pagination-item-padding-block: 10px;
+  --drgn-pagination-item-padding-inline: 14px;
+  --drgn-pagination-gap: 4px;
+  --drgn-pagination-bar-gap: 16px;
+  --drgn-pagination-bar-padding: 16px;
+  --drgn-pagination-text: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-pagination-icon: var(--color-alias-interactive-primary-default);
+  --drgn-pagination-icon-disabled: var(--color-alias-text-color-disabled);
+  --drgn-pagination-nav-hover-background: var(--color-alias-background-color-primary-light-50);
+  --drgn-pagination-item-hover-background: var(--color-alias-background-color-primary-dark-110);
+  --drgn-pagination-item-selected-background: var(--color-alias-background-color-primary-dark-120);
+  --drgn-pagination-item-pressed-background: var(--color-alias-interactive-primary-pressed);
+  --drgn-pagination-item-strong-text: var(--color-alias-text-color-primary-light-0);
+  --drgn-pagination-item-disabled-background: var(--color-alias-background-color-disabled);
+  --drgn-pagination-item-disabled-text: var(--color-alias-text-color-disabled);
+  --drgn-pagination-focus-ring: var(--color-alias-interactive-border-focus);
+
+  /* #007DB3 has no Primitive Token — it is the same untokenized value the Button focus shadow
+     hardcodes — so it lives here as a Component Token instead. */
+  --drgn-pagination-focus-shadow: rgb(0 125 179 / 70%);
+  --drgn-pagination-surface: var(--color-alias-background-color-primary-light-50);
+  --drgn-pagination-divider: var(--color-global-mid-primary-70);
+  --drgn-pagination-select-inline-size: 82px;
 }
 
 @media (prefers-reduced-motion: reduce) {

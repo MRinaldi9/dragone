@@ -1,0 +1,44 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: block;
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--drgn-pagination-bar-gap);
+  padding: var(--drgn-pagination-bar-padding);
+  border-radius: var(--drgn-pagination-radius);
+  background-color: var(--drgn-pagination-surface);
+  color: var(--drgn-pagination-text);
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: var(--drgn-pagination-gap);
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.summary {
+  margin: 0;
+  color: var(--drgn-pagination-text);
+  white-space: nowrap;
+}
+
+.divider {
+  align-self: stretch;
+  width: 1px;
+  background-color: var(--drgn-pagination-divider);
+}
+
+/* The Select is 300px wide by its own Sirio spec; the Pagination spec draws an 82px one.
+   The scoped class selector (class + _ngcontent attribute) outranks the Select's `:host`
+   rule (a single _nghost attribute), so this wins without reaching into the Select. */
+.select {
+  width: var(--drgn-pagination-select-inline-size);
+}
