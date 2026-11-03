@@ -1,11 +1,6 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj
-} from '@analogjs/storybook-angular';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowRight } from '@ng-icons/font-awesome/solid';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, fn } from 'storybook/test';
 
 import { Button } from './button';

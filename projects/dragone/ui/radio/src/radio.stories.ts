@@ -1,9 +1,4 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj
-} from '@analogjs/storybook-angular';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { fn } from 'storybook/test';
 
 import { RadioGroup } from './radio-group/radio-group';

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@analogjs/storybook-angular';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
 
 import type { StatusType } from '@dragone/ui/utils';
 

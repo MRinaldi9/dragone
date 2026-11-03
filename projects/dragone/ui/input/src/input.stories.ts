@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj, argsToTemplate } from '@analogjs/storybook-angular';
+import { type Meta, type StoryObj, argsToTemplate } from '@storybook/angular-vite';
 
 import { InputText } from './input-text/input-text';
 

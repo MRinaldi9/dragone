@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@analogjs/storybook-angular';
 import { faSolidUser } from '@ng-icons/font-awesome/solid';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { fn } from 'storybook/test';
 
 import { ChipInput } from './chip-input';

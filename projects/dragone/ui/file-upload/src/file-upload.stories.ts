@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { fn } from 'storybook/test';
 
 import { FileUpload } from './file-upload';

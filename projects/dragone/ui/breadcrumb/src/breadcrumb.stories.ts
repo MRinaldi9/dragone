@@ -1,12 +1,12 @@
+import { provideRouter, RouterOutlet, withHashLocation } from '@angular/router';
+import { faSolidHouse } from '@ng-icons/font-awesome/solid';
 import {
   applicationConfig,
   argsToTemplate,
   type Meta,
   moduleMetadata,
   type StoryObj
-} from '@analogjs/storybook-angular';
-import { provideRouter, RouterOutlet, withHashLocation } from '@angular/router';
-import { faSolidHouse } from '@ng-icons/font-awesome/solid';
+} from '@storybook/angular-vite';
 
 import { Breadcrumb } from './breadcrumb';
 import { BreadcrumbItem } from './breadcrumb-item/breadcrumb-item';

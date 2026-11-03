@@ -51,23 +51,19 @@
           }
         },
         "storybook": {
-          "builder": "@analogjs/storybook-angular:start-storybook",
+          "builder": "@storybook/angular-vite:start-storybook",
           "options": {
-            "compodoc": true,
             "configDir": ".storybook",
-            "compodocArgs": ["-e", "json", "-d", "."],
             "port": 6006,
-            "experimentalZoneless": true
+            "styles": ["projects/dragone/ui/src/main.css"]
           }
         },
         "build-storybook": {
-          "builder": "@analogjs/storybook-angular:build-storybook",
+          "builder": "@storybook/angular-vite:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "."],
             "outputDir": "dist/storybook",
-            "experimentalZoneless": true
+            "styles": ["projects/dragone/ui/src/main.css"]
           }
         }
       }

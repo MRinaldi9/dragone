@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj, argsToTemplate } from '@analogjs/storybook-angular';
+import { type Meta, type StoryObj, argsToTemplate } from '@storybook/angular-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import { Checkbox } from './checkbox';

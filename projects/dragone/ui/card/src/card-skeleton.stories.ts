@@ -1,4 +1,3 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@analogjs/storybook-angular';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidBookmark,
@@ -6,6 +5,7 @@ import {
   faSolidFileLines,
   faSolidShareNodes
 } from '@ng-icons/font-awesome/solid';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect } from 'storybook/test';
 
 import { Button } from '@dragone/ui/button';

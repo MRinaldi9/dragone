@@ -1,9 +1,4 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj
-} from '@analogjs/storybook-angular';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 
 import { TemporalAdapter } from '@dragone/ui/temporal-adapter';
 

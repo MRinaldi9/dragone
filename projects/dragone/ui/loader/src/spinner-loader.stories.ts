@@ -1,10 +1,5 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj
-} from '@analogjs/storybook-angular';
 import { Component, signal } from '@angular/core';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, waitFor } from 'storybook/test';
 
 import { Announcer, injectAnnouncerState, sleep } from '@dragone/ui/utils';

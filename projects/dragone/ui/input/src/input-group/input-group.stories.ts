@@ -1,9 +1,3 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj
-} from '@analogjs/storybook-angular';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -12,6 +6,7 @@ import {
   faSolidUser,
   faSolidXmark
 } from '@ng-icons/font-awesome/solid';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 
 import { InputText } from '../input-text/input-text';
 import { InputGroup } from './input-group';

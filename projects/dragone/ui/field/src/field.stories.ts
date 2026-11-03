@@ -1,6 +1,6 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
 import { Component, input, signal } from '@angular/core';
 import { form, FormField as FormSignal, required } from '@angular/forms/signals';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 
 import { Checkbox } from '@dragone/ui/checkbox';
 
