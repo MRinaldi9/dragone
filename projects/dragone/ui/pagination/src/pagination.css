@@ -1,0 +1,110 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: block;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  gap: var(--drgn-pagination-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  outline: none;
+}
+
+/* The 1px border is always there, transparent, so the focus state cannot resize the tile. */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: var(--drgn-pagination-item-inline-size);
+  height: var(--drgn-pagination-item-block-size);
+  padding: var(--drgn-pagination-item-padding-block) var(--drgn-pagination-item-padding-inline);
+  border: 1px solid transparent;
+  border-radius: var(--drgn-pagination-radius);
+  background-color: transparent;
+  color: var(--drgn-pagination-text);
+  font-family: var(--drgn-typography-font-family-number);
+  font-size: var(--drgn-typography-size-label-md);
+  font-weight: var(--drgn-typography-weight-regular);
+  line-height: var(--drgn-typography-line-height-label-md);
+  cursor: pointer;
+  outline: none;
+}
+
+/* The spec's focus state: the interactive border plus a 3px glow. box-shadow rather than
+   `filter: drop-shadow`, which would trace the digits too — and on a transparent tile the digits
+   alone, since the box itself has no alpha to cast. */
+button[data-focus-visible] {
+  border-color: var(--drgn-pagination-focus-ring);
+  box-shadow: 0 0 3px var(--drgn-pagination-focus-shadow);
+}
+
+button:disabled {
+  color: var(--drgn-pagination-item-disabled-text);
+  cursor: not-allowed;
+}
+
+/* The current page. */
+button.page-tile[data-selected] {
+  background-color: var(--drgn-pagination-item-selected-background);
+  color: var(--drgn-pagination-item-strong-text);
+}
+
+/* Prev/next keep a light surface, so the chevrons stay bare. */
+button:not(:disabled):hover {
+  background-color: var(--drgn-pagination-nav-hover-background);
+}
+
+/* The numbered tiles use the spec's strong fills: hover #00368F, press #00173D. Both outrank the
+   selected rule above, so hovering the current page lightens it and pressing it returns it. */
+button.page-tile:not(:disabled):hover {
+  background-color: var(--drgn-pagination-item-hover-background);
+  color: var(--drgn-pagination-item-strong-text);
+}
+
+button.page-tile:not(:disabled):active {
+  background-color: var(--drgn-pagination-item-pressed-background);
+  color: var(--drgn-pagination-item-strong-text);
+}
+
+/* The disabled current page is the only one that keeps a surface (Penpot state 5). It restates the
+   disabled colours, which the selected rule above would otherwise override. */
+button.page-tile[data-selected]:disabled {
+  background-color: var(--drgn-pagination-item-disabled-background);
+  color: var(--drgn-pagination-item-disabled-text);
+}
+
+.ellipsis {
+  align-items: center;
+  justify-content: center;
+  min-width: var(--drgn-pagination-item-inline-size);
+  height: var(--drgn-pagination-item-block-size);
+  color: var(--drgn-pagination-text);
+  font-family: var(--drgn-typography-font-family-number);
+  font-size: var(--drgn-typography-size-label-md);
+  line-height: var(--drgn-typography-line-height-label-md);
+}
+
+ng-icon {
+  color: var(--drgn-pagination-icon);
+}
+
+button:disabled ng-icon {
+  color: var(--drgn-pagination-icon-disabled);
+}
+
+/* High-contrast mode replaces the author fill, so the current page would look like every other
+   one. The marker yields to the focus ring when both apply. */
+@media (forced-colors: active) {
+  button.page-tile[data-selected]:not([data-focus-visible]) {
+    outline: 1px solid SelectedItem;
+    outline-offset: -1px;
+  }
+}
