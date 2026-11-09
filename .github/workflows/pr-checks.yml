@@ -6,56 +6,29 @@ on:
       - main
 
 jobs:
-  Eslint-Template-Angular:
+  Format_and_Lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v7.0.0
 
       - name: Setup pnpm
-        uses: pnpm/setup@v2.1.0
+        uses: pnpm/setup@v3.1.2
         with:
-          version: "^12.0.0"
-          runtime: "node@24"
-          cache: true
-          require-lockfile: true
-
-      - name: Run ESLint
-        run: pnpm lint:eslint
-
-  Oxlint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7.0.0
-
-      - name: Setup pnpm
-        uses: pnpm/setup@v2.1.0
-        with:
-          version: "^12.0.0"
-          runtime: "node@24"
-          cache: true
-          require-lockfile: true
-
-      - name: Run Oxlint
-        run: pnpm lint:oxlint --format=github
-
-  Oxfmt-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7.0.0
-
-      - name: Setup pnpm
-        uses: pnpm/setup@v2.1.0
-        with:
-          version: "^12.0.0"
-          runtime: "node@24"
           cache: true
           require-lockfile: true
 
       - name: Run Oxfmt check
         run: pnpm format:check
+
+      - name: Run Oxlint
+        run: pnpm lint:oxlint --format=github
+
+      - name: Run ESLint
+        run: pnpm lint:eslint
+
+      - name: Run Stylelint
+        run: pnpm lint:css
 
       - name: Check docs links
         run: pnpm lint:docs
@@ -67,10 +40,8 @@ jobs:
         uses: actions/checkout@v7.0.0
 
       - name: Setup pnpm
-        uses: pnpm/setup@v2.1.0
+        uses: pnpm/setup@v3.1.2
         with:
-          version: "^12.0.0"
-          runtime: "node@24"
           cache: true
           require-lockfile: true
 
