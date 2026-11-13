@@ -24,7 +24,7 @@ import { Calendar } from './calendar';
   ]
 })
 class CalendarTestHost {
-  readonly state = ngpDatePicker({});
+  readonly state = ngpDatePicker<Date>({});
 
   constructor() {
     datePickerDragoneStateFactory({

@@ -25,7 +25,7 @@ import { InputDatePicker } from './input-date-picker';
   ]
 })
 class InputDatePickerTestHost {
-  readonly state = ngpDatePicker({});
+  readonly state = ngpDatePicker<Date>({});
 
   constructor() {
     datePickerDragoneStateFactory({
