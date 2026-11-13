@@ -11,7 +11,12 @@ import { DropdownTrigger } from './dropdown-trigger/dropdown-trigger';
 @Component({
   imports: [Dropdown, DropdownOption, DropdownPortal, DropdownSearch, DropdownTrigger],
   template: `
-    <button drgnDropdownTrigger [multiple]="multiple()" (valueChange)="value.set($event)">
+    <button
+      drgnDropdownTrigger
+      aria-label="Trigger"
+      [multiple]="multiple()"
+      (valueChange)="value.set($event)"
+    >
       Trigger
       @if (value()) {
         · <span data-testid="trigger-value">{{ value() }}</span>
@@ -72,13 +77,21 @@ describe(Dropdown, () => {
     const trigger = locator.getByRole('combobox');
     await trigger.click();
 
-    const listbox = page.getByRole('listbox');
-    await expect.element(listbox).toHaveAttribute('aria-labelledby', trigger.element().id);
+    // Querying by role and name proves the popup resolves the trigger's accessible name.
+    const listbox = page.getByRole('listbox', { name: 'Trigger' });
+    await expect.element(listbox).toHaveAttribute('aria-label', 'Trigger');
 
+    // The panel is a named non-modal dialog wrapping the search row and the listbox.
     const panel = listbox.element().closest('drgn-dropdown') as HTMLElement;
-    expect(panel.hasAttribute('role')).toBeFalsy();
+    expect(panel.getAttribute('role')).toBe('dialog');
+    expect(panel.getAttribute('aria-label')).toBe('Trigger');
+    expect(panel.hasAttribute('aria-modal')).toBeFalsy();
     expect(panel.hasAttribute('aria-multiselectable')).toBeFalsy();
     expect(getComputedStyle(panel).position).toBe('absolute');
+    await expect.element(page.getByRole('dialog', { name: 'Trigger' })).toBeInTheDocument();
+
+    // The combobox points at the listbox id, not at the panel.
+    expect(trigger.element().getAttribute('aria-controls')).toBe(listbox.element().id);
   });
 
   it('should keep aria-multiselectable on the listbox when multiple changes while open', async () => {

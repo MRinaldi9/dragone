@@ -1,15 +1,30 @@
-import { afterRenderEffect, Component, computed, contentChildren, input } from '@angular/core';
 import {
-  injectSelectDropdownState,
-  injectSelectState,
-  NgpSelectDropdown,
-  provideSelectDropdownState
-} from 'ng-primitives/select';
+  afterRenderEffect,
+  Component,
+  computed,
+  contentChildren,
+  type ElementRef,
+  input,
+  viewChild
+} from '@angular/core';
+import { injectSelectState, NgpSelectDropdown, NgpSelectList } from 'ng-primitives/select';
 
 import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
-import { dropdownListboxId } from './dropdown-listbox-id';
 import { DropdownOption } from './dropdown-option/dropdown-option';
+
+/**
+ * Copies the trigger's naming source onto a popup element: the label ids when the trigger is
+ * labelled, its `aria-label` when named by author, the trigger id as a last resort.
+ */
+function mirrorName(trigger: HTMLElement, popup: HTMLElement): void {
+  const labelledBy = trigger.getAttribute('aria-labelledby');
+  const label = trigger.getAttribute('aria-label');
+  const name = label && !labelledBy ? 'aria-label' : 'aria-labelledby';
+  const value = labelledBy ?? label ?? trigger.id;
+  popup.setAttribute(name, value);
+  popup.removeAttribute(name === 'aria-label' ? 'aria-labelledby' : 'aria-label');
+}
 
 /**
  * The floating panel of selectable options shown by a trigger (a Select field, a Button, or a
@@ -20,7 +35,7 @@ import { DropdownOption } from './dropdown-option/dropdown-option';
  * `DropdownOption` rows plus an optional `DropdownSearch`:
  *
  * ```html
- * <button drgnDropdownTrigger (valueChange)="onChange($event)">
+ * <button drgnDropdownTrigger aria-label="Apri" (valueChange)="onChange($event)">
  *   Apri
  *   <drgn-dropdown *drgnDropdownPortal>
  *     <drgn-dropdown-option value="a">Opzione A</drgn-dropdown-option>
@@ -28,23 +43,19 @@ import { DropdownOption } from './dropdown-option/dropdown-option';
  * </button>
  * ```
  *
- * The options render in an inner `listbox`, labelled by the trigger. The search row and the
- * `emptyLabel` message sit beside it, since a listbox may only own options. When no option is
- * projected — typically because a search filtered them all out — `emptyLabel` is shown and
- * announced through a polite live region.
+ * Name the trigger with `aria-label` or `aria-labelledby` (a `combobox` takes its name from the
+ * author, never from its content): the popup mirrors that name on the panel and the listbox.
+ *
+ * The options render in an inner `listbox`. The search row and the `emptyLabel` message sit beside
+ * it, since a listbox may only own options. When no option is projected — typically because a
+ * search filtered them all out — `emptyLabel` is shown and announced through a polite live region.
  */
 @Component({
   selector: 'drgn-dropdown',
+  imports: [NgpSelectList],
   template: `
     <ng-content select="drgn-dropdown-search" />
-    <div
-      class="listbox"
-      role="listbox"
-      [attr.id]="listboxId()"
-      [attr.aria-labelledby]="triggerId()"
-      [attr.aria-multiselectable]="multiple()"
-      [hidden]="empty()"
-    >
+    <div #listbox class="listbox" ngpSelectList [hidden]="empty()">
       <ng-content />
     </div>
     <div role="status" data-testid="dropdown-status">
@@ -54,10 +65,6 @@ import { DropdownOption } from './dropdown-option/dropdown-option';
     </div>
   `,
   styleUrl: './dropdown.css',
-  providers: [provideSelectDropdownState({ inherit: false })],
-  host: {
-    '[attr.role]': 'null'
-  },
   hostDirectives: [
     {
       directive: NgpSelectDropdown,
@@ -70,27 +77,26 @@ export class Dropdown {
   readonly emptyLabel = input('Nessun risultato');
 
   readonly #state = injectSelectState();
-
-  readonly #statePanel = injectSelectDropdownState();
+  protected readonly listbox = viewChild.required<ElementRef<HTMLElement>>('listbox');
   private readonly options = contentChildren(DropdownOption, { descendants: true });
 
-  protected readonly listboxId = computed(() => dropdownListboxId(this.#statePanel().id()));
-  protected readonly triggerId = computed(() => this.#state().id());
-  protected readonly multiple = computed(() => this.#state().multiple());
   protected readonly empty = computed(() => this.options().length === 0);
 
   constructor() {
     const host = toNativeElement(injectElementRef());
     // NgpSelectDropdown has to sit on the panel: it positions it, and focus moving inside it (into
-    // the search field) must not close the panel. Its listbox semantics move to the inner element
-    // instead, because the panel also holds the search row and the empty message. The role is
-    // static, so the host binding above removes it for good; aria-multiselectable is re-written by
-    // an after-render effect whenever `multiple` changes, which a host binding never sees (its own
-    // value stays null), so only an effect registered after the primitive's can keep it off.
-    // Upstream candidate: let the listbox be a descendant of the positioned element.
+    // the search field) must not close the panel. Its listbox semantics land on the inner
+    // NgpSelectList instead, because the panel also holds the search row and the empty message:
+    // with a list registered the panel renders as a non-modal `dialog` wrapping both.
+    //
+    // The naming runs after render, not as a host binding: it mirrors attributes the trigger
+    // receives through its own host bindings, which no computed can observe. Never name the popup
+    // `aria-labelledby="<trigger id>"` — a `combobox` supports name from author only, so accname
+    // resolves its reference to nothing.
     afterRenderEffect(() => {
-      this.#state().multiple();
-      host.removeAttribute('aria-multiselectable');
+      const trigger = this.#state().elementRef.nativeElement as HTMLElement;
+      mirrorName(trigger, host);
+      mirrorName(trigger, this.listbox().nativeElement);
     });
   }
 }

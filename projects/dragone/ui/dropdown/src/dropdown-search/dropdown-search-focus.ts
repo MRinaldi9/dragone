@@ -3,8 +3,6 @@ import { injectSelectState } from 'ng-primitives/select';
 
 import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
-import { dropdownListboxId } from '../dropdown-listbox-id';
-
 /**
  * Private: drives the dropdown option list from the search field.
  *
@@ -24,10 +22,7 @@ export class DropdownSearchFocus {
   readonly #state = injectSelectState();
   readonly #host = toNativeElement(injectElementRef());
 
-  protected readonly listboxId = computed(() => {
-    const panelId = this.#state().dropdown()?.id();
-    return panelId ? dropdownListboxId(panelId) : null;
-  });
+  protected readonly listboxId = computed(() => this.#state().list()?.id() ?? null);
   protected readonly activeOptionId = computed(
     () => this.#state().activeDescendantManager.id() ?? null
   );
