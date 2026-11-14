@@ -2,6 +2,12 @@ import { defineConfig } from 'oxfmt';
 
 export default defineConfig({
   arrowParens: 'avoid',
+  associations: [
+    {
+      files: ['projects/**/*.html'],
+      language: 'angular-html'
+    }
+  ],
   ignorePatterns: [
     'node_modules',
     'pnpm-lock.yaml',
