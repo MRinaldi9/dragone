@@ -72,6 +72,10 @@ _Avoid_: Scale, dimension, spacing
 
 ### Accessibility
 
+**Combobox**:
+The single element that owns the popup: it carries `role="combobox"`, `aria-expanded`, `aria-controls` and `aria-activedescendant`. In `Dropdown` the trigger is the combobox while the panel is closed; projecting a `DropdownSearch` hands the role to the search field and the trigger falls back to its native role (ADR-0010).
+_Avoid_: Input field, editable dropdown, search box (as a synonym)
+
 **A11y Escalation**:
 When a Sirio design token or component spec fails WCAG 2.2 AA, Dragone implements the spec faithfully, tracks the issue as a known limitation, and escalates to the Sirio design owners. Dragone does not patch the design. Consumers may override Component Tokens locally.
 _Avoid_: A11y workaround, accessibility fix
