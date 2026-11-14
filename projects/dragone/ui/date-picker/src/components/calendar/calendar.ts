@@ -30,7 +30,7 @@ import { CalendarPeriodSelect } from '../period-select/period-select';
     NgpDatePickerCellRender,
     CalendarPeriodSelect
   ],
-  templateUrl: './calendar.component.html',
+  templateUrl: './calendar.html',
   styleUrl: './calendar.css',
   providers: [
     provideIcons({

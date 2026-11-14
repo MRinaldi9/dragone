@@ -28,7 +28,7 @@ export const DEFAULT_YEAR_RANGE = 100;
 @Component({
   selector: 'drgn-calendar-period-select',
   imports: [NgIcon, NgpSelectDropdown, NgpSelectOption, NgpSelectPortal],
-  templateUrl: './period-select.component.html',
+  templateUrl: './period-select.html',
   styleUrl: './period-select.css',
   providers: [
     provideIcons({

@@ -23,7 +23,7 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
 @Component({
   selector: 'drgn-select',
   imports: [Dropdown, DropdownOption, DropdownPortal, NgIcon],
-  templateUrl: './select.component.html',
+  templateUrl: './select.html',
   styleUrl: './select.css',
   // Sirio spec: the panel floats 8px below the field. `provideSelectConfig` sets the default of
   // the host directive's `ngpSelectDropdownOffset` input — the placement-aware gap, so it holds

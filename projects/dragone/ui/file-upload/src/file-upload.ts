@@ -29,7 +29,7 @@ const defaultFileRemoved = (file: File): string => `File removed: ${file.name}`;
 @Component({
   selector: 'drgn-file-upload',
   imports: [Button, NgIcon, NgpFileUpload, ChipInput, AriaLabelPipe, FocusManager, FocusElement],
-  templateUrl: './file-upload.component.html',
+  templateUrl: './file-upload.html',
   styleUrl: './file-upload.css',
   providers: [provideIcons({ faSolidFolderOpen })],
   host: {
