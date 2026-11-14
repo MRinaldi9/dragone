@@ -1,11 +1,10 @@
-import { Component, input, output } from '@angular/core';
+import { Component, DestroyRef, inject, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass } from '@ng-icons/font-awesome/solid';
-import { NgpFocusTrap } from 'ng-primitives/focus-trap';
+import { injectSelectState, NgpSelectInput } from 'ng-primitives/select';
 
 import { InputGroup, InputText } from '@dragone/ui/input';
-
-import { DropdownSearchFocus } from './dropdown-search-focus';
+import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
 /**
  * Optional sticky filter row projected into `Dropdown`, which renders it above the option list. It
@@ -13,38 +12,46 @@ import { DropdownSearchFocus } from './dropdown-search-focus';
  * `DropdownOption`s is the consumer's responsibility, since it depends on their option data. When
  * the filter leaves no option, `Dropdown` shows its `emptyLabel`.
  *
- * Keyboard: the field takes focus when the panel opens, and `ArrowUp`/`ArrowDown`/`Home`/`End`/
- * `Enter` keep driving the option list from here. `Escape` closes the panel and focus returns to
- * the trigger.
+ * The field is the panel's combobox (`NgpSelectInput`): it owns the list's `aria-controls`,
+ * `aria-expanded` and `aria-activedescendant`, takes focus when the panel opens, and drives the
+ * options with `ArrowUp`/`ArrowDown`/`Enter`; `Home`/`End` stay with the caret. While it exists,
+ * `NgpSelect` removes the combobox role from the trigger. `Escape` closes the panel and returns
+ * focus to the trigger; `Tab` closes it and moves on to the next control (ADR-0010).
  */
 @Component({
   selector: 'drgn-dropdown-search',
-  imports: [InputGroup, InputText, NgIcon, DropdownSearchFocus],
+  imports: [InputGroup, InputText, NgIcon, NgpSelectInput],
   template: `
     <drgn-input-group>
       <input
+        #inputText
+        ngpSelectInput
         drgnInputText
-        drgnDropdownSearchFocus
-        type="search"
         [placeholder]="placeholder()"
-        (input)="onInput($event)"
+        (input)="queryChange.emit(inputText.host.value)"
       />
       <ng-icon slot="trailing" name="faSolidMagnifyingGlass" aria-hidden="true" />
     </drgn-input-group>
   `,
   styleUrl: './dropdown-search.css',
-  providers: [provideIcons({ faSolidMagnifyingGlass })],
-  // The trap pulls focus into the row when the panel opens and keeps Tab from escaping it. It sits
-  // here rather than on Dropdown because the field is the only tabbable element in the panel
-  // (options use tabindex="-1"), and the panel without a search must leave focus on the trigger.
-  hostDirectives: [NgpFocusTrap]
+  providers: [provideIcons({ faSolidMagnifyingGlass })]
 })
 export class DropdownSearch {
   readonly placeholder = input('Cerca');
   readonly queryChange = output<string>();
 
-  protected onInput(event: Event): void {
-    const { value } = event.target as HTMLInputElement;
-    this.queryChange.emit(value);
+  readonly #state = injectSelectState();
+
+  constructor() {
+    const host = toNativeElement(injectElementRef());
+    // The overlay closes on Escape from a document capture listener while this field holds focus,
+    // and it runs with restoreFocus disabled: without this the panel would be destroyed with focus
+    // on the body. A Tab that already moved focus elsewhere must not be pulled back.
+    inject(DestroyRef).onDestroy(() => {
+      const active = document.activeElement;
+      if (!active || active === document.body || active === host) {
+        this.#state().focus();
+      }
+    });
   }
 }

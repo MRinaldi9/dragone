@@ -13,6 +13,7 @@ import { DropdownTrigger } from './dropdown-trigger/dropdown-trigger';
   template: `
     <button
       drgnDropdownTrigger
+      data-testid="trigger"
       aria-label="Trigger"
       [multiple]="multiple()"
       (valueChange)="value.set($event)"
@@ -32,6 +33,7 @@ import { DropdownTrigger } from './dropdown-trigger/dropdown-trigger';
         }
       </drgn-dropdown>
     </button>
+    <button data-testid="after">Dopo</button>
   `
 })
 class TestHostComponent {
@@ -67,14 +69,14 @@ class TestHostComponent {
 describe(Dropdown, () => {
   it('should render the panel with the listbox role once opened', async () => {
     const { locator } = await render(TestHostComponent);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     await expect.element(page.getByRole('listbox')).toBeInTheDocument();
   });
 
   it('should float the panel and keep the listbox semantics on the option list', async () => {
     const { locator } = await render(TestHostComponent);
-    const trigger = locator.getByRole('combobox');
+    const trigger = locator.getByTestId('trigger');
     await trigger.click();
 
     // Querying by role and name proves the popup resolves the trigger's accessible name.
@@ -96,7 +98,7 @@ describe(Dropdown, () => {
 
   it('should keep aria-multiselectable on the listbox when multiple changes while open', async () => {
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
     const listbox = page.getByRole('listbox');
     await expect.element(listbox).toHaveAttribute('aria-multiselectable', 'false');
 
@@ -110,7 +112,7 @@ describe(Dropdown, () => {
   it('should show the empty message when there is no option', async () => {
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
     component.query.set('zzz');
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     await expect.element(page.getByRole('status')).toHaveTextContent('Nessun risultato');
     await expect.element(page.getByRole('listbox')).not.toBeInTheDocument();
@@ -118,7 +120,7 @@ describe(Dropdown, () => {
 
   it('should render each projected option with the option role', async () => {
     const { locator } = await render(TestHostComponent);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     await expect.element(page.getByRole('option', { name: 'Opzione A' })).toBeInTheDocument();
     await expect.element(page.getByRole('option', { name: 'Opzione B' })).toBeInTheDocument();
@@ -128,7 +130,7 @@ describe(Dropdown, () => {
   it('should cap the option list height and scroll the overflow', async () => {
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
     component.manyOptions.set(true);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     const listbox = page.getByRole('listbox');
     expect(listbox.element().clientHeight).toBeLessThanOrEqual(240);
@@ -139,7 +141,7 @@ describe(Dropdown, () => {
     expect.hasAssertions();
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
     component.manyOptions.set(true);
-    const trigger = locator.getByRole('combobox');
+    const trigger = locator.getByTestId('trigger');
     await trigger.click();
 
     // The last option sits well below the fold until End activates it.
@@ -157,7 +159,7 @@ describe(Dropdown, () => {
 
   it('should select an option on click', async () => {
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
-    const trigger = locator.getByRole('combobox');
+    const trigger = locator.getByTestId('trigger');
     await trigger.click();
 
     await page.getByRole('option', { name: 'Opzione A' }).click();
@@ -167,7 +169,7 @@ describe(Dropdown, () => {
 
   it('should surface the selected value to the trigger', async () => {
     const { locator } = await render(TestHostComponent);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     await page.getByRole('option', { name: 'Opzione B' }).click();
 
@@ -176,7 +178,7 @@ describe(Dropdown, () => {
 
   it('should mark the selected option with aria-selected and the check icon', async () => {
     const { locator } = await render(TestHostComponent);
-    const trigger = locator.getByRole('combobox');
+    const trigger = locator.getByTestId('trigger');
     await trigger.click();
     await page.getByRole('option', { name: 'Opzione A' }).click();
 
@@ -190,19 +192,21 @@ describe(Dropdown, () => {
 
   it('should not select a disabled option on click', async () => {
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     await page.getByRole('option', { name: 'Opzione C' }).click();
 
     expect(component.value()).toBeUndefined();
   });
 
-  it('should keep focus on the trigger when there is no search field', async () => {
+  it('should keep focus on the trigger and the combobox role when there is no search field', async () => {
     const { locator } = await render(TestHostComponent);
-    const trigger = locator.getByRole('combobox');
+    const trigger = locator.getByTestId('trigger');
     await trigger.click();
 
     expect(document.activeElement).toBe(trigger.element());
+    await expect.element(trigger).toHaveAttribute('role', 'combobox');
+    await expect.element(trigger).toHaveAttribute('aria-expanded', 'true');
   });
 
   describe('with a search field', () => {
@@ -213,7 +217,7 @@ describe(Dropdown, () => {
     const openWithSearch = async () => {
       const rendered = await render(TestHostComponent);
       rendered.componentClassInstance.withSearch.set(true);
-      const trigger = rendered.locator.getByRole('combobox');
+      const trigger = rendered.locator.getByTestId('trigger');
       await trigger.click();
 
       const search = page.getByPlaceholder('Cerca');
@@ -239,14 +243,26 @@ describe(Dropdown, () => {
       expect(component.value()).toBe('b');
     });
 
-    it('should support ArrowUp, End and Home from the search field', async () => {
+    it('should support ArrowUp and ArrowDown from the search field', async () => {
       const { componentClassInstance: component } = await openWithSearch();
 
-      // Walk the list with every navigation key, landing back on the first option.
+      // Walk the list with the navigation keys, landing back on the first option.
       await userEvent.keyboard('{ArrowDown}');
       await userEvent.keyboard('{ArrowUp}');
+      await userEvent.keyboard('{Enter}');
+
+      expect(component.value()).toBe('a');
+    });
+
+    it('should leave Home and End to the caret, not to the option list', async () => {
+      const { componentClassInstance: component, search } = await openWithSearch();
+
+      // The search is a text field now: Home/End move the caret, so the active option stays first.
+      await search.fill('op');
       await userEvent.keyboard('{End}');
+      expect(search.element().selectionStart).toBe(2);
       await userEvent.keyboard('{Home}');
+      expect(search.element().selectionStart).toBe(0);
       await userEvent.keyboard('{Enter}');
 
       expect(component.value()).toBe('a');
@@ -262,6 +278,7 @@ describe(Dropdown, () => {
     });
 
     it('should still select an option by click while the search holds focus', async () => {
+      expect.hasAssertions();
       const { componentClassInstance: component } = await openWithSearch();
 
       await page.getByRole('option', { name: 'Opzione B' }).click();
@@ -269,19 +286,68 @@ describe(Dropdown, () => {
       expect(component.value()).toBe('b');
     });
 
-    it('should not let Tab move focus out of the panel', async () => {
-      const { search } = await openWithSearch();
+    it('should close on Tab and move focus to the next control', async () => {
+      expect.hasAssertions();
+      const { locator, trigger, search } = await openWithSearch();
+      const after = locator.getByTestId('after');
+
+      // The trigger stays in the tab order while the panel is open, so Tab leaves the panel from
+      // the trigger's place instead of restarting from the top of the document.
+      expect(trigger.element().tabIndex).toBe(0);
 
       await userEvent.tab();
 
-      expect(document.activeElement).toBe(search.element());
+      await expect.element(search).not.toBeInTheDocument();
+      await vi.waitFor(() => expect(document.activeElement).toBe(after.element()));
+    });
+
+    it('should hand the combobox to the search field and back to the trigger', async () => {
+      expect.hasAssertions();
+      const { trigger, search } = await openWithSearch();
+      const listbox = page.getByRole('listbox');
+      await expect.element(listbox).toBeInTheDocument();
+
+      await expect.element(search).toHaveAttribute('role', 'combobox');
+      await expect.element(search).toHaveAttribute('aria-expanded', 'true');
+      await expect.element(search).toHaveAttribute('aria-autocomplete', 'list');
+      await expect.element(search).toHaveAttribute('aria-controls', listbox.element().id);
+      // The trigger falls back to its native role while the search field owns the combobox.
+      expect(trigger.element().hasAttribute('role')).toBeFalsy();
+      expect(trigger.element().hasAttribute('aria-expanded')).toBeFalsy();
+      expect(trigger.element().hasAttribute('aria-activedescendant')).toBeFalsy();
+
+      await userEvent.keyboard('{Escape}');
+
+      await expect.element(search).not.toBeInTheDocument();
+      await vi.waitFor(() => expect(trigger.element().getAttribute('role')).toBe('combobox'));
+    });
+
+    it('should point aria-activedescendant at the active option', async () => {
+      expect.hasAssertions();
+      const { search } = await openWithSearch();
+      const optionA = page.getByRole('option', { name: 'Opzione A' });
+      const optionB = page.getByRole('option', { name: 'Opzione B' });
+
+      await vi.waitFor(() =>
+        expect(search.element().getAttribute('aria-activedescendant')).toBe(optionA.element().id)
+      );
+
+      await userEvent.keyboard('{ArrowDown}');
+
+      await vi.waitFor(() =>
+        expect(search.element().getAttribute('aria-activedescendant')).toBe(optionB.element().id)
+      );
     });
 
     it('should keep the search field out of the listbox it controls', async () => {
+      expect.hasAssertions();
       const { search } = await openWithSearch();
       const listbox = page.getByRole('listbox');
+      await expect.element(listbox).toBeInTheDocument();
 
-      await expect.element(search).toHaveAttribute('aria-controls', listbox.element().id);
+      await vi.waitFor(() => {
+        expect(search.element().getAttribute('aria-controls')).toBe(listbox.element().id);
+      });
       expect(listbox.element().contains(search.element())).toBeFalsy();
     });
 
@@ -314,6 +380,7 @@ describe(Dropdown, () => {
     });
 
     it('should close on Escape and return focus to the trigger', async () => {
+      expect.hasAssertions();
       const { trigger, search } = await openWithSearch();
 
       await userEvent.keyboard('{Escape}');
@@ -326,7 +393,7 @@ describe(Dropdown, () => {
   it('should emit queryChange when typing in the search field', async () => {
     const { locator, componentClassInstance: component } = await render(TestHostComponent);
     component.withSearch.set(true);
-    await locator.getByRole('combobox').click();
+    await locator.getByTestId('trigger').click();
 
     await page.getByPlaceholder('Cerca').fill('Opz');
 

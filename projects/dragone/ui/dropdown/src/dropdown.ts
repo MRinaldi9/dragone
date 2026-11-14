@@ -46,6 +46,10 @@ function mirrorName(trigger: HTMLElement, popup: HTMLElement): void {
  * Name the trigger with `aria-label` or `aria-labelledby` (a `combobox` takes its name from the
  * author, never from its content): the popup mirrors that name on the panel and the listbox.
  *
+ * The panel is a non-modal `dialog` wrapping the search row and the listbox. Without a search the
+ * trigger is the combobox; with a `DropdownSearch`, the search field owns the combobox and the
+ * trigger falls back to its native role while the panel is open (ADR-0010).
+ *
  * The options render in an inner `listbox`. The search row and the `emptyLabel` message sit beside
  * it, since a listbox may only own options. When no option is projected — typically because a
  * search filtered them all out — `emptyLabel` is shown and announced through a polite live region.
