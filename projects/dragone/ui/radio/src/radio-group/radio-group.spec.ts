@@ -54,6 +54,7 @@ describe(RadioGroup, () => {
     const { locator } = await render(RadioGroupTest, { inputs: { disabled } });
     disabled.set(true);
     const radioItem = locator.getByRole('radio').first();
+    await expect.element(radioItem).toHaveAttribute('aria-disabled', 'true');
 
     await userEvent.tab();
     await expect.element(radioItem).toHaveAttribute('aria-checked', 'false');
@@ -64,6 +65,7 @@ describe(RadioGroup, () => {
     readonly.set(true);
 
     const radioItem = locator.getByRole('radio').first();
+    await expect.element(radioItem).toHaveAttribute('readonly');
     await userEvent.tab();
     await expect.element(radioItem).toHaveAttribute('aria-checked', 'false');
   });
