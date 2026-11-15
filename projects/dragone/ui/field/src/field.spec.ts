@@ -75,7 +75,7 @@ class CheckboxHost {
   });
 }
 
-/** Focus the control, then move focus away so the field is marked as touched. */
+// Focus the control, then move focus away so the field is marked as touched.
 async function touch(control: Locator) {
   await control.click();
   await userEvent.keyboard('{Tab}');

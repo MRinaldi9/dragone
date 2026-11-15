@@ -3,32 +3,16 @@ import { Platform } from '@angular/cdk/platform';
 import { inject, Injectable } from '@angular/core';
 import type { NgpDateAdapter, NgpDateUnits, NgpDuration } from 'ng-primitives/date-time';
 /**
- * Date adapter backed by the ECMAScript Temporal API (`Temporal.PlainDateTime`).
+ * Immutable date adapter backed by the native ECMAScript `Temporal.PlainDateTime` API (requires
+ * Chrome/Edge 133+, Firefox 137+, or Safari 18.4+):
  *
- * All operations are **immutable** — every method returns a new `Temporal.PlainDateTime` instance
- * without mutating the original.
- *
- * @usageNotes
- *
- *   ### Runtime requirements
- *
- *   This adapter requires a JavaScript runtime that supports the [Temporal
- *   proposal](https://tc39.es/proposal-temporal/docs/) natively:
- *
- *   - Chrome 133+ / Edge 133+
- *   - Firefox 137+
- *   - Safari 18.4+ No polyfill is bundled. If your target browsers do not support Temporal, use
- *     `NgpNativeDateAdapter` (the default).
- *
- *   ### Wiring in the application
- *
- *   ```typescript
- *   import { provideDateAdapter } from 'ng-primitives/date-time';
- *   import { TemporalAdapter } from '@dragone/ui/date-picker';
- *   export const appConfig: ApplicationConfig = {
- *     providers: [provideDateAdapter(TemporalAdapter)]
- *   };
- *   ```
+ * ```typescript
+ * import { provideDateAdapter } from 'ng-primitives/date-time';
+ * import { TemporalAdapter } from '@dragone/ui/temporal-adapter';
+ * export const appConfig: ApplicationConfig = {
+ *   providers: [provideDateAdapter(TemporalAdapter)]
+ * };
+ * ```
  */
 @Injectable({ providedIn: 'root' })
 export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
@@ -68,13 +52,10 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
   }
 
   /**
-   * Return a new `Temporal.PlainDateTime` with the specified fields replaced. The original is never
-   * mutated.
-   *
-   * @note `NgpDateUnits.month` is **zero-based** (0-11) here, matching `getMonth` so
-   * `set(date, { month: getMonth(other) })` round-trips. `Temporal.PlainDateTime.with` expects a
-   * one-based month (1-12), hence the `+ 1`.
+   * Return a new `Temporal.PlainDateTime` with the specified fields replaced (`values.month` is
+   * zero-based 0–11 to match `getMonth`).
    */
+  // `NgpDateUnits.month` is 0-indexed while `Temporal.PlainDateTime.with` expects 1–12.
   set(date: Temporal.PlainDateTime, values: NgpDateUnits): Temporal.PlainDateTime {
     return date.with({
       ...(values.year !== undefined && { year: values.year }),
@@ -89,10 +70,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
     });
   }
 
-  /**
-   * Return a new `Temporal.PlainDateTime` with the given duration added. The field names of
-   * `NgpDuration` match `DurationLikeObject` directly, so no mapping is required.
-   */
+  /** Return a new `Temporal.PlainDateTime` with the given duration added. */
   add(date: Temporal.PlainDateTime, duration: NgpDuration): Temporal.PlainDateTime {
     return date.add(duration);
   }
@@ -102,13 +80,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
     return date.subtract(duration);
   }
 
-  /**
-   * Compare two dates. Returns:
-   *
-   * - `-1` if `a < b`
-   * - `0` if `a === b`
-   * - `1` if `a > b`
-   */
+  /** Compare two dates (`-1` if `a < b`, `0` if `a === b`, `1` if `a > b`). */
   compare(a: Temporal.PlainDateTime, b: Temporal.PlainDateTime): number {
     return Temporal.PlainDateTime.compare(a, b);
   }
@@ -148,12 +120,8 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
     return date.year;
   }
 
-  /**
-   * Get the month as a zero-based number (0-11, January = 0), matching the `NgpDateAdapter`
-   * contract so `set(date, { month: getMonth(other) })` round-trips.
-   *
-   * @note `Temporal.PlainDateTime.month` is 1-indexed, hence the `- 1`.
-   */
+  /** Get the month as a zero-based number (0–11, January = 0). */
+  // `Temporal.PlainDateTime.month` is 1-indexed while `NgpDateAdapter.getMonth` is 0-indexed.
   getMonth(date: Temporal.PlainDateTime): number {
     return date.month - 1;
   }
@@ -163,13 +131,7 @@ export class TemporalAdapter implements NgpDateAdapter<Temporal.PlainDateTime> {
     return date.day;
   }
 
-  /**
-   * Get the day of the week.
-   *
-   * @returns `1` for Monday … `7` for Sunday.
-   * @note `Temporal.PlainDateTime.dayOfWeek` uses the same ISO convention
-   * (1=Monday … 7=Sunday), so no mapping is needed.
-   */
+  /** Get the ISO day of the week (`1` for Monday … `7` for Sunday). */
   getDay(date: Temporal.PlainDateTime): number {
     return date.dayOfWeek;
   }

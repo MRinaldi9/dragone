@@ -11,13 +11,9 @@ function pageRange(start: number, end: number): number[] {
   return Array.from({ length: Math.max(0, end - start + 1) }, (_, index) => start + index);
 }
 
-/**
- * The cells for one window: the first page behind a gap, the window itself, then a gap and the last
- * page. The leading gap carries its ellipsis even when the window opens on page 2 and so hides
- * nothing — it is the cue that the earlier pages are collapsed, and keeping it is what holds the
- * strip's shape. The trailing one appears only when it hides a page, so the pages next to the end
- * are reachable instead of sitting behind an ellipsis that hides nothing.
- */
+// Builds the cells for a single candidate window (`[1, …, start..end, …, pageCount]`).
+// The leading ellipsis is kept whenever `start > 1` to hold the strip's fixed width; the trailing
+// ellipsis appears only when it actually hides a page (`end < pageCount - 1`).
 function windowCells(start: number, end: number, pageCount: number): PageWindowItem[] {
   const cells: PageWindowItem[] = [];
 
@@ -35,7 +31,6 @@ function windowCells(start: number, end: number, pageCount: number): PageWindowI
   return cells;
 }
 
-/** The start of a `length`-page window centred on the current page, clamped to the strip. */
 function centredStart(current: number, length: number, pageCount: number): number {
   const offset = Math.floor((length - 1) / 2);
 
@@ -43,22 +38,11 @@ function centredStart(current: number, length: number, pageCount: number): numbe
 }
 
 /**
- * Builds the page strip: the first page, the last page and, between them, a window of page numbers
- * with the current page in the middle, an ellipsis on each side where a run is skipped.
- *
- * The strip renders `siblingCount * 2 + 3` cells whatever the current page, so its width never
- * changes as the user navigates. The current page sits in the middle of the numbers rather than at
- * their edge: that is what leaves the page before it on screen, so stepping back is a click on a
- * page number and not a trip to the previous button. Among the windows that fill the budget the
- * shortest one wins, which is why the leading ellipsis starts at page 3 — from there the page
- * before the current one costs a cell the strip does not have to spare, and page 2 would otherwise
- * give up its trailing ellipsis to reach the first page. Where the window cannot stay centred, at
- * the ends, it grows towards the middle instead, spending on one more page number the cell an
- * ellipsis would have used. `siblingCount` below 1 is treated as 1. Every cell carries a stable
- * `key` so the strip can `@for`-track by identity: when the window slides, the page buttons that
- * survive are moved rather than destroyed, which keeps keyboard focus on the button the user just
- * activated.
+ * Builds the fixed-width (`siblingCount * 2 + 3` cells) sequence of page numbers and ellipses
+ * around `currentPage` for a strip of `pageCount` pages.
  */
+// Keeps the current page away from the window edges when possible so stepping back is a direct
+// page click, and assigns stable `key`s so `@for` preserves DOM focus across window shifts.
 export function buildPageWindow(
   currentPage: number,
   pageCount: number,

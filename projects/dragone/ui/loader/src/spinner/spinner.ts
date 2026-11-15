@@ -29,15 +29,15 @@ export function coerceSpinnerLabel(value: string | undefined): string {
   }
 })
 export class Spinner {
-  /** The size of the spinner. Medium matches the 64px Penpot component. */
+  /** The size of the spinner. */
   readonly size = input<SpinnerSize>('medium');
   /**
-   * Accessible name announced when loading starts. role="status" only takes its name from the
-   * author (aria-label), never from contents — hence the binding instead of a text node. Empty or
-   * blank values fall back to the default via {@link coerceSpinnerLabel}.
+   * Accessible name announced when loading starts; blank values fall back to
+   * {@link SPINNER_DEFAULT_LABEL}.
    *
    * @default 'Caricamento in corso'
    */
+  // role="status" takes its accessible name from the author (aria-label), never from contents.
   readonly label = input(SPINNER_DEFAULT_LABEL, {
     transform: coerceSpinnerLabel
   });

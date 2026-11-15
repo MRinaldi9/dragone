@@ -55,10 +55,8 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
 })
 export class Select<T> {
   readonly options = input<Option<T>[]>();
-  /**
-   * The selected value. Declared as an input so that `FormField` recognizes `Select` as a custom
-   * form control (paired with the `valueChange` output).
-   */
+  /** The selected value (or array of values when `multiple` is enabled). */
+  // Declared as an input paired with `valueChange` to satisfy the Signal Forms `FormValueControl` contract.
   readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
   /** Message shown, and announced, when the panel has no option to offer. */
@@ -97,18 +95,10 @@ export class Select<T> {
     return !isNil(value);
   });
 
-  /**
-   * Value shown inside the trigger when at least one option is selected. It applies `optionLabel`
-   * mapping when provided.
-   */
   protected readonly mappedValue = computed(() =>
     this.mapByKey(this.internalValue(), this.optionLabel())
   );
 
-  /**
-   * View model used by the dropdown template. It precomputes the display label of each option; the
-   * selected look comes from the `DropdownOption` state.
-   */
   protected readonly optionItems = computed(() =>
     (this.options() ?? []).map(option => ({
       value: option,
@@ -116,10 +106,6 @@ export class Select<T> {
     }))
   );
 
-  /**
-   * Maps a value (or a list of values) to its display/emitted form. When `key` is set, extracts
-   * that property from object values; otherwise returns the value as-is.
-   */
   private mapByKey(value: SelectValue<T>, key?: PropertyKey): unknown {
     if (Array.isArray(value)) {
       return value.map(option => this.mapByKey(option, key));

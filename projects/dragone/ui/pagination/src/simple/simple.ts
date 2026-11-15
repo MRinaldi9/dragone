@@ -13,18 +13,8 @@ import {
 import { buildPageWindow } from '../utils/page-window';
 
 /**
- * A page strip: previous/next buttons around the numbered pages, with an ellipsis where a run of
- * pages is skipped. Behavior — page state, boundary disabling, keyboard handling, `aria-current` —
- * comes from the ng-primitives Pagination Primitive; this Component adds the Sirio look. The full
- * bar, `PaginationFull`, composes it with `showPages` off as its cursor tile.
- *
- * `page` is a controlled input: bind it two-way (`[(page)]`) so the strip can navigate — a one-way
- * `[page]` binding pins the page, and the strip would emit `pageChange` without moving. `pageCount`
- * and `disabled` are plain inputs, remapped from the Primitive. The host is the `navigation`
- * landmark.
- *
- * The class is named `Simple` after its file; `public-api.ts` exports it as `PaginationSimple`, the
- * name consumers import.
+ * Page strip (`PaginationSimple`): renders previous/next buttons around numbered pages and
+ * ellipses. Bind `[(page)]` two-way to navigate across `pageCount` pages.
  */
 @Component({
   selector: 'drgn-pagination-simple',
@@ -94,14 +84,8 @@ import { buildPageWindow } from '../utils/page-window';
 })
 export class Simple {
   /**
-   * Sizes the strip: it always renders `siblingCount * 2 + 3` cells — the first page, the last page
-   * and, between them, a window of page numbers centred on the current page, with a leading
-   * ellipsis from the third page on. A constant cell count is what keeps the strip's width from
-   * jumping as the user navigates, and centring the window is what leaves the page before the
-   * current one on screen, so stepping back is a click on a page number rather than a trip to the
-   * previous button. Near the ends the window cannot stay centred and spends the spare cell on one
-   * more page number. `siblingCount="1"` is the narrowest budget and shows a single page number
-   * mid-strip, where the current page has no neighbour to click. Values below 1 are treated as 1.
+   * Number of sibling pages around the current page (`siblingCount * 2 + 3` total strip cells;
+   * values below 1 are clamped to 1).
    *
    * @default 2
    */

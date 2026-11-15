@@ -9,9 +9,8 @@ import { booleanAttribute, Directive, input } from '@angular/core';
 })
 export class Busy {
   /**
-   * Whether the host region is blocked (e.g. while a loader overlay covers it): sets `inert` and
-   * `aria-busy` together so keyboard, pointer, and screen-reader users consistently cannot reach
-   * the region. A bare `drgnBusy` attribute counts as `true`.
+   * Whether the host region is blocked (`inert` + `aria-busy`). A bare `drgnBusy` attribute counts
+   * as `true`.
    *
    * @default false
    */

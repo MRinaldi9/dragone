@@ -10,7 +10,7 @@ import { provideDragoneDatePickerConfig } from './providers/date-picker-config';
 
 const isWeekend = (date: Temporal.PlainDateTime) => date.dayOfWeek === 6 || date.dayOfWeek === 7;
 
-/** Day-of-month of the nearest date to `date` that is not disabled. */
+// Day-of-month of the nearest date to `date` that is not disabled.
 function nearestEnabledDay(
   date: Temporal.PlainDateTime,
   isDisabled: (date: Temporal.PlainDateTime) => boolean

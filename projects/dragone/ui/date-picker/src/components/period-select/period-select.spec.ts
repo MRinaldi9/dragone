@@ -11,13 +11,6 @@ import {
 import type { IETFLanguageTag } from '../../utils/guards';
 import { CalendarPeriodSelect, DEFAULT_YEAR_RANGE, type CalendarPeriodUnit } from './period-select';
 
-/**
- * Test Host: provides the date picker state and the Dragone state consumed by
- * `CalendarPeriodSelect`, and instantiates both primitive factories so the shared state signals are
- * populated. Exposes the state so tests can drive `focusedDate` through its setter, the `min`/`max`
- * bounds through the signals passed to the factory (the state mirrors them as read-only `Signal`s),
- * and the `unit` from the parent context.
- */
 @Component({
   imports: [CalendarPeriodSelect],
   template: `
@@ -34,7 +27,6 @@ import { CalendarPeriodSelect, DEFAULT_YEAR_RANGE, type CalendarPeriodUnit } fro
   ]
 })
 class TestHost {
-  /** Bounds fed to the primitive factory; the state exposes read-only `Signal` mirrors of them. */
   readonly min = signal<Date | undefined>(undefined);
   readonly max = signal<Date | undefined>(undefined);
   // `min`/`max` must be initialized first: the factory captures these signals by reference.
@@ -53,12 +45,10 @@ class TestHost {
   }
 }
 
-/** `focusedDate` is readonly on the state; tests move focus through the setter. */
 function focus(host: TestHost, date: Date): void {
   host.state.setFocusedDate(date, 'program', 'forward');
 }
 
-/** The select's combobox — the only one in the page (stale hosts are torn down between tests). */
 function combobox(): HTMLElement {
   const element = document.querySelector<HTMLElement>('[role="combobox"]');
   if (!element) {
@@ -67,14 +57,8 @@ function combobox(): HTMLElement {
   return element;
 }
 
-/**
- * The dropdown panel the select currently has open.
- *
- * Dropdowns portal to `document.body`, and a fixture torn down while its dropdown is still closing
- * leaves the previous test's panel behind for a few frames — sometimes re-appended after the
- * current one. The panel is therefore always resolved through the open combobox's `aria-controls`
- * (the id ng-primitives binds on the dropdown), never by DOM order.
- */
+// Resolve the open dropdown panel via the combobox's `aria-controls` so stale closing panels
+// from previous tests are ignored.
 function openPanel(): HTMLElement {
   for (const trigger of document.querySelectorAll<HTMLElement>('[role="combobox"]')) {
     const panelId = trigger.getAttribute('aria-controls');
@@ -86,17 +70,14 @@ function openPanel(): HTMLElement {
   throw new Error('The dropdown panel is not open.');
 }
 
-/** The option elements rendered in the open panel (see {@link openPanel}). */
 function panelOptions(): HTMLElement[] {
   return [...openPanel().querySelectorAll<HTMLElement>('[ngpSelectOption]')];
 }
 
-/** Options rendered in the open dropdown, in display order. */
 function renderedOptions(): string[] {
   return panelOptions().map(option => option.textContent?.trim() ?? '');
 }
 
-/** Wait until the open panel renders an option labelled `name`, and return it. */
 async function waitOption(name: string | RegExp): Promise<HTMLElement> {
   return await vi.waitFor(() => {
     const option = panelOptions().find(element => {
@@ -110,11 +91,7 @@ async function waitOption(name: string | RegExp): Promise<HTMLElement> {
   });
 }
 
-/**
- * Click the option labelled `name` and wait for the dropdown to finish closing. A click on the
- * combobox before `aria-expanded` flips back to `false` toggles the still-open select closed
- * instead of reopening it.
- */
+// Click the option labelled `name` and wait for `aria-expanded="false"` before returning.
 async function selectOption(name: string | RegExp): Promise<void> {
   await userEvent.click(await waitOption(name));
   await vi.waitFor(() => {

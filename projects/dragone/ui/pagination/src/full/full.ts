@@ -5,21 +5,9 @@ import { Select } from '@dragone/ui/select';
 import { Simple } from '../simple/simple';
 
 /**
- * The full pagination bar: an optional "items per page" select with its range summary, an optional
- * page jumper with the page count, and the previous/next strip on a white tile at the right edge.
- * Each piece is opt-in through its boolean input, so the bar composes down to range + nav (the
- * design's mobile form) or to the nav alone.
- *
- * `totalItems` and `pageSize` are the source of truth: `pageCount`, the range and the page jumper
- * options all derive from them, so consumers never have to keep the page count in sync by hand. The
- * bar itself is not a landmark; the strip inside it is.
- *
- * The bar carries no numbered pages: the design keeps the page numbers for the `PaginationSimple`
- * strip used on its own, and gives the bar a previous/next cursor tile. `siblingCount` and the
- * page-number label therefore live on `PaginationSimple`, not here.
- *
- * The class is named `Full` after its file; `public-api.ts` exports it as `PaginationFull`, the
- * name consumers import.
+ * Full pagination bar (`PaginationFull`): combines an optional page-size select, item range
+ * summary, page jumper, and previous/next navigation strip derived from `totalItems` and
+ * `pageSize`.
  */
 @Component({
   selector: 'drgn-pagination-full',
@@ -31,14 +19,13 @@ export class Full {
   /** The total number of items spread across all pages. */
   readonly totalItems = input.required<number>();
   /**
-   * The current page, 1-based. Bind it two-way (`[(page)]`): a one-way binding pins the page, so
-   * the bar would emit `pageChange` without moving.
+   * The current page (1-based). Bind two-way with `[(page)]`.
    *
    * @default 1
    */
   readonly page = model(1);
   /**
-   * How many items a page holds. Bind it two-way (`[(pageSize)]`) for the same reason as `page`.
+   * Number of items per page. Bind two-way with `[(pageSize)]`.
    *
    * @default 10
    */

@@ -8,13 +8,8 @@ import { Busy } from './busy/busy';
 import { LoaderOverlay } from './overlay/loader-overlay';
 import { Spinner } from './spinner/spinner';
 
-/**
- * Completion pattern demo: the trigger persists, so focus returns to it and completion is announced
- * separately (location via focus, state change via the live region — never the same text twice).
- * Disabling the trigger while loading drops focus on `<body>` in Chromium, hence the explicit
- * restore. When the trigger is gone instead, focus the loaded content heading (`tabindex="-1"`) and
- * skip the announcement — the focused heading announces itself.
- */
+// Completion pattern demo: restores focus to the trigger (disabling it while loading drops focus
+// on <body> in Chromium) and announces completion via the live region.
 @Component({
   selector: 'drgn-loader-complete-demo',
   imports: [LoaderOverlay, Busy],

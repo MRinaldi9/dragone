@@ -7,22 +7,10 @@ import { drgnCardFactory, provideDrgnCardState, type CardType } from './card-sta
 export type { CardType } from './card-state';
 
 /**
- * Card is a pure surface container: it provides the visual shell (background, radius, shadow,
- * theme) and the layout type, while the content is composed by the consumer via `ng-content`.
- *
- * Two composition layers, both optional beyond `Card` + `CardBody`:
- *
- * - **Skeleton (layout):** `CardBody` (padded content column), `CardHeader` (top row with
- *   `slot="leading"` / `slot="trailing"`), `CardFooter` (actions row), `CardImage` (responsive
- *   illustration) and `CardLink` (stretched link). These carry the Sirio spacing and positioning;
- *   compose them when you need that behavior, skip them when you don't.
- * - **Typography helpers (convenience):** `CardTitle`, `CardSubtitle`, `CardText`, `CardSignature`
- *   and `CardTag` are token-safe shortcuts for the Sirio text styles. They are never required:
- *   plain native elements (`h3`, `p`, `span`, `time`) projected into the skeleton are a first-class
- *   alternative when the consumer wants full control of the UI.
- *
- * Children Components read `type` from the Card state and `layout` from the shared `Layout` state —
- * never pass them down manually.
+ * Surface container providing the card shell (`type`, `theme`, `layout`). Compose with `CardBody`,
+ * optional skeleton parts (`CardHeader`, `CardFooter`, `CardImage`, `CardLink`), and typography
+ * helpers (`CardTitle`, `CardSubtitle`, `CardText`, `CardSignature`, `CardTag`) or native
+ * elements.
  */
 @Component({
   selector: 'drgn-card',

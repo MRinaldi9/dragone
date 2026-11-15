@@ -82,11 +82,6 @@ export class DialogShell {
     });
   }
 
-  /**
-   * Declarative, template-like bindings for the body component: signal inputs stay reactive through
-   * the framework's binding machinery (no manual `setInput`), plain values are bound through a
-   * constant getter, and output listeners are the programmatic analog of template event bindings.
-   */
   private createBindings(): Binding[] {
     const { inputs, outputs } = this.context;
     const bindings: Binding[] = [];

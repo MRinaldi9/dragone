@@ -2,11 +2,8 @@ import type { Signal } from '@angular/core';
 import { createPrimitive } from 'ng-primitives/state';
 
 /**
- * The layout type of a Card, mirroring the Sirio "tipologia" variants.
- *
- * - `landscape`: image on the left, content on the right.
- * - `portrait`: image on top, content below.
- * - `process`: no image; header shows an icon instead of a category tag.
+ * Layout type of a `Card`: `landscape` (side image), `portrait` (top image), or `process` (icon
+ * header, no image).
  */
 export type CardType = 'landscape' | 'portrait' | 'process';
 

@@ -54,16 +54,9 @@ export class CalendarPeriodSelect<T> {
   readonly #selectState = injectSelectState<number>();
   readonly #datePickerDragoneState = injectDatePickerDragoneState<T>();
 
-  /**
-   * The current year — the stable anchor for the default (unbounded) year range.
-   *
-   * Captured once at component creation so the range never follows the focused date: the popover
-   * recreates this component on every open, so anchoring to the focused value would make the
-   * selected year the new `max` (and re-derive `min` from it) on each reopen.
-   */
+  // Captured once at creation so the unbounded year range stays anchored to the current year across reopens.
   readonly #currentYear = this.#adapter.getYear(this.#adapter.now());
 
-  /** The current value of the selected unit on the focused date. */
   protected readonly focusedValue = computed(() => {
     const focused = this.#datePickerDragoneState().focusedDate() ?? this.#adapter.now();
     return this.unit() === 'year'
@@ -87,7 +80,6 @@ export class CalendarPeriodSelect<T> {
     return Array.from({ length: Math.max(0, to - from + 1) }, (_, index) => to - index);
   });
 
-  /** The selectable options for the current unit, each with a value and a localized label. */
   protected readonly options = computed(() => {
     if (this.unit() === 'month') {
       // Zero-based (0-11) values, matching `NgpDateAdapter.getMonth`/`set` so the value can be
@@ -99,7 +91,6 @@ export class CalendarPeriodSelect<T> {
     return this.allYears().map(year => ({ value: year, label: String(year) }));
   });
 
-  /** The label shown on the trigger for the current focused value. */
   protected readonly currentLabel = computed(() => {
     const value = this.focusedValue();
     return this.options().find(option => option.value === value)?.label ?? String(value);

@@ -34,7 +34,6 @@ class TestHost {
 })
 class TwoWayHost {
   readonly pageCount = input(10);
-  /** A plain property, like a Storybook arg: `[(page)]` works without a signal. */
   page = 1;
 }
 
@@ -44,7 +43,6 @@ class TwoWayHost {
 })
 class SignalHost {
   readonly pageCount = input(10);
-  /** A signal, so a test can drive the page from outside and have the template react. */
   readonly page = signal(1);
 }
 

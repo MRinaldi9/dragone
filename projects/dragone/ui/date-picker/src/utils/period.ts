@@ -1,13 +1,10 @@
 import type { NgpDateAdapter } from 'ng-primitives/date-time';
 
 /**
- * Set the year of a date, clamping the day-of-month to the target February when the source date
- * falls on February 29 and the target year is not a leap year.
- *
- * The intermediate steps never materialize an invalid date (they go through `day: 1`), so this is
- * safe with both the native `Date` adapter (which would roll over to March 1) and the Temporal
- * adapter (which would throw a `RangeError`).
+ * Sets the year of `date`, clamping February 29 to February 28 when the target year is not a leap
+ * year.
  */
+// Steps through `day: 1` first so native `Date` never rolls over to March 1 and `Temporal` never throws.
 export function setYearClamped<T>(adapter: NgpDateAdapter<T>, date: T, year: number): T {
   const firstOfTargetMonth = adapter.set(date, { year, day: 1 });
   const daysInTargetMonth = adapter.getDate(adapter.endOfMonth(firstOfTargetMonth));
@@ -16,11 +13,8 @@ export function setYearClamped<T>(adapter: NgpDateAdapter<T>, date: T, year: num
 }
 
 /**
- * Set the month of a date, clamping the day-of-month to the target month's length when the source
- * day falls beyond it (e.g. January 31 → February 28/29).
- *
- * Same safety property as `setYearClamped`: the intermediate step goes through `day: 1`, so no
- * invalid date is ever materialized.
+ * Sets the month of `date`, clamping the day-of-month to the target month's length (e.g. Jan 31 →
+ * Feb 28/29).
  */
 export function setMonthClamped<T>(adapter: NgpDateAdapter<T>, date: T, month: number): T {
   const firstOfTargetMonth = adapter.set(date, { month, day: 1 });
@@ -29,7 +23,6 @@ export function setMonthClamped<T>(adapter: NgpDateAdapter<T>, date: T, month: n
   return adapter.set(date, { month, day });
 }
 
-/** Whether `date` falls within the `min`/`max` bounds (unbounded when absent). */
 function inBounds<T>(adapter: NgpDateAdapter<T>, date: T, bounds?: { min?: T; max?: T }): boolean {
   return (
     (!bounds?.min || !adapter.isBefore(date, bounds.min)) &&
@@ -38,12 +31,8 @@ function inBounds<T>(adapter: NgpDateAdapter<T>, date: T, bounds?: { min?: T; ma
 }
 
 /**
- * Find the nearest date to `date` that is not disabled, searching outward in both directions so the
- * result is the closest enabled day (e.g. a disabled Saturday resolves to Friday, not Monday).
- *
- * The search respects the `min`/`max` bounds and never returns a date outside them. When no enabled
- * date exists within the bounds — or the search window is exhausted — the original `date` is
- * returned unchanged.
+ * Returns the nearest non-disabled date to `date` within `bounds` (searching outward in both
+ * directions), or `date` itself if none is found.
  */
 export function findNearestEnabledDate<T>(
   adapter: NgpDateAdapter<T>,

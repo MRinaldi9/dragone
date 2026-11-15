@@ -36,16 +36,13 @@ export interface DynamicDialogConfig {
    */
   closeButtonLabel?: string;
   /**
-   * Inputs applied to the Dialog Body Component through declarative `inputBinding`s: signal values
-   * stay reactive while the dialog is open (framework-managed, like a template binding), plain
-   * values are bound once. This replaces the classic CDK-style `data` bag: the body declares its
-   * payload as typed inputs instead.
+   * Inputs bound to the Dialog Body Component; signal values stay reactive while the dialog is
+   * open.
    */
   inputs?: Record<string, MaybeSignal<unknown>>;
   /**
-   * Output listeners applied to the Dialog Body Component through declarative `outputBinding`s —
-   * the programmatic analog of template event bindings. The listener receives the emitted value as
-   * `unknown`; narrow it inside the listener.
+   * Output listeners bound to the Dialog Body Component; each callback receives the emitted value
+   * as `unknown`.
    */
   outputs?: Record<string, (event: unknown) => void>;
   /** ID of the dialog. If omitted, a unique one is generated. */
@@ -57,20 +54,12 @@ export interface DynamicDialogConfig {
    */
   role?: DialogRole;
   /**
-   * Whether the dialog is modal. Modal dialogs show the scrim and set `aria-modal="true"`;
-   * non-modal dialogs keep the page pointer-interactive and set `aria-modal="false"`.
-   *
-   * Known limitations, both upstream in `NgpDialog`/`NgpDialogManager` and not fixable through the
-   * public API:
-   *
-   * - Focus stays trapped inside the panel even when non-modal: `NgpDialog` always applies
-   *   `NgpFocusTrap` and does not derive it from `modal` (the trap arms unconditionally; its
-   *   `disabled` input only skips the initial focus and is not exposed). Keyboard users therefore
-   *   cannot leave a "non-modal" dialog.
-   * - Page scroll is blocked while any dialog is open, including non-modal ones.
+   * Whether the dialog is modal (`aria-modal="true"` with a blocking scrim).
    *
    * @default true
    */
+  // Upstream NgpDialog/NgpDialogManager limitation: focus trapping and page scroll lock remain
+  // active even when `modal` is false.
   modal?: boolean;
   /** The element or selector the dialog is rendered into. `null` means the document body. */
   container?: HTMLElement | string | null;
@@ -86,11 +75,7 @@ export interface DynamicDialogConfig {
   closeOnNavigation?: boolean;
   /** Parent injector for the dialog content; the Dialog Body Component resolves from it. */
   injector?: Injector;
-  /**
-   * View container the dialog content is created from. Optional: when the app is bootstrapped
-   * normally the manager resolves it from the root component; tests (TestBed keeps
-   * `ApplicationRef.components` empty) can pass one, or an `injector` that provides it.
-   */
+  /** Optional `ViewContainerRef` used to create the dialog content. */
   viewContainerRef?: ViewContainerRef;
 }
 
@@ -114,13 +99,7 @@ export interface DynamicDialogRef<R = unknown> {
   readonly keydownEvents: Observable<KeyboardEvent>;
   /** Pointer events dispatched outside the dialog while it is open. */
   readonly outsidePointerEvents: Observable<MouseEvent>;
-  /**
-   * Closes the dialog, resolving {@link afterClosed} with the optional result.
-   *
-   * Declared as a method, not a function-typed property, on purpose: method signatures are checked
-   * bivariantly, so the per-dialog cache can store and return `DynamicDialogRef<R>` as
-   * `DynamicDialogRef<unknown>` without casts. As a property signature `close` would make
-   * `DynamicDialogRef` invariant in `R`.
-   */
+  /** Closes the dialog, resolving {@link afterClosed} with the optional result. */
+  // Method syntax is used so TypeScript checks `R` bivariantly in the per-dialog ref cache.
   close(result?: R): Promise<void>;
 }

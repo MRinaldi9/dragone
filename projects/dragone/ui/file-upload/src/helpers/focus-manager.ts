@@ -26,12 +26,7 @@ export class FocusManager {
     this.#focusMap.delete(filename);
   }
 
-  /**
-   * Esegue la strategia next/previous + fallback.
-   *
-   * Nota: il focus e' chiamato dal template su `animate.leave`, quindi avviene quando l'elemento in
-   * uscita e' gia' marcato con classe leave.
-   */
+  /** Moves focus to the next (or previous) chip remove button, falling back to `fallbackElement`. */
   focusNext(filename: string): void {
     const tmpArr = [...this.#focusMap.entries()];
     const currIndex = tmpArr.findIndex(([key]) => key === filename);

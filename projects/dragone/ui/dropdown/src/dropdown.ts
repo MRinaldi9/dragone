@@ -13,10 +13,7 @@ import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
 import { DropdownOption } from './dropdown-option/dropdown-option';
 
-/**
- * Copies the trigger's naming source onto a popup element: the label ids when the trigger is
- * labelled, its `aria-label` when named by author, the trigger id as a last resort.
- */
+// Copies the trigger's accessible naming source (`aria-labelledby`, `aria-label`, or `id`) onto the popup.
 function mirrorName(trigger: HTMLElement, popup: HTMLElement): void {
   const labelledBy = trigger.getAttribute('aria-labelledby');
   const label = trigger.getAttribute('aria-label');
@@ -27,12 +24,9 @@ function mirrorName(trigger: HTMLElement, popup: HTMLElement): void {
 }
 
 /**
- * The floating panel of selectable options shown by a trigger (a Select field, a Button, or a
- * Link). `Dropdown` owns the panel appearance and the `listbox` ARIA wiring; placement, flip,
- * offset, and open state belong to `DropdownTrigger`.
- *
- * Declare it inside a `DropdownTrigger` element with `drgnDropdownPortal`, and project
- * `DropdownOption` rows plus an optional `DropdownSearch`:
+ * Floating panel of selectable options opened by a `DropdownTrigger` and portaled via
+ * `*drgnDropdownPortal`. Project `DropdownOption` items and an optional `DropdownSearch` inside it,
+ * and name the trigger with `aria-label` or `aria-labelledby`:
  *
  * ```html
  * <button drgnDropdownTrigger aria-label="Apri" (valueChange)="onChange($event)">
@@ -42,17 +36,6 @@ function mirrorName(trigger: HTMLElement, popup: HTMLElement): void {
  *   </drgn-dropdown>
  * </button>
  * ```
- *
- * Name the trigger with `aria-label` or `aria-labelledby` (a `combobox` takes its name from the
- * author, never from its content): the popup mirrors that name on the panel and the listbox.
- *
- * The panel is a non-modal `dialog` wrapping the search row and the listbox. Without a search the
- * trigger is the combobox; with a `DropdownSearch`, the search field owns the combobox and the
- * trigger falls back to its native role while the panel is open (ADR-0010).
- *
- * The options render in an inner `listbox`. The search row and the `emptyLabel` message sit beside
- * it, since a listbox may only own options. When no option is projected — typically because a
- * search filtered them all out — `emptyLabel` is shown and announced through a polite live region.
  */
 @Component({
   selector: 'drgn-dropdown',

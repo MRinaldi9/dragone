@@ -9,10 +9,7 @@ import {
   type DialogShellContext
 } from '../ui/dialog-shell/dialog-shell';
 
-/**
- * Backing implementation of {@link DynamicDialogRef}. Deliberately not exported: consumers depend on
- * the interface, so the upstream `NgpDialogRef` never appears in the public types.
- */
+// Backing implementation of DynamicDialogRef; kept unexported so NgpDialogRef never leaks into public types.
 class DynamicDialogRefImpl<R> implements DynamicDialogRef<R> {
   readonly #ref: NgpDialogRef<unknown, R>;
 
@@ -53,11 +50,7 @@ class DynamicDialogRefImpl<R> implements DynamicDialogRef<R> {
   }
 }
 
-/**
- * One {@link DynamicDialogRef} per underlying dialog, so `DynamicDialog.open()` and
- * `injectDynamicDialogRef()` hand out the same handle (the upstream ref is the shared key: the
- * dialog injector provides the same `NgpDialogRef` instance everywhere).
- */
+// WeakMap cache so `DynamicDialog.open()` and `injectDynamicDialogRef()` return the same handle.
 const dynamicDialogRefs = new WeakMap<NgpDialogRef<unknown, unknown>, DynamicDialogRef<unknown>>();
 
 function dynamicDialogRefFor<R>(ref: NgpDialogRef<unknown, R>): DynamicDialogRef<R> {
@@ -108,11 +101,7 @@ export class DynamicDialog {
   readonly #manager = inject(NgpDialogManager);
   readonly #injector = inject(Injector);
 
-  /**
-   * Opens a dialog rendering `component` as its body and returns a {@link DynamicDialogRef}. The
-   * body component can inject {@link injectDynamicDialogRef} to close the dialog and return a
-   * result.
-   */
+  /** Opens a dialog rendering `component` as its body and returns its {@link DynamicDialogRef}. */
   open<R = unknown>(component: Type<unknown>, config: DynamicDialogConfig): DynamicDialogRef<R> {
     const {
       title,

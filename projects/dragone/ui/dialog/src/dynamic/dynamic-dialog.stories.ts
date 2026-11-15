@@ -136,7 +136,6 @@ class ReactiveDemo {
     this.#destroyRef.onDestroy(() => this.stop());
   }
 
-  /** The body asked to align: stop ticking and write the signal the input binding reads. */
   private align(value: unknown): void {
     if (typeof value !== 'number') {
       return;
@@ -270,14 +269,8 @@ export const WithResult: Story = {
 };
 
 /**
- * Shows the two-way seam of the programmatic API:
- *
- * - The input binding keeps the body in sync with the host signal (the host increments it every
- *   second and both sides display the same value);
- * - The output binding writes back into the same host signal (the body aligns the host to 100, and
- *   that value travels back into the body through the input binding).
- *
- * Non-modal so the host value stays visible (and the page keeps updating) next to the dialog.
+ * Demonstrates live two-way synchronization between a host signal and a non-modal dialog body via
+ * `config.inputs` and `config.outputs`.
  */
 export const ReactiveInputs: Story = {
   render: () => ({

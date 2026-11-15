@@ -21,11 +21,8 @@ import { Status, type StatusType } from '@dragone/ui/utils';
 
 import type { DialogSize } from '../../models/dialog.model';
 
-/**
- * Status icon per the Sirio "Dialog / Semantic" Penpot page. Deliberately different from Alert: the
- * dialog design uses a filled circle exclamation for `warning` and a filled triangle for `danger`.
- * `success` has no dialog variant in the design and falls back to the Alert icon.
- */
+// Status icons per the Sirio "Dialog / Semantic" Penpot page (warning uses a circle exclamation
+// and danger uses a triangle, unlike Alert).
 const STATUS_TO_ICON = {
   neutral: faSolidCircleInfo,
   info: faSolidCircleInfo,
@@ -35,13 +32,8 @@ const STATUS_TO_ICON = {
 } as const;
 
 /**
- * Private Component: the dialog skeleton shared by both APIs — the scrim (`NgpDialogOverlay` host),
- * the panel, the status icon, the title, the description, the close action and the projected
- * content. Not exported: consumers drive it through the `Dialog` component or the `DynamicDialog`
- * service.
- *
- * It must be instantiated inside the dialog injector (portaled by the manager), which is what makes
- * `NgpDialogRef` and the per-dialog config resolvable.
+ * Shared dialog skeleton (scrim, panel, status icon, title, description, close button, and
+ * projected content) used by both `Dialog` and `DynamicDialog`.
  */
 @Component({
   selector: 'drgn-dialog-panel',
@@ -112,15 +104,11 @@ export class DialogPanel {
 
   protected readonly statusIcon = computed(() => STATUS_TO_ICON[this.status()]);
 
-  /** Per-dialog config injected by the manager; the same source `NgpDialog` reads for `aria-modal`. */
   protected readonly modal = injectDialogConfig().modal ?? true;
 
   readonly #dialogRef = inject(NgpDialogRef);
 
-  /**
-   * The close button honors `disableClose` like escape and scrim click do; the underlying
-   * `NgpDialogRef.close()` would otherwise close unconditionally.
-   */
+  // Honors `disableClose` like escape and scrim click; `NgpDialogRef.close()` closes unconditionally.
   protected close(): void {
     if (this.#dialogRef.disableClose) {
       return;

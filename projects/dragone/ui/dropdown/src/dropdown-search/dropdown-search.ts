@@ -7,17 +7,11 @@ import { InputGroup, InputText } from '@dragone/ui/input';
 import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
 /**
- * Optional sticky filter row projected into `Dropdown`, which renders it above the option list. It
- * renders the search field and reports the typed text via `queryChange`; filtering the projected
- * `DropdownOption`s is the consumer's responsibility, since it depends on their option data. When
- * the filter leaves no option, `Dropdown` shows its `emptyLabel`.
- *
- * The field is the panel's combobox (`NgpSelectInput`): it owns the list's `aria-controls`,
- * `aria-expanded` and `aria-activedescendant`, takes focus when the panel opens, and drives the
- * options with `ArrowUp`/`ArrowDown`/`Enter`; `Home`/`End` stay with the caret. While it exists,
- * `NgpSelect` removes the combobox role from the trigger. `Escape` closes the panel and returns
- * focus to the trigger; `Tab` closes it and moves on to the next control (ADR-0010).
+ * Optional sticky filter row projected into `Dropdown` above the option list. Emits the typed query
+ * via `queryChange` so the consumer can filter the projected `DropdownOption` items.
  */
+// Owns the panel's combobox role (`NgpSelectInput`), active-descendant navigation, and focus while
+// open; `NgpSelect` strips `role="combobox"` from the trigger in the meantime (ADR-0010).
 @Component({
   selector: 'drgn-dropdown-search',
   imports: [InputGroup, InputText, NgIcon, NgpSelectInput],

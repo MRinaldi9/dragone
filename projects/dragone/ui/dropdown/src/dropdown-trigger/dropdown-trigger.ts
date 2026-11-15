@@ -4,14 +4,9 @@ import { injectSelectState, NgpSelect } from 'ng-primitives/select';
 import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
 
 /**
- * Applied to the element that opens a `Dropdown` — a Select field, a Button, or a Link. It owns the
- * open state, the selection, and the panel placement, while the projected `Dropdown` only renders
- * the option list.
- *
- * The trigger is the panel's combobox (`role="combobox"`) until a `DropdownSearch` opens: the
- * search field takes that role, and the trigger falls back to its native role. Query it by
- * `data-testid` or by role, not by role alone across both states. The `Dropdown` must be declared
- * inside this element with `drgnDropdownPortal` so it can read the trigger state.
+ * Directive applied to the trigger element (Select, Button, or Link) that opens a `Dropdown`. Owns
+ * open state, selection, and floating placement; declare `<drgn-dropdown *drgnDropdownPortal>`
+ * inside the trigger element.
  */
 @Directive({
   selector: '[drgnDropdownTrigger]',

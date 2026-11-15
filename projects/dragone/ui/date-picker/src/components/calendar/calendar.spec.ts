@@ -10,10 +10,6 @@ import {
 import type { IETFLanguageTag } from '../../utils/guards';
 import { Calendar } from './calendar';
 
-/**
- * Test Host: provides the date picker state and the Dragone state consumed by `Calendar`, and
- * instantiates both primitive factories so the shared state signals are populated.
- */
 @Component({
   imports: [Calendar],
   template: `<drgn-calendar />`,

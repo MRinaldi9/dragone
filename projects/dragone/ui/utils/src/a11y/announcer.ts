@@ -50,7 +50,6 @@ export class Announcer {
   readonly #liveAnnouncer = inject(LiveAnnouncer);
   readonly #destroyRef = inject(DestroyRef);
   readonly #announcementDelayMs = inject(ANNOUNCEMENT_DELAY);
-  /** Id that invalidates in-flight sequences superseded by a newer announcement. */
   #announcementId = 0;
 
   constructor() {
@@ -68,9 +67,8 @@ export class Announcer {
   };
 
   /**
-   * Announces each message in order, waiting `delayMs` between messages so the screen reader can
-   * finish reading the previous one. A newer `announce`, `announceSequence` or `clear` call, or
-   * component destruction, cancels the sequence.
+   * Announces each message in order with a `delayMs` pause between messages; cancelled by a newer
+   * call or component destruction.
    */
   announceSequence = (messages: string[], delayMs = this.#announcementDelayMs): void => {
     this.#announcementId += 1;

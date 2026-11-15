@@ -7,13 +7,7 @@ import {
   provideSelectOptionState
 } from 'ng-primitives/select';
 
-/**
- * A single row inside `Dropdown`. Renders the `faSolidCheck` icon when selected. Hover, pressed,
- * and disabled visuals come from `NgpSelectOption`'s built-in interaction tracking; the
- * keyboard-active ("Focus" in the Sirio spec) look is driven by `[data-active]`, since listbox
- * options never receive real DOM focus: it stays on the trigger or the search field, which point at
- * the active option through `aria-activedescendant`.
- */
+/** Single selectable option row inside a `Dropdown`, displaying a check icon when selected. */
 @Component({
   selector: 'drgn-dropdown-option',
   imports: [NgIcon],

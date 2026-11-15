@@ -13,18 +13,9 @@ import {
 // (WCAG 2.1.2). Blocking is functional via scroll-lock here plus consumer-side
 // `inert`/`aria-busy` on the content below (see the Overlay story).
 /**
- * Fullscreen blocking loader. The veil blocks pointer interaction and this component locks the page
- * scroll, but keyboard and screen-reader users can still reach the content below unless consumers
- * also block it with the `Busy` directive (`[drgnBusy]`, which sets `inert` and `aria-busy`
- * together):
- *
- * - Apply `[drgnBusy]` to the background content while the overlay is shown, and remove it when it is
- *   destroyed;
- * - Save `document.activeElement` before showing the overlay and restore it afterwards — if focus was
- *   inside the subtree made `inert`, the browser drops it on `<body>`; when the trigger is gone,
- *   move focus to the loaded content heading (`tabindex="-1"`) instead;
- * - The spinner itself never takes focus and its removal is not announced: announce completion or
- *   failure separately with the `Announcer` (`drgnAnnouncer`).
+ * Fullscreen blocking loader that locks page scroll and blocks pointer interaction. Pair it with
+ * `[drgnBusy]` on background content, restore focus after loading, and announce completion via
+ * `drgnAnnouncer`.
  */
 @Component({
   selector: 'drgn-loader-overlay',

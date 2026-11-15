@@ -210,10 +210,7 @@ describe(Dropdown, () => {
   });
 
   describe('with a search field', () => {
-    /**
-     * Opens the panel and waits until the search field actually holds focus: the keyboard
-     * assertions below are only meaningful once the trigger no longer receives the key events.
-     */
+    // Opens the panel and waits until the search field holds focus.
     const openWithSearch = async () => {
       const rendered = await render(TestHostComponent);
       rendered.componentClassInstance.withSearch.set(true);

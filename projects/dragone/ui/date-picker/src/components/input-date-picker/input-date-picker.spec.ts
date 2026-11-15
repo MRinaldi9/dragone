@@ -11,10 +11,6 @@ import {
 import type { IETFLanguageTag } from '../../utils/guards';
 import { InputDatePicker } from './input-date-picker';
 
-/**
- * Test Host: provides the date picker state and the Dragone state consumed by `InputDatePicker`,
- * and instantiates both primitive factories so the shared state signals are populated.
- */
 @Component({
   imports: [InputDatePicker],
   template: `<input date-picker />`,

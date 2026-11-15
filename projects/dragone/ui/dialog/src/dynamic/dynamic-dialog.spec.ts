@@ -57,11 +57,7 @@ class TestBody {
   template: ''
 })
 class TestHost {
-  /**
-   * Node injector of the host: TestBed keeps `ApplicationRef.components` empty, so the dialog
-   * manager falls back to `config.injector` for its ViewContainerRef. The node injector provides
-   * one — the same path `NgpDialogTrigger` uses in apps.
-   */
+  // Node injector of the host: provides a ViewContainerRef fallback for NgpDialogManager in TestBed.
   readonly injector = inject(Injector);
 }
 
@@ -75,11 +71,7 @@ describe(DynamicDialog, () => {
     hostInjector = host.injector;
   };
 
-  /**
-   * Dialogs attach to document.body and would leak into the next test's role queries. The manager
-   * is destroyed on TestBed cleanup (which runs before the next test), so closing here keeps every
-   * test starting from a clean DOM.
-   */
+  // Close any open dialogs attached to document.body before the next test runs.
   afterEach(async () => {
     const manager = TestBed.inject(NgpDialogManager);
     if (manager.openDialogs.length > 0) {

@@ -17,18 +17,14 @@ import type { DialogSize } from '../models/dialog.model';
 import { DialogPanel } from '../ui/dialog-panel/dialog-panel';
 
 /**
- * Declarative dialog: author the content in markup and drive opening with a two-way `open` binding.
+ * Declarative dialog controlled by a two-way `[(open)]` binding; use `DynamicDialog` instead when
+ * the body is a dynamically created component:
  *
  * ```html
  * <drgn-dialog [(open)]="confirmOpen" title="Pubblica questo articolo?" size="small">
  *   <p class="drgn-p-md-01">L'azione è irreversibile.</p>
  * </drgn-dialog>
  * ```
- *
- * The content is projected into the shared Dialog Panel; the dialog itself is portaled by
- * `NgpDialogManager`, so it inherits focus trap, escape/outside-click handling, scroll blocking and
- * `aria-hidden` bookkeeping from the primitive. For a dynamically created body component use
- * `DynamicDialog` instead.
  */
 @Component({
   selector: 'drgn-dialog',
@@ -79,20 +75,12 @@ export class Dialog {
    */
   readonly closeButtonLabel = input('Chiudi');
   /**
-   * Whether the dialog is modal. Modal dialogs show the scrim and set `aria-modal="true"`;
-   * non-modal dialogs keep the page pointer-interactive and set `aria-modal="false"`.
-   *
-   * Known limitations, both upstream in `NgpDialog`/`NgpDialogManager` and not fixable through the
-   * public API:
-   *
-   * - Focus stays trapped inside the panel even when non-modal: `NgpDialog` always applies
-   *   `NgpFocusTrap` and does not derive it from `modal` (the trap arms unconditionally; its
-   *   `disabled` input only skips the initial focus and is not exposed). Keyboard users therefore
-   *   cannot leave a "non-modal" dialog.
-   * - Page scroll is blocked while any dialog is open, including non-modal ones.
+   * Whether the dialog is modal (`aria-modal="true"` with a blocking scrim).
    *
    * @default true
    */
+  // Upstream NgpDialog/NgpDialogManager limitation: focus trapping and page scroll lock remain
+  // active even when `modal` is false.
   readonly modal = input(true);
 
   private readonly content = viewChild.required('content', { read: TemplateRef });

@@ -24,23 +24,12 @@ import { injectDatePickerDragoneState } from '../../state/date-picker-state';
 export class InputDatePicker<T> {
   readonly #dragoneDatePickerState = injectDatePickerDragoneState<T>();
   readonly #debounceTimer = injectInputDebounceTimer();
-  /**
-   * The formatted date string displayed in the input.
-   *
-   * - **Source** (`#datePickerState().date`): when the picker's value changes (from calendar
-   *   selection or programmatic set) the linked signal re-syncs by formatting the new date.
-   * - **Local write**: when the user types in the input, `valueDate.set()` is called directly,
-   *   keeping the typed text visible until it is parsed.
-   */
+  // Formatted date string displayed in the input; syncs from the picker state and accepts local edits while typing.
   protected inputDate = linkedSignal({
     source: this.#dragoneDatePickerState().date,
     computation: curr => this.#dragoneDatePickerState().format(curr)
   });
 
-  /**
-   * Debounced version of `valueDate`. Used to trigger validation & re‑parsing after the user stops
-   * typing.
-   */
   private debouncedInputDate = debounced(this.inputDate, this.#debounceTimer);
 
   /**
