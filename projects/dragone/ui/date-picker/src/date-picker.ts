@@ -1,5 +1,11 @@
-import type { InputSignal, InputSignalWithTransform, OutputRef } from '@angular/core';
-import { Component, effect, input } from '@angular/core';
+import {
+  Component,
+  effect,
+  input,
+  type InputSignal,
+  type InputSignalWithTransform,
+  type OutputRef
+} from '@angular/core';
 import type { ValidationError } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCalendarDay } from '@ng-icons/font-awesome/solid';
