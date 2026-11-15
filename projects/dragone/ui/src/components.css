@@ -154,19 +154,35 @@
   --drgn-shadow-dialog-small: var(--elevation-elevation-03);
   --drgn-shadow-dialog-large: var(--elevation-elevation-04);
 
-  /* Pagination — geometry and states from the Penpot "Pagination" page. A page tile fills
+  /* Pagination — geometry and states from the Sirio Figma "Paginazione" page. A page tile fills
      #00368F on hover and #00173D while pressed or as the current page; its focus state is the
-     spec's 1px interactive border plus a 3px glow. The complex bar sits on the light-blue surface
-     (#D9E4F7) with an #84A9E6 divider between its groups. The page-size and page-jumper selects
-     reuse the Select Component, narrowed to the 82px the spec draws. */
+     spec's 1px interactive border plus a 3px glow. The full bar is the spec's 74px board on the
+     light-blue surface (#D9E4F7): the page jumper is preceded by an #84A9E6 rule, and the
+     previous/next cursor sits on a white tile flush with its right edge. The page-size and
+     page-jumper selects reuse the Select Component, narrowed to the 82px the spec draws. */
   --drgn-pagination-radius: 4px;
   --drgn-pagination-item-inline-size: 38px;
   --drgn-pagination-item-block-size: 44px;
   --drgn-pagination-item-padding-block: 10px;
   --drgn-pagination-item-padding-inline: 14px;
+
+  /* The spec's cursor buttons are 38px wide around a 16px icon (11px a side); one pixel less,
+     because the always-transparent hover/focus border takes one on each side. */
+  --drgn-pagination-nav-button-padding-inline: 10px;
   --drgn-pagination-gap: 4px;
-  --drgn-pagination-bar-gap: 16px;
-  --drgn-pagination-bar-padding: 16px;
+  --drgn-pagination-bar-block-size: 74px;
+  --drgn-pagination-section-gap: 8px;
+  --drgn-pagination-section-padding-block: 8px;
+  --drgn-pagination-section-padding-inline: 16px;
+  --drgn-pagination-field-gap: 16px;
+  --drgn-pagination-pager-gap: 24px;
+  --drgn-pagination-pager-padding-start: 24px;
+  --drgn-pagination-pager-padding-end: 32px;
+  --drgn-pagination-nav-gap: 24px;
+
+  /* The spec's 8px word gap in the range and page count: the &nbsp; that keeps the words apart for
+     screen readers measures about 4px, so this is what is left to add. */
+  --drgn-pagination-summary-word-space: 4px;
   --drgn-pagination-text: var(--color-alias-text-color-secondary-dark-100);
   --drgn-pagination-icon: var(--color-alias-interactive-primary-default);
   --drgn-pagination-icon-disabled: var(--color-alias-text-color-disabled);
@@ -183,6 +199,7 @@
      hardcodes — so it lives here as a Component Token instead. */
   --drgn-pagination-focus-shadow: rgb(0 125 179 / 70%);
   --drgn-pagination-surface: var(--color-alias-background-color-primary-light-50);
+  --drgn-pagination-nav-surface: var(--color-alias-background-color-primary-light-0);
   --drgn-pagination-divider: var(--color-global-mid-primary-70);
   --drgn-pagination-select-inline-size: 82px;
 }

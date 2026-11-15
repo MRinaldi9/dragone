@@ -2,93 +2,32 @@ import { booleanAttribute, Component, computed, effect, input, model } from '@an
 
 import { Select } from '@dragone/ui/select';
 
-import { Pagination } from '../pagination';
+import { Simple } from '../simple/simple';
 
 /**
  * The full pagination bar: an optional "items per page" select with its range summary, an optional
- * page jumper with the page count, and the page strip. Each piece is opt-in through its boolean
- * input, so the bar composes down to the strip alone. The strip is the `Pagination` Component,
- * which owns the ng-primitives page state.
+ * page jumper with the page count, and the previous/next strip on a white tile at the right edge.
+ * Each piece is opt-in through its boolean input, so the bar composes down to range + nav (the
+ * design's mobile form) or to the nav alone.
  *
  * `totalItems` and `pageSize` are the source of truth: `pageCount`, the range and the page jumper
  * options all derive from them, so consumers never have to keep the page count in sync by hand. The
  * bar itself is not a landmark; the strip inside it is.
+ *
+ * The bar carries no numbered pages: the design keeps the page numbers for the `PaginationSimple`
+ * strip used on its own, and gives the bar a previous/next cursor tile. `siblingCount` and the
+ * page-number label therefore live on `PaginationSimple`, not here.
+ *
+ * The class is named `Full` after its file; `public-api.ts` exports it as `PaginationFull`, the
+ * name consumers import.
  */
 @Component({
-  selector: 'drgn-pagination-complex',
-  imports: [Pagination, Select],
-  template: `
-    <div class="bar">
-      @if (showPageSize()) {
-        <div class="group">
-          <span class="drgn-label-md-600 label">{{ itemsPerPageLabel() }}</span>
-          <drgn-select
-            class="select"
-            [options]="pageSizeOptions()"
-            [value]="pageSize()"
-            [disabled]="disabled()"
-            [ariaLabel]="itemsPerPageLabel()"
-            (valueChange)="pageSizeChanged($event)"
-          />
-        </div>
-      }
-
-      @if (showRange()) {
-        <!-- role="status" so the new range is announced when the page changes. The &nbsp; separators
-             keep the words apart: Angular drops whitespace-only text nodes between the spans. -->
-        <p class="summary" data-testid="pagination-range" role="status">
-          <span class="drgn-label-md-number-400">{{ rangeStart() }} - {{ rangeEnd() }}</span>
-          &nbsp;
-          <span class="drgn-label-md-600">{{ ofLabel() }}</span>
-          &nbsp;
-          <span class="drgn-label-md-number-400">{{ totalItems() }}</span>
-          &nbsp;
-          <span class="drgn-label-md-600">{{ itemsUnitLabel() }}</span>
-        </p>
-      }
-
-      @if ((showPageSize() || showRange()) && showPageJumper()) {
-        <span aria-hidden="true" class="divider"></span>
-      }
-
-      @if (showPageJumper()) {
-        <div class="group">
-          <drgn-select
-            class="select"
-            [options]="pages()"
-            [value]="page()"
-            [disabled]="disabled()"
-            [ariaLabel]="pageJumperLabel()"
-            (valueChange)="pageChanged($event)"
-          />
-          <p class="summary" data-testid="pagination-page-count">
-            <span class="drgn-label-md-600">{{ ofLabel() }}</span>
-            &nbsp;
-            <span class="drgn-label-md-number-400">{{ pageCount() }}</span>
-            &nbsp;
-            <span class="drgn-label-md-600">{{ pagesUnitLabel() }}</span>
-          </p>
-        </div>
-      }
-
-      <drgn-pagination
-        [page]="page()"
-        [pageCount]="pageCount()"
-        [disabled]="disabled()"
-        [siblingCount]="siblingCount()"
-        [showPages]="showPages()"
-        [showNav]="showNav()"
-        [ariaLabel]="ariaLabel()"
-        [previousLabel]="previousLabel()"
-        [nextLabel]="nextLabel()"
-        [pageLabel]="pageLabel()"
-        (pageChange)="page.set($event)"
-      />
-    </div>
-  `,
-  styleUrl: './pagination-complex.css'
+  selector: 'drgn-pagination-full',
+  imports: [Select, Simple],
+  templateUrl: './full.html',
+  styleUrl: './full.css'
 })
-export class PaginationComplex {
+export class Full {
   /** The total number of items spread across all pages. */
   readonly totalItems = input.required<number>();
   /**
@@ -117,20 +56,7 @@ export class PaginationComplex {
    */
   readonly disabled = input(false, { transform: booleanAttribute });
   /**
-   * Sizes the strip: a constant cell count, so its width never changes as the page moves, with the
-   * current page centred in the page numbers. See `Pagination` for the exact layout.
-   *
-   * @default 2
-   */
-  readonly siblingCount = input(2);
-  /**
-   * Whether to render the numbered page buttons in the strip.
-   *
-   * @default true
-   */
-  readonly showPages = input(true, { transform: booleanAttribute });
-  /**
-   * Whether to render the previous/next buttons in the strip.
+   * Whether to render the previous/next strip, with its white cursor tile.
    *
    * @default true
    */
@@ -202,13 +128,8 @@ export class PaginationComplex {
    * @default 'Pagina successiva'
    */
   readonly nextLabel = input('Pagina successiva');
-  /**
-   * Prefix of a page button's accessible name, e.g. "Pagina 3".
-   *
-   * @default 'Pagina'
-   */
-  readonly pageLabel = input('Pagina');
 
+  protected readonly showItemsSection = computed(() => this.showPageSize() || this.showRange());
   protected readonly pageCount = computed(() => {
     const pageSize = Math.max(1, this.pageSize());
     return Math.max(1, Math.ceil(this.totalItems() / pageSize));

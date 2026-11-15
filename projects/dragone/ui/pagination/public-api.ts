@@ -1,3 +1,2 @@
-export * from './src/pagination';
-export * from './src/pagination.model';
-export * from './src/pagination-complex/pagination-complex';
+export { Full as PaginationFull } from './src/full/full';
+export { Simple as PaginationSimple } from './src/simple/simple';

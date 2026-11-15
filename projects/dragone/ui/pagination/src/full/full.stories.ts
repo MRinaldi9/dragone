@@ -1,16 +1,16 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-import { PaginationComplex } from './pagination-complex';
+import { Full } from './full';
 
-type PaginationComplexStory = PaginationComplex & {
+type PaginationFullStory = Full & {
   pageChange: (value: number) => void;
   pageSizeChange: (value: number) => void;
 };
 
-const meta: Meta<PaginationComplexStory> = {
-  title: 'Dragone/UI/Pagination/Complex',
-  component: PaginationComplex,
+const meta: Meta<PaginationFullStory> = {
+  title: 'Dragone/UI/Pagination/Full',
+  component: Full,
   tags: ['autodocs'],
   args: {
     totalItems: 100,
@@ -18,7 +18,6 @@ const meta: Meta<PaginationComplexStory> = {
     pageSize: 10,
     pageSizeOptions: [10, 20, 30, 50, 100],
     disabled: false,
-    siblingCount: 2,
     showPageSize: true,
     showRange: true,
     showPageJumper: true,
@@ -66,15 +65,10 @@ const meta: Meta<PaginationComplexStory> = {
       control: { type: 'boolean' },
       table: { defaultValue: { summary: 'true' } }
     },
-    showPages: {
-      type: 'boolean',
-      description: 'Whether to render the numbered page buttons in the strip.',
-      control: { type: 'boolean' },
-      table: { defaultValue: { summary: 'true' } }
-    },
     showNav: {
       type: 'boolean',
-      description: 'Whether to render the previous/next buttons in the strip.',
+      description:
+        'Whether to render the previous/next strip with its white cursor tile. The bar has no numbered page buttons: those belong to the standalone PaginationSimple.',
       control: { type: 'boolean' },
       table: { defaultValue: { summary: 'true' } }
     },
@@ -94,7 +88,7 @@ const meta: Meta<PaginationComplexStory> = {
     // `page` and `pageSize` are bound two-way on purpose: one-way bindings would pin the
     // component's models and the bar would emit without ever moving.
     template: `
-      <drgn-pagination-complex
+      <drgn-pagination-full
         [(page)]="page"
         [(pageSize)]="pageSize"
         ${argsToTemplate(args, { exclude: ['page', 'pageSize'] })}
@@ -105,7 +99,7 @@ const meta: Meta<PaginationComplexStory> = {
 
 export default meta;
 
-type Story = StoryObj<PaginationComplexStory>;
+type Story = StoryObj<PaginationFullStory>;
 
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
@@ -127,22 +121,7 @@ export const Default: Story = {
   }
 };
 
-export const PageSizeAndRange: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    await userEvent.click(canvas.getByRole('combobox', { name: 'Elementi per pagina:' }));
-    await userEvent.click(
-      within(canvasElement.ownerDocument.body).getByRole('option', { name: '50' })
-    );
-
-    await expect(canvas.getByTestId('pagination-range')).toHaveTextContent(
-      '1 - 50 di 100 Elementi'
-    );
-    await expect(canvas.getByTestId('pagination-page-count')).toHaveTextContent('di 2 Pagine');
-  }
-};
-
+/** The design's mobile form: the range and the cursor tile only. */
 export const RangeAndNav: Story = {
   args: { showPageSize: false, showPageJumper: false }
 };
@@ -153,6 +132,10 @@ export const WithoutPageSize: Story = {
 
 export const WithoutPageJumper: Story = {
   args: { showPageJumper: false }
+};
+
+export const WithoutNav: Story = {
+  args: { showNav: false }
 };
 
 export const EmptyResultSet: Story = {

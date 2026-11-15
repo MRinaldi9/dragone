@@ -46,6 +46,12 @@ button[data-focus-visible] {
   box-shadow: 0 0 3px var(--drgn-pagination-focus-shadow);
 }
 
+/* The cursor buttons are the spec's 38x44. The numbered tiles keep the wider inline padding their
+   digits need; see the token for why the cursors are one pixel narrower than the spec's 11px. */
+button:not(.page-tile) {
+  padding-inline: var(--drgn-pagination-nav-button-padding-inline);
+}
+
 button:disabled {
   color: var(--drgn-pagination-item-disabled-text);
   cursor: not-allowed;

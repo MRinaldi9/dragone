@@ -2,12 +2,12 @@ import { Component, input, output, signal } from '@angular/core';
 import { render } from '@wismaz/vitest-browser-angular';
 import { userEvent } from 'vitest/browser';
 
-import { Pagination } from './pagination';
+import { Simple } from './simple';
 
 @Component({
-  imports: [Pagination],
+  imports: [Simple],
   template: `
-    <drgn-pagination
+    <drgn-pagination-simple
       [page]="page()"
       [pageCount]="pageCount()"
       [disabled]="disabled()"
@@ -29,8 +29,8 @@ class TestHost {
 }
 
 @Component({
-  imports: [Pagination],
-  template: `<drgn-pagination [pageCount]="pageCount()" [(page)]="page" />`
+  imports: [Simple],
+  template: `<drgn-pagination-simple [pageCount]="pageCount()" [(page)]="page" />`
 })
 class TwoWayHost {
   readonly pageCount = input(10);
@@ -39,8 +39,8 @@ class TwoWayHost {
 }
 
 @Component({
-  imports: [Pagination],
-  template: `<drgn-pagination [pageCount]="pageCount()" [(page)]="page" />`
+  imports: [Simple],
+  template: `<drgn-pagination-simple [pageCount]="pageCount()" [(page)]="page" />`
 })
 class SignalHost {
   readonly pageCount = input(10);
@@ -48,7 +48,7 @@ class SignalHost {
   readonly page = signal(1);
 }
 
-describe(Pagination, () => {
+describe(Simple, () => {
   const page = signal(1);
   const pageCount = signal(10);
   const disabled = signal(false);

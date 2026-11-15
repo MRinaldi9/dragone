@@ -10,21 +10,24 @@ import {
   NgpPaginationPrevious
 } from 'ng-primitives/pagination';
 
-import { buildPageWindow } from './utils/page-window';
+import { buildPageWindow } from '../utils/page-window';
 
 /**
  * A page strip: previous/next buttons around the numbered pages, with an ellipsis where a run of
  * pages is skipped. Behavior — page state, boundary disabling, keyboard handling, `aria-current` —
- * comes from the ng-primitives Pagination Primitive; this Component adds the Sirio look.
- * `PaginationComplex` composes it as its strip.
+ * comes from the ng-primitives Pagination Primitive; this Component adds the Sirio look. The full
+ * bar, `PaginationFull`, composes it with `showPages` off as its cursor tile.
  *
  * `page` is a controlled input: bind it two-way (`[(page)]`) so the strip can navigate — a one-way
  * `[page]` binding pins the page, and the strip would emit `pageChange` without moving. `pageCount`
  * and `disabled` are plain inputs, remapped from the Primitive. The host is the `navigation`
  * landmark.
+ *
+ * The class is named `Simple` after its file; `public-api.ts` exports it as `PaginationSimple`, the
+ * name consumers import.
  */
 @Component({
-  selector: 'drgn-pagination',
+  selector: 'drgn-pagination-simple',
   imports: [NgIcon, NgpPaginationButton, NgpPaginationNext, NgpPaginationPrevious, NgpFocusVisible],
   template: `
     <!-- role="list" restores the list semantics WebKit drops for list-style: none. -->
@@ -72,7 +75,7 @@ import { buildPageWindow } from './utils/page-window';
       }
     </ul>
   `,
-  styleUrl: './pagination.css',
+  styleUrl: './simple.css',
   providers: [provideIcons({ faSolidChevronLeft, faSolidChevronRight })],
   host: {
     '[attr.aria-label]': 'ariaLabel()'
@@ -89,7 +92,7 @@ import { buildPageWindow } from './utils/page-window';
     }
   ]
 })
-export class Pagination {
+export class Simple {
   /**
    * Sizes the strip: it always renders `siblingCount * 2 + 3` cells — the first page, the last page
    * and, between them, a window of page numbers centred on the current page, with a leading
