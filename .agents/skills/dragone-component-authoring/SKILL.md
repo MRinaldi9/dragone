@@ -23,7 +23,10 @@ live in `AGENTS.md` (root) and `projects/dragone/ui/AGENTS.md`; this skill is th
    `public-api.ts` (ADR-0002).
 4. **Implement.** Compose the Primitive with `hostDirectives`; read state with `inject*State()`
    and never expose it. Signal `input()`/`output()`/`model()`; OnPush is the schematic default
-   but current components do not declare it. Style only with `--drgn-*` tokens from
+   but current components do not declare it. Document exported classes and public members with
+   one-sentence consumer `/** JSDoc */` (match `button/src/button.ts`); keep implementation
+   rationale and `ADR-*` notes in `//` comments or `docs/adr/`, never in JSDoc (`dragone/concise-jsdoc`
+   enforces). Style only with `--drgn-*` tokens from
    `src/components.css` (no new color literals), typography classes from `src/typography.css`,
    state exposed via `host` `[attr.data-*]`. Runtime `--drgn-*` aliases of inline `--ngp-*`
    values stay on the element that carries them (ADR-0003).

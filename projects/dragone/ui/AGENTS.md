@@ -33,10 +33,22 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
   and read its state with `inject*State()`. If ng-primitives does not cover something,
   implement it locally, prefer upstreaming it, and leave a one-line note saying why (no
   ADR citations, no decision narrative).
-- Comments explain what the code alone does not say: non-obvious behavior, gotchas (SSR,
-  browser quirks, a11y constraints), usage contracts, and "do not do X" with its reason.
-  Public API JSDoc documents what it does, inputs/defaults, and gotchas. Decision history
-  belongs in `docs/adr/`, not in code.
+- `/** JSDoc */` is strictly for **API consumers** (IDE hover and Storybook `autodocs`, enforced
+  by the `dragone/concise-jsdoc` oxlint plugin):
+  - **Scope**: exported public API symbols only (and exported stories). Never put `/** JSDoc */`
+    on `private` / `protected` / `#private` members, non-exported helpers, or `.spec.ts` files.
+  - **Budget**: 1–2 prose lines on class/interface members (`input()`, `output()`, `model()`,
+    methods, properties) plus `@default` when not inferred; up to 4 prose lines on top-level
+    exported classes/functions/types (excluding fenced code examples and `@tag` lines). Match
+    `button/src/button.ts`.
+  - **Content**: state the observable contract (_what_ it is and _how to use_ it). Keep
+    implementation rationale (_why_ a binding, DOM node, or algorithm was chosen) and `ADR-*`
+    citations out of JSDoc — put decision history in `docs/adr/` or a brief `//` comment on the
+    line that needs it.
+- `//` line comments are for **maintainers**, used sparingly only where the code cannot speak for
+  itself: a browser/SSR quirk, an a11y spec constraint, or a one-line note on why behavior is
+  implemented locally instead of via `ng-primitives`. Default to zero `//` comments when the code
+  is self-explanatory.
 - Selector (`angular.json` prefix `drgn`): attribute selector on the native element when the
   Component needs no template; element selector otherwise. Both alias forms exist today —
   `button[drgnButton],button[drgn-button]` and `input[drgnInputText],input[drgn-input-text]` —

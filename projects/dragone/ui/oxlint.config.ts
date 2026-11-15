@@ -1,13 +1,19 @@
+import { fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'oxlint';
 
 import baseConfig from '../../../oxlint.config.ts';
+
+const dragoneConciseJsdocPlugin = fileURLToPath(
+  new URL('../../../scripts/oxlint-plugins/dragone-concise-jsdoc.mjs', import.meta.url)
+);
 
 export default defineConfig({
   extends: [baseConfig],
   overrides: [
     {
       files: ['**/*.ts'],
-      jsPlugins: ['@angular-eslint/eslint-plugin'],
+      jsPlugins: ['@angular-eslint/eslint-plugin', dragoneConciseJsdocPlugin],
       rules: {
         '@angular-eslint/component-selector': [
           'error',
@@ -32,6 +38,7 @@ export default defineConfig({
         '@angular-eslint/use-lifecycle-interface': 'warn',
         '@angular-eslint/use-pipe-transform-interface': 'error',
         'class-methods-use-this': 'off',
+        'dragone/concise-jsdoc': 'error',
         'sort-keys': 'off',
         'new-cap': [
           'warn',

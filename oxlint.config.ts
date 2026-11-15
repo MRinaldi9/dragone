@@ -25,6 +25,8 @@ export default defineConfig({
         'func-style': ['off'],
         'id-length': ['error', { checkGeneric: false, exceptions: ['_', 'i', 'j', 'K'] }],
         'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
+        'jsdoc/empty-tags': 'error',
+        'jsdoc/no-blank-blocks': 'error',
         'max-params': ['error', { max: 4 }],
         'no-array-constructor': 'error',
         'no-async-promise-executor': 'error',
@@ -174,5 +176,5 @@ export default defineConfig({
       }
     }
   ],
-  plugins: ['typescript', 'eslint', 'oxc']
+  plugins: ['typescript', 'eslint', 'oxc', 'jsdoc']
 });
