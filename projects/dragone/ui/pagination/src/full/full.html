@@ -1,0 +1,79 @@
+<div class="bar" data-testid="pagination-bar">
+  @if (showItemsSection()) {
+    <div class="section items">
+      @if (showPageSize()) {
+        <div class="field">
+          <span class="drgn-label-md-600 label">{{ itemsPerPageLabel() }}</span>
+          <drgn-select
+            class="select"
+            [options]="pageSizeOptions()"
+            [value]="pageSize()"
+            [disabled]="disabled()"
+            [ariaLabel]="itemsPerPageLabel()"
+            (valueChange)="pageSizeChanged($event)"
+          />
+        </div>
+      }
+
+      @if (showRange()) {
+        <!-- role="status" so the new range is announced when the page changes. The &nbsp;
+             separators keep the words apart: Angular drops whitespace-only text nodes between the
+             spans, and without them a screen reader reads "1 - 10di100Elementi". -->
+        <p class="summary" data-testid="pagination-range" role="status">
+          <span class="drgn-label-md-number-400">{{ rangeStart() }} - {{ rangeEnd() }}</span>
+          &nbsp;
+          <span class="drgn-label-md-600">{{ ofLabel() }}</span>
+          &nbsp;
+          <span class="drgn-label-md-number-400">{{ totalItems() }}</span>
+          &nbsp;
+          <span class="drgn-label-md-600">{{ itemsUnitLabel() }}</span>
+        </p>
+      }
+    </div>
+  }
+
+  @if (showPageJumper()) {
+    <div class="section pager">
+      <!-- The master draws its only rule here, between the range and the page jumper; the vector
+           inside its "items per page" group carries no stroke. -->
+      <span
+        aria-hidden="true"
+        class="divider"
+        data-testid="pagination-divider"
+        [hidden]="!showItemsSection()"
+      ></span>
+
+      <drgn-select
+        class="select"
+        [options]="pages()"
+        [value]="page()"
+        [disabled]="disabled()"
+        [ariaLabel]="pageJumperLabel()"
+        (valueChange)="pageChanged($event)"
+      />
+      <p class="summary" data-testid="pagination-page-count">
+        <span class="drgn-label-md-600">{{ ofLabel() }}</span>
+        &nbsp;
+        <span class="drgn-label-md-number-400">{{ pageCount() }}</span>
+        &nbsp;
+        <span class="drgn-label-md-600">{{ pagesUnitLabel() }}</span>
+      </p>
+    </div>
+  }
+
+  @if (showNav()) {
+    <!-- The strip is prev/next only here; its page numbers belong to PaginationSimple, on its own. -->
+    <div class="nav" data-testid="pagination-nav">
+      <drgn-pagination-simple
+        [page]="page()"
+        [pageCount]="pageCount()"
+        [disabled]="disabled()"
+        [showPages]="false"
+        [ariaLabel]="ariaLabel()"
+        [previousLabel]="previousLabel()"
+        [nextLabel]="nextLabel()"
+        (pageChange)="page.set($event)"
+      />
+    </div>
+  }
+</div>

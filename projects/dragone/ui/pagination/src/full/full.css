@@ -1,0 +1,95 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: block;
+}
+
+/* Three regions: the "items per page" section, the page-jumper section and the white cursor tile.
+   The bar is a single line — the cursor tile must never drop under the controls, as it did while
+   this could wrap. Nothing inside wraps either: the bar keeps its content width (`min-content`) and
+   the page scrolls on a viewport too narrow for it. The spec's 74px board is a minimum, so a
+   consumer's taller Select grows the bar instead of clipping it. */
+.bar {
+  display: flex;
+  align-items: stretch;
+  min-inline-size: min-content;
+  min-block-size: var(--drgn-pagination-bar-block-size);
+  border-radius: var(--drgn-pagination-radius);
+  background-color: var(--drgn-pagination-surface);
+  color: var(--drgn-pagination-text);
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: var(--drgn-pagination-section-gap);
+  padding-block: var(--drgn-pagination-section-padding-block);
+  padding-inline: var(--drgn-pagination-section-padding-inline);
+}
+
+/* The left section absorbs the slack: the spec's 1016px board leaves it exactly the width the pager
+   and the cursor tile do not use, which keeps those two at the right edge at any width. */
+.items {
+  flex: 1 1 auto;
+}
+
+.pager {
+  flex: 0 0 auto;
+  gap: var(--drgn-pagination-pager-gap);
+  padding-inline: var(--drgn-pagination-pager-padding-start)
+    var(--drgn-pagination-pager-padding-end);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--drgn-pagination-field-gap);
+}
+
+.label {
+  white-space: nowrap;
+}
+
+/* The range and the page count are inline text, not a flex row: their &nbsp; separators are the
+   spaces a screen reader reads, and a flex `gap` would render each of them as an anonymous item on
+   top of the gap. `span + span` restores the spec's 8px word gap around the ~4px a space measures. */
+.summary {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.summary span + span {
+  margin-inline-start: var(--drgn-pagination-summary-word-space);
+}
+
+/* The 58px rule the spec draws before the page jumper, at the section's content height. */
+.divider {
+  align-self: stretch;
+  width: 1px;
+  background-color: var(--drgn-pagination-divider);
+}
+
+/* The white cursor tile the strip sits on: flush with the bar's right edge, its right corners
+   rounded instead of clipping the bar, which would cut the focus glow off the next button. */
+.nav {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: var(--drgn-pagination-nav-gap);
+  border-start-end-radius: var(--drgn-pagination-radius);
+  border-end-end-radius: var(--drgn-pagination-radius);
+  background-color: var(--drgn-pagination-nav-surface);
+}
+
+/* The spec draws the two cursor buttons touching; the strip's own gap is the 4px its numbered
+   tiles need. Overriding the Component Token reaches no internal selector. */
+.nav drgn-pagination-simple {
+  --drgn-pagination-gap: 0;
+}
+
+/* The Select is 300px wide by its own Sirio spec; the Pagination spec draws an 82px one.
+   The scoped class selector (class + _ngcontent attribute) outranks the Select's `:host`
+   rule (a single _nghost attribute), so this wins without reaching into the Select. */
+.select {
+  width: var(--drgn-pagination-select-inline-size);
+}

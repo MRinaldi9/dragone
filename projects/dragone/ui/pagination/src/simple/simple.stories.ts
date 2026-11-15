@@ -1,9 +1,9 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-import { Pagination } from './pagination';
+import { Simple } from './simple';
 
-type PaginationStory = Pagination & {
+type PaginationStory = Simple & {
   page: number;
   pageCount: number;
   disabled: boolean;
@@ -12,7 +12,7 @@ type PaginationStory = Pagination & {
 
 const meta: Meta<PaginationStory> = {
   title: 'Dragone/UI/Pagination/Simple',
-  component: Pagination,
+  component: Simple,
   tags: ['autodocs'],
   args: {
     page: 1,
@@ -70,7 +70,7 @@ const meta: Meta<PaginationStory> = {
     props: args,
     // `page` is bound two-way on purpose: a one-way `[page]` binding pins the Primitive's
     // controlled state and the strip would emit without ever moving.
-    template: `<drgn-pagination [(page)]="page" ${argsToTemplate(args, { exclude: ['page'] })} />`
+    template: `<drgn-pagination-simple [(page)]="page" ${argsToTemplate(args, { exclude: ['page'] })} />`
   })
 };
 
