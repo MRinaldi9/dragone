@@ -3,13 +3,11 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "schematicCollections": [
-      "angular-eslint"
-    ]
+    "schematicCollections": ["angular-eslint"],
+    "analytics": false
   },
   "schematics": {
     "@schematics/angular:component": {
-      "changeDetection": "OnPush",
       "path": "projects/dragone/ui"
     },
     "@schematics/angular:directive": {
@@ -49,41 +47,23 @@
               "projects/dragone/ui/**/*.ts",
               "projects/dragone/ui/**/*.html"
             ],
-            "eslintConfig": "projects/dragone/ui/eslint.config.mjs",
-            "concurrency": "auto"
+            "eslintConfig": "projects/dragone/ui/eslint.config.mjs"
           }
         },
         "storybook": {
-          "builder": "@analogjs/storybook-angular:start-storybook",
+          "builder": "@storybook/angular-vite:start-storybook",
           "options": {
-            "compodoc": true,
             "configDir": ".storybook",
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "."
-            ],
             "port": 6006,
-            "experimentalZoneless": true
+            "styles": ["projects/dragone/ui/src/main.css"]
           }
         },
         "build-storybook": {
-          "builder": "@analogjs/storybook-angular:build-storybook",
+          "builder": "@storybook/angular-vite:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "."
-            ],
-            "outputDir": "storybook-static",
-            "styles": [
-              "../projects/dragone/ui/src/main.css"
-            ],
-            "experimentalZoneless": true
+            "outputDir": "dist/storybook",
+            "styles": ["projects/dragone/ui/src/main.css"]
           }
         }
       }

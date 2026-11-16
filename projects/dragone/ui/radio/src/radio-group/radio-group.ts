@@ -5,16 +5,17 @@ import {
   contentChildren,
   ElementRef,
   input,
-  output,
+  output
 } from '@angular/core';
 import { injectRadioGroupState, NgpRadioGroup } from 'ng-primitives/radio';
+
+import { toNativeElement } from '@dragone/ui/utils';
 
 import { provideRadioGroupContext } from '../radio-group-context';
 import { RadioItem } from '../radio-item/radio-item';
 
 @Component({
   selector: 'drgn-radio-group',
-  imports: [],
   template: ` <ng-content /> `,
   styleUrl: './radio-group.css',
   providers: [provideRadioGroupContext(RadioGroup)],
@@ -23,7 +24,7 @@ import { RadioItem } from '../radio-item/radio-item';
     '[style.--direction]': 'direction()',
     '[attr.readonly]': 'readonly() ? "" : null',
     '[attr.name]': 'name() ? name() : null',
-    '[attr.hidden]': 'hidden() ? "" : null',
+    '[attr.hidden]': 'hidden() ? "" : null'
   },
   hostDirectives: [
     {
@@ -32,32 +33,33 @@ import { RadioItem } from '../radio-item/radio-item';
         'ngpRadioGroupValue:value',
         'ngpRadioGroupDisabled:disabled',
         'ngpRadioGroupOrientation:orientation',
-        'ngpRadioGroupCompareWith:compare',
+        'ngpRadioGroupCompareWith:compare'
       ],
-      outputs: ['ngpRadioGroupValueChange:valueChange'],
-    },
-  ],
+      outputs: ['ngpRadioGroupValueChange:valueChange']
+    }
+  ]
 })
 export class RadioGroup<T> {
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly hidden = input(false, { transform: booleanAttribute });
   readonly name = input<string>();
   protected readonly radioItems = contentChildren<RadioItem, ElementRef<HTMLElement>>(RadioItem, {
-    read: ElementRef,
+    read: ElementRef
   });
   readonly touch = output<void>();
   readonly #radioGroupState = injectRadioGroupState<T>();
+  readonly firstRadioItem = computed(() => this.radioItems().at(0));
 
   protected direction = computed(() =>
-    this.#radioGroupState().orientation() === 'horizontal' ? 'row' : 'column',
+    this.#radioGroupState().orientation() === 'horizontal' ? 'row' : 'column'
   );
 
   focus(options?: FocusOptions): void {
-    this.radioItems().at(0)?.nativeElement.focus(options);
+    toNativeElement(this.firstRadioItem)?.focus(options);
   }
 
   reset(): void {
-    this.#radioGroupState().value.set(null);
+    this.#radioGroupState().setValue(null);
   }
 
   protected touched(event: FocusEvent): void {

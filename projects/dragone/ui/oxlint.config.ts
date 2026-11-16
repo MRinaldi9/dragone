@@ -1,21 +1,27 @@
+import { fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'oxlint';
 
 import baseConfig from '../../../oxlint.config.ts';
+
+const dragoneConciseJsdocPlugin = fileURLToPath(
+  new URL('../../../scripts/oxlint-plugins/dragone-concise-jsdoc.mjs', import.meta.url)
+);
 
 export default defineConfig({
   extends: [baseConfig],
   overrides: [
     {
       files: ['**/*.ts'],
-      jsPlugins: ['@angular-eslint/eslint-plugin'],
+      jsPlugins: ['@angular-eslint/eslint-plugin', dragoneConciseJsdocPlugin],
       rules: {
         '@angular-eslint/component-selector': [
-          'warn',
+          'error',
           {
             prefix: 'drgn',
             style: 'kebab-case',
-            type: ['element', 'attribute'],
-          },
+            type: ['element', 'attribute']
+          }
         ],
         '@angular-eslint/contextual-lifecycle': 'error',
         '@angular-eslint/no-empty-lifecycle-method': 'error',
@@ -32,12 +38,15 @@ export default defineConfig({
         '@angular-eslint/use-lifecycle-interface': 'warn',
         '@angular-eslint/use-pipe-transform-interface': 'error',
         'class-methods-use-this': 'off',
+        'dragone/concise-jsdoc': 'error',
         'sort-keys': 'off',
         'new-cap': [
           'warn',
-          { capIsNewExceptions: ['Component', 'Pipe', 'Directive', 'Injectable'] },
-        ],
-      },
+          {
+            capIsNewExceptions: ['Component', 'Pipe', 'Directive', 'Injectable', 'Service']
+          }
+        ]
+      }
     },
     {
       files: ['**/*.stories.ts', '**/*.story.ts'],
@@ -57,9 +66,8 @@ export default defineConfig({
         'storybook/prefer-pascal-case': 'warn',
         'storybook/story-exports': 'error',
         'storybook/use-storybook-expect': 'error',
-        'storybook/use-storybook-testing-library': 'error',
-        'vitest/prefer-importing-vitest-globals': 'off',
-      },
-    },
-  ],
+        'storybook/use-storybook-testing-library': 'error'
+      }
+    }
+  ]
 });

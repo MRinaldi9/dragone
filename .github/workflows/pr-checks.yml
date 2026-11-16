@@ -6,97 +6,67 @@ on:
       - main
 
 jobs:
-  Eslint-Template-Angular:
+  Format_and_Lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7.0.0
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6.0.8
+        uses: pnpm/setup@v3.1.2
         with:
-          version: latest
+          cache: true
+          require-lockfile: true
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6.2.0
-        with:
-          node-version: 'latest'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run ESLint
-        run: pnpm lint:eslint
-
-  Oxlint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6.0.8
-        with:
-          version: latest
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6.2.0
-        with:
-          node-version: 'latest'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Run Oxfmt check
+        run: pnpm format:check
 
       - name: Run Oxlint
         run: pnpm lint:oxlint --format=github
 
-  Oxfmt-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+      - name: Run ESLint
+        run: pnpm lint:eslint
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6.0.8
-        with:
-          version: latest
+      - name: Run Stylelint
+        run: pnpm lint:css
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v6.2.0
-        with:
-          node-version: 'latest'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run Oxfmt check
-        run: pnpm format:check
+      - name: Check docs links
+        run: pnpm lint:docs
 
   Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7.0.0
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6.0.8
+        uses: pnpm/setup@v3.1.2
         with:
-          version: latest
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6.2.0
-        with:
-          node-version: 'latest'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          cache: true
+          require-lockfile: true
 
       - name: Install Playwright browsers
-        run: pnpx playwright install --with-deps --only-shell
+        run: pnpm exec playwright install --with-deps --only-shell
 
       - name: Run tests
         run: pnpm test
+
+  # Build-Package:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v7.0.0
+
+  #     - name: Setup pnpm
+  #       uses: pnpm/setup@v2.1.0
+  #       with:
+  #         version: "^12.0.0"
+  #         runtime: "node@24"
+  #         cache: true
+  #         require-lockfile: true
+
+  #     - name: Build library and lint package
+  #       run: pnpm lint:package
+
+  #     - name: Build Storybook
+  #       run: pnpm build-storybook

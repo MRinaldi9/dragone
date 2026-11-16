@@ -1,10 +1,7 @@
 import { Component, effect, untracked } from '@angular/core';
-import {
-  injectRadioGroupState,
-  injectRadioItemState,
-  NgpRadioIndicator,
-  NgpRadioItem,
-} from 'ng-primitives/radio';
+import { injectRadioGroupState, NgpRadioIndicator, NgpRadioItem } from 'ng-primitives/radio';
+
+import { createNotifier } from '@dragone/ui/utils';
 
 import { injectRadioGroupContext } from '../radio-group-context';
 
@@ -21,30 +18,25 @@ import { injectRadioGroupContext } from '../radio-group-context';
   `,
   styleUrl: './radio-item.css',
   host: {
-    '[attr.readonly]': 'radioGroupReadonly() ? "" : null',
+    '[attr.readonly]': 'radioGroupReadonly() ? "" : null'
   },
   hostDirectives: [
     {
       directive: NgpRadioItem,
-      inputs: ['ngpRadioItemValue:value', 'ngpRadioItemDisabled:disabled'],
-    },
-  ],
+      inputs: ['ngpRadioItemValue:value', 'ngpRadioItemDisabled:disabled']
+    }
+  ]
 })
 export class RadioItem {
-  readonly #state = injectRadioItemState();
-  readonly #radioGroupState = injectRadioGroupState();
   protected readonly radioGroupReadonly = injectRadioGroupContext().readonly;
+  readonly #radioGroupState = injectRadioGroupState();
+  readonly #notifierRadioGroup = createNotifier({ deps: [this.#radioGroupState().value] });
 
   constructor() {
     effect(() => {
-      const internalState = untracked(() => this.#state());
-      const disabled = this.#radioGroupState().disabled();
-      internalState.disabled.set(disabled);
-    });
-    effect(() => {
-      this.#radioGroupState().value();
+      this.#notifierRadioGroup.listen();
       const isReadonly = this.radioGroupReadonly();
-      if (isReadonly) untracked(() => this.#radioGroupState().value.set(null));
+      if (isReadonly) untracked(() => this.#radioGroupState().setValue(null));
     });
   }
 }

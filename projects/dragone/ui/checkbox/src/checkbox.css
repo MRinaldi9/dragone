@@ -1,3 +1,4 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: flex;
   width: 22px;
@@ -6,42 +7,47 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.25rem;
-  border: 1px solid var(--data-entry-border-default);
-  background-color: var(--color-global-primary-000);
+  border: 1px solid var(--drgn-color-border-data-entry-default);
+  background-color: var(--drgn-color-surface-base);
   padding: 0;
   outline: none;
   flex: none;
-  color: var(--ngp-text-inverse);
+  color: var(--drgn-color-text-inverse);
   font-size: 0.75rem;
+}
 
-  &[data-focus-visible],
-  &:focus-visible {
-    outline: 1px solid var(--data-entry-label-focus);
-    outline-offset: 2px;
-    border-color: var(--data-entry-label-focus);
-  }
-  &:not([data-disabled])[data-hover],
-  &:not([data-disabled]):hover {
-    border-color: var(--data-entry-label-hover);
-  }
-  &[data-disabled],
-  &:disabled {
-    background-color: var(--bg-disabled);
-    border-color: var(--bg-disabled);
-    color: var(--text-disabled);
-    pointer-events: none;
-  }
-  &[hidden] {
-    display: none;
-  }
-  &:not([data-disabled]):hover ng-icon {
-    color: var(--data-entry-label-hover);
-  }
-  &[readonly] {
-    pointer-events: none;
-  }
+:host[data-focus-visible],
+:host:focus-visible {
+  outline: 1px solid var(--drgn-color-text-data-entry-focus);
+  outline-offset: 2px;
+  border-color: var(--drgn-color-text-data-entry-focus);
+}
+
+:host:not([data-disabled])[data-hover],
+:host:not([data-disabled]):hover {
+  border-color: var(--drgn-color-text-data-entry-hover);
+}
+
+:host[data-disabled],
+:host:disabled {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: var(--drgn-color-surface-disabled);
+  color: var(--drgn-color-text-disabled);
+  pointer-events: none;
+}
+
+:host[hidden] {
+  display: none;
 }
 
 ng-icon {
-  color: var(--data-entry-label-default);
+  color: var(--drgn-color-text-data-entry-default);
+}
+
+:host:not([data-disabled]):hover ng-icon {
+  color: var(--drgn-color-text-data-entry-hover);
+}
+
+:host[readonly] {
+  pointer-events: none;
 }

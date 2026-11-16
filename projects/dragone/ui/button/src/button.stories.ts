@@ -1,11 +1,6 @@
-import {
-  argsToTemplate,
-  moduleMetadata,
-  type Meta,
-  type StoryObj,
-} from '@analogjs/storybook-angular';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowRight } from '@ng-icons/font-awesome/solid';
+import { argsToTemplate, moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, fn } from 'storybook/test';
 
 import { Button } from './button';
@@ -13,11 +8,11 @@ import { Button } from './button';
 type ButtonStory = Button & {
   darkMode: boolean;
   disabled: boolean;
-  icon: boolean;
   focusVisible: () => boolean;
   label: string;
   showLeadingIcon: boolean;
   showTrailingIcon: boolean;
+  status: 'info' | 'success' | 'warning' | 'danger' | 'neutral';
 };
 
 const meta: Meta<ButtonStory> = {
@@ -28,57 +23,72 @@ const meta: Meta<ButtonStory> = {
     focusVisible: fn(),
     label: 'Dragone',
     disabled: false,
-    icon: false,
+    iconOnly: false,
     showLeadingIcon: false,
     showTrailingIcon: false,
     size: 'large',
-    variant: 'primary',
+    semantic: 'primary'
   },
   argTypes: {
     focusVisible: { type: 'function', control: false },
     label: { control: 'text' },
-    showLeadingIcon: { control: 'boolean' },
-    showTrailingIcon: { control: 'boolean' },
+    showLeadingIcon: {
+      control: 'boolean',
+      if: { arg: 'iconOnly', truthy: false }
+    },
+    showTrailingIcon: {
+      control: 'boolean',
+      if: { arg: 'iconOnly', truthy: false }
+    },
     size: {
       description: 'The size of the button',
       type: 'string',
       options: ['small', 'medium', 'large'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'large' },
-      },
+        defaultValue: { summary: 'large' }
+      }
     },
-    variant: {
+    semantic: {
       description: 'The variant of the button',
       type: 'string',
-      options: ['primary', 'secondary', 'tertiary', 'ghost', 'danger'],
+      options: ['primary', 'secondary', 'tertiary', 'ghost'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'primary' },
-      },
+        defaultValue: { summary: 'primary' }
+      }
     },
     disabled: {
       description: 'Whether the button is disabled',
       type: 'boolean',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
+    status: {
+      description: 'The status of the button',
+      type: 'string',
+      options: ['neutral', 'danger'],
+      control: { type: 'select' }
+    }
   },
   decorators: [
-    moduleMetadata({ providers: [provideIcons({ faSolidArrowRight })], imports: [NgIcon] }),
+    moduleMetadata({
+      providers: [provideIcons({ faSolidArrowRight })],
+      imports: [NgIcon]
+    })
   ],
   render: args => ({
     props: args,
     template: `
       <button drgnButton ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>
-        ${args.showLeadingIcon ? '<ng-icon slot="leading" name="fa-solid-arrow-right"></ng-icon>' : ''}
+        ${args.showLeadingIcon ? '<ng-icon slot="leading" name="fa-solid-arrow-right" size="1rem"></ng-icon>' : ''}
         ${args.label}
-        ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right"></ng-icon>' : ''}
+        ${args.showTrailingIcon ? '<ng-icon slot="trailing" name="fa-solid-arrow-right" size="1rem"></ng-icon>' : ''}
       </button>
-      `,
-  }),
+      `
+  })
 };
 
 export default meta;
@@ -99,49 +109,49 @@ const Template: Story = {
       await expect(button).toHaveFocus();
       await expect(args.focusVisible).toHaveBeenCalled();
     });
-  },
+  }
 };
 
 export const Primary: Story = {
   ...Template,
   args: {
-    variant: 'primary',
-  },
+    semantic: 'primary'
+  }
 };
 
 export const Secondary: Story = {
   ...Template,
   args: {
-    variant: 'secondary',
-  },
+    semantic: 'secondary'
+  }
 };
 
 export const Tertiary: Story = {
   ...Template,
   args: {
-    variant: 'tertiary',
-  },
-};
-
-export const Danger: Story = {
-  ...Template,
-  args: {
-    variant: 'danger',
-  },
+    semantic: 'tertiary'
+  }
 };
 
 export const WithTrailingIcon: Story = {
   ...Template,
   args: {
-    showTrailingIcon: true,
-  },
+    showTrailingIcon: true
+  }
 };
 
 export const IconOnly: Story = {
   ...Template,
+  render: args => ({
+    props: args,
+    template: `
+      <button drgnButton ${argsToTemplate(args, { exclude: ['darkMode', 'label', 'showLeadingIcon', 'showTrailingIcon'] })}>
+        <ng-icon name="fa-solid-arrow-right" size="1rem"/>
+      </button>
+      `
+  }),
   args: {
     label: '',
-    showLeadingIcon: true,
-    icon: true,
-  },
+    iconOnly: true
+  }
 };

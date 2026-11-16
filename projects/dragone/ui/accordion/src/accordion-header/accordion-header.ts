@@ -4,10 +4,10 @@ import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
 import {
   injectAccordionItemState,
   injectAccordionState,
-  NgpAccordionTrigger,
+  NgpAccordionTrigger
 } from 'ng-primitives/accordion';
 
-import { Button, type ButtonVariant } from '@dragone/ui/button';
+import { Button, type ButtonSemantic } from '@dragone/ui/button';
 
 export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -18,28 +18,28 @@ export type AriaLevel = 1 | 2 | 3 | 4 | 5 | 6;
     <button
       ngpAccordionTrigger
       drgnButton
-      class="drgn-label-md-600"
-      [variant]="variant()"
+      labelClass="drgn-label-md-600"
+      [semantic]="headerSemantic()"
       [disabled]="isDisabled()"
     >
       <ng-content />
-      <ng-icon slot="trailing" class="chevron-icon" name="faSolidChevronDown" />
+      <ng-icon size="1rem" slot="trailing" class="chevron-icon" name="faSolidChevronDown" />
     </button>
   `,
   styleUrl: './accordion-header.css',
   providers: [provideIcons({ faSolidChevronDown })],
   host: {
     role: 'heading',
-    '[ariaLevel]': 'ariaLevel()',
-  },
+    '[ariaLevel]': 'ariaLevel()'
+  }
 })
 export class AccordionHeader {
   readonly ariaLevel = input.required<AriaLevel>();
-  readonly variant = input<Extract<ButtonVariant, 'primary' | 'tertiary'>>('primary');
+  readonly headerSemantic = input<Extract<ButtonSemantic, 'primary' | 'tertiary'>>('primary');
   private readonly internalState = injectAccordionItemState();
   private readonly accordionState = injectAccordionState();
 
   protected readonly isDisabled = computed(
-    () => this.internalState().disabled() || this.accordionState().disabled(),
+    () => this.internalState().disabled() || this.accordionState().disabled()
   );
 }

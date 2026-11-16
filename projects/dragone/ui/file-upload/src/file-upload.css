@@ -1,0 +1,60 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+:host[hidden] {
+  display: none;
+}
+
+.file-button {
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: inline-flex;
+}
+
+.file-item-enter {
+  animation: file-chip-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter) both;
+}
+
+.file-item-leave {
+  animation: file-chip-out var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit) both;
+}
+
+@keyframes file-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes file-chip-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}

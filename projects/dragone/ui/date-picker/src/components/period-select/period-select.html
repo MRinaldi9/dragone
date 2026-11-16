@@ -1,0 +1,14 @@
+<span class="select-value">{{ currentLabel() }}</span>
+<ng-icon name="faSolidChevronDown" />
+<div *ngpSelectPortal ngpSelectDropdown>
+  @for (option of options(); track option.value) {
+    <div
+      class="drgn-label-md-400"
+      ngpSelectOption
+      [ngpSelectOptionValue]="option.value"
+      [ngpSelectOptionIndex]="$index"
+    >
+      {{ option.label }}
+    </div>
+  }
+</div>

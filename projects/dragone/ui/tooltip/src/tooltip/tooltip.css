@@ -1,5 +1,8 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
-  background-color: var(--color-global-dark-secondary-120);
+  --drgn-runtime-tooltip-transform-origin: var(--ngp-tooltip-transform-origin);
+
+  background-color: var(--drgn-color-surface-secondary-strong);
   border-radius: 8px;
   position: absolute;
   max-width: 16rem;
@@ -7,19 +10,22 @@
   border: none;
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--text-on-primary-light);
-  transform-origin: var(--ngp-tooltip-transform-origin);
-  & .container {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
+  color: var(--drgn-color-text-inverse);
+  transform-origin: var(--drgn-runtime-tooltip-transform-origin);
 }
+
+:host .container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
 :host[data-enter] {
-  animation: tooltip-show 200ms ease-in-out;
+  animation: tooltip-show var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter);
 }
+
 :host[data-exit] {
-  animation: tooltip-hide 200ms ease-in-out;
+  animation: tooltip-hide var(--drgn-motion-duration-medium) var(--drgn-motion-easing-exit);
 }
 
 @keyframes tooltip-show {
@@ -27,16 +33,19 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
   }
 }
+
 @keyframes tooltip-hide {
   0% {
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.9);

@@ -10,6 +10,7 @@
     "noEmit": true
   },
   "include": [
-    "**/*.config.ts"
+    "**/*.config.ts",
+    "scripts/**/*.ts"
   ]
 }

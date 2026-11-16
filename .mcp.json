@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "angular-cli": {
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["exec", "ng", "mcp"]
+    },
+    "ngp-mcp": {
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["exec", "ngp-mcp"]
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    }
+  }
+}

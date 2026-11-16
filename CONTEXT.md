@@ -1,51 +1,105 @@
 # Dragone
 
-Dragone è un design system Angular che estende e implementa [Sirio](https://www.inps.design/3e7e2b0f5/p/37c451-ciao-italia) (il design system INPS). `@dragone/ui` è la libreria di componenti Angular che ne costituisce l'implementazione concreta.
+An independent Angular design system inspired by the [Sirio](https://www.inps.design/3e7e2b0f5/p/37c451-ciao-italia) design system (INPS), built on [ng-primitives](https://angularprimitives.com) for behavior and accessibility. Targeted at Italian public-sector digital services, released as open source.
 
 ## Language
 
-**Dragone**:
-Il progetto nel suo complesso — design system, tooling, convenzioni. Superset di Sirio.
-_Avoid_: framework, sistema, design system Dragone (è il progetto, non solo il design system)
-
-**Sirio**:
-Il design system INPS di riferimento da cui Dragone eredita visual language e token. Dragone lo estende ma non lo sostituisce.
-_Avoid_: design system (da solo, ambiguo tra Sirio e Dragone)
-
-**@dragone/ui**:
-La libreria Angular di componenti. Distribuita come secondary entry points (`@dragone/ui/button`, `@dragone/ui/checkbox`, ecc.). È l'artefatto pubblicabile di Dragone.
-_Avoid_: "la libreria Dragone" (usa sempre `@dragone/ui`)
-
-**Component**:
-Un Angular standalone component che appartiene a `@dragone/ui`. Combina una Primitive con lo stile Sirio e la surface API Dragone. Ogni Component vive in una propria directory e viene distribuito come secondary entry point.
-_Avoid_: widget, elemento, blocco
+### Architectural Layer
 
 **Primitive**:
-Una direttiva o componente headless di `ng-primitives` che gestisce comportamento, accessibilità e state management. I Component di Dragone compongono Primitive tramite `hostDirectives` anziché reimplementarne la logica.
-_Avoid_: base component, core component, ng-primitives component
+A headless Angular directive from ng-primitives that provides behavior and accessibility without styling.
+_Avoid_: Headless component, unstyled directive
 
-**Secondary Entry Point**:
-Un punto di ingresso indipendente della libreria (`@dragone/ui/<name>`), configurato tramite `ng-package.json`. Permette tree-shaking a livello di componente singolo.
-_Avoid_: subpackage, modulo, submodulo
+**Component**:
+A styled, themed, accessible Dragone unit that wraps one or more Primitives via `hostDirectives`, remapping inputs/outputs to `drgn-*` names and adding visual design.
+_Avoid_: Wrapper, styled primitive
 
-**Attribute Selector**:
-Selettore Angular del tipo `nativeElement[drgnDirective]` (es. `button[drgnButton]`). Si usa quando il Component non ha bisogno di un template proprio e potenzia un elemento HTML nativo.
-_Avoid_: directive selector (è comunque un Component, non una Directive)
+**Children Component**:
+An exported part of a composite Component (e.g. `AccordionItem` is a Children Component of `Accordion`).
+_Avoid_: Sub-component, part, slot
 
-**Element Selector**:
-Selettore Angular del tipo `drgn-name` (es. `drgn-select`). Si usa quando il Component richiede un template non triviale o sostituisce completamente il comportamento dell'elemento nativo.
-_Avoid_: custom element, web component
+**Private Component**:
+An unexported part of a composite Component used internally (e.g. `AccordionHeader` is a Private Component of `Accordion`).
+_Avoid_: Internal part, hidden component
 
-**Token**:
-Variabile CSS definita in `projects/dragone/ui/src/tokens.css`. Unico modo ammesso per esprimere valori di stile nei Component. Organizzati su tre livelli: Global (primitivi, non usare), Alias (semantici, preferire), Specific (contestuali).
-_Avoid_: variabile CSS (generico), design token (usa semplicemente "token")
+### Token System
 
-## Example dialogue
+**Primitive Token**:
+The original Sirio design-system CSS variables in `tokens.css` (e.g. `--color-global-primary-100`). Owned by Sirio, not intended for consumer override.
+_Avoid_: Raw token, base token, global token
 
-> **Dev**: Devo creare il componente Radio — uso `drgn-radio` o `input[drgnRadio]`?
->
-> **Domain expert**: Dipende dal template. Se puoi appoggiarti alla Primitiva `NgpRadio` di ng-primitives senza un template elaborato, usa l'Attribute Selector su `input`. Se il visual custom richiede elementi aggiuntivi nel DOM (icone, label animate), vai con Element Selector.
->
-> **Dev**: E per lo state, uso un signal mio o la Primitiva?
->
-> **Domain expert**: Prima consulta ng-primitives MCP — se esiste `injectRadioState()`, quella è la fonte di verità. Il Component Dragone si limita a leggere quello state e a proiettarlo nei data-attributes per lo styling.
+**Component Token**:
+The canonical `--drgn-*` CSS variables in `components.css` that Components consume. The public customization API — consumers may override these to diverge from Sirio.
+_Avoid_: Canonical token, drgn token, alias token
+
+### Theming
+
+**Theme**:
+A named visual context (light or dark) that remaps the values to which Component Tokens resolve, via a `data-theme` attribute. Component Token names stay the same across themes; only the resolved values change.
+_Avoid_: Color scheme, skin, mode
+
+### Forms
+
+**Form Field**:
+A composite unit (label + control + description + errors) that wraps a single Field Control. Implemented as `FormContainer`.
+_Avoid_: Form group, field wrapper, form element
+
+**Field Control**:
+The interactive element projected into a Form Field (e.g. input, select, checkbox).
+_Avoid_: Form input, form element
+
+**Form Control**:
+A Component that participates in Angular Signal Forms by implementing `FormValueControl` or `FormCheckboxControl`. The interface may be satisfied directly by the Component or by its ng-primitives hostDirective.
+_Avoid_: Form element, control value accessor, field
+
+### Visual Variables
+
+**Semantic**:
+The visual style of a Component, exposed via the `semantic` input (Button: `primary`, `secondary`, `tertiary`, `ghost`). Button semantics follow Sirio specs 1:1. Not every Component has a Semantic.
+_Avoid_: Variant, style, appearance, theme (conflicts with Theme)
+
+**Status**:
+The semantic meaning of a Component: `info`, `success`, `warning`, `danger`, `neutral`. Exposed via the `Status` directive's `drgnStatus` input and rendered as `data-status`; `neutral` is the default and is not rendered.
+_Avoid_: Alert, error, type, severity
+
+**Layout**:
+The responsive display mode of a Component (e.g. `mobile`, `desktop`). Exposed via the `layout` input.
+_Avoid_: Aspect, display mode, breakpoint
+
+**Size**:
+The dimensional scale of an interactive Component: `small`, `medium`, `large`. Not all Components have a Size.
+_Avoid_: Scale, dimension, spacing
+
+### Accessibility
+
+**Combobox**:
+The single element that owns the popup: it carries `role="combobox"`, `aria-expanded`, `aria-controls` and `aria-activedescendant`. In `Dropdown` the trigger is the combobox while the panel is closed; projecting a `DropdownSearch` hands the role to the search field and the trigger falls back to its native role (ADR-0010).
+_Avoid_: Input field, editable dropdown, search box (as a synonym)
+
+**A11y Escalation**:
+When a Sirio design token or component spec fails WCAG 2.2 AA, Dragone implements the spec faithfully, tracks the issue as a known limitation, and escalates to the Sirio design owners. Dragone does not patch the design. Consumers may override Component Tokens locally.
+_Avoid_: A11y workaround, accessibility fix
+
+### Testing
+
+**Test Host**:
+A test-only Angular Component that composes a Component under test, binding its signal inputs and observing its outputs, rendered with `render()` from `@wismaz/vitest-browser-angular`. The Component under test stays reactive to signal changes during the test.
+_Avoid_: Harness, fixture wrapper, test bench
+
+The Test Host is one option, not a blanket requirement. It is the natural fit when the Component under test targets a native element selector (e.g. `Button` on `button[drgnButton]`) and therefore cannot be rendered on its own, or when a test needs to drive the component from a parent context, such as Angular form APIs. Components with their own element selector (e.g. `Alert` on `drgn-alert`) can be rendered directly with `render(Component, ...)`. Choose per Component, per test intent.
+
+**Controlling Time in Tests**:
+Before writing a test that involves timers, decide whether the timing is the behavior under test or just in the way (see the [Marmicode Cookbook](https://cookbook.marmicode.io/angular/testing/controlling-time-in-tests)):
+
+- **Manual mode** (`vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()`) when the precise delay is what you assert, e.g. "at 99ms not fired, at 100ms fired".
+- **Fast-forward mode** (`vi.useFakeTimers().setTimerTickMode('nextTimerAsync')`, Vitest ≥ 4.1.0) when the timing is just in the way: the clock advances on its own, so tests do not couple to delay values. Flush pending timers with `await vi.runAllTimersAsync()`.
+- Always restore real timers with `onTestFinished(() => vi.useRealTimers())` (colocated setup/teardown), and install fake timers before any timer-dependent code runs.
+
+_Avoid_: hardcoding delay values in tests that do not assert precise timing; restoring real timers in `afterEach` instead of `onTestFinished`.
+
+## Rules
+
+- **WCAG 2.2 AA** is the accessibility standard, in both light and dark themes.
+- **Component Token overrides** are the supported customization path. Primitive Tokens are Sirio-owned and must not be overridden by consumers.
+- **All documentation is in English.** End-user-facing content (Storybook descriptions, usage guides) may be localized.
+- **Signal Forms** are the form integration strategy. `ControlValueAccessor` is not used — `FormValueControl`/`FormCheckboxControl` are the contracts.

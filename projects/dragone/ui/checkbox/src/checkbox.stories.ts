@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj, argsToTemplate } from '@analogjs/storybook-angular';
+import { type Meta, type StoryObj, argsToTemplate } from '@storybook/angular-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import { Checkbox } from './checkbox';
@@ -20,78 +20,72 @@ const meta: Meta<CheckboxArgs> = {
       description: 'Controlla se il checkbox è selezionato',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     disabled: {
       control: 'boolean',
       description: 'Disabilita il checkbox impedendo interazioni',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     checkedChange: {
       action: 'checkedChange',
       description: 'Evento emesso quando lo stato checked cambia',
       table: {
-        type: { summary: 'EventEmitter<boolean>' },
-      },
+        type: { summary: 'EventEmitter<boolean>' }
+      }
     },
     hidden: {
       control: 'boolean',
       description: 'Nasconde il checkbox quando impostato a true',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     readonly: {
       control: 'boolean',
       description: 'Rende il checkbox di sola lettura, non interagibile',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
+        defaultValue: { summary: 'false' }
+      }
+    }
   },
   render: args => ({
     props: args,
-    template: `<drgn-checkbox aria-label="Checkbox" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`,
-  }),
+    template: `<drgn-checkbox aria-label="Checkbox" ${argsToTemplate(args, { exclude: ['darkMode'] })}/>`
+  })
 };
 
 export default meta;
 type Story = StoryObj<CheckboxArgs>;
 
-/**
- * Checkbox di default in stato non selezionato.
- */
+/** Checkbox di default in stato non selezionato. */
 export const Default: Story = {
   args: {
     checked: false,
     disabled: false,
-    checkedChange: fn(),
-  },
+    checkedChange: fn()
+  }
 };
 
-/**
- * Checkbox in stato checked (selezionato).
- */
+/** Checkbox in stato checked (selezionato). */
 export const Checked: Story = {
   args: {
     ...Default.args,
-    checked: true,
-  },
+    checked: true
+  }
 };
 
-/**
- * Checkbox in stato disabilitato, non interagibile.
- */
+/** Checkbox in stato disabilitato, non interagibile. */
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    disabled: true,
+    disabled: true
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -100,23 +94,19 @@ export const Disabled: Story = {
     // Verifica che il checkbox sia disabilitato
     await expect(checkboxElement).toHaveAttribute('aria-disabled', 'true');
     await expect(checkboxElement).toHaveAttribute('data-disabled');
-  },
+  }
 };
 
-/**
- * Checkbox disabilitato in stato checked.
- */
+/** Checkbox disabilitato in stato checked. */
 export const DisabledChecked: Story = {
   args: {
     ...Default.args,
     checked: true,
-    disabled: true,
-  },
+    disabled: true
+  }
 };
 
-/**
- * Test di interazione: verifica che il checkbox cambi stato al click.
- */
+/** Test di interazione: verifica che il checkbox cambi stato al click. */
 export const InteractionTest: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -139,12 +129,10 @@ export const InteractionTest: Story = {
     // Verifica stato non checked
     await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');
     await expect(checkboxElement).not.toHaveAttribute('data-checked');
-  },
+  }
 };
 
-/**
- * Test di accessibilità: verifica la navigazione da tastiera.
- */
+/** Test di accessibilità: verifica la navigazione da tastiera. */
 export const KeyboardNavigation: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -165,5 +153,5 @@ export const KeyboardNavigation: Story = {
     // Deseleziona con Space
     await userEvent.keyboard(' ');
     await expect(checkboxElement).toHaveAttribute('aria-checked', 'false');
-  },
+  }
 };

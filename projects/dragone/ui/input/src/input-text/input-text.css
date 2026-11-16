@@ -1,39 +1,55 @@
-:host {
-  &:not(:where(drgn-input-group *)) {
-    display: block;
-    width: 100%;
-    border: 1px solid var(--data-entry-border-default);
-    border-radius: 4px;
-    padding: 1rem;
-    background-color: var(--color-global-primary-000);
-    color: var(--data-entry-label-default);
-    transition: border-color 0.2s;
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host:not(:where(drgn-input-group *)) {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--drgn-color-border-data-entry-default);
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: var(--drgn-color-surface-base);
+  color: var(--drgn-color-text-data-entry-default);
+  transition: border-color var(--drgn-motion-duration-medium);
+}
 
-    &::placeholder {
-      color: var(--data-entry-placeholder-default);
-    }
+:host:not(:where(drgn-input-group *))::placeholder {
+  color: var(--drgn-color-text-placeholder-default);
+}
 
-    &:hover:not(:disabled) {
-      border-color: var(--data-entry-label-hover);
-    }
+/* In a group the frame belongs to the group and the input just fills the row. These rules live
+   here because `input-group.css` cannot reach a projected input: its `:host input` is shimmed to
+   `input[_ngcontent-<group>]`, which a consumer-declared input never carries. */
+:host:where(drgn-input-group *) {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 0;
+  background: transparent;
+  color: var(--drgn-color-text-data-entry-default);
+}
 
-    &:focus {
-      border-color: var(--interactive-primary-default);
-      outline: none;
-    }
+:host:where(drgn-input-group *)::placeholder {
+  color: var(--drgn-color-text-placeholder-default);
+}
 
-    &[data-focus-visible='keyboard'] {
-      outline: none;
-      box-shadow:
-        0 0 0 3px var(--color-global-primary-000),
-        0 0 0 5px var(--interactive-primary-default);
-    }
+:host:not(:where(drgn-input-group *)):hover:not(:disabled) {
+  border-color: var(--drgn-color-text-data-entry-hover);
+}
 
-    &:disabled {
-      background-color: var(--bg-disabled);
-      border-color: transparent;
-      color: var(--text-disabled);
-      cursor: not-allowed;
-    }
-  }
+:host:not(:where(drgn-input-group *)):focus {
+  border-color: var(--drgn-color-interactive-primary-default);
+  outline: none;
+}
+
+:host:not(:where(drgn-input-group *))[data-focus-visible='keyboard'] {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--drgn-color-focus-ring-outline),
+    0 0 0 5px var(--drgn-color-focus-ring-primary);
+}
+
+:host:not(:where(drgn-input-group *)):disabled {
+  background-color: var(--drgn-color-surface-disabled);
+  border-color: transparent;
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
 }

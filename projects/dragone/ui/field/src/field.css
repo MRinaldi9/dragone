@@ -1,0 +1,71 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+:host([data-control-layout='horizontal']) .control {
+  order: 1;
+}
+
+:host([data-control-layout='horizontal']) .label {
+  order: 2;
+}
+
+:host([data-control-layout='horizontal']) .description {
+  order: 3;
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-bottom: 4px;
+}
+
+:host([data-control-layout='horizontal']) .field-container {
+  flex-direction: row;
+}
+
+.error-message {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  color: var(--drgn-color-interactive-alert-default);
+}
+
+.error-enter {
+  animation: error-in var(--drgn-motion-duration-medium) var(--drgn-motion-easing-enter) both;
+}
+
+.error-leave {
+  animation: error-out var(--drgn-motion-duration-short) var(--drgn-motion-easing-exit) both;
+}
+
+@keyframes error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}

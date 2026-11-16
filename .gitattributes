@@ -1,0 +1,27 @@
+# Line endings are LF everywhere, on every platform.
+#
+# oxfmt writes LF unconditionally and has no endOfLine option, so a CRLF working
+# tree makes `pnpm format:check` report every file as unformatted while `git diff`
+# shows nothing (core.autocrlf silently converts CRLF back to LF on staging).
+# `eol=lf` overrides core.autocrlf per clone, so Windows, macOS and Linux all get
+# the same bytes that are stored in the repository.
+* text=auto eol=lf
+
+# Binary: never translate, never diff as text.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.avif binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.otf   binary
+*.pdf  binary
+
+# Generated: keep out of diffs and review noise.
+pnpm-lock.yaml     -diff linguist-generated
+documentation.json -diff linguist-generated

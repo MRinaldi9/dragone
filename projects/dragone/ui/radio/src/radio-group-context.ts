@@ -4,7 +4,7 @@ import {
   type Provider,
   type Type,
   assertInInjectionContext,
-  inject,
+  inject
 } from '@angular/core';
 
 export interface RadioGroupContext {
@@ -15,7 +15,7 @@ const RADIO_GROUP_CONTEXT = new InjectionToken<RadioGroupContext>('Radio Group C
 
 export const provideRadioGroupContext = <T>(component: Type<T>): Provider => ({
   provide: RADIO_GROUP_CONTEXT,
-  useExisting: component,
+  useExisting: component
 });
 
 export const injectRadioGroupContext = (): RadioGroupContext => {

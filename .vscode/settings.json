@@ -4,22 +4,45 @@
       "file": ".github/commit-message-instructions.md"
     }
   ],
-  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.fmt.configPath": "oxfmt.config.ts",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "explicit"
+    "source.fixAll.oxc": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "oxc.enable": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "css.validate": false,
+  "[postcss]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "oxc.enable.oxlint": true,
-  "oxc.enable.oxfmt": true,
-  "chat.instructionsFilesLocations": {
-    ".github/instructions": true,
-    ".claude/rules": true,
-    "~/.copilot/instructions": true,
-    "~/.claude/rules": true
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "js/ts.tsdk.path": "node_modules\\typescript\\lib",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://opencode.ai/": true
+  },
 }

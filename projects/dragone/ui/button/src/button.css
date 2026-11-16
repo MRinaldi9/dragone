@@ -1,123 +1,223 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
 :host {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-on-primary-light);
-  padding: 12px 42px;
+  color: var(--drgn-color-text-inverse);
   border-radius: 4px;
   border-width: 0;
   cursor: pointer;
-  &[data-icon-only='true'] {
-    padding: 16px;
-  }
-  &[data-focus-visible] {
-    outline: none;
-    box-shadow:
-      0 0 0 3px var(--color-global-primary-000),
-      0 0 0 5px var(--interactive-primary-default),
-      0 0 10px 0 rgba(0, 125, 179, 0.7);
-  }
-  &:disabled {
-    background-color: var(--bg-disabled);
-    color: var(--text-disabled);
-    cursor: not-allowed;
-  }
-  &[data-variant='primary']:not(:disabled) {
-    background-color: var(--interactive-primary-default);
-    &:hover {
-      background-color: var(--interactive-primary-hover);
-    }
-    &:active {
-      background-color: var(--interactive-primary-pressed);
-    }
-  }
-  &[data-variant='secondary']:not(:disabled) {
-    background-color: var(--interactive-secondary-default);
-    &:hover {
-      background-color: var(--interactive-secondary-hover);
-    }
-    &:active {
-      background-color: var(--interactive-secondary-pressed);
-    }
-  }
-  &[data-variant='danger']:not(:disabled) {
-    background-color: var(--interactive-alert-default);
-    &:hover {
-      background-color: var(--interactive-alert-hover);
-    }
-    &:active {
-      background-color: var(--interactive-alert-pressed);
-    }
-  }
-  &[data-variant='tertiary']:not([ngpAccordionTrigger]) {
-    background-color: transparent;
-    &:not(:disabled) {
-      color: var(--interactive-primary-default);
-      border: 2px solid var(--interactive-primary-default);
-      &:hover {
-        color: var(--interactive-primary-hover);
-        border: 2px solid var(--interactive-primary-hover);
-      }
-      &:active {
-        color: var(--interactive-primary-pressed);
-        border: 2px solid var(--interactive-primary-pressed);
-      }
-    }
-    &:disabled {
-      color: var(--text-disabled);
-      border: 2px solid var(--bg-disabled);
-    }
-  }
-  &[data-variant='ghost'] {
-    background-color: transparent;
-    &:not(:disabled) {
-      color: var(--interactive-primary-default);
-      &:hover {
-        color: var(--interactive-primary-hover);
-      }
-      &:active {
-        color: var(--text-on-primary-light);
-        background-color: var(--interactive-primary-pressed);
-      }
-    }
-    &:disabled {
-      color: var(--text-disabled);
-    }
-  }
-  &[data-variant='tertiary'][ngpAccordionTrigger] {
-    background-color: var(--color-global-primary-000);
-    &:not(:disabled) {
-      color: var(--bg-primary-dark-110);
-      border: 1px solid var(--bg-primary-light-50);
-      &:hover,
-      &[data-open] {
-        background-color: var(--bg-primary-light-40);
-      }
-    }
-    &:disabled {
-      color: var(--text-disabled);
-      border: 1px solid var(--bg-disabled);
-    }
-  }
 }
-:host-context(.drgn-dark) {
-  &[data-variant='tertiary'] {
-    background-color: transparent;
-    &:not(:disabled) {
-      color: var(--interactive-accent-default);
-      border: 2px solid var(--interactive-accent-default);
-      &:hover {
-        color: var(--interactive-accent-hover);
-        border: 2px solid var(--interactive-accent-hover);
-      }
-      &:active {
-        color: var(--interactive-accent-pressed);
-        border: 2px solid var(--interactive-accent-pressed);
-      }
+
+:host[data-size='large'] {
+  padding: 12px 42px;
+}
+
+:host[data-size='large'][data-icon-only] {
+  padding: 16px;
+}
+
+:host[data-size='medium'] {
+  padding: 6px 12px;
+}
+
+:host[data-size='medium'][data-icon-only] {
+  padding: 12px;
+}
+
+:host[data-size='small'] {
+  padding: 2px 6px;
+}
+
+:host[data-size='small'][data-icon-only] {
+  padding: 6px;
+}
+
+/* Icon-only projects the icon through the default slot, inside the label
+   wrapper span. Without this the span keeps an inline formatting context
+   (inherited line-height strut) taller than the 16px icon. display: contents
+   removes the wrapper box so the icon sizes the button directly. */
+:host[data-icon-only] > span {
+  display: contents;
+}
+
+:host[data-focus-visible],
+:host[data-focus].cdk-program-focused {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--drgn-color-focus-ring-outline),
+    0 0 0 5px var(--drgn-color-focus-ring-interactive),
+    0 0 10px 5px #007db3b3;
+}
+
+:host:disabled {
+  background-color: var(--drgn-color-surface-disabled);
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
+}
+
+:host[data-semantic='primary']:not(:disabled) {
+  background-color: var(--drgn-color-interactive-primary-default);
+}
+
+:host[data-semantic='primary']:not(:disabled):hover {
+  background-color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-semantic='primary']:not(:disabled):active {
+  background-color: var(--drgn-color-interactive-primary-pressed);
+}
+
+:host[data-semantic='primary']:not(:disabled)[data-status='danger'] {
+  background-color: var(--drgn-color-interactive-alert-default);
+}
+
+:host[data-semantic='primary']:not(:disabled)[data-status='danger']:hover {
+  background-color: var(--drgn-color-interactive-alert-hover);
+}
+
+:host[data-semantic='primary']:not(:disabled)[data-status='danger']:active {
+  background-color: var(--drgn-color-interactive-alert-pressed);
+}
+
+:host[data-semantic='secondary']:not(:disabled) {
+  background-color: var(--drgn-color-interactive-secondary-default);
+}
+
+:host[data-semantic='secondary']:not(:disabled):hover {
+  background-color: var(--drgn-color-interactive-secondary-hover);
+}
+
+:host[data-semantic='secondary']:not(:disabled):active {
+  background-color: var(--drgn-color-interactive-secondary-pressed);
+}
+
+/* &[data-status='danger']:not(:disabled) {
+    background-color: var(--drgn-color-interactive-alert-default);
+    &:hover {
+      background-color: var(--drgn-color-interactive-alert-hover);
     }
-    &:disabled {
-      color: var(--text-disabled);
-      border: 2px solid var(--bg-disabled);
+    &:active {
+      background-color: var(--drgn-color-interactive-alert-pressed);
     }
-  }
+  } */
+:host[data-semantic='tertiary'] {
+  background-color: transparent;
+}
+
+:host[data-semantic='tertiary']:not(:disabled) {
+  color: var(--drgn-color-interactive-primary-default);
+  border: 2px solid var(--drgn-color-interactive-primary-default);
+}
+
+:host[data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 2px solid var(--drgn-color-surface-disabled);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary'] {
+  background-color: transparent;
+}
+
+:host[data-semantic='tertiary']:not(:disabled):hover {
+  color: var(--drgn-color-interactive-primary-hover);
+  border: 2px solid var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-semantic='tertiary']:not(:disabled):active {
+  color: var(--drgn-color-interactive-primary-pressed);
+  border: 2px solid var(--drgn-color-interactive-primary-pressed);
+}
+
+:host[data-semantic='tertiary']:not(:disabled)[data-status='danger'] {
+  color: var(--drgn-color-interactive-alert-default);
+  border: 2px solid var(--drgn-color-interactive-alert-default);
+}
+
+:host[data-semantic='tertiary']:not(:disabled)[data-status='danger']:hover {
+  color: var(--drgn-color-interactive-alert-hover);
+  border: 2px solid var(--drgn-color-interactive-alert-hover);
+}
+
+:host[data-semantic='tertiary']:not(:disabled)[data-status='danger']:active {
+  color: var(--drgn-color-interactive-alert-pressed);
+  border: 2px solid var(--drgn-color-interactive-alert-pressed);
+}
+
+:host[data-semantic='ghost'] {
+  background-color: transparent;
+}
+
+:host[data-semantic='ghost']:not(:disabled) {
+  color: var(--drgn-color-interactive-primary-default);
+}
+
+:host[data-semantic='ghost']:disabled {
+  color: var(--drgn-color-text-disabled);
+}
+
+:host[data-semantic='ghost']:not(:disabled):hover {
+  color: var(--drgn-color-interactive-primary-hover);
+}
+
+:host[data-semantic='ghost']:not(:disabled):active {
+  color: var(--drgn-color-text-inverse);
+  background-color: var(--drgn-color-interactive-primary-pressed);
+}
+
+:host[data-semantic='ghost']:not(:disabled)[data-status='danger'] {
+  color: var(--drgn-color-interactive-alert-default);
+}
+
+:host[data-semantic='ghost']:not(:disabled)[data-status='danger']:hover {
+  color: var(--drgn-color-interactive-alert-hover);
+}
+
+:host[data-semantic='ghost']:not(:disabled)[data-status='danger']:active {
+  color: var(--drgn-color-text-inverse);
+  background-color: var(--drgn-color-interactive-alert-pressed);
+}
+
+:host[data-theme='dark'][data-semantic='tertiary'] {
+  background-color: transparent;
+}
+
+:host[data-theme='dark'][data-semantic='tertiary']:not(:disabled) {
+  color: var(--drgn-color-interactive-accent-default);
+  border: 2px solid var(--drgn-color-interactive-accent-default);
+}
+
+:host[data-theme='dark'][data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 2px solid var(--drgn-color-surface-disabled);
+}
+
+:host[data-theme='dark'][data-semantic='tertiary']:not(:disabled):hover {
+  color: var(--drgn-color-interactive-accent-hover);
+  border: 2px solid var(--drgn-color-interactive-accent-hover);
+}
+
+:host[data-theme='dark'][data-semantic='tertiary']:not(:disabled):active {
+  color: var(--drgn-color-interactive-accent-pressed);
+  border: 2px solid var(--drgn-color-interactive-accent-pressed);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary']:not(:disabled) {
+  color: var(--drgn-color-interactive-accent-default);
+  border: 2px solid var(--drgn-color-interactive-accent-default);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary']:disabled {
+  color: var(--drgn-color-text-disabled);
+  border: 2px solid var(--drgn-color-surface-disabled);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary']:not(:disabled):hover {
+  color: var(--drgn-color-interactive-accent-hover);
+  border: 2px solid var(--drgn-color-interactive-accent-hover);
+}
+
+:host-context([data-theme='dark'])[data-semantic='tertiary']:not(:disabled):active {
+  color: var(--drgn-color-interactive-accent-pressed);
+  border: 2px solid var(--drgn-color-interactive-accent-pressed);
 }

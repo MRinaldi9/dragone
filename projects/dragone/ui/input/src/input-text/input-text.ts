@@ -2,6 +2,8 @@ import { Component, computed, input } from '@angular/core';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 import { uniqueId } from 'ng-primitives/utils';
 
+import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
+
 export type InputValidity = 'valid' | 'invalid' | 'warning';
 
 @Component({
@@ -13,12 +15,13 @@ export type InputValidity = 'valid' | 'invalid' | 'warning';
     class: 'drgn-label-md-400',
     '[id]': 'id()',
     '[attr.aria-invalid]': 'isInvalid()',
-    '[attr.data-validation]': 'validationState()',
+    '[attr.data-validation]': 'validationState()'
   },
-  hostDirectives: [NgpFocusVisible],
+  hostDirectives: [NgpFocusVisible]
 })
 export class InputText {
   readonly id = input(uniqueId('drgn-input'));
   readonly validationState = input<InputValidity | null>(null);
   readonly isInvalid = computed(() => this.validationState() === 'invalid');
+  readonly host = toNativeElement<HTMLInputElement>(injectElementRef());
 }

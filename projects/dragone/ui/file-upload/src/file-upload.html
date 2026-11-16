@@ -1,0 +1,38 @@
+<button
+  type="button"
+  drgnButton
+  ngpFileUpload
+  class="file-button"
+  [ngpFileUploadMultiple]="multiple()"
+  [ngpFileUploadDisabled]="disabled()"
+  [ngpFileUploadDragDrop]="dragDrop()"
+  [ngpFileUploadFileTypes]="fileTypes()"
+  [disabled]="disabled()"
+  (ngpFileUploadSelected)="filesSelected($event)"
+  (blur)="touch.emit()"
+>
+  <ng-content />
+  <ng-icon slot="trailing" name="faSolidFolderOpen" size="1rem" />
+</button>
+@let files = filesTemplate();
+
+<ul #focusManager="focusManager" drgnFocusManager [fallbackElement]="fileUploader()">
+  @for (file of files; track file.name) {
+    @let uniqueName = `${file.name}:${file.size}:${file.lastModified}`;
+    <li
+      #liElement
+      animate.enter="file-item-enter"
+      [drgnFocusElement]="uniqueName"
+      (animate.leave)="
+        liElement.classList.add('file-item-leave'); focusManager.focusNext(uniqueName)
+      "
+    >
+      <drgn-chip-input
+        [label]="file.name"
+        [disabled]="disabled()"
+        [removeAriaLabel]="file | ariaLabel: files"
+        (remove)="removeFile(file)"
+      />
+    </li>
+  }
+</ul>

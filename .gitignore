@@ -5,11 +5,13 @@
 /tmp
 /out-tsc
 /bazel-out
+.stylelintcache
 
 # Node
-/node_modules
+node_modules
 npm-debug.log
 yarn-error.log
+*.tsbuildinfo
 
 # IDEs and editors
 .idea/
@@ -42,3 +44,7 @@ Thumbs.db
 storybook-static
 storybook-static/
 documentation.json
+.tokensave
+
+# Claude Code personal overrides
+.claude/settings.local.json

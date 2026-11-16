@@ -8,7 +8,7 @@ describe(InputText, () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputText],
+      imports: [InputText]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InputText);

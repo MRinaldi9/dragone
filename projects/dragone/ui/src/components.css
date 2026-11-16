@@ -1,0 +1,213 @@
+:root {
+  /* Canonical Dragone tokens consumed by components */
+  --drgn-color-text-primary: var(--color-alias-text-color-secondary-dark-130);
+  --drgn-color-text-primary-dark-110: var(--color-alias-text-color-primary-dark-110);
+  --drgn-color-text-secondary: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-inverse: var(--color-alias-text-color-primary-light-0);
+  --drgn-color-text-disabled: var(--color-alias-text-color-disabled);
+  --drgn-color-text-default: var(--color-alias-interactive-primary-000-default);
+  --drgn-color-surface-base: var(--color-alias-background-color-primary-light-0);
+  --drgn-color-surface-disabled: var(--color-alias-background-color-disabled);
+  --drgn-color-surface-primary-subtle: var(--color-alias-background-color-primary-light-40);
+  --drgn-color-surface-primary-muted: var(--color-alias-background-color-primary-light-50);
+  --drgn-color-surface-primary-strong: var(--color-alias-background-color-primary-dark-110);
+  --drgn-color-surface-primary-darker: var(--color-alias-background-color-primary-dark-115);
+  --drgn-color-surface-secondary-strong: var(--color-alias-background-color-secondary-dark-120);
+  --drgn-color-border-data-entry-default: var(--color-specific-data-entry-border-color-default);
+  --drgn-color-border-data-entry-hover: var(--color-specific-data-entry-border-color-hover);
+  --drgn-color-border-data-entry-focus: var(--color-specific-data-entry-border-color-focus);
+  --drgn-color-border-accent-subtle: var(--color-global-mid-primary-70);
+  --drgn-color-text-data-entry-default: var(--color-specific-data-entry-label-color-default);
+  --drgn-color-text-data-entry-hover: var(--color-specific-data-entry-label-color-hover);
+  --drgn-color-text-data-entry-focus: var(--color-specific-data-entry-label-color-focus);
+  --drgn-color-text-placeholder-default: var(--color-specific-data-entry-placeholder-color-default);
+  --drgn-color-interactive-primary-default: var(--color-alias-interactive-primary-default);
+  --drgn-color-interactive-primary-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-color-interactive-primary-pressed: var(--color-alias-interactive-primary-pressed);
+  --drgn-color-interactive-secondary-default: var(--color-alias-interactive-secondary-default);
+  --drgn-color-interactive-secondary-hover: var(--color-alias-interactive-secondary-hover);
+  --drgn-color-interactive-secondary-pressed: var(--color-alias-interactive-secondary-pressed);
+  --drgn-color-interactive-alert-default: var(--color-alias-interactive-alert-default);
+  --drgn-color-interactive-alert-hover: var(--color-alias-interactive-alert-hover);
+  --drgn-color-interactive-alert-pressed: var(--color-alias-interactive-alert-pressed);
+  --drgn-color-interactive-warning-default: var(--color-alias-interactive-warning-default);
+  --drgn-color-interactive-warning-hover: var(--color-alias-interactive-warning-hover);
+  --drgn-color-interactive-success-default: var(--color-alias-interactive-success-default);
+  --drgn-color-interactive-accent-default: var(--color-alias-interactive-accent-default);
+  --drgn-color-interactive-accent-hover: var(--color-alias-interactive-accent-hover);
+  --drgn-color-interactive-accent-pressed: var(--color-alias-interactive-accent-pressed);
+  --drgn-color-option-background-focus: var(--color-specific-option-background-color-focus);
+  --drgn-color-option-background-hover: var(--color-specific-option-background-color-hover);
+  --drgn-color-option-background-pressed: var(--color-specific-option-background-color-pressed);
+  --drgn-color-option-background-selected: var(--color-specific-option-background-color-valued);
+  --drgn-color-surface-search-header: var(--color-global-light-secondary-40);
+  --drgn-color-border-search-field-default: var(--color-global-light-secondary-50);
+  --drgn-color-focus-ring-outline: var(--color-global-primary-000);
+  --drgn-color-focus-ring-primary: var(--color-alias-interactive-primary-default);
+  --drgn-color-focus-ring-interactive: var(--color-alias-interactive-border-focus);
+  --drgn-typography-font-family-base: var(--typography-global-font-family-01);
+  --drgn-typography-font-family-number: var(--typography-global-font-family-03);
+  --drgn-typography-font-family-serif: var(--typography-alias-font-family-text-02);
+  --drgn-typography-font-style-normal: normal;
+  --drgn-typography-letter-spacing-default: 0;
+  --drgn-typography-size-h1-xl: var(--typography-alias-h1-xl-size-15);
+  --drgn-typography-line-height-h1-xl: var(--typography-alias-h1-xl-line-height-15);
+  --drgn-typography-size-h3-md: var(--typography-alias-h3-md-size-09);
+  --drgn-typography-line-height-h3-md: var(--typography-alias-h3-md-line-height-09);
+  --drgn-typography-size-h4-md: var(--typography-alias-h4-md-size-07);
+  --drgn-typography-line-height-h4-md: var(--typography-alias-h4-md-line-height-07);
+  --drgn-typography-size-h4-lg: var(--typography-alias-h4-lg-size-08);
+  --drgn-typography-line-height-h4-lg: var(--typography-alias-h4-lg-line-height-08);
+  --drgn-typography-size-label-md: var(--typography-alias-label-md-size-04);
+  --drgn-typography-line-height-label-md: var(--typography-alias-label-line-height-04);
+  --drgn-typography-size-p-md: var(--typography-alias-p-md-size-04);
+  --drgn-typography-line-height-p-md: var(--typography-alias-p-md-line-height-04);
+  --drgn-typography-size-p-lg: var(--typography-alias-p-lg-size-05);
+  --drgn-typography-line-height-p-lg: var(--typography-alias-p-lg-line-height-05);
+  --drgn-typography-size-helper-text-xs: var(--typography-alias-label-xs-size-02);
+  --drgn-typography-line-height-helper-text-xs: var(--typography-alias-label-line-height-01);
+  --drgn-typography-weight-regular: var(--typography-global-font-weights-400);
+  --drgn-typography-weight-semibold: var(--typography-global-font-weights-600);
+  --drgn-typography-weight-bold: var(--typography-global-font-weights-700);
+  --drgn-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
+  --drgn-motion-duration-short: 100ms;
+  --drgn-motion-duration-medium: 200ms;
+  --drgn-motion-duration-long: 400ms;
+  --drgn-motion-easing-standard: ease;
+  --drgn-motion-easing-enter: ease-out;
+  --drgn-motion-easing-exit: ease-in;
+  --drgn-shadow-blur-sm: var(--elevation-elevation-01);
+  --drgn-shadow-blur-md: var(--elevation-elevation-02);
+  --drgn-shadow-blur-lg: var(--elevation-elevation-03);
+  --drgn-shadow-blur-xl: var(--elevation-elevation-04);
+
+  /* Loader: 64px matches the Penpot "Loader" main component and the exported
+     Loader.svg. The ring is a conic fade (transparent blue to solid blue) with
+     a solid head tick; the exported SVG shows no static gray track, so the
+     gray construction layer from Penpot is intentionally omitted. */
+  --drgn-loader-size-small: 32px;
+  --drgn-loader-size-medium: 64px;
+  --drgn-loader-size-large: 96px;
+  --drgn-loader-gradient-color: var(--color-global-primary-100);
+  --drgn-loader-indicator-color: var(--drgn-color-interactive-primary-default);
+  --drgn-loader-animation-duration: 1s;
+
+  /* Blocking is functional (scroll-lock + consumer-side inert); the veil only
+     dims the page and stays consumer-overridable. 95% alpha keeps the page
+     barely perceivable behind the spinner. */
+  --drgn-loader-overlay-background: color-mix(
+    in srgb,
+    var(--color-global-primary-000) 95%,
+    transparent
+  );
+  --drgn-loader-overlay-z-index: 1000;
+
+  /* Card */
+  --drgn-color-surface-card: var(--color-alias-background-color-primary-light-0);
+  --drgn-color-surface-card-dark: var(--color-global-dark-primary-115);
+  --drgn-color-text-card-title: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-card-subtitle: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-card-body: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-card-signature: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-card-tag-bg: var(--color-global-secondary-100);
+  --drgn-color-card-tag-text: var(--color-alias-text-color-primary-light-0);
+  --drgn-color-card-link: var(--color-alias-interactive-primary-default);
+  --drgn-color-card-link-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-color-card-link-pressed: var(--color-alias-interactive-primary-pressed);
+  --drgn-color-card-overlay: var(--color-specific-card-overlay-gradient-img);
+  --drgn-radius-card: 4px;
+  --drgn-shadow-card: var(--elevation-elevation-01);
+  --drgn-shadow-card-hover: var(--elevation-elevation-02);
+  --drgn-space-card-padding: 32px;
+  --drgn-space-card-gap: 24px;
+  --drgn-space-card-padding-mobile: 16px;
+  --drgn-space-card-padding-mobile-top: 24px;
+  --drgn-space-card-padding-inline-landscape: 48px;
+  --drgn-space-card-gap-mobile: 16px;
+
+  /* Dialog — geometry from the Penpot "Dialog" page (Small 360px / Large 600px
+     panels, 16px radius, white surface; Large pads 24px top / 32px inline and
+     bottom; content gap 16px Small / 24px Large; 48px ghost close button
+     pinned 24px from the panel's top-right corner, 32px inline on Large).
+     Shadows: several Penpot variants carry an untokenized #aab2bb/50% value;
+     the token-linked elevation values the other variants use are mapped here
+     (recorded as a Sirio inconsistency). The scrim is not specified in the
+     Penpot Dialog page: the Sirio overlay alias (dark primary at 90%) is used,
+     with no blur. */
+  --drgn-dialog-overlay-background: var(--color-alias-overlay-90-dark-primary-120);
+  --drgn-dialog-overlay-z-index: 1000;
+  --drgn-space-dialog-overlay-padding: 24px;
+  --drgn-dialog-width-small: 360px;
+  --drgn-dialog-width-large: 600px;
+  --drgn-radius-dialog: 16px;
+  --drgn-space-dialog-padding-small: 24px;
+  --drgn-space-dialog-padding-large-top: 24px;
+  --drgn-space-dialog-padding-large-inline: 32px;
+  --drgn-space-dialog-padding-large-bottom: 32px;
+  --drgn-space-dialog-gap-small: 16px;
+  --drgn-space-dialog-gap-large: 24px;
+  --drgn-space-dialog-close-inset: 24px;
+  --drgn-space-dialog-close-inset-large: 32px;
+  --drgn-color-surface-dialog: var(--color-alias-background-color-primary-light-0);
+  --drgn-color-text-dialog-title: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-color-text-dialog-body: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-shadow-dialog-small: var(--elevation-elevation-03);
+  --drgn-shadow-dialog-large: var(--elevation-elevation-04);
+
+  /* Pagination — geometry and states from the Sirio Figma "Paginazione" page. A page tile fills
+     #00368F on hover and #00173D while pressed or as the current page; its focus state is the
+     spec's 1px interactive border plus a 3px glow. The full bar is the spec's 74px board on the
+     light-blue surface (#D9E4F7): the page jumper is preceded by an #84A9E6 rule, and the
+     previous/next cursor sits on a white tile flush with its right edge. The page-size and
+     page-jumper selects reuse the Select Component, narrowed to the 82px the spec draws. */
+  --drgn-pagination-radius: 4px;
+  --drgn-pagination-item-inline-size: 38px;
+  --drgn-pagination-item-block-size: 44px;
+  --drgn-pagination-item-padding-block: 10px;
+  --drgn-pagination-item-padding-inline: 14px;
+
+  /* The spec's cursor buttons are 38px wide around a 16px icon (11px a side); one pixel less,
+     because the always-transparent hover/focus border takes one on each side. */
+  --drgn-pagination-nav-button-padding-inline: 10px;
+  --drgn-pagination-gap: 4px;
+  --drgn-pagination-bar-block-size: 74px;
+  --drgn-pagination-section-gap: 8px;
+  --drgn-pagination-section-padding-block: 8px;
+  --drgn-pagination-section-padding-inline: 16px;
+  --drgn-pagination-field-gap: 16px;
+  --drgn-pagination-pager-gap: 24px;
+  --drgn-pagination-pager-padding-start: 24px;
+  --drgn-pagination-pager-padding-end: 32px;
+  --drgn-pagination-nav-gap: 24px;
+
+  /* The spec's 8px word gap in the range and page count: the &nbsp; that keeps the words apart for
+     screen readers measures about 4px, so this is what is left to add. */
+  --drgn-pagination-summary-word-space: 4px;
+  --drgn-pagination-text: var(--color-alias-text-color-secondary-dark-100);
+  --drgn-pagination-icon: var(--color-alias-interactive-primary-default);
+  --drgn-pagination-icon-disabled: var(--color-alias-text-color-disabled);
+  --drgn-pagination-nav-hover-background: var(--color-alias-background-color-primary-light-50);
+  --drgn-pagination-item-hover-background: var(--color-alias-background-color-primary-dark-110);
+  --drgn-pagination-item-selected-background: var(--color-alias-background-color-primary-dark-120);
+  --drgn-pagination-item-pressed-background: var(--color-alias-interactive-primary-pressed);
+  --drgn-pagination-item-strong-text: var(--color-alias-text-color-primary-light-0);
+  --drgn-pagination-item-disabled-background: var(--color-alias-background-color-disabled);
+  --drgn-pagination-item-disabled-text: var(--color-alias-text-color-disabled);
+  --drgn-pagination-focus-ring: var(--color-alias-interactive-border-focus);
+
+  /* #007DB3 has no Primitive Token — it is the same untokenized value the Button focus shadow
+     hardcodes — so it lives here as a Component Token instead. */
+  --drgn-pagination-focus-shadow: rgb(0 125 179 / 70%);
+  --drgn-pagination-surface: var(--color-alias-background-color-primary-light-50);
+  --drgn-pagination-nav-surface: var(--color-alias-background-color-primary-light-0);
+  --drgn-pagination-divider: var(--color-global-mid-primary-70);
+  --drgn-pagination-select-inline-size: 82px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --drgn-motion-duration-short: 0.001ms;
+    --drgn-motion-duration-medium: 0.001ms;
+    --drgn-motion-duration-long: 0.001ms;
+  }
+}

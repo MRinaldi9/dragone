@@ -1,4 +1,4 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, fn, within } from 'storybook/test';
 
 import { Switch } from './switch';
@@ -21,83 +21,77 @@ const meta: Meta<SwitchArgs> = {
       description: 'Controlla se lo switch è attivo o meno',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     disabled: {
       control: 'boolean',
       description: 'Disabilita lo switch impedendo interazioni',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     checkedChange: {
       action: 'checkedChange',
       description: 'Evento emesso quando lo stato checked cambia',
       table: {
-        type: { summary: 'EventEmitter<boolean>' },
-      },
+        type: { summary: 'EventEmitter<boolean>' }
+      }
     },
     hidden: {
       control: 'boolean',
       description: 'Nasconde lo switch quando impostato a true',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
+        defaultValue: { summary: 'false' }
+      }
     },
     readonly: {
       control: 'boolean',
       description: 'Rende lo switch di sola lettura, non interagibile',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-      },
-    },
+        defaultValue: { summary: 'false' }
+      }
+    }
   },
   args: {
-    ariaLabel: 'switch',
+    ariaLabel: 'switch'
   },
   render: args => ({
     props: args,
     template: `
       <drgn-switch aria-label="Switch" ${argsToTemplate(args, { exclude: ['darkMode'] })}></drgn-switch>
-    `,
-  }),
+    `
+  })
 };
 
 export default meta;
 type Story = StoryObj<SwitchArgs>;
 
-/**
- * Switch di default in stato non selezionato.
- */
+/** Switch di default in stato non selezionato. */
 export const Default: Story = {
   args: {
     checked: false,
     disabled: false,
-    checkedChange: fn(),
-  },
+    checkedChange: fn()
+  }
 };
 
-/**
- * Switch in stato checked (attivo).
- */
+/** Switch in stato checked (attivo). */
 export const Checked: Story = {
   args: {
     ...Default.args,
-    checked: true,
-  },
+    checked: true
+  }
 };
 
-/**
- * Switch in stato disabilitato, non interagibile.
- */
+/** Switch in stato disabilitato, non interagibile. */
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    disabled: true,
+    disabled: true
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -106,23 +100,19 @@ export const Disabled: Story = {
     // Verifica che lo switch sia disabilitato
     await expect(switchElement).toHaveAttribute('aria-disabled', 'true');
     await expect(switchElement).toHaveAttribute('data-disabled');
-  },
+  }
 };
 
-/**
- * Switch disabilitato in stato checked.
- */
+/** Switch disabilitato in stato checked. */
 export const DisabledChecked: Story = {
   args: {
     ...Default.args,
     checked: true,
-    disabled: true,
-  },
+    disabled: true
+  }
 };
 
-/**
- * Test di interazione: verifica che lo switch cambi stato al click.
- */
+/** Test di interazione: verifica che lo switch cambi stato al click. */
 export const InteractionTest: Story = {
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
@@ -145,12 +135,10 @@ export const InteractionTest: Story = {
     // Verifica stato non checked
     await expect(switchElement).toHaveAttribute('aria-checked', 'false');
     await expect(switchElement).not.toHaveAttribute('data-checked');
-  },
+  }
 };
 
-/**
- * Test di accessibilità: verifica la navigazione da tastiera.
- */
+/** Test di accessibilità: verifica la navigazione da tastiera. */
 export const KeyboardNavigation: Story = {
   play: async ({ canvasElement, userEvent, step }) => {
     const canvas = within(canvasElement);
@@ -181,12 +169,12 @@ export const KeyboardNavigation: Story = {
       await userEvent.keyboard('{Enter}');
       await expect(switchElement).toHaveAttribute('aria-checked', 'false');
     });
-  },
+  }
 };
 
 /**
- * Variante con label personalizzata.
- * Mostra come usare lo switch insieme a una label per migliorare l'accessibilità.
+ * Variante con label personalizzata. Mostra come usare lo switch insieme a una label per migliorare
+ * l'accessibilità.
  */
 export const WithLabel: Story = {
   render: args => ({
@@ -200,6 +188,6 @@ export const WithLabel: Story = {
           </span>
         </label>
       </div>
-    `,
-  }),
+    `
+  })
 };

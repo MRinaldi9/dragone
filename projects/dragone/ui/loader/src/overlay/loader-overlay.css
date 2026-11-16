@@ -1,0 +1,10 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: var(--drgn-loader-overlay-z-index);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--drgn-loader-overlay-background);
+}

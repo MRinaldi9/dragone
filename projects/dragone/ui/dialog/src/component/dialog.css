@@ -1,0 +1,6 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+
+/* The component renders nothing inline: the content is portaled into the dialog container. */
+:host {
+  display: contents;
+}

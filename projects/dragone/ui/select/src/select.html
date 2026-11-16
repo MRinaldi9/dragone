@@ -1,0 +1,13 @@
+@if (canShowValue()) {
+  <span class="select-value">
+    {{ mappedValue() }}
+  </span>
+} @else {
+  <span drgnTestId="placeholder" class="select-placeholder">{{ placeholder() }}</span>
+}
+<ng-icon class="chevron" name="faSolidChevronDown" />
+<drgn-dropdown *drgnDropdownPortal [emptyLabel]="emptyLabel()">
+  @for (option of optionItems(); track option.value) {
+    <drgn-dropdown-option [value]="option.value">{{ option.label }}</drgn-dropdown-option>
+  }
+</drgn-dropdown>

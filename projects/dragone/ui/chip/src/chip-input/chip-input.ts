@@ -3,14 +3,14 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 
-import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
+import { convertToSvgIcon, TestId, type SvgIcon } from '@dragone/ui/utils';
 
 @Component({
   selector: 'drgn-chip-input',
-  imports: [NgIcon],
+  imports: [NgIcon, TestId],
   template: `
     @if (icon()) {
-      <ng-icon aria-hidden="true" size="1rem" [svg]="icon()" />
+      <ng-icon drgnTestId="leading-icon" aria-hidden="true" size="1rem" [svg]="icon()" />
     }
     <span class="drgn-chip__label">{{ label() }}</span>
     <button
@@ -27,16 +27,19 @@ import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
   providers: [provideIcons({ faSolidXmark })],
   host: {
     class: 'drgn-label-md-700',
-    tabindex: '0',
-    '[attr.data-disabled]': 'disabled() ? "" : null',
+    tabindex: '-1',
+    '[attr.data-disabled]': 'disabled() ? "" : null'
   },
-  hostDirectives: [NgpFocusVisible],
+  hostDirectives: [NgpFocusVisible]
 })
 export class ChipInput {
   readonly disabled = input<boolean>(false);
   readonly label = input.required<string>();
+  readonly removeAriaLabel = input<string>();
   readonly icon = input<SvgIcon, string>(undefined, { transform: icon => convertToSvgIcon(icon) });
   readonly remove = output<void>();
 
-  protected readonly ariaLabelBtn = computed(() => `Remove ${this.label()}`);
+  protected readonly ariaLabelBtn = computed(
+    () => this.removeAriaLabel() ?? `Remove ${this.label()}`
+  );
 }

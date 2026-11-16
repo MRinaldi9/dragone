@@ -9,11 +9,11 @@ export default defineConfig(({ mode }) => {
   return {
     cacheDir: '../../../node_modules/.vite',
     define: {
-      'import.meta.vitest': mode !== 'production',
+      'import.meta.vitest': mode !== 'production'
     },
     plugins: [angular()],
     resolve: {
-      tsconfigPaths: true,
+      tsconfigPaths: true
     },
     root: './projects/dragone/ui',
     test: {
@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
         instances: [{ browser: 'chromium' }],
         provider: playwright(),
         screenshotFailures: !isHeadless,
-        viewport: { height: 1080, width: 1920 },
+        viewport: { height: 1080, width: 1920 }
       },
       coverage: {
         enabled: true,
@@ -35,18 +35,14 @@ export default defineConfig(({ mode }) => {
           '**/index.ts',
           '**/public-api.ts',
           '**/*.js',
-          '**/*.css',
+          '**/*.css'
         ],
         reporter: ['lcov', 'html', 'text-summary'],
-        reportsDirectory: '../../../coverage/dragone',
+        reportsDirectory: '../../../coverage/dragone'
       },
       globals: true,
       include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-      setupFiles: ['./test-setup.ts'],
-      tags: [
-        { description: 'Unit tests', name: 'unit' },
-        { description: 'Component tests', name: 'component' },
-      ],
-    },
+      setupFiles: ['./test-setup.ts']
+    }
   };
 });

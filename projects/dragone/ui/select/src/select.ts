@@ -1,29 +1,34 @@
 import { booleanAttribute, Component, computed, input, linkedSignal, output } from '@angular/core';
 import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidCheck, faSolidChevronDown } from '@ng-icons/font-awesome/solid';
-import {
-  injectSelectState,
-  NgpSelect,
-  NgpSelectDropdown,
-  NgpSelectOption,
-  NgpSelectPortal,
-} from 'ng-primitives/select';
+import { faSolidChevronDown } from '@ng-icons/font-awesome/solid';
+import { injectSelectState, NgpSelect, provideSelectConfig } from 'ng-primitives/select';
 import { map } from 'rxjs';
 
-import { isNotNil } from '@dragone/ui/utils';
+import { Dropdown, DropdownOption, DropdownPortal } from '@dragone/ui/dropdown';
+import { isNil, TestId, type KeyOf, type LiteralUnion } from '@dragone/ui/utils';
 
 type OptionPrimitive = string | number | boolean;
-type OptionObject<T> = T & { disabled?: boolean };
+type OptionObject<T extends object = Record<string, unknown>> = T & { disabled?: boolean };
 type Option<T> = T extends object ? OptionObject<T> : OptionPrimitive;
 type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
+type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
 
+/**
+ * A single-choice or multiple-choice form field. The host is the combobox trigger (composed with
+ * `NgpSelect`); the floating panel is a `Dropdown` rendered through `DropdownPortal`, whose
+ * behavior — placement, flip, listbox ARIA wiring, empty announcement — is owned by the `Dropdown`
+ * family from `@dragone/ui/dropdown`.
+ */
 @Component({
   selector: 'drgn-select',
-  imports: [NgpSelectDropdown, NgpSelectOption, NgpSelectPortal, NgIcon],
-  templateUrl: './select.component.html',
+  imports: [Dropdown, DropdownOption, DropdownPortal, NgIcon, TestId],
+  templateUrl: './select.html',
   styleUrl: './select.css',
-  providers: [provideIcons({ faSolidChevronDown, faSolidCheck })],
+  // Sirio spec: the panel floats 8px below the field. `provideSelectConfig` sets the default of
+  // the host directive's `ngpSelectDropdownOffset` input — the placement-aware gap, so it holds
+  // when the panel flips above the field too; consumers override it with `[offset]`.
+  providers: [provideIcons({ faSolidChevronDown }), provideSelectConfig({ offset: 8 })],
   host: {
     class: 'drgn-label-md-400',
     '[ariaLabel]': 'ariaLabelledBy() ? undefined : (ariaLabel() || placeholder())',
@@ -31,7 +36,7 @@ type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
     '[attr.name]': 'name()',
     '[attr.readonly]': 'readonly() ? "" : undefined',
     '[attr.hidden]': 'hidden() ? "" : undefined',
-    '(blur)': 'touch.emit()',
+    '(blur)': 'touch.emit()'
   },
   hostDirectives: [
     {
@@ -42,120 +47,72 @@ type SelectValue<T> = Option<T> | Option<T>[] | null | undefined;
         'ngpSelectValue: value',
         'ngpSelectMultiple: multiple',
         'ngpSelectCompareWith: compare',
+        'ngpSelectDropdownOffset: offset'
       ],
-      outputs: ['ngpSelectOpenChange: openChange'],
-    },
-  ],
+      outputs: ['ngpSelectOpenChange: openChange']
+    }
+  ]
 })
 export class Select<T> {
   readonly options = input<Option<T>[]>();
+  /** The selected value (or array of values when `multiple` is enabled). */
+  // Declared as an input paired with `valueChange` to satisfy the Signal Forms `FormValueControl` contract.
   readonly value = input<SelectValue<T>>();
   readonly placeholder = input<string>();
+  /** Message shown, and announced, when the panel has no option to offer. */
+  readonly emptyLabel = input('Non ci sono elementi da visualizzare');
   /**
-   * A string that maps an option to its display label. If not provided, the option itself will be used as the label.
+   * A string that maps an option to its display label. If not provided, the option itself will be
+   * used as the label.
    */
-  readonly optionLabel = input<T extends object ? keyof T : never>();
-  /** A string that maps an option to its value. If not provided, the option itself will be used as the value. */
-  readonly optionValue = input<T extends object ? keyof T : never>();
+  readonly optionLabel = input<OptionKey<T>>();
+  /**
+   * A string that maps an option to its value. If not provided, the option itself will be used as
+   * the value.
+   */
+  readonly optionValue = input<OptionKey<T>>();
   readonly ariaLabel = input<string>();
   readonly ariaLabelledBy = input<string>();
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly hidden = input(false, { transform: booleanAttribute });
   readonly name = input<string>();
   readonly touch = output<void>();
-  readonly #internalState = injectSelectState();
+  readonly #internalState = injectSelectState<SelectValue<T>>();
 
   readonly valueChange = outputFromObservable(
     outputToObservable(this.#internalState().valueChange).pipe(
-      map((value: SelectValue<T>) => {
-        if (Array.isArray(value)) {
-          return value.map(val => this.mapOutputValue(val));
-        }
-        return this.mapOutputValue(value);
-      }),
-    ),
+      map(value => this.mapByKey(value, this.optionValue()))
+    )
   );
 
-  protected readonly internalValue = linkedSignal<Option<T> | Option<T>[]>(
-    this.#internalState().value,
-  );
+  protected readonly internalValue = linkedSignal(this.#internalState().value);
+
   protected readonly canShowValue = computed(() => {
-    const isMultiple = this.#internalState().multiple();
     const value = this.internalValue();
-    if (isMultiple && Array.isArray(value)) {
+    if (this.#internalState().multiple() && Array.isArray(value)) {
       return value.length > 0;
     }
-    return isNotNil(value);
+    return !isNil(value);
   });
 
-  /**
-   * Value shown inside the trigger when at least one option is selected.
-   * It applies `optionLabel` mapping when provided.
-   */
-  protected readonly mappedValue = computed(() => this.mapOption(this.internalValue()));
+  protected readonly mappedValue = computed(() =>
+    this.mapByKey(this.internalValue(), this.optionLabel())
+  );
 
-  /**
-   * View model used by the dropdown template.
-   * It precomputes label and selected state for each option.
-   */
-  protected readonly optionItems = computed(() => {
-    const selectedValue = this.internalValue();
-    return (this.options() ?? []).map(option => ({
+  protected readonly optionItems = computed(() =>
+    (this.options() ?? []).map(option => ({
       value: option,
-      label: this.mapOption(option),
-      selected: this.isOptionSelected(option, selectedValue),
-    }));
-  });
+      label: this.mapByKey(option, this.optionLabel())
+    }))
+  );
 
-  /**
-   * Maps one option (or a list of options) to its display label.
-   * If `optionLabel` is not set, the original value is returned.
-   */
-  private mapOption(value: Option<T> | Option<T>[] | null | undefined): unknown {
-    if (typeof value !== 'object' || !value) {
-      return value;
-    }
-    const key = this.optionLabel();
-    if (!key) {
-      return value;
-    }
+  private mapByKey(value: SelectValue<T>, key?: PropertyKey): unknown {
     if (Array.isArray(value)) {
-      return value.map(option => this.getOptionProp(option, key));
+      return value.map(option => this.mapByKey(option, key));
     }
-    return this.getOptionProp(value, key);
-  }
-
-  /**
-   * Returns whether the current option is selected.
-   * Selection is delegated to `compareWith` from `ng-primitives` state.
-   */
-  private isOptionSelected(currOption: Option<T>, selectedValue: SelectValue<T>): boolean {
-    const compareWith = this.#internalState().compareWith();
-    if (Array.isArray(selectedValue)) {
-      return selectedValue.some(value => compareWith(value, currOption));
-    }
-    return compareWith(selectedValue, currOption);
-  }
-
-  /**
-   * Safely reads a property from an option object using the configured key.
-   */
-  private getOptionProp(option: Option<T>, key: T extends object ? keyof T : never): unknown {
-    return (option as Record<PropertyKey, unknown>)[key as PropertyKey];
-  }
-
-  /**
-   * Maps emitted values for `valueChange`.
-   * If `optionValue` is configured, emits the extracted property; otherwise emits the raw option.
-   */
-  private mapOutputValue(value: Option<T> | null | undefined): unknown {
-    if (!isNotNil(value)) {
+    if (isNil(value) || typeof value !== 'object' || !key) {
       return value;
     }
-    const key = this.optionValue();
-    if (!key || typeof value !== 'object') {
-      return value;
-    }
-    return this.getOptionProp(value, key);
+    return (value as Record<PropertyKey, unknown>)[key];
   }
 }

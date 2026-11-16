@@ -3,21 +3,32 @@
 #   Refer for explanation to following link:
 #   https://lefthook.dev/configuration/
 #
+assert_lefthook_installed: true
+colors: true
+prepare-commit-msg:
+  commands:
+    commitzen:
+      interactive: true
+      run: pnpm commit --hook # Or npx cz --hook
+      env:
+        LEFTHOOK: "0"
+      skip:
+        - merge
+        - rebase
+        - run: git stripspace --strip-comments < "$(git rev-parse --git-dir)/COMMIT_EDITMSG" | grep -q '[^[:space:]]'
 commit-msg:
   commands:
-    'lint commit message':
-      run: pnpm commitlint --edit $1
-      env:
-        LEFTHOOK: 0
+    "lint commit message":
+      run: pnpm commitlint --edit {1}
 pre-commit:
   parallel: true
   jobs:
     - name: Oxlint Dragone UI staged files
-      run: pnpm run lint:oxlint {staged_files}
+      run: pnpm oxlint {staged_files} --no-error-on-unmatched-pattern
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: ESLint Dragone
-      run: pnpm run lint:eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
+      run: pnpm eslint --fix -c projects/dragone/ui/eslint.config.mjs {staged_files}
       stage_fixed: true
       glob: "*.{ts,html,css,js}"
     - name: Format Dragone UI staged files

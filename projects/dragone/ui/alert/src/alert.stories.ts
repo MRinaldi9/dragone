@@ -1,10 +1,15 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { fn } from 'storybook/test';
+
+import type { LayoutType, StatusType } from '@dragone/ui/utils';
 
 import { Alert } from './alert';
 
 type AlertStory = Alert & {
   darkMode: boolean;
+  theme: 'light' | 'dark';
+  status: StatusType;
+  layout: LayoutType;
 };
 
 const meta: Meta<AlertStory> = {
@@ -12,45 +17,61 @@ const meta: Meta<AlertStory> = {
   component: Alert,
   tags: ['autodocs'],
   args: {
-    alertTheme: 'light',
-    aspect: 'desktop',
-    alertType: 'info',
-    ctaClick: fn(),
+    theme: 'light',
+    layout: 'desktop',
+    status: 'info',
+    titleAsHeading: false,
+    headingLevel: 4,
+    ctaClick: fn()
   },
   argTypes: {
     title: {
-      control: 'text',
+      control: 'text'
     },
-    aspect: {
+    layout: {
       options: ['mobile', 'desktop'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'desktop' },
-      },
+        defaultValue: { summary: 'desktop' }
+      }
     },
-    alertTheme: {
+    theme: {
       options: ['light', 'dark'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'light' },
-      },
+        defaultValue: { summary: 'light' }
+      }
     },
-    alertType: {
-      options: ['info', 'success', 'warning', 'error'],
+    status: {
+      options: ['info', 'success', 'warning', 'danger'],
       control: { type: 'select' },
       table: {
-        defaultValue: { summary: 'info' },
-      },
+        defaultValue: { summary: 'info' }
+      }
+    },
+    titleAsHeading: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' }
+      }
+    },
+    headingLevel: {
+      options: [1, 2, 3, 4, 5, 6],
+      control: { type: 'select' },
+      if: { arg: 'titleAsHeading', truthy: true },
+      table: {
+        defaultValue: { summary: '4' }
+      }
     },
     ctaText: {
-      control: 'text',
+      control: 'text'
     },
     ctaClick: {
       if: { arg: 'ctaText', truthy: true },
       type: 'function',
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 };
 
 export default meta;
@@ -59,7 +80,7 @@ type Story = StoryObj<AlertStory>;
 export const Info: Story = {
   args: {
     title: 'This is an alert title',
-    ctaText: 'CTA',
+    ctaText: 'CTA'
   },
   render: args => ({
     props: args,
@@ -68,6 +89,6 @@ export const Info: Story = {
           Labore doloribus ea consequatur quam sequi similique unde.
           Et ad laudantium sint aliquid dolores. Aut est rerum illum nulla corrupti reiciendis eum.
         </drgn-alert>
-    `,
-  }),
+    `
+  })
 };

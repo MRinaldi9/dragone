@@ -3,7 +3,6 @@ import { NgpAccordion } from 'ng-primitives/accordion';
 
 @Component({
   selector: 'drgn-accordion',
-  imports: [],
   template: ` <ng-content /> `,
   styleUrl: './accordion.css',
   hostDirectives: [
@@ -14,10 +13,10 @@ import { NgpAccordion } from 'ng-primitives/accordion';
         'ngpAccordionType: type',
         'ngpAccordionDisabled: disabled',
         'ngpAccordionOrientation: orientation',
-        'ngpAccordionValue: value',
+        'ngpAccordionValue: value'
       ],
-      outputs: ['ngpAccordionValueChange: accordionChange'],
-    },
-  ],
+      outputs: ['ngpAccordionValueChange: accordionChange']
+    }
+  ]
 })
 export class Accordion {}

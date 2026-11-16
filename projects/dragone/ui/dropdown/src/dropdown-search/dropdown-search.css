@@ -1,0 +1,9 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  background-color: var(--drgn-color-surface-search-header);
+  border-bottom: 1px solid var(--drgn-color-border-data-entry-default);
+}

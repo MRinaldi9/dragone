@@ -5,30 +5,35 @@ export default defineConfig({
     correctness: 'error',
     perf: 'warn',
     restriction: 'error',
-    style: 'warn',
+    style: 'warn'
   },
   env: {
     browser: true,
     es2024: true,
     node: true,
-    'shared-node-browser': true,
+    'shared-node-browser': true
   },
-  ignorePatterns: ['**/dist', '**/out-tsc', '**/node_modules', '**/coverage'],
+  ignorePatterns: ['scripts/**', '**/dist', '**/out-tsc', '**/node_modules', '**/coverage'],
   overrides: [
     {
       files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.js', '**/*.cjs', '**/*.mjs'],
       rules: {
         // Eslint
+        'capitalized-comments': ['warn', 'always', { ignoreConsecutiveComments: true }],
         curly: ['error', 'multi-line'],
         'for-direction': 'error',
-        'id-length': ['error', { checkGeneric: false, exceptions: ['_'] }],
+        'func-style': ['off'],
+        'id-length': ['error', { checkGeneric: false, exceptions: ['_', 'i', 'j', 'K'] }],
         'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
+        'jsdoc/empty-tags': 'error',
+        'jsdoc/no-blank-blocks': 'error',
         'max-params': ['error', { max: 4 }],
         'no-array-constructor': 'error',
         'no-async-promise-executor': 'error',
         'no-case-declarations': 'error',
         'no-compare-neg-zero': 'error',
         'no-cond-assign': 'error',
+        'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-constant-binary-expression': 'error',
         'no-constant-condition': 'error',
         'no-control-regex': 'error',
@@ -72,15 +77,17 @@ export default defineConfig({
             caughtErrorsIgnorePattern: '^_',
             destructuredArrayIgnorePattern: '^_',
             ignoreRestSiblings: true,
-            varsIgnorePattern: '^_',
-          },
+            varsIgnorePattern: '^_'
+          }
         ],
         'no-useless-backreference': 'error',
         'no-useless-catch': 'error',
         'no-useless-escape': ['error', { allowRegexCharacters: ['\\', '.'] }],
         'no-var': 'error',
+        'one-var': 'off',
         'oxc/no-async-await': 'off',
         'oxc/no-optional-chaining': 'off',
+        'oxc/no-rest-spread-properties': 'off',
         'prefer-const': 'error',
         'prefer-rest-params': 'error',
         'prefer-spread': 'error',
@@ -89,10 +96,18 @@ export default defineConfig({
         // TypeScript
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/ban-ts-comment': 'error',
+        'typescript/explicit-function-return-type': [
+          'error',
+          { allowExpressions: true, allowIIFEs: true }
+        ],
         'typescript/explicit-member-accessibility': [
           'error',
-          { accessibility: 'no-public', overrides: { constructors: 'off', methods: 'no-public' } },
+          {
+            accessibility: 'no-public',
+            overrides: { constructors: 'off', methods: 'no-public' }
+          }
         ],
+        'typescript/method-signature-style': 'off',
         'typescript/no-duplicate-enum-values': 'error',
         'typescript/no-empty-interface': 'error',
         'typescript/no-empty-object-type': 'error',
@@ -112,12 +127,15 @@ export default defineConfig({
         'typescript/prefer-as-const': 'error',
         'typescript/prefer-namespace-keyword': 'error',
         'typescript/triple-slash-reference': 'error',
+        'unicorn/no-null': 'off',
+        'unicorn/prefer-spread': 'off',
         'use-isnan': 'error',
-        'valid-typeof': 'error',
-      },
+        'valid-typeof': 'error'
+      }
     },
     {
       files: ['**/*.spec.ts', '**/*.test.ts'],
+      plugins: ['typescript', 'vitest', 'eslint', 'oxc'],
       rules: {
         'init-declarations': ['off'],
         'max-params': 'off',
@@ -134,10 +152,14 @@ export default defineConfig({
         'vitest/no-identical-title': 'error',
         'vitest/no-import-node-test': 'error',
         'vitest/no-standalone-expect': 'error',
+        'vitest/prefer-called-times': 'off',
         'vitest/prefer-describe-function-title': 'error',
         'vitest/prefer-expect-assertions': [
           'warn',
-          { onlyFunctionsWithAsyncKeyword: false, onlyFunctionsWithExpectInCallback: true },
+          {
+            onlyFunctionsWithAsyncKeyword: false,
+            onlyFunctionsWithExpectInCallback: true
+          }
         ],
         'vitest/prefer-hooks-in-order': 'warn',
         'vitest/prefer-hooks-on-top': 'warn',
@@ -150,9 +172,9 @@ export default defineConfig({
         'vitest/require-test-timeout': 'off',
         'vitest/valid-describe-callback': 'off',
         'vitest/valid-expect': 'error',
-        'vitest/valid-title': 'off',
-      },
-    },
+        'vitest/valid-title': 'off'
+      }
+    }
   ],
-  plugins: ['typescript', 'vitest', 'eslint', 'oxc'],
+  plugins: ['typescript', 'eslint', 'oxc', 'jsdoc']
 });

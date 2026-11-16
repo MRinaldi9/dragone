@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input, output } from '@angular/core';
+import { booleanAttribute, Component, computed, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidMinus } from '@ng-icons/font-awesome/solid';
 import { injectCheckboxState, NgpCheckbox } from 'ng-primitives/checkbox';
@@ -8,7 +8,7 @@ import { NgpFocusVisible } from 'ng-primitives/interactions';
   selector: 'drgn-checkbox',
   imports: [NgIcon],
   template: `
-    @if (_checked()) {
+    @if (checkedValue()) {
       <ng-icon name="faSolidCheck" />
     }
   `,
@@ -18,16 +18,16 @@ import { NgpFocusVisible } from 'ng-primitives/interactions';
     '[hidden]': 'hidden()',
     '[attr.name]': 'name() ? name() : null',
     '[attr.readonly]': 'readonly() ? "" : null',
-    '(blur)': 'touch.emit()',
+    '(blur)': 'touch.emit()'
   },
   hostDirectives: [
     NgpFocusVisible,
     {
       directive: NgpCheckbox,
       inputs: ['ngpCheckboxChecked:checked', 'ngpCheckboxDisabled:disabled', 'id'],
-      outputs: ['ngpCheckboxCheckedChange:checkedChange'],
-    },
-  ],
+      outputs: ['ngpCheckboxCheckedChange:checkedChange']
+    }
+  ]
 })
 export class Checkbox {
   readonly readonly = input(false, { transform: booleanAttribute });
@@ -36,5 +36,5 @@ export class Checkbox {
   readonly touch = output<void>();
   readonly #checkboxState = injectCheckboxState();
 
-  protected readonly _checked = this.#checkboxState().checked;
+  protected readonly checkedValue = computed(() => this.#checkboxState().checked());
 }

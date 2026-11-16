@@ -1,45 +1,57 @@
-import { argsToTemplate, type Meta, type StoryObj } from '@analogjs/storybook-angular';
-import { fn } from 'storybook/test';
+import { argsToTemplate, type Meta, type StoryObj } from '@storybook/angular-vite';
 
 import { ChipSelected } from './chip-selected';
 
-interface ChipSelectedArgs {
-  selected: boolean;
+type ChipSelectedArgs = ChipSelected & {
+  checked: boolean;
   disabled: boolean;
+  checkedChange: (checked: boolean) => void;
   label: string;
-  selectedChange: (selected: boolean) => void;
-}
+};
 
 const meta: Meta<ChipSelectedArgs> = {
   title: 'Dragone/UI/Chip/Selected',
   component: ChipSelected,
   tags: ['autodocs'],
   args: {
-    label: 'Chips',
-    selected: false,
-    disabled: false,
-    selectedChange: fn(),
+    label: 'Chips'
   },
   argTypes: {
     label: {
       control: 'text',
-      description: 'Testo visualizzato nella chip',
+      description: 'Testo visualizzato nella chip'
     },
-    selected: {
+    checked: {
       control: 'boolean',
       description: 'Stato di selezione della chip',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' }
+      }
     },
     disabled: {
       control: 'boolean',
       description: 'Disabilita la chip impedendo interazioni',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' }
+      }
     },
-    selectedChange: {
+    checkedChange: {
       action: 'selectedChange',
       description: 'Evento emesso quando lo stato selected cambia',
-      table: { type: { summary: 'EventEmitter<boolean>' } },
+      table: { type: { summary: 'EventEmitter<boolean>' } }
     },
+    hidden: {
+      control: 'boolean',
+      description: 'Nasconde la chip',
+      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' } }
+    },
+    name: {
+      control: 'text',
+      description: "Nome della chip, utile per l'identificazione in un gruppo di chip",
+      table: { type: { summary: 'string' } }
+    }
   },
   render: args => ({
     props: args,
@@ -51,42 +63,34 @@ const meta: Meta<ChipSelectedArgs> = {
 			>
 				${args.label}
 			</button>
-		`,
-  }),
+		`
+  })
 };
 
 export default meta;
 type Story = StoryObj<ChipSelectedArgs>;
 
-/**
- * Chip non selezionata.
- */
+/** Chip non selezionata. */
 export const Default: Story = {};
 
-/**
- * Chip selezionata.
- */
+/** Chip selezionata. */
 export const Selected: Story = {
   args: {
-    selected: true,
-  },
+    checked: true
+  }
 };
 
-/**
- * Chip disabilitata.
- */
+/** Chip disabilitata. */
 export const Disabled: Story = {
   args: {
-    disabled: true,
-  },
+    disabled: true
+  }
 };
 
-/**
- * Chip selezionata e disabilitata.
- */
+/** Chip selezionata e disabilitata. */
 export const DisabledSelected: Story = {
   args: {
-    selected: true,
-    disabled: true,
-  },
+    checked: true,
+    disabled: true
+  }
 };
