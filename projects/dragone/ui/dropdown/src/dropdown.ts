@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { injectSelectState, NgpSelectDropdown, NgpSelectList } from 'ng-primitives/select';
 
-import { injectElementRef, toNativeElement } from '@dragone/ui/utils';
+import { injectElementRef, TestId, toNativeElement } from '@dragone/ui/utils';
 
 import { DropdownOption } from './dropdown-option/dropdown-option';
 
@@ -39,13 +39,13 @@ function mirrorName(trigger: HTMLElement, popup: HTMLElement): void {
  */
 @Component({
   selector: 'drgn-dropdown',
-  imports: [NgpSelectList],
+  imports: [NgpSelectList, TestId],
   template: `
     <ng-content select="drgn-dropdown-search" />
     <div #listbox class="listbox" ngpSelectList [hidden]="empty()">
       <ng-content />
     </div>
-    <div role="status" data-testid="dropdown-status">
+    <div role="status" drgnTestId="dropdown-status">
       @if (empty()) {
         <div class="empty drgn-label-md-400">{{ emptyLabel() }}</div>
       }

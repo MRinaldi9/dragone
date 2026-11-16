@@ -1,4 +1,4 @@
-<div class="bar" data-testid="pagination-bar">
+<div class="bar" drgnTestId="pagination-bar">
   @if (showItemsSection()) {
     <div class="section items">
       @if (showPageSize()) {
@@ -19,7 +19,7 @@
         <!-- role="status" so the new range is announced when the page changes. The &nbsp;
              separators keep the words apart: Angular drops whitespace-only text nodes between the
              spans, and without them a screen reader reads "1 - 10di100Elementi". -->
-        <p class="summary" data-testid="pagination-range" role="status">
+        <p class="summary" drgnTestId="pagination-range" role="status">
           <span class="drgn-label-md-number-400">{{ rangeStart() }} - {{ rangeEnd() }}</span>
           &nbsp;
           <span class="drgn-label-md-600">{{ ofLabel() }}</span>
@@ -39,7 +39,7 @@
       <span
         aria-hidden="true"
         class="divider"
-        data-testid="pagination-divider"
+        drgnTestId="pagination-divider"
         [hidden]="!showItemsSection()"
       ></span>
 
@@ -51,7 +51,7 @@
         [ariaLabel]="pageJumperLabel()"
         (valueChange)="pageChanged($event)"
       />
-      <p class="summary" data-testid="pagination-page-count">
+      <p class="summary" drgnTestId="pagination-page-count">
         <span class="drgn-label-md-600">{{ ofLabel() }}</span>
         &nbsp;
         <span class="drgn-label-md-number-400">{{ pageCount() }}</span>
@@ -63,7 +63,7 @@
 
   @if (showNav()) {
     <!-- The strip is prev/next only here; its page numbers belong to PaginationSimple, on its own. -->
-    <div class="nav" data-testid="pagination-nav">
+    <div class="nav" drgnTestId="pagination-nav">
       <drgn-pagination-simple
         [page]="page()"
         [pageCount]="pageCount()"

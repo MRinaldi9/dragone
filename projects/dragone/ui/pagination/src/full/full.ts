@@ -1,6 +1,7 @@
 import { booleanAttribute, Component, computed, effect, input, model } from '@angular/core';
 
 import { Select } from '@dragone/ui/select';
+import { TestId } from '@dragone/ui/utils';
 
 import { Simple } from '../simple/simple';
 
@@ -11,7 +12,7 @@ import { Simple } from '../simple/simple';
  */
 @Component({
   selector: 'drgn-pagination-full',
-  imports: [Select, Simple],
+  imports: [Select, Simple, TestId],
   templateUrl: './full.html',
   styleUrl: './full.css'
 })

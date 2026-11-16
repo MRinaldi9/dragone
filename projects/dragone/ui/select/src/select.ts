@@ -6,7 +6,7 @@ import { injectSelectState, NgpSelect, provideSelectConfig } from 'ng-primitives
 import { map } from 'rxjs';
 
 import { Dropdown, DropdownOption, DropdownPortal } from '@dragone/ui/dropdown';
-import { isNil, type KeyOf, type LiteralUnion } from '@dragone/ui/utils';
+import { isNil, TestId, type KeyOf, type LiteralUnion } from '@dragone/ui/utils';
 
 type OptionPrimitive = string | number | boolean;
 type OptionObject<T extends object = Record<string, unknown>> = T & { disabled?: boolean };
@@ -22,7 +22,7 @@ type OptionKey<T> = LiteralUnion<KeyOf<T>, string>;
  */
 @Component({
   selector: 'drgn-select',
-  imports: [Dropdown, DropdownOption, DropdownPortal, NgIcon],
+  imports: [Dropdown, DropdownOption, DropdownPortal, NgIcon, TestId],
   templateUrl: './select.html',
   styleUrl: './select.css',
   // Sirio spec: the panel floats 8px below the field. `provideSelectConfig` sets the default of

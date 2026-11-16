@@ -4,14 +4,16 @@ import { NgIcon } from '@ng-icons/core';
 import { NgpBreadcrumbLink, NgpBreadcrumbPage } from 'ng-primitives/breadcrumbs';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 
+import { TestId } from '@dragone/ui/utils';
+
 import type { BreadcrumbItemConfig } from '../breadcrumb.model';
 @Component({
   selector: 'drgn-breadcrumb-item',
-  imports: [RouterLink, NgIcon, NgpFocusVisible, NgpBreadcrumbPage, NgpBreadcrumbLink],
+  imports: [RouterLink, NgIcon, NgpFocusVisible, NgpBreadcrumbPage, NgpBreadcrumbLink, TestId],
   template: `
     @let config = breadcrumbConfiguration();
     @if (config.icon) {
-      <ng-icon data-testid="breadcrumb-icon" [svg]="config.icon" />
+      <ng-icon drgnTestId="breadcrumb-icon" [svg]="config.icon" />
     }
     @if (config.href) {
       <a

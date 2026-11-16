@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { NgpDialogManager, type NgpDialogRef } from 'ng-primitives/dialog';
 
-import type { StatusType } from '@dragone/ui/utils';
+import { TestId, type StatusType } from '@dragone/ui/utils';
 
 import type { DialogSize } from '../models/dialog.model';
 import { DialogPanel } from '../ui/dialog-panel/dialog-panel';
@@ -28,10 +28,11 @@ import { DialogPanel } from '../ui/dialog-panel/dialog-panel';
  */
 @Component({
   selector: 'drgn-dialog',
-  imports: [DialogPanel],
+  imports: [DialogPanel, TestId],
   template: `
     <ng-template #content>
       <drgn-dialog-panel
+        drgnTestId="dialog-overlay"
         [title]="title()"
         [description]="description()"
         [size]="size()"

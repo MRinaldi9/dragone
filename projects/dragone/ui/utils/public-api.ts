@@ -8,6 +8,7 @@ export * from './src/predicates/notifier';
 export * from './src/predicates/to-value';
 export * from './src/dom/to-native-element';
 export * from './src/dom/element-ref';
+export * from './src/dom/test-id';
 export * from './src/predicates/sleep';
 export * from './src/theming/theme';
 export * from './src/theming/status';

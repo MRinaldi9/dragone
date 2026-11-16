@@ -3,14 +3,14 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { NgpFocusVisible } from 'ng-primitives/interactions';
 
-import { convertToSvgIcon, type SvgIcon } from '@dragone/ui/utils';
+import { convertToSvgIcon, TestId, type SvgIcon } from '@dragone/ui/utils';
 
 @Component({
   selector: 'drgn-chip-input',
-  imports: [NgIcon],
+  imports: [NgIcon, TestId],
   template: `
     @if (icon()) {
-      <ng-icon data-testid="leading-icon" aria-hidden="true" size="1rem" [svg]="icon()" />
+      <ng-icon drgnTestId="leading-icon" aria-hidden="true" size="1rem" [svg]="icon()" />
     }
     <span class="drgn-chip__label">{{ label() }}</span>
     <button

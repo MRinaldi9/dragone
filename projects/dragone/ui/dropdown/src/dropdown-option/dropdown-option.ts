@@ -7,14 +7,16 @@ import {
   provideSelectOptionState
 } from 'ng-primitives/select';
 
+import { TestId } from '@dragone/ui/utils';
+
 /** Single selectable option row inside a `Dropdown`, displaying a check icon when selected. */
 @Component({
   selector: 'drgn-dropdown-option',
-  imports: [NgIcon],
+  imports: [NgIcon, TestId],
   template: `
     <span class="drgn-label-md-400"><ng-content /></span>
     @if (selected()) {
-      <ng-icon data-testid="selected-icon" name="faSolidCheck" aria-hidden="true" />
+      <ng-icon drgnTestId="selected-icon" name="faSolidCheck" aria-hidden="true" />
     }
   `,
   styleUrl: './dropdown-option.css',

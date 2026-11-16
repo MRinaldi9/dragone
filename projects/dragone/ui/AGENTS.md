@@ -91,7 +91,8 @@ Components. Never create a barrel export from the root `public-api.ts`; its plac
 - Query with the specialized locators only (`getByRole`, `getByTestId`, `getByText`, …).
   Never `locator.locator(<selector>)`: in `@vitest/browser` v5 it is `protected` on the
   `Locator` type (TS2551) even though it resolves at runtime, so it breaks `tsc` and the IDE.
-  Add `data-testid` to template internals you must reach instead (see `alert/src/alert.ts`
+  Add `drgnTestId` (`TestId` from `@dragone/ui/utils`, which renders `data-testid` in
+  `ngDevMode` only) to template internals you must reach instead (see `alert/src/alert.ts`
   and `alert.spec.ts`).
 - Timers: use `setUpFastForward()` / `setUpManualForward()` from
   `tests/setup-timer-mode.ts` and follow the "Controlling Time in Tests" rules in `CONTEXT.md`.

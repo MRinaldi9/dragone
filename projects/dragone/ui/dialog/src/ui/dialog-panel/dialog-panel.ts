@@ -17,7 +17,7 @@ import {
 } from 'ng-primitives/dialog';
 
 import { Button } from '@dragone/ui/button';
-import { Status, type StatusType } from '@dragone/ui/utils';
+import { Status, TestId, type StatusType } from '@dragone/ui/utils';
 
 import type { DialogSize } from '../../models/dialog.model';
 
@@ -37,7 +37,7 @@ const STATUS_TO_ICON = {
  */
 @Component({
   selector: 'drgn-dialog-panel',
-  imports: [NgIcon, NgpDialog, NgpDialogDescription, NgpDialogTitle, Button, Status],
+  imports: [NgIcon, NgpDialog, NgpDialogDescription, NgpDialogTitle, Button, Status, TestId],
   template: `
     <div class="dialog-panel" ngpDialog [drgnStatus]="status()" [attr.data-size]="size()">
       <button
@@ -51,12 +51,7 @@ const STATUS_TO_ICON = {
       >
         <ng-icon size="16" name="faSolidXmark" />
       </button>
-      <ng-icon
-        size="24"
-        class="dialog-icon"
-        data-testid="dialog-status-icon"
-        [svg]="statusIcon()"
-      />
+      <ng-icon size="24" class="dialog-icon" drgnTestId="dialog-status-icon" [svg]="statusIcon()" />
       <h2 class="drgn-h4-md dialog-title" ngpDialogTitle>{{ title() }}</h2>
       @if (description()) {
         <p class="drgn-p-md-01 dialog-description" ngpDialogDescription>{{ description() }}</p>
@@ -71,9 +66,7 @@ const STATUS_TO_ICON = {
     // (transparent, pointer-events: none — see the stylesheet) while `aria-modal` is false. This
     // removes the scrim and the pointer block only: focus stays trapped (upstream NgpDialog always
     // applies NgpFocusTrap) — see `DialogConfig.modal` / `Dialog.modal`.
-    '[attr.data-modal]': 'modal ? "true" : "false"',
-    // Test hook: the scrim is only reachable by coordinates, never by role or text.
-    'data-testid': 'dialog-overlay'
+    '[attr.data-modal]': 'modal ? "true" : "false"'
   },
   hostDirectives: [NgpDialogOverlay]
 })

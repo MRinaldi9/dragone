@@ -8,7 +8,14 @@ import {
 } from '@ng-icons/font-awesome/solid';
 
 import { Button } from '@dragone/ui/button';
-import { injectLayoutState, injectStatusState, Layout, Status, Theme } from '@dragone/ui/utils';
+import {
+  injectLayoutState,
+  injectStatusState,
+  Layout,
+  Status,
+  TestId,
+  Theme
+} from '@dragone/ui/utils';
 
 export type AlertPolite = 'off' | 'polite' | 'assertive';
 
@@ -21,9 +28,9 @@ const TYPE_TO_ICON = {
 
 @Component({
   selector: 'drgn-alert',
-  imports: [NgIcon, Button],
+  imports: [NgIcon, Button, TestId],
   template: `
-    <ng-icon size="24" class="alert-icon" data-testid="alert-icon" [svg]="alertType()" />
+    <ng-icon size="24" class="alert-icon" drgnTestId="alert-icon" [svg]="alertType()" />
     <p
       class="drgn-h4-lg alert-title"
       [attr.role]="titleAsHeading() ? 'heading' : null"

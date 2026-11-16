@@ -1,5 +1,7 @@
 import { Component, input } from '@angular/core';
 
+import { TestId } from '@dragone/ui/utils';
+
 export type SpinnerSize = 'small' | 'medium' | 'large';
 
 /** Fallback accessible name used when an empty or blank label is bound. */
@@ -15,10 +17,11 @@ export function coerceSpinnerLabel(value: string | undefined): string {
 
 @Component({
   selector: 'drgn-spinner',
+  imports: [TestId],
   template: `
-    <div class="spinner-rotor" aria-hidden="true" data-testid="spinner-rotor">
-      <div class="spinner-ring" data-testid="spinner-ring"></div>
-      <div class="spinner-head" data-testid="spinner-head"></div>
+    <div class="spinner-rotor" aria-hidden="true" drgnTestId="spinner-rotor">
+      <div class="spinner-ring" drgnTestId="spinner-ring"></div>
+      <div class="spinner-head" drgnTestId="spinner-head"></div>
     </div>
   `,
   styleUrl: './spinner.css',

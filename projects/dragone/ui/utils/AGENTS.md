@@ -7,8 +7,9 @@ Entry point `@dragone/ui/utils`. Root rules: [`AGENTS.md`](../../../../AGENTS.md
 
 Everything exported through `public-api.ts`: event plugins (`provideEventsPlugin`, debounce and
 prevent-default plugins), type utilities (`toValue`, `toNativeElement`, `notifier`, `sleep`, guards),
-accessibility (`Announcer`, `ANNOUNCEMENT_DELAY`), theming (`Theme`, `Status`, `Layout` and
-their factories/injectors), and `Logger` / `provideLogger`.
+DOM utilities (`injectElementRef`, `TestId`), accessibility (`Announcer`, `ANNOUNCEMENT_DELAY`),
+theming (`Theme`, `Status`, `Layout` and their factories/injectors), and `Logger` /
+`provideLogger`.
 
 ## State factory pattern
 
@@ -36,6 +37,6 @@ sequences stop on destroy.
 
 ## Tests
 
-6 spec files (announcer, event plugins, logger, layout, status, theme). This entry point has no
-stories because it is not a visual Component. Focus:
+7 spec files (announcer, event plugins, logger, layout, status, test-id, theme). This entry point
+has no stories because it is not a visual Component. Focus:
 `CI=true pnpm exec vitest run utils`.

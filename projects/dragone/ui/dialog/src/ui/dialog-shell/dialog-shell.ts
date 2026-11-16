@@ -13,7 +13,7 @@ import {
   type Type
 } from '@angular/core';
 
-import type { MaybeSignal, StatusType } from '@dragone/ui/utils';
+import { TestId, type MaybeSignal, type StatusType } from '@dragone/ui/utils';
 
 import type { DialogSize } from '../../models/dialog.model';
 import { DialogPanel } from '../dialog-panel/dialog-panel';
@@ -49,9 +49,10 @@ export const DIALOG_SHELL_CONTEXT = new InjectionToken<DialogShellContext>(
  */
 @Component({
   selector: 'drgn-dialog-shell',
-  imports: [DialogPanel],
+  imports: [DialogPanel, TestId],
   template: `
     <drgn-dialog-panel
+      drgnTestId="dialog-overlay"
       [title]="context.title"
       [description]="context.description"
       [size]="context.size"
