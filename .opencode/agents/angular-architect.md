@@ -79,12 +79,12 @@ Invia a `dragone-tester` il **`Seam Contract`** completo.
 
 Invia a `dragone-coder` il **`Seam Contract`** e il riepilogo dei test appena creati da `dragone-tester`.
 
-- **Compito**: implementare o aggiornare il codice di produzione (`ng-package.json`, `public-api.ts`, `index.ts`, `<name>.ts`, `<name>.css`, `components.css`) fino a far passare tutti i test di `dragone-tester`. `dragone-coder` non ha il permesso di modificare `*.spec.ts`.
-- **Completion Criterion**: `CI=true pnpm exec vitest run <area>`, `pnpm build @dragone/ui` e `pnpm lint` passano (`GREEN`). Conserva il `sessionID` restituito da `dragone-coder`.
+- **Compito**: implementare o aggiornare **solo** il codice di produzione (`ng-package.json`, `public-api.ts`, `index.ts`, `<name>.ts`, `<name>.html`, `<name>.css`, `components.css`) fino a far passare i test di `dragone-tester`. `dragone-coder` non può creare né modificare `*.spec.ts` / `*.stories.ts` e non deve eseguire il gate di `dragone-reviewer`.
+- **Completion Criterion**: `pnpm format` e `CI=true pnpm exec vitest run <area>` passano (`GREEN`). Conserva il `sessionID` restituito da `dragone-coder`.
 
 ### Step 3: A11Y (Condizionale) — Delega a `accessibility-specialist`
 
-Se il Component introduce interazioni da tastiera, gestione del focus, `aria-live`, o potenziali criticità WCAG 2.2 AA / Sirio (ADR-0005), invoca `accessibility-specialist` prima della review finale.
+Se il Component introduce interazioni da tastiera, gestione del focus, `aria-live`, o potenziali criticità WCAG 2.2 AA / Sirio (ADR-0005), invoca `accessibility-specialist` in **sola lettura** (`edit: deny`, `bash: deny`). Se `accessibility-specialist` restituisce `A11Y VERDICT: KO`, delega le correzioni di codice a `dragone-coder` (e gli eventuali nuovi test a `dragone-tester`) prima della review finale.
 
 ### Step 4: REVIEW — Delega a `dragone-reviewer`
 

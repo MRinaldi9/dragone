@@ -57,12 +57,12 @@ Send the complete **`Seam Contract`** to `dragone-tester`.
 
 Send the **`Seam Contract`** and the summary of the tests created by `dragone-tester` to `dragone-coder`.
 
-- **Task**: implement or update the production code (`ng-package.json`, `public-api.ts`, `index.ts`, `<name>.ts`, `<name>.css`, `components.css`) until all `dragone-tester` specs pass. `dragone-coder` must never edit `*.spec.ts`.
-- **Completion Criterion**: `CI=true pnpm exec vitest run <area>`, `pnpm build @dragone/ui`, and `pnpm lint` pass (`GREEN`).
+- **Task**: implement or update **only** the production code (`ng-package.json`, `public-api.ts`, `index.ts`, `<name>.ts`, `<name>.html`, `<name>.css`, `components.css`) until all `dragone-tester` specs pass. `dragone-coder` cannot create or edit `*.spec.ts` / `*.stories.ts` and must not run `dragone-reviewer`'s gate.
+- **Completion Criterion**: `pnpm format` and `CI=true pnpm exec vitest run <area>` pass (`GREEN`).
 
 ### Step 3: A11Y (Conditional) — Delegate to `accessibility-specialist`
 
-If the Component introduces keyboard interactions, focus management, `aria-live`, or potential WCAG 2.2 AA / Sirio issues (ADR-0005), invoke `accessibility-specialist` before the final review.
+If the Component introduces keyboard interactions, focus management, `aria-live`, or potential WCAG 2.2 AA / Sirio issues (ADR-0005), invoke `accessibility-specialist` in **read-only mode** (`edit: deny`, `bash: deny`). If `accessibility-specialist` returns `A11Y VERDICT: KO`, delegate the code fixes to `dragone-coder` (and any new a11y specs to `dragone-tester`) before the final review.
 
 ### Step 4: REVIEW — Delegate to `dragone-reviewer`
 

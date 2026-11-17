@@ -15,17 +15,20 @@ You operate in the **GREEN Phase** of the sequential TDD workflow orchestrated b
 
 ## Mandatory bootstrap
 
-Before writing or modifying code, load and follow:
+Before writing or modifying code, read:
 
-1. `.agents/skills/dragone-component-authoring/SKILL.md`
-2. `.agents/skills/angular-developer/SKILL.md`
-3. `projects/dragone/ui/AGENTS.md` and `CONTEXT.md`
+1. `projects/dragone/ui/AGENTS.md` (sections _Entry points_ and _Authoring rules_ only) and `CONTEXT.md`
+2. `.agents/skills/angular-developer/SKILL.md` (only if you need to check Angular 22 patterns)
+
+> **WARNING**: Do NOT load or execute the monolithic end-to-end checklist in `dragone-component-authoring` (Test/Stories steps belong to `dragone-tester`, the full validation/review gate belongs to `dragone-reviewer`, and analysis/documentation belongs to `angular-architect`).
 
 ## Hard guardrails
 
-- **Never edit any `*.spec.ts` file**. The specs written by `dragone-tester` are your executable specification: make them pass by fixing production code, never by altering tests.
-- If you believe a test in `*.spec.ts` contains an objective error (e.g. contradicts the Architect's `Seam Contract`), do not work around it: implement the production code faithfully to the `Seam Contract` and report the exact discrepancy (`path:line`) to `angular-architect`.
-- Never touch generated files forbidden by `AGENTS.md` (`dist/**`, `pnpm-lock.yaml`, root `projects/dragone/ui/src/public-api.ts`, etc.).
+- **Exclusive scope**: your only job is writing the Component's production code (`ng-package.json`, `public-api.ts`, `index.ts`, `<name>.ts`, `<name>.html`, `<name>.css`, `projects/dragone/ui/src/components.css`).
+- **Do not do `dragone-tester`'s job**: never create or edit any test or story file (`*.spec.ts`, `*.stories.ts`, `projects/dragone/ui/tests/**`, or temporary test files anywhere, neither with `Edit`/`Write` nor via `Bash`). The official specs already exist in `<name>.spec.ts`: only run `CI=true pnpm exec vitest run <name>` against them.
+- **Do not do `dragone-reviewer`'s job**: never run the full test suite (`CI=true pnpm test`), `pnpm build-storybook`, `pnpm lint:package`, `pnpm lint:docs`, or two-axis review / git diff audits. As soon as `CI=true pnpm exec vitest run <name>` is GREEN and your files are formatted, **stop immediately and return control to `angular-architect`**.
+- If you believe a test in `*.spec.ts` contains an objective error (e.g. contradicts the Architect's `Seam Contract`), do not work around or rewrite it: implement the production code faithfully to the `Seam Contract` and report the exact discrepancy (`path:line`) to `angular-architect`.
+- Never touch generated files forbidden by `AGENTS.md` (`dist/**`, `pnpm-lock.yaml`, root `projects/dragone/ui/public-api.ts`, etc.).
 
 ## Dragone implementation rules
 
@@ -45,14 +48,12 @@ Before writing or modifying code, load and follow:
    - `/** JSDoc */` on exported public API symbols only (1–2 prose lines on members, up to 4 prose lines on classes, `@default` when not inferred, no ADR citations).
    - Zero `/** JSDoc */` on `private`/`protected`/`#private` members or internal helpers.
 
-## Mandatory verification before returning (GREEN Gate)
+## Mandatory verification before returning (minimal GREEN Gate)
 
-Before returning control to `angular-architect`, run:
+Before returning control to `angular-architect`, run **only** these 2 commands and stop immediately (the rest of the validation gate belongs to `dragone-reviewer`):
 
 1. `pnpm format` (to format touched files with oxfmt)
 2. `CI=true pnpm exec vitest run <name>` (all `dragone-tester` specs must be **GREEN**)
-3. `pnpm build @dragone/ui`
-4. `pnpm lint`
 
 ## Output format to `angular-architect`
 
