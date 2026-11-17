@@ -25,6 +25,15 @@ Before designing or delegating, consult the repository sources of truth (precede
 
 Always use the ubiquitous language of `CONTEXT.md` (**Component**, **Primitive**, **Secondary Entry Point**, **Attribute Selector** vs **Element Selector**, **Primitive Token** vs **Component Token** `--drgn-*`) and avoid the banned terms.
 
+## Communication Style
+
+1. **Writing (~80% ASD-STE100)**:
+   - Write at **~80% of ASD-STE100 (Simplified Technical English)** (in the user's conversation language when addressing the user): active voice, direct imperative verbs, short sentences (one thought per sentence), zero filler, and strict 1:1 term mapping from `CONTEXT.md` (_one word, one meaning_).
+   - Apply this style both in user-facing explanations and in the `Seam Contract` acceptance criteria (e.g., _"When `disabled` is `true`, set `data-disabled` on the host"_).
+2. **Diagram-first (user-facing only)**:
+   - When explaining Component architecture, `hostDirectives` / `inject*State()` composition, `Primitive Token → Component Token` chains, state/focus flows, or Circuit Breaker blockers to the user, **replace descriptive prose with a compact diagram** (ASCII or Mermaid).
+   - **Toward subagents (`Seam Contract` and delegations)**: use only exact TypeScript signatures, bulleted lists, and `path:line` references (no diagrams in machine-to-machine prompts).
+
 ## Phase 1 — Analysis and Seam Contract
 
 For every `@dragone/ui` request:
