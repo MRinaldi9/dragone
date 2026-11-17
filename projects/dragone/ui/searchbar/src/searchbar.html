@@ -1,0 +1,80 @@
+<div class="field-wrapper">
+  <div class="field">
+    <input
+      #input
+      class="input drgn-label-md-400"
+      type="search"
+      ngpInput
+      ngpFocusVisible
+      [id]="inputId()"
+      [value]="value()"
+      [disabled]="disabled()"
+      [readOnly]="readonly()"
+      [required]="required()"
+      [placeholder]="placeholder()"
+      [attr.name]="name() || null"
+      [attr.aria-label]="inputAriaLabel()"
+      [attr.role]="hasSuggestions() ? 'combobox' : null"
+      [attr.aria-autocomplete]="hasSuggestions() ? 'list' : null"
+      [attr.aria-haspopup]="hasSuggestions() ? 'listbox' : null"
+      [attr.aria-expanded]="hasSuggestions() ? (isOpen() ? 'true' : 'false') : null"
+      [attr.aria-controls]="isOpen() ? listboxId() : null"
+      [attr.aria-activedescendant]="isOpen() ? (activeDescendantId() ?? null) : null"
+      (focus)="onFocus()"
+      (input)="onInput($event)"
+      (keydown.escape)="onEscape($event)"
+      (keydown.arrowdown)="onArrowDown($event)"
+      (keydown.arrowup)="onArrowUp($event)"
+      (keydown.enter)="onEnter($event)"
+    />
+
+    @if (!empty()) {
+      <button
+        type="button"
+        class="clear"
+        ngpSearchClear
+        ngpFocusVisible
+        [attr.aria-label]="clearInputAriaLabel()"
+        [disabled]="disabled() || readonly()"
+        (pointerdown)="$event.preventDefault()"
+        (click)="onClear()"
+      >
+        <ng-icon name="faSolidXmark" size="1rem" aria-hidden="true" />
+      </button>
+    }
+  </div>
+
+  <button drgnButton type="button" [disabled]="disabled()" (click)="onSubmit()">
+    {{ searchLabel() }}
+    <ng-icon slot="trailing" name="faSolidMagnifyingGlass" size="1rem" aria-hidden="true" />
+  </button>
+
+  @if (isOpen()) {
+    <div
+      class="listbox"
+      role="listbox"
+      [id]="listboxId()"
+      [attr.aria-label]="inputAriaLabel()"
+      [attr.aria-labelledby]="fieldLabelledBy()"
+    >
+      @for (suggestion of filteredSuggestions(); track $index) {
+        <!-- Options are activated from the combobox input through aria-activedescendant, so they stay unfocusable and own no key handlers. -->
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+        <div
+          #option
+          role="option"
+          class="option drgn-label-md-400"
+          [id]="optionId($index)"
+          [attr.aria-selected]="activeIndex() === $index ? 'true' : 'false'"
+          [attr.data-active]="activeIndex() === $index ? '' : null"
+          (pointerenter)="onOptionPointerEnter($index)"
+          (pointerleave)="onOptionPointerLeave($index)"
+          (pointerdown)="$event.preventDefault()"
+          (click)="selectSuggestion(suggestion)"
+        >
+          {{ suggestion }}
+        </div>
+      }
+    </div>
+  }
+</div>
