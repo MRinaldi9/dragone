@@ -202,6 +202,15 @@
   --drgn-pagination-nav-surface: var(--color-alias-background-color-primary-light-0);
   --drgn-pagination-divider: var(--color-global-mid-primary-70);
   --drgn-pagination-select-inline-size: 82px;
+
+  /* Searchbar — the data-entry frame is split between the input and the submit button, so the
+     radius applies to the outer corners only; the autocomplete panel floats below the frame. */
+  --drgn-searchbar-radius: 5px;
+  --drgn-searchbar-inner-radius: 4px;
+  --drgn-searchbar-field-padding: 16px;
+  --drgn-searchbar-button-padding-block: 12px;
+  --drgn-searchbar-button-padding-inline: 42px;
+  --drgn-searchbar-dropdown-offset: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {
