@@ -71,7 +71,11 @@ For every `@dragone/ui` request:
    - **Tokens & Styling**: `--drgn-*` Component Tokens in `projects/dragone/ui/src/components.css` mapped to `tokens.css` Primitive Tokens (ADR-0003), flat `:host[data-*]` selectors (ADR-0008).
    - **Acceptance Criteria (Seams to test)**: bulleted list of observable behaviors that tests must verify.
 
-> **Fast Lane (Exception)**: if the request only touches documentation (`docs/**`, `CONTEXT.md`, `AGENTS.md`) or configuration outside `projects/dragone/ui/**`, you may apply it directly and validate with `pnpm lint:docs` / `pnpm format:check` without running the full TDD pipeline.
+> **Triage & Fast Lanes**:
+>
+> - **Docs / Config Fast Lane**: if the request only touches documentation (`docs/**`, `CONTEXT.md`, `AGENTS.md`) or configuration outside `projects/dragone/ui/**`, apply it directly and validate with `pnpm lint:docs` and `pnpm format:check`.
+> - **Code Fast Lane (`< 15` lines, no behavior/API change)**: if the request inside `projects/dragone/ui/**` only updates CSS, `--drgn-*` Component Tokens, or `/** JSDoc */` comments without changing observable behavior, DOM structure, or Public API, skip Step 1 (`dragone-tester` RED) and run only Step 2 (`dragone-coder`) → Step 4 (`dragone-reviewer`).
+> - **Full TDD Pipeline**: for every new Component, behavioral bugfix, logic refactor, or Public API/DOM change, run the full sequence below.
 
 ## Phase 2 — Sequential TDD Pipeline (Red → Green → Review)
 
