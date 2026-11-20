@@ -58,6 +58,8 @@
   --drgn-typography-line-height-h4-md: var(--typography-alias-h4-md-line-height-07);
   --drgn-typography-size-h4-lg: var(--typography-alias-h4-lg-size-08);
   --drgn-typography-line-height-h4-lg: var(--typography-alias-h4-lg-line-height-08);
+  --drgn-typography-size-h5-md: var(--typography-alias-h5-md-size-06);
+  --drgn-typography-line-height-h5-md: var(--typography-alias-h5-md-line-height-06);
   --drgn-typography-size-label-md: var(--typography-alias-label-md-size-04);
   --drgn-typography-line-height-label-md: var(--typography-alias-label-line-height-04);
   --drgn-typography-size-p-md: var(--typography-alias-p-md-size-04);
@@ -211,6 +213,42 @@
   --drgn-searchbar-button-padding-block: 12px;
   --drgn-searchbar-button-padding-inline: 42px;
   --drgn-searchbar-dropdown-offset: 8px;
+
+  /* Title Bar */
+  --drgn-title-bar-radius: 4px;
+  --drgn-title-bar-desktop-min-block-size: 62px;
+  --drgn-title-bar-mobile-min-block-size: 60px;
+  --drgn-title-bar-padding-inline: 16px;
+  --drgn-title-bar-desktop-gap: 16px;
+  --drgn-title-bar-mobile-gap: 10px;
+  --drgn-title-bar-title-padding-block: 4px;
+  --drgn-title-bar-actions-gap: 16px;
+  --drgn-title-bar-background: var(--color-alias-background-color-primary-light-40);
+  --drgn-title-bar-title-color: var(--color-alias-text-color-secondary-dark-130);
+  --drgn-title-bar-subtitle-color: var(--color-alias-interactive-secondary-pressed);
+  --drgn-title-bar-dark-background: var(--color-alias-interactive-primary-default);
+  --drgn-title-bar-dark-title-color: var(--color-alias-interactive-primary-000-default);
+  --drgn-title-bar-dark-subtitle-color: var(--color-alias-interactive-primary-000-default);
+  --drgn-title-bar-action-min-block-size: 40px;
+  --drgn-title-bar-action-padding-block: 6px;
+  --drgn-title-bar-action-padding-inline: 10px;
+  --drgn-title-bar-action-icon-only-padding: 10px;
+  --drgn-title-bar-action-gap: 8px;
+  --drgn-title-bar-action-color: var(--color-alias-interactive-primary-default);
+  --drgn-title-bar-action-hover-color: var(--color-alias-interactive-primary-hover);
+  --drgn-title-bar-action-focus-border: var(--color-alias-interactive-border-focus);
+
+  /* Untokenized 1.5px black/25% focus drop-shadow from the Sirio "Title Bar / Button Bg Light" Figma spec. */
+  --drgn-title-bar-action-focus-shadow: 0 0 1.5px 0 rgb(0 0 0 / 25%);
+  --drgn-title-bar-action-pressed-background: var(--color-alias-interactive-primary-pressed);
+  --drgn-title-bar-action-pressed-color: var(--color-alias-interactive-primary-000-default);
+  --drgn-title-bar-action-disabled-color: var(--color-alias-text-color-disabled);
+  --drgn-title-bar-dark-action-color: var(--color-alias-interactive-primary-000-default);
+  --drgn-title-bar-dark-action-hover-background: var(--color-alias-interactive-primary-hover);
+  --drgn-title-bar-dark-action-focus-border: var(--color-alias-interactive-primary-000-default);
+  --drgn-title-bar-dark-action-disabled-background: var(--color-alias-background-color-disabled);
+  --drgn-title-bar-menu-min-inline-size: 145px;
+  --drgn-title-bar-menu-item-padding: 16px;
 }
 
 @media (prefers-reduced-motion: reduce) {

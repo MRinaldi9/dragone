@@ -28,6 +28,16 @@
   margin: 0;
 }
 
+.drgn-h5-md {
+  font-family: var(--drgn-typography-font-family-base);
+  font-size: var(--drgn-typography-size-h5-md);
+  line-height: var(--drgn-typography-line-height-h5-md);
+  font-weight: var(--drgn-typography-weight-semibold);
+  font-style: var(--drgn-typography-font-style-normal);
+  letter-spacing: var(--drgn-typography-letter-spacing-default);
+  margin: 0;
+}
+
 .drgn-label-md-700 {
   font-family: var(--drgn-typography-font-family-base);
   font-size: var(--drgn-typography-size-label-md);

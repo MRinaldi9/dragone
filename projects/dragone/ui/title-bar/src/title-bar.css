@@ -1,0 +1,199 @@
+/* Flat :host selectors per ADR-0008 (no nesting under :host). */
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-block-size: var(--drgn-title-bar-desktop-min-block-size);
+  padding-inline: var(--drgn-title-bar-padding-inline);
+  gap: var(--drgn-title-bar-desktop-gap);
+  border-start-start-radius: var(--drgn-title-bar-radius);
+  border-start-end-radius: var(--drgn-title-bar-radius);
+  background-color: var(--drgn-title-bar-background);
+}
+
+:host[data-layout='mobile'] {
+  min-block-size: var(--drgn-title-bar-mobile-min-block-size);
+  gap: var(--drgn-title-bar-mobile-gap);
+}
+
+:host[data-theme='dark'] {
+  background-color: var(--drgn-title-bar-dark-background);
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  min-inline-size: 0;
+  padding-block: var(--drgn-title-bar-title-padding-block);
+}
+
+.title {
+  color: var(--drgn-title-bar-title-color);
+}
+
+.subtitle {
+  color: var(--drgn-title-bar-subtitle-color);
+}
+
+:host[data-theme='dark'] .title {
+  color: var(--drgn-title-bar-dark-title-color);
+}
+
+:host[data-theme='dark'] .subtitle {
+  color: var(--drgn-title-bar-dark-subtitle-color);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.inline-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--drgn-title-bar-actions-gap);
+}
+
+button.title-bar-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-block-size: var(--drgn-title-bar-action-min-block-size);
+  padding-block: var(--drgn-title-bar-action-padding-block);
+  padding-inline: var(--drgn-title-bar-action-padding-inline);
+  gap: var(--drgn-title-bar-action-gap);
+  border-radius: var(--drgn-title-bar-radius);
+  border: 2px solid transparent;
+  background-color: transparent;
+  color: var(--drgn-title-bar-action-color);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+button.title-bar-action[data-icon-only] {
+  padding: var(--drgn-title-bar-action-icon-only-padding);
+  gap: 0;
+}
+
+button.title-bar-action ng-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+button.title-bar-action:not([data-theme='dark']):disabled,
+button.title-bar-action:not([data-theme='dark'])[data-disabled] {
+  background-color: transparent;
+  color: var(--drgn-title-bar-action-disabled-color);
+  cursor: not-allowed;
+}
+
+button.title-bar-action:not([data-theme='dark'], :disabled, [data-disabled]):hover,
+button.title-bar-action:not([data-theme='dark'], :disabled, [data-disabled])[data-hover] {
+  background-color: transparent;
+  color: var(--drgn-title-bar-action-hover-color);
+}
+
+button.title-bar-action:not([data-theme='dark'])[data-focus-visible] {
+  outline: none;
+  border-color: var(--drgn-title-bar-action-focus-border);
+  box-shadow: var(--drgn-title-bar-action-focus-shadow);
+}
+
+button.title-bar-action:not([data-theme='dark'], :disabled, [data-disabled]):active,
+button.title-bar-action:not([data-theme='dark'], :disabled, [data-disabled])[data-press],
+button.title-bar-action:not([data-theme='dark'], :disabled, [data-disabled])[data-open] {
+  background-color: var(--drgn-title-bar-action-pressed-background);
+  color: var(--drgn-title-bar-action-pressed-color);
+}
+
+button.title-bar-action[data-theme='dark']:disabled,
+button.title-bar-action[data-theme='dark'][data-disabled] {
+  background-color: var(--drgn-title-bar-dark-action-disabled-background);
+  color: var(--drgn-title-bar-action-disabled-color);
+  cursor: not-allowed;
+}
+
+button.title-bar-action[data-theme='dark']:not(:disabled, [data-disabled]) {
+  background-color: transparent;
+  color: var(--drgn-title-bar-dark-action-color);
+}
+
+button.title-bar-action[data-theme='dark']:not(:disabled, [data-disabled]):hover,
+button.title-bar-action[data-theme='dark']:not(:disabled, [data-disabled])[data-hover] {
+  background-color: var(--drgn-title-bar-dark-action-hover-background);
+  color: var(--drgn-title-bar-dark-action-color);
+}
+
+button.title-bar-action[data-theme='dark'][data-focus-visible] {
+  outline: none;
+  border-color: var(--drgn-title-bar-dark-action-focus-border);
+  box-shadow: none;
+}
+
+button.title-bar-action[data-theme='dark']:not(:disabled, [data-disabled]):active,
+button.title-bar-action[data-theme='dark']:not(:disabled, [data-disabled])[data-press],
+button.title-bar-action[data-theme='dark']:not(:disabled, [data-disabled])[data-open] {
+  background-color: var(--drgn-title-bar-action-pressed-background);
+  color: var(--drgn-title-bar-action-pressed-color);
+}
+
+.overflow-menu {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-inline-size: var(--drgn-title-bar-menu-min-inline-size);
+  border: 1px solid var(--drgn-color-border-data-entry-default);
+  border-radius: var(--drgn-title-bar-radius);
+  background-color: var(--drgn-color-surface-base);
+  overflow: hidden;
+  outline: none;
+}
+
+.overflow-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: var(--drgn-title-bar-menu-item-padding);
+  border: 0;
+  background-color: var(--drgn-color-surface-base);
+  color: var(--drgn-color-text-data-entry-default);
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+}
+
+.overflow-menu-item:not(:last-child) {
+  border-block-end: 1px solid var(--drgn-color-border-data-entry-default);
+}
+
+.overflow-menu-item:disabled,
+.overflow-menu-item[data-disabled] {
+  background-color: var(--drgn-color-surface-disabled);
+  color: var(--drgn-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.overflow-menu-item[data-hover]:not(:disabled) {
+  background-color: var(--drgn-color-option-background-hover);
+  color: var(--drgn-color-text-inverse);
+}
+
+.overflow-menu-item[data-focus-visible]:not([data-hover]) {
+  outline: 2px solid var(--drgn-color-interactive-primary-default);
+  outline-offset: -2px;
+}
+
+.overflow-menu-item[data-press]:not(:disabled) {
+  background-color: var(--drgn-color-option-background-pressed);
+  color: var(--drgn-color-text-inverse);
+}

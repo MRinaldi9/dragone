@@ -1,0 +1,82 @@
+<div class="title-container" drgnTestId="title-bar-header">
+  <p
+    class="drgn-h5-md title"
+    drgnTestId="title-bar-title"
+    [attr.role]="titleAsHeading() ? 'heading' : null"
+    [attr.aria-level]="titleAsHeading() ? headingLevel() : null"
+  >
+    {{ title() }}
+  </p>
+  @if (subtitle()) {
+    <p class="drgn-p-md-01 subtitle" drgnTestId="title-bar-subtitle">
+      {{ subtitle() }}
+    </p>
+  }
+</div>
+
+<div class="actions" drgnTestId="title-bar-actions">
+  @if (!isCollapsed()) {
+    <div class="inline-actions">
+      @for (action of actions(); track action.id ?? action.label) {
+        <button
+          drgnButton
+          type="button"
+          class="title-bar-action"
+          semantic="ghost"
+          size="medium"
+          [attr.aria-label]="isIconOnlyAction(action) ? action.label : null"
+          [disabled]="!!action.disabled"
+          [iconOnly]="isIconOnlyAction(action)"
+          (click)="onActionClick(action)"
+        >
+          @if (action.icon; as icon) {
+            <ng-icon
+              slot="leading"
+              size="16"
+              aria-hidden="true"
+              [name]="isSvgIcon(icon) ? undefined : icon"
+              [svg]="isSvgIcon(icon) ? icon : undefined"
+            />
+          }
+          {{ isIconOnlyAction(action) ? '' : action.label }}
+        </button>
+      }
+    </div>
+  } @else {
+    <button
+      drgnButton
+      type="button"
+      class="title-bar-action"
+      semantic="ghost"
+      size="medium"
+      iconOnly
+      drgnTestId="title-bar-overflow-trigger"
+      ngpMenuTriggerPlacement="bottom-end"
+      [attr.aria-label]="overflowMenuLabel()"
+      [ngpMenuTrigger]="overflowMenu"
+      [ngpMenuTriggerOpenTriggers]="['click', 'arrowkey']"
+    >
+      <ng-icon name="faSolidEllipsisVertical" size="16" aria-hidden="true" />
+    </button>
+    <ng-template #overflowMenu>
+      <div
+        ngpMenu
+        class="overflow-menu"
+        drgnTestId="title-bar-overflow-menu"
+        [attr.aria-label]="overflowMenuLabel()"
+      >
+        @for (action of actions(); track action.id ?? action.label) {
+          <button
+            type="button"
+            ngpMenuItem
+            class="overflow-menu-item drgn-label-md-400"
+            [ngpMenuItemDisabled]="!!action.disabled"
+            (click)="onActionClick(action)"
+          >
+            {{ action.label }}
+          </button>
+        }
+      </div>
+    </ng-template>
+  }
+</div>
