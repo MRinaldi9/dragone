@@ -26,16 +26,32 @@
       "prefix": "drgn",
       "architect": {
         "build": {
-          "builder": "@angular/build:ng-packagr",
+          "builder": "@angular/build:library",
           "configurations": {
             "production": {
               "tsConfig": "projects/dragone/ui/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/dragone/ui/tsconfig.lib.json"
+              "compilationMode": "full"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "production",
+          "options": {
+            "tsConfig": "projects/dragone/ui/tsconfig.lib.json",
+            "outputPath": "dist/dragone/ui",
+            "assets": [
+              {
+                "input": "projects/dragone/ui/src",
+                "glob": "**/*.css",
+                "output": "./"
+              },
+              {
+                "input": "projects/dragone/ui",
+                "glob": "CHANGELOG.md",
+                "output": "."
+              }
+            ]
+          }
         },
         "test": {
           "builder": "@analogjs/vitest-angular:test"

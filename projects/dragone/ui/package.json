@@ -1,4 +1,31 @@
 {
+  "exports": {
+    ".": "./public-api.ts",
+    "./accordion": "./accordion/public-api.ts",
+    "./alert": "./alert/public-api.ts",
+    "./breadcrumb": "./breadcrumb/public-api.ts",
+    "./button": "./button/public-api.ts",
+    "./card": "./card/public-api.ts",
+    "./checkbox": "./checkbox/public-api.ts",
+    "./chip": "./chip/public-api.ts",
+    "./date-picker": "./date-picker/public-api.ts",
+    "./dialog": "./dialog/public-api.ts",
+    "./dropdown": "./dropdown/public-api.ts",
+    "./field": "./field/public-api.ts",
+    "./file-upload": "./file-upload/public-api.ts",
+    "./input": "./input/public-api.ts",
+    "./loader": "./loader/public-api.ts",
+    "./pagination": "./pagination/public-api.ts",
+    "./radio": "./radio/public-api.ts",
+    "./searchbar": "./searchbar/public-api.ts",
+    "./select": "./select/public-api.ts",
+    "./switch": "./switch/public-api.ts",
+    "./tag": "./tag/public-api.ts",
+    "./temporal-adapter": "./temporal-adapter/public-api.ts",
+    "./title-bar": "./title-bar/public-api.ts",
+    "./tooltip": "./tooltip/public-api.ts",
+    "./utils": "./utils/public-api.ts"
+  },
   "name": "@dragone/ui",
   "version": "0.0.1",
   "type": "module",
@@ -13,9 +40,6 @@
     "@floating-ui/dom": ">=1.6.0",
     "@ng-icons/core": ">=32.0.0",
     "@ng-icons/font-awesome": ">=32.0.0"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
   },
   "sideEffects": false,
   "publishConfig": {
