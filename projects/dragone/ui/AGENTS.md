@@ -6,13 +6,12 @@ Component-authoring rules. Repository-wide rules are in the root
 
 ## Entry points
 
-Each Component is a secondary entry point under `projects/dragone/ui/<name>/`:
+Each Component is a secondary entry point under `projects/dragone/ui/<name>/`, registered in
+`projects/dragone/ui/package.json` under `exports` (`"./<name>": "./<name>/public-api.ts"`):
 
 ```
 <name>/
-├── ng-package.json     # { "lib": { "entryFile": "public-api.ts" } }
 ├── public-api.ts       # export * from './src/<name>'
-├── index.ts            # export { <Name> } from './public-api'
 └── src/
     ├── <name>.ts
     ├── <name>.css
@@ -20,7 +19,10 @@ Each Component is a secondary entry point under `projects/dragone/ui/<name>/`:
     └── <name>.stories.ts
 ```
 
-`button/` is the canonical reference. Composite Components keep additional
+Scaffold new entry points with `pnpm exec ng generate entry-point <name> --skip-ts-config`,
+move `<name>/src/public-api.ts` to `<name>/public-api.ts`, and update `exports["./<name>"]`
+in `projects/dragone/ui/package.json` to `"./<name>/public-api.ts"`. `button/` is the
+canonical reference. Composite Components keep additional
 Children/Private Components in `src/<child>/`, as `accordion/`, `breadcrumb/`, and `radio/`
 do. `utils/` and `temporal-adapter/` are entry points without stories: they are not visual
 Components. Never create a barrel export from the root `public-api.ts`; its placeholder

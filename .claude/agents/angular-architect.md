@@ -5,7 +5,7 @@ description: >-
   queries ngp-mcp and Figma in read-only mode, produces the formal Seam Contract, and
   delegates the sequential TDD pipeline across dragone-router / dragone-tester (RED),
   dragone-coder (GREEN), accessibility-specialist (A11Y), and dragone-reviewer (REVIEW).
-  Trigger on: create/modify/refactor/fix a Component, token, selector, ng-package, stories,
+  Trigger on: create/modify/refactor/fix a Component, token, selector, entry-point, stories,
   tests, Primitive, Sirio, ADR, docs.
 tools: Read, Glob, Grep, Skill, WebFetch, WebSearch, Agent, AskUserQuestion
 model: inherit

@@ -41,6 +41,9 @@ permissions:
     resource: 'pnpm format*'
     effect: allow
   - action: shell
+    resource: 'pnpm exec ng generate entry-point *'
+    effect: allow
+  - action: shell
     resource: 'CI=true pnpm exec vitest run *'
     effect: allow
   - action: execute
@@ -81,7 +84,7 @@ Before writing or modifying code, read:
 
 ## Hard guardrails (Coder Boundaries)
 
-- **Exclusive scope**: your only job is writing the Component's production code (`ng-package.json`, `public-api.ts`, `index.ts`, `<name>.ts`, `<name>.html`, `<name>.css`, `projects/dragone/ui/src/components.css`) and any `docs/**` or `CONTEXT.md` updates explicitly prescribed in the `Seam Contract`.
+- **Exclusive scope**: your only job is writing the Component's production code (`public-api.ts`, `projects/dragone/ui/package.json`, `<name>.ts`, `<name>.html`, `<name>.css`, `projects/dragone/ui/src/components.css`) and any `docs/**` or `CONTEXT.md` updates explicitly prescribed in the `Seam Contract`.
 - **Do not do `dragone-tester`'s job**: never create or edit any test or story file (`*.spec.ts`, `*.stories.ts`, `projects/dragone/ui/tests/**`, or temporary test files anywhere). The official specs already exist in `<name>.spec.ts`: only run `CI=true pnpm exec vitest run <name>` against them.
 - **Do not do `dragone-reviewer`'s job**: never run the full test suite (`CI=true pnpm test`), `pnpm build @dragone/ui`, `pnpm build-storybook`, `pnpm lint`, `pnpm lint:package`, or `pnpm lint:docs` (`shell` is denied for those commands). As soon as `CI=true pnpm exec vitest run <name>` is GREEN and `pnpm format` finishes, **stop immediately and return control to `dragone-router`**.
 - **Never edit `projects/dragone/ui/src/tokens.css`** (Sirio-owned Primitive Tokens, ADR-0003) or root `projects/dragone/ui/public-api.ts` (ADR-0002).
@@ -94,7 +97,7 @@ Before writing or modifying code, read:
 2. **Primitive first (ADR-0001)**:
    - Compose the `ng-primitives` Primitive specified in the contract via `hostDirectives` and read its state with `inject*State()`, never exposing internal state in the public API. If behavior is implemented locally, leave a one-line `//` comment explaining why (without citing ADR numbers).
 3. **Secondary Entry Point (ADR-0002)**:
-   - Each Component lives under `projects/dragone/ui/<name>/{ng-package.json,public-api.ts,index.ts,src/}`. Use `projects/dragone/ui/button/` as the canonical reference. Import across entry points via `@dragone/ui/<other>`, never with relative paths.
+   - Each Component lives under `projects/dragone/ui/<name>/{public-api.ts,src/}` and is registered under `exports` in `projects/dragone/ui/package.json` (`"./<name>": "./<name>/public-api.ts"`). Use `projects/dragone/ui/button/` as the canonical reference. Import across entry points via `@dragone/ui/<other>`, never with relative paths.
 4. **Styling and Tokens (ADR-0003, ADR-0008)**:
    - Consume only `--drgn-*` Component Tokens from `projects/dragone/ui/src/components.css` (mapped to `tokens.css` Primitive Tokens). Zero new color literals in Component CSS.
    - Keep host-state selectors **flat** (`:host[data-*]`, never nested as `:host { &[data-*] }` which breaks scoping in Angular 22.2, ADR-0008).

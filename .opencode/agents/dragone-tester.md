@@ -65,7 +65,7 @@ Before writing any test or story, read:
 ## Hard guardrails (Tester Boundaries)
 
 - **Exclusive scope**: you may only create or edit `projects/dragone/ui/**/*.spec.ts`, `projects/dragone/ui/**/*.stories.ts`, and `projects/dragone/ui/tests/**`.
-- **Never edit production source files** (`<name>.ts`, `<name>.html`, `<name>.css`, `public-api.ts`, `index.ts`, `ng-package.json`, `components.css`). If a test fails because of a bug in the Component, leave the failing test that proves the bug and report the failure to `dragone-router`.
+- **Never edit production source files** (`<name>.ts`, `<name>.html`, `<name>.css`, `public-api.ts`, `projects/dragone/ui/package.json`, `components.css`). If a test fails because of a bug in the Component, leave the failing test that proves the bug and report the failure to `dragone-router`.
 - **Do not do `dragone-reviewer`'s job**: never run `CI=true pnpm test` (full suite), `pnpm build @dragone/ui`, `pnpm build-storybook`, `pnpm lint`, or `pnpm lint:package`. Your `shell` access is restricted strictly to `CI=true pnpm exec vitest run <name>` and `pnpm format`.
 
 ## Dragone testing and story rules

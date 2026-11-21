@@ -106,7 +106,7 @@ Inspect the diff (`git status`, `git diff`) and created files against the `Seam 
 Verify line-by-line compliance with Dragone architectural invariants:
 
 - **ADR-0001 (ng-primitives)**: is the Primitive composed via `hostDirectives` and read with `inject*State()` without exposing internal state in the public API? If local behavior is implemented, is there a one-line `//` rationale comment?
-- **ADR-0002 (Secondary Entry Points)**: do `ng-package.json`, `public-api.ts`, and `index.ts` match `button/`? Was the root `projects/dragone/ui/public-api.ts` left untouched? Do cross-entry-point imports use `@dragone/ui/<name>`?
+- **ADR-0002 (Secondary Entry Points)**: does `public-api.ts` match `button/` and is `"./<name>": "./<name>/public-api.ts"` registered under `exports` in `projects/dragone/ui/package.json`? Was the root `projects/dragone/ui/public-api.ts` left untouched? Do cross-entry-point imports use `@dragone/ui/<name>`?
 - **ADR-0003 (Tokens)**: does CSS consume only `--drgn-*` Component Tokens from `src/components.css` mapped to `src/tokens.css`? Zero new color literals?
 - **ADR-0004 (Signal Forms)**: does it use `FormValueControl` / `FormCheckboxControl` from `@angular/forms/signals` and never `ControlValueAccessor`? Signal APIs only (`input()`, `output()`, `model()`), no `@Input()` / `@Output()`?
 - **ADR-0005 & WCAG 2.2 AA**: are native semantics, ARIA attributes, keyboard navigation, and focus-visible states sound? Are any Sirio token defects escalated rather than patched in `tokens.css`?

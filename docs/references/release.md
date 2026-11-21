@@ -46,8 +46,8 @@ body before the next run.
 
 There is exactly one published package (`@dragone/ui`), so the tag is plain `vX.Y.Z`
 (`include-component-in-tag: false`). The version that matters lives in
-`projects/dragone/ui/package.json`; ng-packagr copies it to `dist/dragone/ui/package.json`
-during the build, so bumping the source is enough.
+`projects/dragone/ui/package.json`; `@angular/build:library` writes it to
+`dist/dragone/ui/package.json` during the build, so bumping the source is enough.
 
 `@dragone/ui` is deliberately **outside** the pnpm workspace: `pnpm-workspace.yaml` declares no
 `packages`. This keeps pnpm from creating `projects/dragone/ui/node_modules` and from owning the
@@ -101,7 +101,7 @@ These are unresolved. Record the outcome here or in an ADR when each is decided.
 3. **Tag format** — currently `vX.Y.Z` via `include-component-in-tag: false`. Switch back to
    `@dragone/ui-vX.Y.Z` if a second package is ever added.
 4. **Ship the changelog?** — `projects/dragone/ui/CHANGELOG.md` is copied into the package via
-   `assets` in `ng-package.json`. Remove that asset to keep the changelog repo-only.
+   `assets` in `angular.json`. Remove that asset to keep the changelog repo-only.
 5. **`publishConfig.directory`** — kept on the source manifest as a safety net so a stray
    `pnpm publish` inside `projects/dragone/ui` packs `dist/dragone/ui`. Remove it only if that
    protection is not wanted.

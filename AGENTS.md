@@ -44,9 +44,9 @@ before validating the implementation.
 - ng-primitives owns the behavior it provides (ADR-0001): compose Primitive directives via
   `hostDirectives` and read their state with `inject*State()`. Behavior ng-primitives does not
   cover may be implemented locally, but prefer upstreaming it and leave a note saying why.
-- Secondary entry points only (ADR-0002): each component directory owns `ng-package.json`,
-  `public-api.ts`, and `index.ts`. Consumers import subpaths; never re-export from the root
-  `public-api.ts`.
+- Secondary entry points only (ADR-0002): each component directory owns `public-api.ts` and
+  is registered under `exports` in `projects/dragone/ui/package.json`. Consumers import
+  subpaths; never re-export from the root `public-api.ts`.
 - Tokens (ADR-0003): components consume only `--drgn-*` tokens from
   `projects/dragone/ui/src/components.css`; no new color literals in component CSS.
 - Forms (ADR-0004): `FormValueControl` / `FormCheckboxControl` from `@angular/forms/signals`;

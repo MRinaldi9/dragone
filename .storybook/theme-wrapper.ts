@@ -1,6 +1,6 @@
 import { Component, effect, input } from '@angular/core';
 
-import { provideThemeState, themeFactory } from '../projects/dragone/ui/utils';
+import { provideThemeState, themeFactory } from '../projects/dragone/ui/utils/public-api';
 
 @Component({
   host: {

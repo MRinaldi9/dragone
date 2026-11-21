@@ -6,7 +6,7 @@ description: >-
   (REVIEW), managing up to 2 KO retry cycles before returning the consolidated report to
   angular-architect.
 mode: subagent
-model: opencode/glm-5.3-flash-free#low
+model: opencode/glm-5.3-flash#low
 color: '#0284c7'
 permissions:
   - action: '*'

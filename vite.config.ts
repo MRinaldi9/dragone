@@ -29,10 +29,8 @@ export default defineConfig(({ mode }) => {
         enabled: true,
         exclude: [
           ...coverageConfigDefaults.exclude,
-          'index.ts',
           'public-api.ts',
           '**/*.stories.ts',
-          '**/index.ts',
           '**/public-api.ts',
           '**/*.js',
           '**/*.css'

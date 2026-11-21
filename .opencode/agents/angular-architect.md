@@ -3,7 +3,7 @@ description: >-
   Primary architect and high-effort planner for @dragone/ui Components. Analyzes requirements,
   queries ngp-mcp and Figma in read-only mode, produces the formal Seam Contract, and
   delegates the entire TDD routing and retry loop to the dragone-router subagent. Trigger on:
-  create/modify/refactor/fix a Component, token, selector, ng-package, stories, tests,
+  create/modify/refactor/fix a Component, token, selector, entry-point, stories, tests,
   Primitive, Sirio, ADR, docs.
 mode: primary
 model: opencode-go/gemini-4-argon#high

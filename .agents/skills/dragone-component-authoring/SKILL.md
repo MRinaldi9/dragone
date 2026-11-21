@@ -17,10 +17,13 @@ live in `AGENTS.md` (root) and `projects/dragone/ui/AGENTS.md`; this skill is th
    template (`button[drgnButton]`, `input[drgnInputText]`); element selector otherwise
    (`drgn-select`, `drgn-alert`). Keep both alias forms (`drgnX` and `drgn-x`) consistent with
    existing components; the linter prefers kebab-case.
-3. **Scaffold the entry point.** Create
-   `projects/dragone/ui/<name>/{ng-package.json,public-api.ts,index.ts,src/}` with
-   `<name>.ts/.css/.spec.ts/.stories.ts`. Copy `button/` as reference. Never touch the root
-   `public-api.ts` (ADR-0002).
+3. **Scaffold the entry point.** Run
+   `pnpm exec ng generate entry-point <name> --skip-ts-config`, move the generated
+   `<name>/src/public-api.ts` to `<name>/public-api.ts` (`export * from './src/<name>';`),
+   point `exports["./<name>"]` in `projects/dragone/ui/package.json` to
+   `"./<name>/public-api.ts"`, and add `<name>.css` and `<name>.stories.ts` under
+   `<name>/src/`. Copy `button/` as reference. Never touch the root `public-api.ts`
+   (ADR-0002).
 4. **Implement.** Compose the Primitive with `hostDirectives`; read state with `inject*State()`
    and never expose it. Signal `input()`/`output()`/`model()`; OnPush is the schematic default
    but current components do not declare it. Document exported classes and public members with
