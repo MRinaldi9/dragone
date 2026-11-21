@@ -12,8 +12,7 @@ import {
   NgpDialogDescription,
   NgpDialogOverlay,
   NgpDialogRef,
-  NgpDialogTitle,
-  injectDialogConfig
+  NgpDialogTitle
 } from 'ng-primitives/dialog';
 
 import { Button } from '@dragone/ui/button';
@@ -62,10 +61,7 @@ const STATUS_TO_ICON = {
   styleUrl: './dialog-panel.css',
   providers: [provideIcons({ faSolidXmark })],
   host: {
-    // The scrim only exists for modal dialogs: non-modal dialogs keep the page pointer-interactive
-    // (transparent, pointer-events: none — see the stylesheet) while `aria-modal` is false. This
-    // removes the scrim and the pointer block only: focus stays trapped (upstream NgpDialog always
-    // applies NgpFocusTrap) — see `DialogConfig.modal` / `Dialog.modal`.
+    // The scrim only exists for modal dialogs: non-modal dialogs keep the page pointer-interactive.
     '[attr.data-modal]': 'modal ? "true" : "false"'
   },
   hostDirectives: [NgpDialogOverlay]
@@ -97,9 +93,9 @@ export class DialogPanel {
 
   protected readonly statusIcon = computed(() => STATUS_TO_ICON[this.status()]);
 
-  protected readonly modal = injectDialogConfig().modal ?? true;
-
   readonly #dialogRef = inject(NgpDialogRef);
+
+  protected readonly modal = this.#dialogRef.config.modal ?? true;
 
   // Honors `disableClose` like escape and scrim click; `NgpDialogRef.close()` closes unconditionally.
   protected close(): void {

@@ -80,8 +80,6 @@ export class Dialog {
    *
    * @default true
    */
-  // Upstream NgpDialog/NgpDialogManager limitation: focus trapping and page scroll lock remain
-  // active even when `modal` is false.
   readonly modal = input(true);
 
   private readonly content = viewChild.required('content', { read: TemplateRef });

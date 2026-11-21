@@ -58,8 +58,6 @@ export interface DynamicDialogConfig {
    *
    * @default true
    */
-  // Upstream NgpDialog/NgpDialogManager limitation: focus trapping and page scroll lock remain
-  // active even when `modal` is false.
   modal?: boolean;
   /** The element or selector the dialog is rendered into. `null` means the document body. */
   container?: HTMLElement | string | null;
