@@ -1,8 +1,9 @@
 import { Logger } from './logger';
 
 describe(Logger, () => {
-  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(vi.fn);
-  const errorSpy = vi.spyOn(console, 'error').mockImplementation(vi.fn);
+  const noop = () => undefined;
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(noop);
+  const errorSpy = vi.spyOn(console, 'error').mockImplementation(noop);
 
   afterEach(() => {
     warnSpy.mockClear();
