@@ -20,6 +20,7 @@
     "./searchbar": "./searchbar/public-api.ts",
     "./select": "./select/public-api.ts",
     "./switch": "./switch/public-api.ts",
+    "./tab": "./tab/public-api.ts",
     "./tag": "./tag/public-api.ts",
     "./temporal-adapter": "./temporal-adapter/public-api.ts",
     "./title-bar": "./title-bar/public-api.ts",
