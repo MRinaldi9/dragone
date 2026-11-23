@@ -5,7 +5,7 @@ description: >-
   @wismaz/vitest-browser-angular and Storybook stories (*.stories.ts). Cannot edit production
   source files.
 mode: subagent
-model: opencode-go/mimo-v2.6-flash#low
+model: opencode-go/mimo-v2.6-flash
 color: '#f59e0b'
 permissions:
   - action: '*'
