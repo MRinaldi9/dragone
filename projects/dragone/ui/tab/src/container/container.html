@@ -1,0 +1,41 @@
+<div ngpTabList class="tab-list" drgnTestId="tab-list" [attr.aria-label]="ariaLabel() ?? null">
+  @for (tab of tabs(); track tab.value()) {
+    <button
+      type="button"
+      ngpTabButton
+      class="tab-button"
+      [ngpTabButtonValue]="tab.value()"
+      [ngpTabButtonDisabled]="tab.disabled()"
+      [attr.data-has-icon]="tab.icon() ? '' : null"
+    >
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <span class="tab-button-content">
+        @if (tab.icon(); as icon) {
+          <ng-icon
+            class="tab-icon"
+            size="16"
+            aria-hidden="true"
+            drgnTestId="tab-icon"
+            [name]="isSvgIcon(icon) ? undefined : icon"
+            [svg]="isSvgIcon(icon) ? icon : undefined"
+          />
+        }
+        <span class="tab-label">{{ tab.label() }}</span>
+      </span>
+    </button>
+  }
+</div>
+
+<div class="tab-panels" drgnTestId="tab-panels">
+  @for (tab of tabs(); track tab.value()) {
+    <div ngpTabPanel class="tab-panel" [ngpTabPanelValue]="tab.value()">
+      @if (tab.lazyContent(); as lazy) {
+        @if (isTabActive(tab.value())) {
+          <ng-container [ngTemplateOutlet]="lazy.templateRef" />
+        }
+      } @else {
+        <ng-container [ngTemplateOutlet]="tab.eagerContent()" />
+      }
+    </div>
+  }
+</div>

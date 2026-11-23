@@ -214,6 +214,40 @@
   --drgn-searchbar-button-padding-inline: 42px;
   --drgn-searchbar-dropdown-offset: 8px;
 
+  /* Tab */
+  --drgn-tab-list-gap: 2px;
+  --drgn-tab-indicator-size: 3px;
+  --drgn-tab-indicator-radius: 4px;
+  --drgn-tab-icon-size: 16px;
+  --drgn-tab-font-size: var(--typography-alias-label-xl-size-06);
+  --drgn-tab-line-height: var(--typography-alias-label-line-height-06);
+  --drgn-tab-font-weight-default: var(--typography-alias-label-font-weight-400);
+  --drgn-tab-font-weight-selected: var(--typography-alias-label-font-weight-700);
+  --drgn-tab-text-default: var(--color-alias-interactive-secondary-default);
+  --drgn-tab-text-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-tab-text-selected: var(--color-alias-interactive-secondary-default);
+  --drgn-tab-text-disabled: var(--color-alias-text-color-disabled);
+  --drgn-tab-indicator-default: transparent;
+  --drgn-tab-indicator-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-tab-indicator-selected: var(--color-alias-interactive-primary-default);
+  --drgn-tab-indicator-focus: var(--color-alias-interactive-primary-focus);
+  --drgn-tab-focus-border: var(--color-alias-interactive-border-focus);
+  --drgn-tab-focus-shadow: var(--drgn-pagination-focus-shadow);
+  --drgn-tab-panel-padding: 16px;
+
+  /* Tab Container */
+  --drgn-tab-container-radius: 2px;
+  --drgn-tab-container-min-block-size: 62px;
+  --drgn-tab-container-padding-block: 14px;
+  --drgn-tab-container-padding-inline-label: 40px;
+  --drgn-tab-container-padding-inline-icon: 32px;
+  --drgn-tab-container-content-gap: 4px;
+  --drgn-tab-container-background-default: var(--color-alias-background-color-primary-light-40);
+  --drgn-tab-container-background-hover: var(--color-alias-background-color-primary-light-40);
+  --drgn-tab-container-background-selected: var(--color-alias-background-color-primary-light-0);
+  --drgn-tab-container-background-disabled: var(--color-alias-background-color-disabled);
+  --drgn-tab-container-border-selected: var(--color-alias-background-color-primary-light-40);
+
   /* Title Bar */
   --drgn-title-bar-radius: 4px;
   --drgn-title-bar-desktop-min-block-size: 62px;
