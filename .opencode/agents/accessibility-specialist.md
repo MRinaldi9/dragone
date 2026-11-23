@@ -13,16 +13,25 @@ permissions:
     resource: '*'
     effect: deny
   - action: read
-    resource: '.opencode/contracts/*.contract.d.ts'
+    resource: '*.opencode/contracts/*.contract.d.ts'
     effect: allow
   - action: read
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
+  - action: read
+    resource: '*AGENTS.md'
+    effect: deny
+  - action: read
+    resource: '*CONTEXT.md'
+    effect: deny
+  - action: read
+    resource: '*SKILL.md'
+    effect: deny
   - action: glob
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: grep
-    resource: '*'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: skill
     resource: 'accessibility'

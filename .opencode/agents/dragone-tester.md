@@ -5,32 +5,41 @@ description: >-
   @wismaz/vitest-browser-angular and Storybook stories (*.stories.ts). Cannot edit production
   source files.
 mode: subagent
-model: opencode-go/mimo-v2.6-flash
+model: opencode-go/mimo-v2.6-flash#low
 color: '#f59e0b'
 permissions:
   - action: '*'
     resource: '*'
     effect: deny
   - action: read
-    resource: '.opencode/contracts/*.contract.d.ts'
+    resource: '*.opencode/contracts/*.contract.d.ts'
     effect: allow
   - action: read
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
+  - action: read
+    resource: '*AGENTS.md'
+    effect: deny
+  - action: read
+    resource: '*CONTEXT.md'
+    effect: deny
+  - action: read
+    resource: '*SKILL.md'
+    effect: deny
   - action: glob
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: grep
-    resource: '*'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: edit
-    resource: 'projects/dragone/ui/**/*.spec.ts'
+    resource: '*projects/dragone/ui/*.spec.ts'
     effect: allow
   - action: edit
-    resource: 'projects/dragone/ui/**/*.stories.ts'
+    resource: '*projects/dragone/ui/*.stories.ts'
     effect: allow
   - action: edit
-    resource: 'projects/dragone/ui/tests/**'
+    resource: '*projects/dragone/ui/tests/*'
     effect: allow
   - action: shell
     resource: 'CI=true pnpm exec vitest run *'

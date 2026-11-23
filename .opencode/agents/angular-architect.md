@@ -25,7 +25,7 @@ permissions:
     resource: '*'
     effect: allow
   - action: edit
-    resource: '.opencode/contracts/*.contract.d.ts'
+    resource: '*.opencode/contracts/*.contract.d.ts'
     effect: allow
   - action: question
     resource: '*'

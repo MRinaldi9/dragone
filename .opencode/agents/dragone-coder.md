@@ -12,61 +12,73 @@ permissions:
     resource: '*'
     effect: deny
   - action: read
-    resource: '.opencode/contracts/*.contract.d.ts'
+    resource: '*.opencode/contracts/*.contract.d.ts'
     effect: allow
   - action: read
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: read
-    resource: 'docs/**'
+    resource: '*docs/*'
     effect: allow
   - action: read
-    resource: 'CONTEXT.md'
+    resource: '*CONTEXT.md'
     effect: allow
+  - action: read
+    resource: '*AGENTS.md'
+    effect: deny
+  - action: read
+    resource: '*SKILL.md'
+    effect: deny
   - action: glob
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: grep
-    resource: '*'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: edit
-    resource: 'projects/dragone/ui/**'
+    resource: '*projects/dragone/ui/*'
     effect: allow
   - action: edit
-    resource: 'docs/**'
+    resource: '*docs/*'
     effect: allow
   - action: edit
-    resource: 'CONTEXT.md'
+    resource: '*CONTEXT.md'
     effect: allow
   - action: edit
-    resource: '**/*.spec.ts'
+    resource: '*.spec.ts'
     effect: deny
   - action: edit
-    resource: '**/*.stories.ts'
+    resource: '*.stories.ts'
     effect: deny
   - action: edit
-    resource: 'projects/dragone/ui/tests/**'
+    resource: '*projects/dragone/ui/tests/*'
     effect: deny
   - action: edit
-    resource: 'projects/dragone/ui/public-api.ts'
+    resource: '*projects/dragone/ui/public-api.ts'
     effect: deny
   - action: edit
-    resource: 'projects/dragone/ui/src/tokens.css'
+    resource: '*projects/dragone/ui/src/tokens.css'
     effect: deny
   - action: edit
-    resource: 'projects/dragone/ui/src/typography.css'
+    resource: '*projects/dragone/ui/src/typography.css'
     effect: deny
   - action: edit
-    resource: 'projects/dragone/ui/AGENTS.md'
+    resource: '*AGENTS.md'
     effect: deny
   - action: edit
-    resource: 'projects/dragone/ui/CHANGELOG.md'
+    resource: '*projects/dragone/ui/CHANGELOG.md'
     effect: deny
   - action: shell
     resource: 'pnpm format*'
     effect: allow
   - action: shell
     resource: 'CI=true pnpm exec vitest run *'
+    effect: allow
+  - action: shell
+    resource: 'rm -rf projects/dragone/ui/*'
+    effect: allow
+  - action: shell
+    resource: 'rm -f projects/dragone/ui/*'
     effect: allow
 ---
 

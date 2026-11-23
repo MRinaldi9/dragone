@@ -5,11 +5,8 @@
     "subagent_depth": 2
   },
   "formatter": {
-    "prettier": {
-      "disabled": true
-    },
     "oxfmt": {
-      "command": ["pnpm", "format"],
+      "command": ["pnpm", "exec", "oxfmt", "$FILE"],
       "extensions": [".ts"]
     }
   },
