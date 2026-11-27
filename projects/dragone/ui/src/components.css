@@ -214,6 +214,45 @@
   --drgn-searchbar-button-padding-inline: 42px;
   --drgn-searchbar-dropdown-offset: 8px;
 
+  /* Slider — a 3px track with a rounded range, a bordered thumb and a lateral number field with
+     the two stepper triggers stacked on its trailing edge. */
+  --drgn-slider-block-size: 48px;
+  --drgn-slider-gap: 16px;
+  --drgn-slider-track-min-inline-size: 200px;
+  --drgn-slider-track-row-block-size: 24px;
+  --drgn-slider-track-block-size: 3px;
+  --drgn-slider-track-radius: 50px;
+  --drgn-slider-track-background: var(--color-global-light-secondary-40);
+  --drgn-slider-range-default: var(--color-alias-interactive-secondary-default);
+  --drgn-slider-range-focus: var(--color-alias-interactive-border-focus);
+  --drgn-slider-range-pressed: var(--color-specific-option-background-color-pressed);
+  --drgn-slider-thumb-size: 24px;
+  --drgn-slider-thumb-border-width: 2px;
+  --drgn-slider-thumb-gap-width: 2px;
+  --drgn-slider-thumb-gap-color: var(--color-global-primary-000);
+  --drgn-slider-thumb-default: var(--color-alias-interactive-primary-default);
+  --drgn-slider-thumb-pressed: var(--color-specific-option-background-color-pressed);
+  --drgn-slider-thumb-disabled: var(--color-alias-background-color-disabled);
+  --drgn-slider-label-color: var(--color-alias-interactive-secondary-default);
+  --drgn-slider-input-inline-size: 100px;
+  --drgn-slider-input-block-size: 48px;
+  --drgn-slider-input-padding-block: 12px;
+  --drgn-slider-input-padding-inline: 16px;
+  --drgn-slider-input-radius: 4px;
+  --drgn-slider-input-background: var(--color-alias-background-color-primary-light-0);
+  --drgn-slider-input-background-disabled: var(--color-alias-background-color-disabled);
+  --drgn-slider-input-border-default: var(--color-specific-data-entry-border-color-default);
+  --drgn-slider-input-border-hover: var(--color-specific-data-entry-border-color-hover);
+  --drgn-slider-input-border-focus: var(--color-specific-data-entry-border-color-focus);
+  --drgn-slider-input-text: var(--color-specific-data-entry-label-color-default);
+  --drgn-slider-input-text-hover: var(--color-specific-data-entry-label-color-hover);
+  --drgn-slider-input-icon-default: var(--color-alias-interactive-secondary-default);
+  --drgn-slider-input-icon-hover: var(--color-alias-interactive-primary-hover);
+  --drgn-slider-input-icon-focus: var(--color-alias-interactive-primary-focus);
+  --drgn-slider-input-icon-disabled: var(--color-alias-text-color-disabled);
+  --drgn-slider-stepper-min-size: 24px;
+  --drgn-slider-focus-outline: var(--color-alias-interactive-border-focus);
+
   /* Tab */
   --drgn-tab-list-gap: 2px;
   --drgn-tab-indicator-size: 3px;

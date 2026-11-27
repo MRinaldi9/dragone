@@ -1,0 +1,94 @@
+<div class="slider-progress">
+  <div class="slider-track-row">
+    <span ngpSliderTrack class="slider-track" drgnTestId="slider-track">
+      <span ngpSliderRange class="slider-range" drgnTestId="slider-range"></span>
+    </span>
+
+    <span
+      #thumb
+      ngpSliderThumb
+      role="slider"
+      class="slider-thumb"
+      [attr.data-disabled]="isDisabled() ? '' : null"
+      [attr.tabindex]="isDisabled() ? '-1' : '0'"
+      [attr.aria-valuenow]="value()"
+      [attr.aria-label]="thumbAriaLabel()"
+      [attr.aria-labelledby]="thumbLabelledBy()"
+      [attr.aria-describedby]="ariaDescribedBy()"
+      [attr.aria-invalid]="isInvalid() ? 'true' : null"
+      [attr.aria-readonly]="readonly() ? 'true' : null"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
+    ></span>
+  </div>
+
+  <div class="slider-labels">
+    <span class="slider-label drgn-label-md-number-400" drgnTestId="slider-min-label">
+      {{ minValue() }}
+    </span>
+    <span class="slider-label drgn-label-md-number-400" drgnTestId="slider-max-label">
+      {{ maxValue() }}
+    </span>
+  </div>
+</div>
+
+<span class="slider-input-wrapper">
+  <input
+    class="slider-input drgn-label-md-number-400"
+    type="text"
+    inputmode="decimal"
+    role="spinbutton"
+    [value]="value()"
+    [attr.min]="minValue()"
+    [attr.max]="maxValue()"
+    [attr.step]="stepValue()"
+    [attr.aria-valuemin]="minValue()"
+    [attr.aria-valuemax]="maxValue()"
+    [attr.aria-valuenow]="value()"
+    [attr.aria-valuetext]="value()"
+    [attr.name]="name() || null"
+    [attr.aria-label]="inputAriaLabelValue()"
+    [attr.aria-labelledby]="thumbLabelledBy()"
+    [attr.aria-describedby]="ariaDescribedBy()"
+    [attr.aria-invalid]="isInvalid() ? 'true' : null"
+    [attr.aria-required]="required() ? 'true' : null"
+    [disabled]="isDisabled()"
+    [readOnly]="readonly()"
+    (input)="onNumberInput($event)"
+    (blur)="onNumberCommit($event)"
+    (keydown.enter)="onNumberCommit($event)"
+    (keydown)="onNumberKeydown($event)"
+  />
+
+  <span class="slider-steppers">
+    <ng-icon
+      class="slider-sort-icon slider-sort-icon-up"
+      name="faSolidSortUp"
+      size="16px"
+      aria-hidden="true"
+    />
+    <ng-icon
+      class="slider-sort-icon slider-sort-icon-down"
+      name="faSolidSortDown"
+      size="16px"
+      aria-hidden="true"
+    />
+    <button
+      type="button"
+      class="slider-stepper slider-stepper-up"
+      drgnTestId="slider-step-up"
+      aria-label="Aumenta"
+      [disabled]="isDisabled()"
+      (pointerdown)="$event.preventDefault()"
+      (click)="increment()"
+    ></button>
+    <button
+      type="button"
+      class="slider-stepper slider-stepper-down"
+      drgnTestId="slider-step-down"
+      aria-label="Riduci"
+      [disabled]="isDisabled()"
+      (pointerdown)="$event.preventDefault()"
+      (click)="decrement()"
+    ></button>
+  </span>
+</span>
