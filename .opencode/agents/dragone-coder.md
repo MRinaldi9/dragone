@@ -24,17 +24,32 @@ permissions:
     resource: '*CONTEXT.md'
     effect: allow
   - action: read
-    resource: '*AGENTS.md'
+    resource: '*AGENTS.md*'
     effect: deny
   - action: read
-    resource: '*SKILL.md'
+    resource: '*CLAUDE.md*'
+    effect: deny
+  - action: read
+    resource: '*SKILL.md*'
     effect: deny
   - action: glob
     resource: '*projects/dragone/ui/*'
     effect: allow
+  - action: glob
+    resource: '*AGENTS.md*'
+    effect: deny
+  - action: glob
+    resource: '*CLAUDE.md*'
+    effect: deny
+  - action: glob
+    resource: '*SKILL.md*'
+    effect: deny
   - action: grep
-    resource: '*projects/dragone/ui/*'
+    resource: '*'
     effect: allow
+  - action: grep
+    resource: '*AGENTS.md*'
+    effect: deny
   - action: edit
     resource: '*projects/dragone/ui/*'
     effect: allow

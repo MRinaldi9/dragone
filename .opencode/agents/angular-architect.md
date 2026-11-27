@@ -39,6 +39,9 @@ permissions:
   - action: 'Figma_*'
     resource: '*'
     effect: allow
+  - action: 'penpot_*'
+    resource: '*'
+    effect: allow
   - action: 'angular_cli_*'
     resource: '*'
     effect: allow
