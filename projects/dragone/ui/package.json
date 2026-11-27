@@ -19,6 +19,7 @@
     "./radio": "./radio/public-api.ts",
     "./searchbar": "./searchbar/public-api.ts",
     "./select": "./select/public-api.ts",
+    "./slider": "./slider/public-api.ts",
     "./switch": "./switch/public-api.ts",
     "./tab": "./tab/public-api.ts",
     "./tag": "./tag/public-api.ts",

@@ -1,0 +1,256 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: var(--drgn-slider-gap);
+  block-size: var(--drgn-slider-block-size);
+  box-sizing: border-box;
+  color: var(--drgn-slider-label-color);
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.slider-progress {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-inline-size: var(--drgn-slider-track-min-inline-size);
+  block-size: var(--drgn-slider-block-size);
+}
+
+.slider-track-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  block-size: var(--drgn-slider-track-row-block-size);
+}
+
+.slider-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  block-size: var(--drgn-slider-track-row-block-size);
+}
+
+.slider-label {
+  color: var(--drgn-slider-label-color);
+  white-space: nowrap;
+}
+
+.slider-track {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  inline-size: 100%;
+  block-size: var(--drgn-slider-track-block-size);
+  border-radius: var(--drgn-slider-track-radius);
+  background-color: var(--drgn-slider-track-background);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.slider-range {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background-color: var(--drgn-slider-range-default);
+}
+
+.slider-thumb {
+  position: absolute;
+  top: 50%;
+  display: block;
+  inline-size: var(--drgn-slider-thumb-size);
+  block-size: var(--drgn-slider-thumb-size);
+  border-radius: 50%;
+  border: var(--drgn-slider-thumb-border-width) solid var(--drgn-slider-thumb-default);
+  background-color: var(--drgn-slider-thumb-default);
+  box-shadow: inset 0 0 0 var(--drgn-slider-thumb-gap-width) var(--drgn-slider-thumb-gap-color);
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  outline: none;
+  cursor: grab;
+}
+
+.slider-thumb:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 var(--drgn-slider-thumb-gap-width) var(--drgn-slider-thumb-gap-color),
+    0 0 0 2px var(--drgn-slider-thumb-gap-color),
+    0 0 0 3px var(--drgn-slider-focus-outline);
+}
+
+.slider-thumb[data-press],
+.slider-thumb:active {
+  border-color: var(--drgn-slider-thumb-pressed);
+  background-color: var(--drgn-slider-thumb-pressed);
+  box-shadow: inset 0 0 0 var(--drgn-slider-thumb-gap-width) var(--drgn-slider-thumb-gap-color);
+}
+
+.slider-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 0 auto;
+  inline-size: var(--drgn-slider-input-inline-size);
+  block-size: var(--drgn-slider-input-block-size);
+  padding: var(--drgn-slider-input-padding-block) var(--drgn-slider-input-padding-inline);
+  border: 1px solid var(--drgn-slider-input-border-default);
+  border-radius: var(--drgn-slider-input-radius);
+  background-color: var(--drgn-slider-input-background);
+  box-sizing: border-box;
+}
+
+.slider-input {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  padding: 0;
+  border: none;
+  border-radius: inherit;
+  background-color: transparent;
+  color: var(--drgn-slider-input-text);
+  box-sizing: border-box;
+  appearance: textfield;
+}
+
+.slider-input:focus,
+.slider-input:focus-visible {
+  outline: none;
+}
+
+.slider-input::-webkit-outer-spin-button,
+.slider-input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.slider-steppers {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 16px;
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.slider-sort-icon {
+  position: absolute;
+  inset: 0;
+  color: var(--drgn-slider-input-icon-default);
+  transition: transform var(--drgn-motion-duration-short) var(--drgn-motion-easing-standard);
+  pointer-events: none;
+}
+
+.slider-stepper {
+  position: absolute;
+  inset-inline-end: -4px;
+  inline-size: var(--drgn-slider-stepper-min-size);
+  block-size: var(--drgn-slider-stepper-min-size);
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.slider-stepper-up {
+  bottom: 50%;
+}
+
+.slider-stepper-down {
+  top: 50%;
+}
+
+.slider-stepper:disabled {
+  cursor: not-allowed;
+}
+
+:host([data-disabled]) .slider-input-wrapper {
+  background-color: var(--drgn-slider-input-background-disabled);
+  border-color: transparent;
+}
+
+:host([data-disabled]) .slider-sort-icon {
+  color: var(--drgn-slider-input-icon-disabled);
+}
+
+:host:not([data-disabled]) .slider-input-wrapper:hover {
+  border-color: var(--drgn-slider-input-border-hover);
+}
+
+:host:not([data-disabled]) .slider-input-wrapper:hover .slider-input {
+  color: var(--drgn-slider-input-text-hover);
+}
+
+:host:not([data-disabled]) .slider-input-wrapper:hover .slider-sort-icon {
+  color: var(--drgn-slider-input-icon-hover);
+}
+
+:host:focus-within:not([data-disabled]) .slider-range {
+  background-color: var(--drgn-slider-range-focus);
+}
+
+:host:not([data-disabled]) .slider-input-wrapper:focus-within {
+  border-color: var(--drgn-slider-input-border-focus);
+  box-shadow:
+    0 0 0 2px var(--drgn-slider-thumb-gap-color),
+    0 0 0 3px var(--drgn-slider-focus-outline);
+}
+
+:host:not([data-disabled]) .slider-input-wrapper:focus-within .slider-sort-icon {
+  color: var(--drgn-slider-input-icon-focus);
+}
+
+:host:not([data-disabled], [data-readonly])
+  .slider-steppers:has(.slider-stepper-up:active)
+  .slider-sort-icon-up {
+  transform: translateY(-2px);
+}
+
+:host:not([data-disabled], [data-readonly])
+  .slider-steppers:has(.slider-stepper-down:active)
+  .slider-sort-icon-down {
+  transform: translateY(2px);
+}
+
+:host:has(.slider-thumb[data-press], .slider-thumb:active) .slider-range {
+  background-color: var(--drgn-slider-range-pressed);
+}
+
+:host([data-disabled]) .slider-thumb {
+  border-color: var(--drgn-slider-thumb-disabled);
+  background-color: var(--drgn-slider-thumb-disabled);
+  box-shadow: inset 0 0 0 var(--drgn-slider-thumb-gap-width) var(--drgn-slider-thumb-gap-color);
+  cursor: not-allowed;
+}
+
+:host([data-readonly]) .slider-thumb {
+  cursor: default;
+}
+
+/* Windows high-contrast mode: the token colors collapse, so the range and the thumb state are
+   re-expressed with the system colors the user has chosen. */
+@media (forced-colors: active) {
+  .slider-track {
+    background-color: CanvasText;
+    forced-color-adjust: none;
+  }
+
+  .slider-range {
+    background-color: Highlight;
+  }
+
+  .slider-thumb {
+    border-color: ButtonText;
+  }
+
+  .slider-thumb:focus-visible,
+  .slider-input:focus-visible,
+  .slider-stepper:focus-visible {
+    outline-color: Highlight;
+  }
+}
